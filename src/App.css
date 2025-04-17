@@ -1,9 +1,10 @@
 #root {
-  max-width: 1280px;
+  width: max-content;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
 }
+
 
 .logo {
   height: 6em;
@@ -39,4 +40,9 @@
 
 .read-the-docs {
   color: #888;
+}
+.body1 {
+  position: absolute;
+  left: 0;
+
 }

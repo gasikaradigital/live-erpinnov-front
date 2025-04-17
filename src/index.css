@@ -11,6 +11,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
 }
 
 a {
@@ -26,8 +27,9 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  position: relative; /* Ajoutez cette ligne */
+  background: #f8fafc;
+  animation: float 20s ease-in-out infinite;
 }
 
 h1 {
