@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import 'remixicon/fonts/remixicon.css'; 
 import './NavSection.css';
 
 const NavSection = () => {

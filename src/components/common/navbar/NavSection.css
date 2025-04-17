@@ -3,6 +3,54 @@
     color: #0393da;
 }
 
+/* Style de la navbar */
+.navbar {
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Style des liens de navigation */
+.navbar-nav .nav-link {
+    position: relative;
+    transition: color 0.3s ease;
+    margin: 0 10px;
+    font-weight: 500;
+}
+
+/* Effet de survol pour les liens de navigation */
+.navbar-nav .nav-link:hover {
+    color: #0d6efd !important;
+}
+
+/* Animation de soulignement au survol */
+.navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #0d6efd;
+    transition: width 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover::after {
+    width: 100%;
+}
+
+/* Style pour les icônes dans la navbar */
+.navbar i, .navbar svg {
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.navbar i:hover, .navbar svg:hover {
+    color: #0d6efd !important;
+    transform: scale(1.1);
+}
+
 /* Bureau : Les boutons restent normaux */
 @media (min-width: 992px) {
     .btn-login,
@@ -14,6 +62,7 @@
         border-radius: 20px;
         text-decoration: none;
         font-weight: bold;
+        transition: all 0.3s ease;
     }
 
     .btn-login {
@@ -25,6 +74,7 @@
     .btn-login:hover {
         background-color: white;
         color: #0d6efd;
+        transform: translateY(-2px);
     }
 
     .btn-inscription {
@@ -36,6 +86,7 @@
     .btn-inscription:hover {
         background-color: white;
         color: #ff8c00;
+        transform: translateY(-2px);
     }
 }
 
@@ -46,17 +97,25 @@
         position: absolute;
         right: 10px; /* Positionner l'icône à droite */
         top: 10px; /* Ajuster la position verticale si nécessaire */
+        border: none;
+        transition: transform 0.3s ease;
     }
+    
+    .navbar-toggler:hover {
+        transform: rotate(5deg);
+    }
+    
     .light-style .navbar.landing-navbar .landing-nav-menu {
         background-color: #ffffff;
         display: flex;
         flex-direction: column; /* Organiser les éléments en colonne */
         align-items: center; /* Aligner les éléments à droite */
-        margin-top: 15%; /* Espacement supérieur pour espacer les éléments du haut */
+        margin-top: 0%; /* Espacement supérieur pour espacer les éléments du haut */
         height: 50%; /* Prendre toute la largeur disponible */
         max-width: 100%;
         margin-left: 10%;
         padding: 0px; /* Supprime le padding si nécessaire */
+        border-radius: 8px;
     }
 
     /* Menu non modifié, reste centré */
@@ -64,12 +123,20 @@
         display: flex;
         justify-content: center; /* Garder centré */
         width: 100%;
+        border-radius: 8px;
+        overflow: hidden;
     }
 
     .navbar-nav {
         display: flex;
         flex-direction: column; /* Organiser les éléments en colonne */
         align-items: center; /* Aligner les éléments à droite */
+    }
+    
+    .navbar-nav .nav-item {
+        width: 100%;
+        text-align: center;
+        margin: 5px 0;
     }
 
     .auth-link {
@@ -79,6 +146,7 @@
         padding: 12px 0;
         font-weight: bold;
         text-decoration: none;
+        transition: all 0.3s ease;
     }
 
     .btn-login {
@@ -99,5 +167,20 @@
     .btn-inscription:hover {
         background-color: #ff8c00;
         color: white;
+    }
+    
+    /* Animation pour les éléments du menu mobile */
+    .navbar-nav .nav-item {
+        opacity: 0;
+        transform: translateY(10px);
+        animation: fadeInUp 0.3s forwards;
+        animation-delay: calc(0.1s * var(--item-index, 0));
+    }
+    
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 }
