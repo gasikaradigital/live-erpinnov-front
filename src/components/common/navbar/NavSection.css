@@ -1,0 +1,103 @@
+/* Style du texte ERP Innov */
+.innov-text {
+    color: #0393da;
+}
+
+/* Bureau : Les boutons restent normaux */
+@media (min-width: 992px) {
+    .btn-login,
+    .btn-inscription {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 20px;
+        border-radius: 20px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .btn-login {
+        background-color: #0d6efd; /* Bleu */
+        border: 2px solid #0d6efd;
+        color: white;
+    }
+
+    .btn-login:hover {
+        background-color: white;
+        color: #0d6efd;
+    }
+
+    .btn-inscription {
+        background-color: #ff8c00; /* Orange */
+        border: 2px solid #ff8c00;
+        color: white;
+    }
+
+    .btn-inscription:hover {
+        background-color: white;
+        color: #ff8c00;
+    }
+}
+
+/* Mobile : Transformer en liens */
+@media (max-width: 991.98px) {
+    /* Alignement de l'icône du menu uniquement à droite */
+    .navbar-toggler {
+        position: absolute;
+        right: 10px; /* Positionner l'icône à droite */
+        top: 10px; /* Ajuster la position verticale si nécessaire */
+    }
+    .light-style .navbar.landing-navbar .landing-nav-menu {
+        background-color: #ffffff;
+        display: flex;
+        flex-direction: column; /* Organiser les éléments en colonne */
+        align-items: center; /* Aligner les éléments à droite */
+        margin-top: 15%; /* Espacement supérieur pour espacer les éléments du haut */
+        height: 50%; /* Prendre toute la largeur disponible */
+        max-width: 100%;
+        margin-left: 10%;
+        padding: 0px; /* Supprime le padding si nécessaire */
+    }
+
+    /* Menu non modifié, reste centré */
+    .navbar-collapse {
+        display: flex;
+        justify-content: center; /* Garder centré */
+        width: 100%;
+    }
+
+    .navbar-nav {
+        display: flex;
+        flex-direction: column; /* Organiser les éléments en colonne */
+        align-items: center; /* Aligner les éléments à droite */
+    }
+
+    .auth-link {
+        display: block;
+        text-align: left;
+        width: 100%;
+        padding: 12px 0;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .btn-login {
+        color: #0d6efd;
+        border-bottom: 2px solid #0d6efd;
+    }
+
+    .btn-inscription {
+        color: #ff8c00;
+        border-bottom: 2px solid #ff8c00;
+    }
+
+    .btn-login:hover {
+        background-color: #0d6efd;
+        color: white;
+    }
+
+    .btn-inscription:hover {
+        background-color: #ff8c00;
+        color: white;
+    }
+}
