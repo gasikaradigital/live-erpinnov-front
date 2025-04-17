@@ -1,0 +1,136 @@
+  .scaleX-n1-rtl {
+    transform: scaleX(1);
+  }
+
+  .feature-item img {
+    width: 20px;
+    height: auto;
+ }
+
+.gradient-text {
+  font-weight: bold;
+  color: #0d6efd;
+}
+ .card-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.feature-list {
+  flex-grow: 1;
+  margin-bottom: 2rem;
+}
+
+.button-wrapper {
+  margin-top: auto;
+}
+  .pricing-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  }
+
+  .section-icon {
+    font-size: 1.5rem;
+    color: #0d6efd;
+  }
+
+  .pricing-card {
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: visible;
+    margin-top: 3rem;
+  }
+
+  .pricing-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+  }
+
+  .pricing-card.featured {
+    border: 2px solid #0d6efd;
+  }
+
+  /* Titre flottant */
+  .floating-title {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 10px 25px;
+    border-radius: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .plan-name {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #0d6efd;
+  }
+
+  .price-container {
+    position: relative;
+    display: inline-block;
+    margin-top: 2rem;
+  }
+
+  .currency {
+    position: relative;
+    top: -20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .price {
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: #0d6efd;
+  }
+
+  .period {
+    font-size: 1rem;
+    color: #6c757d;
+  }
+
+  /* Liste avec flèches */
+  .feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+  }
+
+  .arrow-icon {
+    color: #0d6efd;
+    margin-right: 10px;
+    font-size: 0.9em;
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateX(-50%) translateY(0);
+    }
+    50% {
+      transform: translateX(-50%) translateY(-10px);
+    }
+    100% {
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 992px) {
+    .pricing-card {
+      margin-top: 4rem;
+    }
+  }
+
