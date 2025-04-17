@@ -1,6 +1,6 @@
-
 import "./App.css";
 import NavSection from "./components/common/navbar/navBare";
+import PricingSection from "./pages/landing-page/PrincingSection/PricingSection";
 
 function App() {
 
@@ -9,7 +9,8 @@ function App() {
     <>
       <div>
        <NavSection/>
-      </div>
+        <PricingSection />
+        </div>
     </>
   );
 }
