@@ -1,5 +1,6 @@
 import React from 'react';
 import './Pricing.css';
+
 const PricingSection = () => {
   const pricingPlans = [
     {
@@ -74,8 +75,8 @@ const PricingSection = () => {
         </p>
 
         <div className="row g-4">
-          {pricingPlans.map((plan) => (
-            <div key={plan.id} className="col-lg-4">
+          {pricingPlans.map((plan, index) => (
+            <div key={plan.id} className={`col-lg-4 pricing-card fadeIn`} style={{ animationDelay: `${index * 0.2}s` }}>
               <div className={`card border-0 h-100 ${plan.featured ? 'border-primary' : ''}`}>
                 <div className="card-header text-center">
                   <h4 className="plan-name">{plan.name}</h4>

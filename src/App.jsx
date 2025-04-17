@@ -5,18 +5,15 @@ import HeroSection from "./pages/landing-page/HomeSection/HeroSection";
 
 
 function App() {
-
-
   return (
     <>
       <div>
-
        <NavSection/>
        <HeroSection/>
         <PricingSection />
         </div>
     </>
-  );
+);
 }
 
 export default App;
