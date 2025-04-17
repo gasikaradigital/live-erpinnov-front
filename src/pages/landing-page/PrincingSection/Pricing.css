@@ -1,17 +1,20 @@
-  .scaleX-n1-rtl {
-    transform: scaleX(1);
-  }
+/* Votre code CSS initial */
+.scaleX-n1-rtl {
+  transform: scaleX(1);
+}
 
-  .feature-item img {
-    width: 20px;
-    height: auto;
- }
+.feature-item img {
+  width: 20px;
+  height: auto;
+}
 
 .gradient-text {
   font-weight: bold;
   color: #0d6efd;
+  animation: slideText 5s linear infinite; /* Ajout d'animation de défilement */
 }
- .card-body {
+
+.card-body {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -25,112 +28,170 @@
 .button-wrapper {
   margin-top: auto;
 }
-  .pricing-section {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  }
 
-  .section-icon {
-    font-size: 1.5rem;
-    color: #0d6efd;
-  }
+.pricing-section {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
 
+.section-icon {
+  font-size: 1.5rem;
+  color: #0d6efd;
+  animation: floatIcon 2s ease-in-out infinite; /* Animation de flottement */
+}
+
+.pricing-card {
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: visible;
+  margin-top: 3rem;
+  opacity: 0;
+  animation: fadeIn 1s ease-out forwards;
+  animation-delay: 0.3s; /* Délai d'animation pour les cartes */
+}
+
+.pricing-card:hover {
+  transform: translateY(-10px) scale(1.05); /* Zoom et survol */
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.pricing-card.featured {
+  border: 2px solid #0d6efd;
+}
+
+/* Titre flottant */
+.floating-title {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  padding: 10px 25px;
+  border-radius: 25px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  animation: float 3s ease-in-out infinite, rotate 5s linear infinite; /* Animation de flottement et rotation */
+}
+
+.plan-name {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #0d6efd;
+}
+
+.price-container {
+  position: relative;
+  display: inline-block;
+  margin-top: 2rem;
+}
+
+.currency {
+  position: relative;
+  top: -20px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.price {
+  font-size: 3.5rem;
+  font-weight: bold;
+  color: #0d6efd;
+}
+
+.period {
+  font-size: 1rem;
+  color: #6c757d;
+}
+
+/* Liste avec flèches */
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+}
+
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in-out forwards; /* Animation d'apparition */
+}
+
+.feature-item:nth-child(even) {
+  animation-delay: 0.3s;
+}
+
+.feature-item:nth-child(odd) {
+  animation-delay: 0.6s;
+}
+
+.arrow-icon {
+  color: #0d6efd;
+  margin-right: 10px;
+  font-size: 0.9em;
+}
+
+/* Animation de flottement */
+@keyframes float {
+  0% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Animation de rotation pour le titre flottant */
+@keyframes rotate {
+  0% {
+    transform: translateX(-50%) translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateX(-50%) translateY(0) rotate(360deg);
+  }
+}
+
+/* Animation de fondu */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Animation de défilement du texte gradient */
+@keyframes slideText {
+  0% {
+    background-position: -100%;
+  }
+  100% {
+    background-position: 100%;
+  }
+}
+
+/* Animation de flottement pour l'icône */
+@keyframes floatIcon {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
   .pricing-card {
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    position: relative;
-    overflow: visible;
-    margin-top: 3rem;
+    margin-top: 4rem;
   }
-
-  .pricing-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-  }
-
-  .pricing-card.featured {
-    border: 2px solid #0d6efd;
-  }
-
-  /* Titre flottant */
-  .floating-title {
-    position: absolute;
-    top: -25px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: white;
-    padding: 10px 25px;
-    border-radius: 25px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    animation: float 3s ease-in-out infinite;
-  }
-
-  .plan-name {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #0d6efd;
-  }
-
-  .price-container {
-    position: relative;
-    display: inline-block;
-    margin-top: 2rem;
-  }
-
-  .currency {
-    position: relative;
-    top: -20px;
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-
-  .price {
-    font-size: 3.5rem;
-    font-weight: bold;
-    color: #0d6efd;
-  }
-
-  .period {
-    font-size: 1rem;
-    color: #6c757d;
-  }
-
-  /* Liste avec flèches */
-  .feature-list {
-    list-style: none;
-    padding: 0;
-    margin: 2rem 0;
-  }
-
-  .feature-item {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 1rem;
-    line-height: 1.4;
-  }
-
-  .arrow-icon {
-    color: #0d6efd;
-    margin-right: 10px;
-    font-size: 0.9em;
-  }
-
-  @keyframes float {
-    0% {
-      transform: translateX(-50%) translateY(0);
-    }
-    50% {
-      transform: translateX(-50%) translateY(-10px);
-    }
-    100% {
-      transform: translateX(-50%) translateY(0);
-    }
-  }
-
-  /* Responsive adjustments */
-  @media (max-width: 992px) {
-    .pricing-card {
-      margin-top: 4rem;
-    }
-  }
-
+}
