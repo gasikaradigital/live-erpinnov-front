@@ -54,7 +54,7 @@ const NavSection = () => {
                 <img src="/assets/img/front-pages/logo/logo.png" alt="Logo ERP INNOV" style={{ width: '40px', height: '40px' }} className="img-fluid" />
               </span>
               <span className="app-brand-text demo menu-text fw-semibold ms-2">
-                ERP finoana <span className="innov-text">INNOV</span>
+                ERP <span className="innov-text">INNOV</span>
               </span>
             </a>
           </div>
