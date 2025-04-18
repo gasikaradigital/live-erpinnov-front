@@ -1,0 +1,128 @@
+/* Ajout du fond blanc pour la section entière */
+#landingGestion {
+    width: max-content;
+    position: relative;
+}
+
+#landingFunFacts {
+    display: flex;
+    place-items: center;
+}
+
+.fun-facts-icon {
+    transition: transform 0.3s ease;
+    /* Augmenter la taille pour une meilleure visibilité */
+    padding: 1.5rem !important;
+}
+
+.fun-facts-icon:hover {
+    transform: scale(1.1);
+}
+
+/* Style pour les icônes - augmenter la visibilité */
+.fun-facts-icon i {
+    color: #fff; /* Texte blanc pour contraster avec le fond */
+    font-size: 2.5rem !important;
+}
+
+/* Style pour le titre principal */
+.display-5.fs-4.fw-bold {
+    font-size: 2rem !important; /* Taille similaire à h2 */
+    font-weight: 700 !important;
+    margin-bottom: 1rem;
+}
+
+/* Style pour le sous-titre de la section */
+.text-center.fw-medium.mb-10 {
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+}
+
+/* Style pour les titres des modules */
+.fun-facts-text {
+    background: linear-gradient(45deg, var(--bs-primary), #2563eb);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem !important;
+}
+
+/* Ajout de marge pour les sous-titres des icônes */
+h6.mb-0.text-body {
+    margin-top: 0.75rem !important;
+    margin-bottom: 1.5rem !important;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #6c757d !important;
+}
+
+/* Classes utilitaires pour assurer la compatibilité avec le design d'origine */
+.section-py {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+
+.py-12 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.my-3 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem;
+}
+
+.mb-10 {
+    margin-bottom: 2.5rem;
+}
+
+.mb-6 {
+    margin-bottom: 1.5rem;
+}
+
+.p-5 {
+    padding: 1.25rem;
+}
+
+/* Classes pour les couleurs de fond - couleurs plus vives */
+.bg-label-hover-primary {
+    background-color: #0d6efd; /* Bleu plus vif */
+    transition: background-color 0.3s ease;
+}
+
+.bg-label-hover-primary:hover {
+    background-color: #0b5ed7; /* Bleu plus foncé au survol */
+}
+
+.bg-label-hover-success {
+    background-color: #198754; /* Vert plus vif */
+    transition: background-color 0.3s ease;
+}
+
+.bg-label-hover-success:hover {
+    background-color: #157347; /* Vert plus foncé au survol */
+}
+
+.bg-label-hover-warning {
+    background-color: #ffc107; /* Jaune plus vif */
+    transition: background-color 0.3s ease;
+}
+
+.bg-label-hover-warning:hover {
+    background-color: #e0a800; /* Jaune plus foncé au survol */
+}
+
+/* Pour s'assurer que les icônes s'affichent correctement */
+.ri-42px {
+    font-size: 42px;
+}
+
+/* Ajout d'espacement entre les cartes */
+.col-md-4.col-sm-6.text-center {
+    margin-bottom: 2rem;
+}
