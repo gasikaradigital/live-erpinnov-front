@@ -11,7 +11,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
+
 }
 
 a {
@@ -29,7 +29,6 @@ body {
   place-items: center;
   position: relative; /* Ajoutez cette ligne */
   background: #f8fafc;
-  animation: float 20s ease-in-out infinite;
 }
 
 h1 {

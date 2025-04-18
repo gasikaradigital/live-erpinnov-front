@@ -2,17 +2,19 @@ import "./App.css";
 import NavSection from "./components/common/navbar/navBare";
 import PricingSection from "./pages/landing-page/PrincingSection/PricingSection";
 import HeroSection from "./pages/landing-page/HomeSection/HeroSection";
+import ModuleSection from "./pages/GestionSection/ModuleSection";
 
 
 function App() {
   return (
-    <>
+   
       <div>
        <NavSection/>
        <HeroSection/>
+       <ModuleSection/>
         <PricingSection />
         </div>
-    </>
+  
 );
 }
 

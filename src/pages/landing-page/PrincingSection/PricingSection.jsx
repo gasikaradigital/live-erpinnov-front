@@ -53,7 +53,7 @@ const PricingSection = () => {
   ];
 
   return (
-    <section id="landingPricing" className="section-py bg-light">
+    <section id="landingPricing" className="section-py bg-light" style={{ paddingTop:125}}>
       <div className="container bg-icon-left position-relative">
         <h2 className="text-center d-flex justify-content-center align-items-center mb-2">
           <img src="/assets/img/front-pages/icons/section-tilte-icon.png" alt="section title icon" className="me-3" />

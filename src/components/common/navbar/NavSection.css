@@ -3,13 +3,33 @@
     color: #0393da;
 }
 
-/* Style de la navbar */
+/* Style de la navbar - ajout de position fixed */
+
 .navbar {
     background-color: white;
     border-radius: 10px;
     padding: 15px 0;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    position: fixed;
+    top: 10px;
+    bottom: auto;
+}
+
+
+
+/* Ajout d'un espace pour compenser la navbar fixe */
+.layout-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+/* Ajout de marge en haut du contenu principal */
+body {
+    padding-top: 0px; /* Ajuster cette valeur en fonction de la hauteur de votre navbar */
 }
 
 /* Style des liens de navigation */
@@ -92,6 +112,11 @@
 
 /* Mobile : Transformer en liens */
 @media (max-width: 991.98px) {
+    /* Ajuster le padding pour la navbar fixe en mobile */
+    body {
+        padding-top: 70px; /* Réduire pour mobile */
+    }
+    
     /* Alignement de l'icône du menu uniquement à droite */
     .navbar-toggler {
         position: absolute;
