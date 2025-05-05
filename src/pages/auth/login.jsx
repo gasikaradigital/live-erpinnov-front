@@ -1,0 +1,113 @@
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import NavigationBar from "../../components/common/navbar/navbarlogin";
+
+const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPwd, setShowPwd] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log({ email, password, rememberMe });
+    navigate("/dashboard"); // Redirection après connexion simulée
+  };
+
+  return (
+    <div className="vw-100">
+      <NavigationBar isAuthenticated={false} user={null} />
+      <div className="d-flex container align-items-center justify-content-center min-vh-100 bg-dark"
+      style={{ width: "100%", maxWidth: "100%" }}>
+        <div
+          className="card shadow p-4 bg-white login-form"
+          style={{ width: "100%", maxWidth: "500px" }}
+        >
+          <div className="text-center mb-4">
+            <img
+              src="/assets/img/front-pages/logo/logo.png"
+              alt="ERP INNOV"
+              style={{ height: "50px" }}
+              className="mb-2"
+            />
+
+            <h5 className="fw-bold mb-0">ERP INNOV</h5>
+          </div>
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label">
+                Email
+              </label>
+              <input
+                type="email"
+                className="form-control"
+                id="email"
+                placeholder="Entrer votre email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="password" className="form-label">
+                Mot de passe
+              </label>
+              <div className="input-group">
+                <input
+                  type={showPwd ? "text" : "password"}
+                  className="form-control"
+                  id="password"
+                  placeholder="Mot de passe"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <button
+                  type="button"
+                  className="btn btn-outline-secondary"
+                  onClick={() => setShowPwd(!showPwd)}
+                >
+                  <i
+                    className={`bi ${showPwd ? "bi-eye-slash" : "bi-eye"}`}
+                  ></i>
+                </button>
+              </div>
+            </div>
+
+            <div className="form-check mb-3">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                id="remember"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+              />
+              <label className="form-check-label" htmlFor="remember">
+                Se souvenir de moi
+              </label>
+            </div>
+
+            <div className="d-grid">
+              <button type="submit" className="btn btn-primary">
+                Se connecter
+              </button>
+            </div>
+          </form>
+
+          <div className="text-center mt-3">
+            <small>
+              Nouveau ?{" "}
+              <Link to="/inscription" className="text-primary">
+                S'inscrire
+              </Link>
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Login;

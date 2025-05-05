@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import 'remixicon/fonts/remixicon.css'; 
+import { Link } from 'react-router-dom'; // ✅ Import Link
+import 'remixicon/fonts/remixicon.css';
 import './NavSection.css';
 
 const NavSection = () => {
-  // Utilisez window.Laravel?.auth || false pour avoir une valeur par défaut
   const [auth] = useState(window.Laravel?.auth || false);
   const [activeSection, setActiveSection] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
-  
+
   const menuItems = [
     { href: "#landingHero", icon: "ri-home-line", text: "Accueil" },
     { href: "#landingPricing", icon: "ri-price-tag-line", text: "Offres" },
@@ -37,8 +37,6 @@ const NavSection = () => {
   useEffect(() => {
     handleScroll();
     window.addEventListener("scroll", handleScroll);
-    
-    // Cleanup event listener on component unmount
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -50,16 +48,20 @@ const NavSection = () => {
         {/* Logo */}
         <div className="navbar-brand app-brand demo d-flex py-0 py-lg-2 me-4">
           <div className="navbar-brand app-brand-links demo d-flex py-0 py-lg-2 me-4">
-            <a href="/" className="app-brand-link">
+            <Link to="/" className="app-brand-link">
               <span className="app-brand-logo demo">
-                <img src="/assets/img/front-pages/logo/logo.png" alt="Logo ERP INNOV" style={{ width: '40px', height: '40px' }} className="img-fluid" />
+                <img
+                  src="/assets/img/front-pages/logo/logo.png"
+                  alt="Logo ERP INNOV"
+                  style={{ width: '40px', height: '40px' }}
+                  className="img-fluid"
+                />
               </span>
               <span className="app-brand-text demo menu-text fw-semibold ms-2">
                 ERP <span className="innov-text">INNOV</span>
               </span>
-            </a>
+            </Link>
           </div>
-          {/* Icône du menu alignée à droite sur mobile uniquement */}
           <button
             className="navbar-toggler border-0 px-0 me-2"
             type="button"
@@ -92,18 +94,18 @@ const NavSection = () => {
             {/* Connexion et Inscription */}
             {!auth && (
               <li className="nav-item mx-2">
-                <a href="/login" className="auth-link btn-login">
+                <Link to="/login" className="auth-link btn-login">
                   <i className="tf-icons ri-user-line me-md-1"></i>
                   <span className="d-inline">Connexion</span>
-                </a>
+                </Link>
               </li>
             )}
             {!auth && (
               <li className="nav-item mx-2">
-                <a href="/inscription" className="auth-link btn-inscription">
+                <Link to="/inscription" className="auth-link btn-inscription">
                   <i className="tf-icons ri-user-add-line me-md-1"></i>
                   <span className="d-inline">Inscription</span>
-                </a>
+                </Link>
               </li>
             )}
           </ul>
@@ -112,6 +114,5 @@ const NavSection = () => {
     </nav>
   );
 };
-
 
 export default NavSection;
