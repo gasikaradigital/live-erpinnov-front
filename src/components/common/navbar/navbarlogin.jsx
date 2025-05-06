@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Navbar,
   Nav,
@@ -7,27 +7,10 @@ import {
   Image,
   Button,
 } from "react-bootstrap";
+import { useDarkMode } from "../../../contexts/DarkModeContext";
 
 export default function NavigationBar({ isAuthenticated, user }) {
-  const [darkMode, setDarkMode] = useState(() => {
-    // Initialisation depuis localStorage
-    const savedMode = localStorage.getItem("darkMode");
-    return savedMode === "true";
-  });
-
-  // Appliquer la classe au body lors du premier rendu ou changement
-  useEffect(() => {
-    if (darkMode) {
-      document.body.classList.add("dark-mode");
-    } else {
-      document.body.classList.remove("dark-mode");
-    }
-    localStorage.setItem("darkMode", darkMode); // Sauvegarde
-  }, [darkMode]);
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
+  const { darkMode, toggleDarkMode } = useDarkMode();
 
   return (
     <Navbar
@@ -51,7 +34,6 @@ export default function NavigationBar({ isAuthenticated, user }) {
         <Navbar.Toggle aria-controls="main-navbar-nav" />
         <Navbar.Collapse id="main-navbar-nav">
           <Nav className="ms-auto d-flex align-items-center gap-3">
-            {/* Bouton mode sombre */}
             <Button
               variant={darkMode ? "light" : "outline-secondary"}
               onClick={toggleDarkMode}

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import NavigationBar from "../../components/common/navbar/navbarlogin";
+import { useDarkMode } from "../../contexts/DarkModeContext";
 
 const Login = () => {
+  const { darkMode } = useDarkMode();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPwd, setShowPwd] = useState(false);
@@ -12,18 +14,25 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log({ email, password, rememberMe });
-    navigate("/dashboard"); // Redirection après connexion simulée
+    navigate("/dashboard");
   };
 
   return (
-    <div className="vw-100">
+    <div className={`vw-100 ${darkMode ? "bg-dark text-white" : "bg-light"}`}>
       <NavigationBar isAuthenticated={false} user={null} />
-      <div className="d-flex container align-items-center justify-content-center min-vh-100 bg-dark"
-      style={{ width: "100%", maxWidth: "100%" }}>
+      <div
+        className={`d-flex container align-items-center justify-content-center min-vh-100 ${
+          darkMode ? "bg-dark text-white" : "bg-light"
+        }`}
+        style={{ width: "100%", maxWidth: "100%" }}
+      >
         <div
-          className="card shadow p-4 bg-white login-form"
-          style={{ width: "100%", maxWidth: "500px" }}
-        >
+  className={`card shadow p-4 login-form ${
+    darkMode ? "login-card-dark" : "login-card-white"
+  }`}
+  style={{ width: "100%", maxWidth: "500px" }}
+>
+
           <div className="text-center mb-4">
             <img
               src="/assets/img/front-pages/logo/logo.png"
@@ -31,7 +40,6 @@ const Login = () => {
               style={{ height: "50px" }}
               className="mb-2"
             />
-
             <h5 className="fw-bold mb-0">ERP INNOV</h5>
           </div>
           <form onSubmit={handleSubmit}>
