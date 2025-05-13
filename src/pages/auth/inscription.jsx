@@ -1,96 +1,120 @@
-import React, { useState } from 'react';
-import { Form, Button, Container, Card } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import NavigationBar from "../../components/common/navbar/navbarlogin";
+import { useDarkMode } from "../../contexts/DarkModeContext";
 
 const Inscription = () => {
-  const [formData, setFormData] = useState({
-    nom: '',
-    email: '',
-    motDePasse: '',
-    confirmation: '',
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
+  const { darkMode } = useDarkMode();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPwd, setShowPwd] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Logique de validation ou d'envoi à un backend
-    if (formData.motDePasse !== formData.confirmation) {
-      alert("Les mots de passe ne correspondent pas.");
-      return;
-    }
-
-    console.log("Formulaire envoyé :", formData);
-    alert("Inscription réussie !");
+    console.log({ email, password, rememberMe });
+    navigate("/dashboard");
   };
 
   return (
-    <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
-      <Card style={{ width: '100%', maxWidth: '500px' }} className="p-4 shadow">
-        <h3 className="text-center mb-4">Créer un compte</h3>
-        <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="formNom">
-            <Form.Label>Nom complet</Form.Label>
-            <Form.Control
-              type="text"
-              name="nom"
-              value={formData.nom}
-              onChange={handleChange}
-              placeholder="Entrez votre nom"
-              required
-            />
-          </Form.Group>
+    <div className={`vw-100 ${darkMode ? "bg-dark text-white" : "bg-light"}`}>
+      <NavigationBar isAuthenticated={false} user={null} />
+      <div
+        className={`d-flex container align-items-center justify-content-center min-vh-100 ${
+          darkMode ? "bg-dark text-white" : "bg-light"
+        }`}
+        style={{ width: "100%", maxWidth: "100%" }}
+      >
+        <div
+  className={`card shadow p-4 login-form ${
+    darkMode ? "login-card-dark" : "login-card-white"
+  }`}
+  style={{ width: "100%", maxWidth: "500px" }}
+>
 
-          <Form.Group className="mb-3" controlId="formEmail">
-            <Form.Label>Adresse email</Form.Label>
-            <Form.Control
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="exemple@mail.com"
-              required
+          <div className="text-center mb-4">
+            <img
+              src="/assets/img/front-pages/logo/logo.png"
+              alt="ERP INNOV"
+              style={{ height: "50px" }}
+              className="mb-2"
             />
-          </Form.Group>
+            <h5 className="fw-bold mb-0">ERP INNOV</h5>
+          </div>
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label">
+                Email
+              </label>
+              <input
+                type="email"
+                className="form-control"
+                id="email"
+                placeholder="Entrer votre email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
 
-          <Form.Group className="mb-3" controlId="formPassword">
-            <Form.Label>Mot de passe</Form.Label>
-            <Form.Control
-              type="password"
-              name="motDePasse"
-              value={formData.motDePasse}
-              onChange={handleChange}
-              placeholder="Mot de passe sécurisé"
-              required
-            />
-          </Form.Group>
+            <div className="mb-3">
+              <label htmlFor="password" className="form-label">
+                Mot de passe
+              </label>
+              <div className="input-group">
+                <input
+                  type={showPwd ? "text" : "password"}
+                  className="form-control"
+                  id="password"
+                  placeholder="Mot de passe"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <button
+                  type="button"
+                  className="btn btn-outline-secondary"
+                  onClick={() => setShowPwd(!showPwd)}
+                >
+                  <i
+                    className={`bi ${showPwd ? "bi-eye-slash" : "bi-eye"}`}
+                  ></i>
+                </button>
+              </div>
+            </div>
 
-          <Form.Group className="mb-4" controlId="formConfirmPassword">
-            <Form.Label>Confirmation du mot de passe</Form.Label>
-            <Form.Control
-              type="password"
-              name="confirmation"
-              value={formData.confirmation}
-              onChange={handleChange}
-              placeholder="Répétez le mot de passe"
-              required
-            />
-          </Form.Group>
+            <div className="form-check mb-3">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                id="remember"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+              />
+              <label className="form-check-label" htmlFor="remember">
+                Se souvenir de moi
+              </label>
+            </div>
 
-          <Button variant="primary" type="submit" className="w-100">
-            S'inscrire
-          </Button>
+            <div className="d-grid">
+              <button type="submit" className="btn btn-primary">
+                Se connecter
+              </button>
+            </div>
+          </form>
 
           <div className="text-center mt-3">
-            <small>Déjà un compte ? <Link to="/login">Se connecter</Link></small>
+            <small>
+              Nouveau ?{" "}
+              <Link to="/inscription" className="text-primary">
+                S'inscrire
+              </Link>
+            </small>
           </div>
-        </Form>
-      </Card>
-    </Container>
+        </div>
+      </div>
+    </div>
   );
 };
 
