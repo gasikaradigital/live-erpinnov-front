@@ -2,116 +2,150 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import NavigationBar from "../../components/common/navbar/navbarlogin";
 import { useDarkMode } from "../../contexts/DarkModeContext";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Inscription = () => {
   const { darkMode } = useDarkMode();
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPwd, setShowPwd] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
-  const navigate = useNavigate();
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [acceptTerms, setAcceptTerms] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ email, password, rememberMe });
+
+    if (!acceptTerms) {
+      alert("Vous devez accepter les conditions d'utilisation.");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      alert("Les mots de passe ne correspondent pas.");
+      return;
+    }
+
+    console.log({ email, password });
     navigate("/dashboard");
   };
 
   return (
     <div className={`vw-100 ${darkMode ? "bg-dark text-white" : "bg-light"}`}>
       <NavigationBar isAuthenticated={false} user={null} />
-      <div
-        className={`d-flex container align-items-center justify-content-center min-vh-100 ${
-          darkMode ? "bg-dark text-white" : "bg-light"
-        }`}
-        style={{ width: "100%", maxWidth: "100%" }}
-      >
+      <div className="container d-flex align-items-center justify-content-center min-vh-100">
         <div
-  className={`card shadow p-4 login-form ${
-    darkMode ? "login-card-dark" : "login-card-white"
-  }`}
-  style={{ width: "100%", maxWidth: "500px" }}
->
-
-          <div className="text-center mb-4">
-            <img
-              src="/assets/img/front-pages/logo/logo.png"
-              alt="ERP INNOV"
-              style={{ height: "50px" }}
-              className="mb-2"
-            />
-            <h5 className="fw-bold mb-0">ERP INNOV</h5>
-          </div>
+          className={`card shadow p-4 ${
+            darkMode ? "bg-dark text-white" : "bg-white"
+          }`}
+          style={{
+            width: "100%",
+            maxWidth: "500px",
+            borderRadius: "12px",
+            backgroundColor: darkMode ? "#1c2333" : "#fff",
+          }}
+        >
+          <h2 className="text-center mb-4">Créer un compte gratuit</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
-              <label htmlFor="email" className="form-label">
-                Email
-              </label>
+              <label className="form-label text-start w-100">Adresse email</label>
               <input
                 type="email"
                 className="form-control"
-                id="email"
-                placeholder="Entrer votre email"
+                placeholder="Adresse email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
 
-            <div className="mb-3">
-              <label htmlFor="password" className="form-label">
-                Mot de passe
-              </label>
-              <div className="input-group">
-                <input
-                  type={showPwd ? "text" : "password"}
-                  className="form-control"
-                  id="password"
-                  placeholder="Mot de passe"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-                <button
-                  type="button"
-                  className="btn btn-outline-secondary"
-                  onClick={() => setShowPwd(!showPwd)}
-                >
-                  <i
-                    className={`bi ${showPwd ? "bi-eye-slash" : "bi-eye"}`}
-                  ></i>
-                </button>
-              </div>
+            {/* Mot de passe */}
+            <div className="mb-3 position-relative">
+              <label className="form-label text-start w-100">Mot de passe</label>
+              <input
+                type={showPassword ? "text" : "password"}
+                className="form-control pe-5"
+                placeholder="Mot de passe"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <span
+                onClick={() => setShowPassword(!showPassword)}
+                style={{
+                  position: "absolute",
+                  top: "65%",
+                  right: "15px",
+                  transform: "translateY(-50%)",
+                  cursor: "pointer",
+                  color: "#6c757d",
+                  fontSize: "2rem" // 👈 ajuste ici la taille
+                }}
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </span>
+            </div>
+
+            {/* Confirmation mot de passe */}
+            <div className="mb-3 position-relative">
+              <label className="form-label text-start w-100">Confirmer le mot de passe</label>
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                className="form-control pe-5"
+                placeholder="Confirmer le mot de passe"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+              <span
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                style={{
+                  position: "absolute",
+                  top: "65%",
+                  right: "15px",
+                  transform: "translateY(-50%)",
+                  cursor: "pointer",
+                  color: "#6c757d",
+                  fontSize: "2rem" // 👈 ajuste ici la taille
+                }}
+              >
+                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+              </span>
             </div>
 
             <div className="form-check mb-3">
               <input
-                className="form-check-input"
                 type="checkbox"
-                id="remember"
-                checked={rememberMe}
-                onChange={(e) => setRememberMe(e.target.checked)}
+                className="form-check-input"
+                id="acceptTerms"
+                checked={acceptTerms}
+                onChange={() => setAcceptTerms(!acceptTerms)}
               />
-              <label className="form-check-label" htmlFor="remember">
-                Se souvenir de moi
+              <label className="form-check-label text-start w-100" htmlFor="acceptTerms">
+                J'accepte les{" "}
+                <Link to="/conditions" className="text-primary">
+                  conditions d'utilisation
+                </Link>{" "}
+                et la{" "}
+                <Link to="/confidentialite" className="text-primary">
+                  politique de confidentialité
+                </Link>.
               </label>
             </div>
 
-            <div className="d-grid">
-              <button type="submit" className="btn btn-primary">
-                Se connecter
-              </button>
-            </div>
-          </form>
+            <button type="submit" className="btn btn-primary w-100">
+              Créer mon compte
+            </button>
 
-          <div className="text-center mt-3">
-            <small>
-              Nouveau ?{" "}
-              <Link to="/inscription" className="text-primary">
-                S'inscrire
+            <p className="text-center mt-3">
+              Déjà inscrit ?{" "}
+              <Link to="/login" className="text-primary">
+                Se connecter
               </Link>
-            </small>
-          </div>
+            </p>
+          </form>
         </div>
       </div>
     </div>

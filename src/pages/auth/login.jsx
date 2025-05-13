@@ -27,12 +27,11 @@ const Login = () => {
         style={{ width: "100%", maxWidth: "100%" }}
       >
         <div
-  className={`card shadow p-4 login-form ${
-    darkMode ? "login-card-dark" : "login-card-white"
-  }`}
-  style={{ width: "100%", maxWidth: "500px" }}
->
-
+          className={`card shadow p-4 login-form ${
+            darkMode ? "login-card-dark" : "login-card-white"
+          }`}
+          style={{ width: "100%", maxWidth: "500px" }}
+        >
           <div className="text-center mb-4">
             <img
               src="/assets/img/front-pages/logo/logo.png"
@@ -42,9 +41,10 @@ const Login = () => {
             />
             <h5 className="fw-bold mb-0">ERP INNOV</h5>
           </div>
+
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
-              <label htmlFor="email" className="form-label">
+              <label htmlFor="email" className="form-label text-start w-100">
                 Email
               </label>
               <input
@@ -59,9 +59,14 @@ const Login = () => {
             </div>
 
             <div className="mb-3">
-              <label htmlFor="password" className="form-label">
-                Mot de passe
-              </label>
+              <div className="d-flex justify-content-between align-items-center w-100">
+                <label htmlFor="password" className="form-label mb-0">
+                  Mot de passe
+                </label>
+                <Link to="/mot-de-passe-oublie" className="small text-primary">
+                  Mot de passe oublié ?
+                </Link>
+              </div>
               <div className="input-group">
                 <input
                   type={showPwd ? "text" : "password"}
@@ -77,14 +82,12 @@ const Login = () => {
                   className="btn btn-outline-secondary"
                   onClick={() => setShowPwd(!showPwd)}
                 >
-                  <i
-                    className={`bi ${showPwd ? "bi-eye-slash" : "bi-eye"}`}
-                  ></i>
+                  <i className={`bi ${showPwd ? "bi-eye-slash" : "bi-eye"}`}></i>
                 </button>
               </div>
             </div>
 
-            <div className="form-check mb-3">
+            <div className="form-check mb-3 text-start">
               <input
                 className="form-check-input"
                 type="checkbox"
@@ -106,7 +109,7 @@ const Login = () => {
 
           <div className="text-center mt-3">
             <small>
-              Nouveau ?{" "}
+              Nouveau sur notre plateforme ?{" "}
               <Link to="/inscription" className="text-primary">
                 S'inscrire
               </Link>
