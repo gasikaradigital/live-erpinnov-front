@@ -25,8 +25,7 @@ function App() {
     <DarkModeProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
           <Route path="/inscription" element={<Inscription />} />
         </Routes>
       </Router>
