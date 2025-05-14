@@ -89,7 +89,7 @@ export default function NavigationBar({ isAuthenticated, user }) {
               </Dropdown>
             ) : (
               <>
-                <Button variant="outline-primary" href="/login">
+                <Button variant="outline-primary" href="/">
                   Se connecter
                 </Button>
                 <Button variant="primary" href="/inscription">
