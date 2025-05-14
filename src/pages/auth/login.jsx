@@ -63,7 +63,7 @@ const Login = () => {
                 <label htmlFor="password" className="form-label mb-0">
                   Mot de passe
                 </label>
-                <Link to="/mot-de-passe-oublie" className="small text-primary">
+                <Link to="/forgot-password" className="small text-primary">
                   Mot de passe oublié ?
                 </Link>
               </div>

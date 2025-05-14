@@ -12,9 +12,7 @@ export default function ConfirmPassword({ onConfirm }) {
     setError("");
 
     try {
-      // Ici tu peux appeler ton backend avec fetch ou axios
-      // Exemple :
-      // await axios.post('/password/confirm', { password });
+
 
       if (onConfirm) onConfirm(password); // Hook pour backend Laravel ou autre
 

@@ -141,7 +141,7 @@ const Inscription = () => {
 
             <p className="text-center mt-3">
               Déjà inscrit ?{" "}
-              <Link to="/login" className="text-primary">
+              <Link to="/" className="text-primary">
                 Se connecter
               </Link>
             </p>
