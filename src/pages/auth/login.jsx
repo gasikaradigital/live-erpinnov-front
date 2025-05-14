@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import NavigationBar from "../../components/common/navbar/navbarlogin";
 import { useDarkMode } from "../../contexts/DarkModeContext";
+import axios from "axios";
 
 const Login = () => {
   const { darkMode } = useDarkMode();
@@ -10,9 +11,41 @@ const Login = () => {
   const [showPwd, setShowPwd] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
+  const [error,  setError ] = useState("");
+  const [status, setStatus ] = useState("");
+  const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!email || !password) {
+      setError("Veuillez remplir tous les champs.");
+      return;
+    }
+
+    setError("");
+    setStatus("Connexion en cours...");
+
+    try{
+      const response = await axios.post(`${baseUrl}/api/login`, {
+        email,
+        password,
+      }, {
+        headers: {
+        'Content-Type': 'application/json',
+        },
+      });
+
+      console.log("Réponse reçus:", response.data);
+
+      if(response.data.token || response.data.user) {
+        setStatus("Connexion réussi");
+      } else {
+        setError("Connexion échouée");
+      }
+    } catch(err) {
+      console.error("Erreur Api: ", err);
+    }
     console.log({ email, password, rememberMe });
     navigate("/dashboard");
   };
