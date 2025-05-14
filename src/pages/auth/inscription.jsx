@@ -13,13 +13,14 @@ const Inscription = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [acceptTerms, setAcceptTerms] = useState(false);
+  const [acceptConditions, setAcceptConditions] = useState(false);
+  const [acceptPolitique, setAcceptPolitique] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!acceptTerms) {
-      alert("Vous devez accepter les conditions d'utilisation.");
+    if (!acceptConditions || !acceptPolitique) {
+      alert("Vous devez accepter les conditions ou la politique d'utilisation.");
       return;
     }
 
@@ -115,25 +116,40 @@ const Inscription = () => {
               </span>
             </div>
 
-            <div className="form-check mb-3">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="acceptTerms"
-                checked={acceptTerms}
-                onChange={() => setAcceptTerms(!acceptTerms)}
-              />
-              <label className="form-check-label text-start w-100" htmlFor="acceptTerms">
-                J'accepte les{" "}
-                <Link to="/conditions" className="text-primary">
-                  conditions d'utilisation
-                </Link>{" "}
-                et la{" "}
-                <Link to="/confidentialite" className="text-primary">
-                  politique de confidentialité
-                </Link>.
-              </label>
+            <div className="mb-3">
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  id="acceptConditions"
+                  checked={acceptConditions}
+                  onChange={() => setAcceptConditions(!acceptConditions)}
+                />
+                <label className="form-check-label text-start w-100" htmlFor="acceptConditions">
+                  J'accepte les{" "}
+                  <Link to="/conditions" className="text-primary">
+                    conditions d'utilisation
+                  </Link>.
+                </label>
+              </div>
+
+              <div className="form-check mt-2">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  id="acceptPolitique"
+                  checked={acceptPolitique}
+                  onChange={() => setAcceptPolitique(!acceptPolitique)}
+                />
+                <label className="form-check-label text-start w-100" htmlFor="acceptPolitique">
+                  J'accepte la{" "}
+                  <Link to="/confidentialite" className="text-primary">
+                    politique de confidentialité
+                  </Link>.
+                </label>
+              </div>
             </div>
+
 
             <button type="submit" className="btn btn-primary w-100">
               Créer mon compte
