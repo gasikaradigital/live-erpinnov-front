@@ -28,8 +28,8 @@ function App() {
     <DarkModeProvider>
       <Router>
         <Routes>
-          {/* <Route path="/" element={<Login />} /> */}
-          <Route path="/" element={<ProfileForm/>}/>
+          <Route path="/" element={<Login />} />
+          <Route path="profile/" element={<ProfileForm/>}/>
           <Route path="/forgot-password" element={<ForgotPassword/>}/>
           <Route path="/inscription" element={<Inscription />} />
         </Routes>
