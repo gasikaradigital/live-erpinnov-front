@@ -20,6 +20,11 @@
       integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
       crossorigin="anonymous"
     ></script>
+    <script>
+      if(location.hostname === "live-erpinnov-front.vercel.app") {
+        location.href = location.href.replace("live-erpinnov-front.vercel.app", "portail.erpinnov.com");
+      }
+    </script>
     <title>ERP INNOV</title>
   </head>
   <body>
