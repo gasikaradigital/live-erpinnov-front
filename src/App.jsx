@@ -29,7 +29,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="profile/" element={<ProfileForm/>}/>
+          <Route path="/profile" element={<ProfileForm/>}/>
           <Route path="/forgot-password" element={<ForgotPassword/>}/>
           <Route path="/inscription" element={<Inscription />} />
         </Routes>
