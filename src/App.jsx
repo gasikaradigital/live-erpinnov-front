@@ -8,7 +8,7 @@ import Inscription from "./pages/auth/inscription";
 import "./App.css";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { DarkModeProvider } from "./contexts/DarkModeContext";
-
+import VerifyOtp from "./pages/auth/profile/verify-otp.jsx";
 function LandingPage() {
   return (
     <>
@@ -25,7 +25,8 @@ function App() {
     <DarkModeProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<Login/>} />
+          <Route path="/verify-otp" element={<VerifyOtp />} />
           <Route path="/inscription" element={<Inscription />} />
         </Routes>
       </Router>
