@@ -9,6 +9,7 @@ import {
 } from "react-bootstrap";
 import { useDarkMode } from "../../../contexts/DarkModeContext";
 
+
 export default function NavigationBar({ isAuthenticated, user }) {
   const { darkMode, toggleDarkMode } = useDarkMode();
 
