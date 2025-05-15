@@ -27,19 +27,6 @@ const Login = () => {
     setStatus("Connexion en cours...");
 
     try{
-      fetch("https://api.erpinnov.com/test-cors.php", {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ test: true })
-      })
-      .then(res => res.json())
-      .then(console.log)
-      .catch(console.error);
-
-
       // const response = await axios.post(`${baseUrl}/api/login`, {
       //   email,
       //   password,
@@ -49,14 +36,23 @@ const Login = () => {
       //   'Accept': 'application/json'
       //   },
       // });
+      const response = await axios.post("https://backend.erpinnov.com/api/login", {
+        email,
+        password,
+      }, {
+        headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+        },
+      });
 
-      // console.log("Réponse reçus:", response.data);
+      console.log("Réponse reçus:", response.data);
 
-      // if(response.data.token || response.data.user) {
-      //   setStatus("Connexion réussi");
-      // } else {
-      //   setError("Connexion échouée");
-      // }
+      if(response.data.token || response.data.user) {
+        setStatus("Connexion réussi");
+      } else {
+        setError("Connexion échouée");
+      }
     } catch(err) {
       console.error("Erreur Api: ", err);
     }
