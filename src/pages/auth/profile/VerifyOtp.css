@@ -1,21 +1,153 @@
 /* VerifyOtp.css */
-
-/* Utilitaires de base */
-.pt-20 {
-  padding-top: 5rem;
+.main-layout {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 50px; /* Augmenté de 80px à 120px pour plus d'espace */
 }
+
 .min-h-screen {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 12px;
+}
+
+.sm\:mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 28rem; /* Correspond à la largeur de la carte de l'image */
+}
+
+.bg-white {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+}
+
+.text-gray-900 {
+  color: #1f2937;
+}
+
+.text-gray-600 {
+  color: #4b5563;
+}
+
+.text-gray-700 {
+  color: #374151;
+}
+
+.text-gray-500 {
+  color: #6b7280;
+}
+
+.bg-primary-100 {
+  background-color: #dbeafe;
+}
+
+.text-primary-600 {
+  color: #2563eb;
+}
+
+.bg-primary-600 {
+  background-color: #2563eb;
+}
+
+.hover\:bg-primary-700:hover {
+  background-color: #1d4ed8;
+}
+
+.focus\:ring-primary-500:focus {
+  --tw-ring-color: #3b82f6;
+}
+
+.border-gray-300 {
+  border-color: #d1d5db;
+}
+
+.border-gray-100 {
+  border-color: #f3f4f6;
+}
+
+input {
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  text-align: center;
+  font-size: 1.25rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 600;
+}
+
+input:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: #3b82f6;
 }
 
 .flex {
   display: flex;
 }
 
-.flex-col {
-  flex-direction: column;
+.justify-between {
+  justify-content: space-between;
 }
 
+.items-center {
+  align-items: center;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+button {
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.15s ease-in-out;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.text-white {
+  color: #fff;
+}
+
+.bg-green-50 {
+  background-color: #f0fdf4;
+}
+
+.text-green-700 {
+  color: #047857;
+}
+
+.bg-red-50 {
+  background-color: #fef2f2;
+}
+
+.text-red-700 {
+  color: #dc2626;
+}
+
+/* Utilitaires de base */
 .justify-center {
   justify-content: center;
 }
