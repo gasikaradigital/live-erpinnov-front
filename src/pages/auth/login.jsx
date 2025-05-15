@@ -27,16 +27,7 @@ const Login = () => {
     setStatus("Connexion en cours...");
 
     try{
-      // const response = await axios.post(`${baseUrl}/api/login`, {
-      //   email,
-      //   password,
-      // }, {
-      //   headers: {
-      //   'Content-Type': 'application/json',
-      //   'Accept': 'application/json'
-      //   },
-      // });
-      const response = await axios.post("https://backend.erpinnov.com/api/login", {
+      const response = await axios.post(`${baseUrl}/api/login`, {
         email,
         password,
       }, {
@@ -45,7 +36,7 @@ const Login = () => {
         'Accept': 'application/json'
         },
       });
-
+      
       console.log("Réponse reçus:", response.data);
 
       if(response.data.token || response.data.user) {
