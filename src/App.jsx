@@ -10,6 +10,7 @@ import EditProfile from "./pages/auth/profile/ProfileForm";
 import "./App.css";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { DarkModeProvider } from "./contexts/DarkModeContext";
+import ConfirmPassword from "./pages/auth/confirm-password.jsx";
 import ProfileForm from "./pages/auth/profile/ProfileForm";
 import VerifyOtp from "./pages/auth/profile/verify-otp.jsx";
 function LandingPage() {
@@ -31,6 +32,7 @@ function App() {
           <Route path="/profile" element={<ProfileForm/>}/>
           <Route path="/" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword/>}/>
+          <Route path="/confirm-password" element={<ConfirmPassword/>}/>
           <Route path="/verify-otp" element={<VerifyOtp />} />
           <Route path="/inscription" element={<Inscription />} />
         </Routes>
