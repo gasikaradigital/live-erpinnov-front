@@ -64,10 +64,10 @@ const Inscription = () => {
         withCredentials: true
       });
       
-      console.log("Utilisateur enregistré:", reponse.data);
+      console.log("Utilisateur enregistré:", response.data);
 
       navigate("/verify-otp");      
-    } catch(err) {
+    } catch(error) {
       if (error.response && error.response.status === 422) {
         console.log("Validation errors:", error.response.data);
         alert("Erreur validation : " + JSON.stringify(error.response.data));
