@@ -30,7 +30,10 @@ const Login = () => {
       /**
        * Obtenir le cookie CSRF 
        */
-      const responseCsrf = await axios.get(`${baseUrl}/sanctum/csrf-cookie`);
+      const responseCsrf = await axios.get(`${baseUrl}/sanctum/csrf-cookie`, {
+        withCredentials: true
+      });
+
       /**
        * Requête pour le login
        * @param {string} email l'email de l'utilisateur
@@ -45,6 +48,7 @@ const Login = () => {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
         },
+        withCredentials: true
       });
       
       console.log("Réponse reçus:", response.data, "et reponse csrf-cookie", responseCsrf.data);

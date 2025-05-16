@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import NavigationBar from "../../components/common/navbar/navbarlogin";
 import { useDarkMode } from "../../contexts/DarkModeContext";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import axios from 'axios';
 
 const Inscription = () => {
   const { darkMode } = useDarkMode();
@@ -15,9 +16,17 @@ const Inscription = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [acceptConditions, setAcceptConditions] = useState(false);
   const [acceptPolitique, setAcceptPolitique] = useState(false);
+  const [error,  setError ] = useState("");
+  const [status, setStatus ] = useState("");
+  const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if(!email){
+      alert("Entrer votre email");
+      return;
+    }
 
     if (!acceptConditions || !acceptPolitique) {
       alert("Vous devez accepter les conditions ou la politique d'utilisation.");
@@ -29,8 +38,44 @@ const Inscription = () => {
       return;
     }
 
-    console.log({ email, password });
-    navigate("/dashboard");
+    try{
+      /**
+       * Obtenir le cookie CSRF 
+       */
+      const responseCsrf = await axios.get(`${baseUrl}/sanctum/csrf-cookie`, {
+        withCredentials: true,
+      });
+
+      /**
+       * Requête pour le login
+       * @param {string} email l'email de l'utilisateur
+       * @param {string} password le mot de passe de l'utilisateur
+       * @returns {Promise<AxiosResponse>} La réponse du serveur
+       */
+      const response = await axios.post(`${baseUrl}/api/register`, {
+        email,
+        password,
+        confirmPassword,
+      }, {
+        headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+        },
+        withCredentials: true
+      });
+      
+      console.log("Réponse reçus:", response.data, "et reponse csrf-cookie", responseCsrf.data);
+
+      if(response.data.token || response.data.user) {
+        setStatus("Inscription réussi");
+        navigate("/verify-otp");
+      } else {
+        setError("Inscription échouée");
+      }
+    } catch(err) {
+      console.error("Erreur Api: ", err);
+    }
+    
   };
 
   return (
