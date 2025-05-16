@@ -27,6 +27,16 @@ const Login = () => {
     setStatus("Connexion en cours...");
 
     try{
+      /**
+       * Obtenir le cookie CSRF 
+       */
+      const responseCsrf = await axios.get(`${baseUrl}/sanctum/csrf-cookie`);
+      /**
+       * Requête pour le login
+       * @param {string} email l'email de l'utilisateur
+       * @param {string} password le mot de passe de l'utilisateur
+       * @returns {Promise<AxiosResponse>} La réponse du serveur
+       */
       const response = await axios.post(`${baseUrl}/api/login`, {
         email,
         password,
@@ -37,7 +47,7 @@ const Login = () => {
         },
       });
       
-      console.log("Réponse reçus:", response.data);
+      console.log("Réponse reçus:", response.data, "et reponse csrf-cookie", responseCsrf.data);
 
       if(response.data.token || response.data.user) {
         setStatus("Connexion réussi");
