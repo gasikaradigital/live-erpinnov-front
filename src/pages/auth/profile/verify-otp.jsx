@@ -3,6 +3,7 @@ import './VerifyOtp.css';
 import './darkTheme.css';
 import NavigationBar from '../../../components/common/navbar/navbarlogin';
 import { useDarkMode } from '../../../contexts/DarkModeContext';
+import { verifyOtp } from '../../../api/otpApi';
 
 const VerifyOtp = () => {
   const [otp, setOtp] = useState('');
@@ -87,9 +88,10 @@ const VerifyOtp = () => {
       return;
     }
     
+    
     // Logique de soumission à implémenter
     console.log('OTP soumis:', otp);
-    
+    verifyOtp(otp);
     // Simulation de réponse (à remplacer par l'appel API réel)
     // Succès
     // setStatus('Code vérifié avec succès');
