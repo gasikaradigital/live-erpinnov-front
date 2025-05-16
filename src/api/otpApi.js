@@ -25,13 +25,10 @@ const verifyOtp = async (otp) => {
         }
     } catch (error) {
         if (error.response) {
-            // Erreur côté serveur (400, 401, 500, etc.)
             console.error('Erreur serveur:', error.response.status, error.response.data);
         } else if (error.request) {
-            // Aucun retour de réponse (serveur non joignable, timeout, etc.)
             console.error('Aucune réponse du serveur:', error.request);
         } else {
-            // Erreur dans la configuration de la requête
             console.error('Erreur lors de la requête OTP:', error.message);
         }
         return null;
