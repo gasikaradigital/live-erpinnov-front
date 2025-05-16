@@ -58,7 +58,7 @@ const Login = () => {
       console.error("Erreur Api: ", err);
     }
     console.log({ email, password, rememberMe });
-    navigate("/verify-otp");
+    navigate("/dashboard");
   };
 
   return (
