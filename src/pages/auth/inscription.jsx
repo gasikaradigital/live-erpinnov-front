@@ -56,6 +56,7 @@ const Inscription = () => {
         email,
         password,
         confirmPassword,
+        terms: true,
       }, {
         headers: {
         'Content-Type': 'application/json',
@@ -64,14 +65,9 @@ const Inscription = () => {
         withCredentials: true
       });
       
-      console.log("Réponse reçus:", response.data, "et reponse csrf-cookie", responseCsrf.data);
+      console.log("Utilisateur enregistré:", reponse.data);
 
-      if(response.data.token || response.data.user) {
-        setStatus("Inscription réussi");
-        navigate("/verify-otp");
-      } else {
-        setError("Inscription échouée");
-      }
+      navigate("/verify-otp");      
     } catch(err) {
       console.error("Erreur Api: ", err);
     }
