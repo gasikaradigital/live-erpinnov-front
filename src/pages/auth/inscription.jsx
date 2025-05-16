@@ -53,9 +53,9 @@ const Inscription = () => {
        * @returns {Promise<AxiosResponse>} La réponse du serveur
        */
       const response = await axios.post(`${baseUrl}/api/register`, {
-        email,
-        password,
-        confirmPassword,
+        email: email,
+        password: password,
+        password_confirmation: confirmPassword,
       }, {
         headers: {
         'Content-Type': 'application/json',
