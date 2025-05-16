@@ -69,7 +69,12 @@ const Inscription = () => {
 
       navigate("/verify-otp");      
     } catch(err) {
-      console.error("Erreur Api: ", err);
+      if (error.response && error.response.status === 422) {
+        console.log("Validation errors:", error.response.data);
+        alert("Erreur validation : " + JSON.stringify(error.response.data));
+      } else {
+        console.error("Erreur API: ", error);
+      }
     }
     
   };
