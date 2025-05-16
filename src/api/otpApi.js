@@ -3,6 +3,7 @@ import { API_BASE_URL } from "../config";
 
 
 const verifyOtp = async (otp) => {
+    console.log('Starting');
     try {
         const response = await axios.post(
             `${API_BASE_URL}/api/verify-otp`,
