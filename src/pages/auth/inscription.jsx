@@ -56,7 +56,6 @@ const Inscription = () => {
         email,
         password,
         confirmPassword,
-        terms: true,
       }, {
         headers: {
         'Content-Type': 'application/json',
