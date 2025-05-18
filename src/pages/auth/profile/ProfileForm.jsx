@@ -11,6 +11,11 @@ import {
 import NavBarProfile from "../../../components/common/navBarProfile";
 import { useDarkMode } from "../../../contexts/DarkModeContext";
 import { HiUser, HiMapPin, HiPencil } from "react-icons/hi2";
+import { useNavigate } from "react-router-dom";
+import { fetchProfile, updateProfile} from "../../../api/profileApi";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function ProfileForm({ initialData = {}, onSubmit }) {
   const { darkMode } = useDarkMode();
@@ -27,6 +32,28 @@ export default function ProfileForm({ initialData = {}, onSubmit }) {
     bio: initialData.bio || "",
     is_public: initialData.is_public || false,
   });
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const profile = await fetchProfile();
+        if (profile) {
+          console.log(profile);
+          setFormData(profile);
+        } else {
+          console.warn("Profil introuvable, redirection vers la page de connexion.");
+          navigate('/login');
+        }
+      } catch (err) {
+        console.error("Erreur inattendue lors de la récupération du profil :", err);
+        navigate('/login');
+      }
+    };
+
+    fetchUser();
+  }, [navigate]);
 
   const [status, setStatus] = useState("");
 
@@ -49,11 +76,23 @@ export default function ProfileForm({ initialData = {}, onSubmit }) {
     setFormData((prev) => ({ ...prev, [name]: val }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (onSubmit) onSubmit(formData);
-    setStatus("✅ Modifications enregistrées !");
+  
+    try {
+      const result = await updateProfile(formData);
+      if (result) {
+        toast.success("✅ Modifications enregistrées !");
+        if (onSubmit) onSubmit(formData);
+        setStatus("✅ Modifications enregistrées !");
+      } else {
+        toast.warning("⚠️ Échec de la mise à jour du profil.");
+      }
+    } catch (error) {
+      toast.error("❌ Une erreur est survenue lors de l'enregistrement.");
+    }
   };
+  
 
   const inputClass = darkMode ? "bg-secondary text-white border-0" : "";
 
