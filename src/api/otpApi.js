@@ -1,25 +1,13 @@
-import axios from "axios";
-import { API_BASE_URL } from "../config";
+import { api } from "../config";
 
-
-const verifyOtp = async (otp) => {
+export const verifyOtp = async (otp) => {
     console.log('Starting');
     try {
-        const response = await axios.post(
-            `${API_BASE_URL}/api/verify-otp`,
-            { otp },
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                },
-                withCredentials: true,
-            }
-        );
+        const response = await api.post(`/api/verify-otp`,{ otp });
 
         if (response.status === 200) {
             console.log('OTP vérifié avec succès:', response.data);
-            return response.data;
+            return response;
         } else {
             console.warn('Réponse inattendue du serveur:', response.status, response.data);
             return null;
@@ -35,5 +23,3 @@ const verifyOtp = async (otp) => {
         return null;
     }
 };
-
-export {verifyOtp};

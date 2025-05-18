@@ -21,17 +21,18 @@ export default function ProfileForm({ initialData = {}, onSubmit }) {
   const { darkMode } = useDarkMode();
 
   const [formData, setFormData] = useState({
-    civilite: initialData.civilite || "mr",
-    fname: initialData.fname || "",
-    lname: initialData.lname || "",
-    telephone: initialData.telephone || "",
-    adresse: initialData.adresse || "",
-    zipcode: initialData.zipcode || "",
-    ville: initialData.ville || "",
-    pays: initialData.pays || "",
-    bio: initialData.bio || "",
-    is_public: initialData.is_public || false,
+    civilite: initialData?.civilite ?? "mr",
+    fname: initialData?.fname ?? "",
+    lname: initialData?.lname ?? "",
+    telephone: initialData?.telephone ?? "",
+    adresse: initialData?.adresse ?? "",
+    zipcode: initialData?.zipcode ?? "",
+    ville: initialData?.ville ?? "",
+    pays: initialData?.pays ?? "",
+    bio: initialData?.bio ?? "",
+    is_public: initialData?.is_public ?? false,
   });
+  
 
   const navigate = useNavigate();
 
@@ -100,8 +101,8 @@ export default function ProfileForm({ initialData = {}, onSubmit }) {
     <div className={`vw-100 min-vh-100  ${darkMode ? "bg-dark text-white" : "bg-light"}`}>
       <NavBarProfile
         user={{
-          initials: `${formData.fname[0] || ""}${formData.lname[0] || ""}`.toUpperCase(),
-        }}
+          initials: `${formData?.fname?.[0] ?? ""}${formData?.lname?.[0] ?? ""}`.toUpperCase(),
+        }}        
       />
       <div className="container d-flex align-items-center justify-content-center min-vh-100">
         <Container className="py-5" style={{ width: "100%", maxWidth: "700px", borderRadius: "12px" }}>

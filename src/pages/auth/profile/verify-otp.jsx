@@ -4,6 +4,8 @@ import './darkTheme.css';
 import NavigationBar from '../../../components/common/navbar/navbarlogin';
 import { useDarkMode } from '../../../contexts/DarkModeContext';
 import { verifyOtp } from '../../../api/otpApi';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const VerifyOtp = () => {
   const [otp, setOtp] = useState('');
@@ -11,6 +13,7 @@ const VerifyOtp = () => {
   const [status, setStatus] = useState('');
   const [error, setError] = useState('');
   const inputRefs = useRef([]);
+  const navigate = useNavigate();
   const { darkMode } = useDarkMode();
 
   useEffect(() => {
@@ -78,28 +81,33 @@ const VerifyOtp = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Vérification que tous les champs sont remplis
+  
     if (otp.length !== 6) {
       setError('Veuillez entrer un code à 6 chiffres complet');
       setStatus('');
+      toast.warn('Code OTP incomplet', { autoClose: 3000 });
       return;
     }
-    
-    
-    // Logique de soumission à implémenter
-    console.log('OTP soumis:', otp);
-    verifyOtp(otp);
-    // Simulation de réponse (à remplacer par l'appel API réel)
-    // Succès
-    // setStatus('Code vérifié avec succès');
-    // setError('');
-    
-    // Erreur
-    // setError('Code invalide');
-    // setStatus('');
+  
+    try {
+      const res = await verifyOtp(otp);
+      if (res && res.status === 200) {
+        setStatus('Code vérifié avec succès');        
+        setError('');
+        toast.success('✅ Code OTP vérifié avec succès', { autoClose: 3000 });
+        navigate('/profile');
+      } else {
+        setError('Code invalide');
+        setStatus('');
+        toast.error('❌ Code OTP invalide', { autoClose: 3000 });
+      }
+    } catch (err) {
+      setError('Une erreur est survenue');
+      setStatus('');
+      toast.error('⚠️ Erreur lors de la vérification du code', { autoClose: 3000 });
+    }
   };
 
   const handleResend = (e) => {
