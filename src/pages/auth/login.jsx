@@ -30,10 +30,11 @@ const Login = () => {
       /**
        * Obtenir le cookie CSRF 
        */
-      const responseCsrf = await axios.get(`${baseUrl}/sanctum/csrf-cookie`, {
+      const   csrf_response = await axios.get(`${baseUrl}/sanctum/csrf-cookie`, {
         withCredentials: true
       });
 
+      console.log(csrf_response.data);
       /**
        * Requête pour le login
        * @param {string} email l'email de l'utilisateur
@@ -48,10 +49,11 @@ const Login = () => {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
         },
-        withCredentials: true
+        withCredentials: true,
+        withXSRFToken : true
       });
       
-      console.log("Réponse reçus:", response.data, "et reponse csrf-cookie", responseCsrf.data);
+      console.log("Réponse reçus:", response.data, "et reponse csrf-cookie");
 
       if(response.data.token || response.data.user) {
         setStatus("Connexion réussi");
@@ -62,7 +64,7 @@ const Login = () => {
       console.error("Erreur Api: ", err);
     }
     console.log({ email, password, rememberMe });
-    navigate("/dashboard");
+    navigate("/profile");
   };
 
   return (
