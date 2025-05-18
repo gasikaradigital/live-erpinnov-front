@@ -29,9 +29,9 @@ export const updateProfile = async (profile) => {
     civilite: profile.civilite,
     telephone: profile.telephone
 }  
-console.log(body);
+  console.log(body);
   const updateProfileResponse = await api.patch('/api/profile',body )
-    if (response.status === 200) {
+    if (updateProfileResponse.status === 200) {
       return updateProfileResponse;
     }
     return null;
