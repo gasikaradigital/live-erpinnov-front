@@ -88,6 +88,7 @@ export default function ProfileForm({ initialData = {}, onSubmit }) {
         toast.success("✅ Modifications enregistrées !");
         if (onSubmit) onSubmit(formData);
         setStatus("✅ Modifications enregistrées !");
+        navigate("/dashboard");
       } else {
         toast.warning("⚠️ Échec de la mise à jour du profil.");
       }

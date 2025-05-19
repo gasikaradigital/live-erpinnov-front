@@ -16,7 +16,7 @@ const AppNavbar = () => {
     >
 
       <Container fluid>
-      <Navbar.Brand href="/" className="d-flex align-items-center gap-2">
+      <Navbar.Brand href="/dashboard" className="d-flex align-items-center gap-2">
           <img
             src="/assets/img/front-pages/logo/logo.png"
             alt="ERP INNOV"
