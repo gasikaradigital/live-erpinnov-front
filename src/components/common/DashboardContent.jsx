@@ -4,14 +4,14 @@ import InstancesCard from "./InstancesCard";
 import SolutionsTeaser from "./SolutionsTeaser";
 
 const DashboardContent = () => (
-  <Container className="my-4">
-    <Row>
+  <Container className="pt-5 mt-5">
+    <Row className="mb-4">
       <Col lg={{ span: 10, offset: 1 }}>
         <InstancesCard />
       </Col>
     </Row>
     <Row>
-      <Col>
+      <Col lg={{ span: 10, offset: 1 }}>
         <SolutionsTeaser />
       </Col>
     </Row>
@@ -19,4 +19,3 @@ const DashboardContent = () => (
 );
 
 export default DashboardContent;
-

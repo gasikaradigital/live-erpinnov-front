@@ -9,15 +9,23 @@ const AppNavbar = () => {
     <Navbar
       expand="lg"
       className="border-bottom"
+      fixed="top"
       bg="dark"
       data-bs-theme={theme}
       variant={theme === "dark" ? "dark" : "light"}
     >
+
       <Container fluid>
-        <Navbar.Brand href="#home" className="d-flex align-items-center gap-2">
-          <i className="bi bi-toggle2-on fs-4 text-primary" /> ERP INNOV
+      <Navbar.Brand href="/" className="d-flex align-items-center gap-2">
+          <img
+            src="/assets/img/front-pages/logo/logo.png"
+            alt="ERP INNOV"
+            style={{ height: "50px" }}
+            className="mb-2"
+          />
+          <span className="fw-semibold text-primary">ERP INNOV</span>
         </Navbar.Brand>
-        <Nav className="ms-auto align-items-center gap-2">
+         <Nav className="d-flex align-items-center gap-3">
           <Button
             variant="outline-secondary"
             className="rounded-circle p-2"

@@ -64,7 +64,7 @@ const Login = () => {
       console.error("Erreur Api: ", err);
     }
     console.log({ email, password, rememberMe });
-    navigate("/profile");
+    navigate("/dashboard");
   };
 
   return (
