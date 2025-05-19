@@ -3,7 +3,7 @@ import './VerifyOtp.css';
 import './darkTheme.css';
 import NavigationBar from '../../../components/common/navbar/navbarlogin';
 import { useDarkMode } from '../../../contexts/DarkModeContext';
-import { verifyOtp } from '../../../api/otpApi';
+import { resendOtp, verifyOtp } from '../../../api/otpApi';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -110,26 +110,34 @@ const VerifyOtp = () => {
     }
   };
 
-  const handleResend = (e) => {
+  const handleResend = async(e) => {
     e.preventDefault();
     
-    // Réinitialiser le formulaire
     setOtpValues(Array(6).fill(''));
     setOtp('');
     setError('');
-    
-    // Logique de renvoi du code à implémenter
-    console.log('Renvoyer le code');
-    
-    // Afficher le message de succès
-    setStatus('Un nouveau code a été envoyé à votre adresse email');
-    
-    // Focus sur le premier champ
-    setTimeout(() => {
-      if (inputRefs.current[0]) {
-        inputRefs.current[0].focus();
+    try {
+      const res = await resendOtp();
+      if (res && res.status === 200) {
+        setStatus('Code OTP renvoyé avec succès');
+        setError('');
+        toast.success('✅ Code OTP renvoyé avec succès', { autoClose: 3000 });
+        setTimeout(() => {
+          if (inputRefs.current[0]) {
+            inputRefs.current[0].focus();
+          }
+        }, 100);
+      } else {
+        setError('Échec de l’envoi du code');
+        setStatus('');
+        toast.error('❌ Échec de l’envoi du code OTP', { autoClose: 3000 });
       }
-    }, 100);
+    } catch (err) {
+      setError('Une erreur est survenue lors du renvoi du code');
+      setStatus('');
+      toast.error('⚠️ Erreur lors du renvoi du code OTP', { autoClose: 3000 });
+    }
+    
   };
 
   return (<div className="main-layout w-full">
