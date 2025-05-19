@@ -40,10 +40,12 @@ export default function ProfileForm({ initialData = {}, onSubmit }) {
     const fetchUser = async () => {
       try {
         const profile = await fetchProfile();
+        console.log(profile);
         if (profile) {
           console.log(profile);
           setFormData(profile);
         } else {
+          console.log(profile);
           console.warn("Profil introuvable, redirection vers la page de connexion.");
           navigate('/login');
         }

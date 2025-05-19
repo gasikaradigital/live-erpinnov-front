@@ -4,6 +4,7 @@ import { API_BASE_URL,api } from "../config";
 export const fetchProfile = async () => {
     try {
       const response = await api.get('/api/user');
+      console.log(response);
       if (response.status === 200) {
         return response.data.profile;
       }
