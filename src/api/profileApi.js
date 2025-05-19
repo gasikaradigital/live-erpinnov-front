@@ -6,7 +6,7 @@ export const fetchProfile = async () => {
       const response = await api.get('/api/user');
       console.log(response);
       if (response.status === 200) {
-        return response.data.profile;
+        return response.data;
       }
       return null;
     } catch (error) {
