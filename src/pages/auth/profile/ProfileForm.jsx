@@ -86,6 +86,7 @@ export default function ProfileForm({ initialData = {}, onSubmit }) {
       const result = await updateProfile(formData);
       if (result) {
         toast.success("✅ Modifications enregistrées !");
+        navigate("/dashboard");
         if (onSubmit) onSubmit(formData);
         setStatus("✅ Modifications enregistrées !");
         navigate("/dashboard");
