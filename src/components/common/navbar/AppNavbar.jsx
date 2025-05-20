@@ -72,6 +72,7 @@ const AppNavbar = () => {
               </Dropdown.Menu>
             </Dropdown>
           </Nav>
+          
         </Navbar.Collapse>
       </Container>
     </Navbar>

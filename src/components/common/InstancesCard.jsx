@@ -4,7 +4,7 @@ import "./InstancesCard.css";
 
 const InstancesCard = () => {
   return (
-    <Card className="instances-card">
+    <Card className="instances-card" >
       <Card.Body>
         <div className="d-flex justify-content-between flex-wrap gap-3 mb-3">
           <div>

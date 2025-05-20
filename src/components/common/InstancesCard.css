@@ -1,16 +1,16 @@
-/* InstancesCard.css */
-
 /* Général et structure principale */
 .instances-card {
   border-radius: 16px !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
   border: 1px solid #e9ecef !important;
-  margin: 2rem;
+  margin: 2rem 0; /* Full width with vertical margins only */
+  width: 100%; /* Stretch to full width of the parent Col */
   overflow: hidden;
 }
 
 .card-body {
   padding: 1.5rem !important;
+  width: 100%; /* Ensure the card body stretches fully */
 }
 
 /* En-tête et titres */
@@ -54,6 +54,7 @@ small.text-body-secondary {
   overflow: hidden;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
+  width: 100%; /* Allow the input group to stretch with the card */
 }
 
 .input-group:focus-within {
@@ -72,6 +73,7 @@ small.text-body-secondary {
   border-left: none;
   padding: 0.6rem;
   font-size: 0.9rem;
+  width: 100%; /* Ensure the input stretches fully */
 }
 
 .form-control:focus {
@@ -205,5 +207,10 @@ small.text-body-secondary {
   .input-group {
     max-width: 100% !important;
     margin: 1rem 0;
+  }
+
+  .instances-card {
+    width: 100%; /* Ensure full width on small screens */
+    margin: 1rem 0; /* Adjust margin for better fit */
   }
 }
