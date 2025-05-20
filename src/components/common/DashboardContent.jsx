@@ -6,7 +6,7 @@ import SolutionsTeaser from "./SolutionsTeaser";
 const DashboardContent = () => (
   <Container className="pt-5 mt-5">
     <Row className="mb-4">
-      <Col lg={{ span: 10, offset: 1 }}>
+      <Col lg={{ span: 12 }}>
         <InstancesCard />
       </Col>
     </Row>
