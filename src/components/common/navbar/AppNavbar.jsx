@@ -1,22 +1,22 @@
 import React from "react";
-import { Navbar, Container, Nav, Button } from "react-bootstrap";
+import { Navbar, Container, Nav, Button, Dropdown } from "react-bootstrap";
 import { useTheme } from "../../../contexts/ThemeContext";
+import './AppNavbar.css';
 
 const AppNavbar = () => {
   const { theme, toggleTheme } = useTheme();
 
   return (
     <Navbar
-      expand="lg"
-      className="border-bottom"
       fixed="top"
-      bg="dark"
-      data-bs-theme={theme}
+      bg={theme === "dark" ? "dark" : "light"}
       variant={theme === "dark" ? "dark" : "light"}
+      expand="lg"
+      className="border-bottom shadow-sm"
+      data-bs-theme={theme}
     >
-
-      <Container fluid>
-      <Navbar.Brand href="/dashboard" className="d-flex align-items-center gap-2">
+      <Container>
+        <Navbar.Brand href="/dashboard" className="d-flex align-items-center gap-2">
           <img
             src="/assets/img/front-pages/logo/logo.png"
             alt="ERP INNOV"
@@ -25,23 +25,54 @@ const AppNavbar = () => {
           />
           <span className="fw-semibold text-primary">ERP INNOV</span>
         </Navbar.Brand>
-         <Nav className="d-flex align-items-center gap-3">
-          <Button
-            variant="outline-secondary"
-            className="rounded-circle p-2"
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-          >
-            {theme === "dark" ? (
-              <i className="bi bi-sun-fill" />
-            ) : (
-              <i className="bi bi-moon-stars-fill" />
-            )}
-          </Button>
-          <div className="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center" style={{ width: 36, height: 36 }}>
-            FI
-          </div>
-        </Nav>
+        <Navbar.Toggle aria-controls="main-navbar-nav" />
+        <Navbar.Collapse id="main-navbar-nav">
+          <Nav className="ms-auto d-flex align-items-center gap-3">
+            <Button
+              variant={theme === "dark" ? "light" : "outline-secondary"}
+              onClick={toggleTheme}
+              className="rounded-circle p-2"
+              title="Basculer en mode sombre"
+            >
+              {theme === "dark" ? (
+                <i className="bi bi-sun-fill"></i>
+              ) : (
+                <i className="bi bi-moon-fill"></i>
+              )}
+            </Button>
+            <Dropdown align="end">
+              <Dropdown.Toggle
+                variant="light"
+                className="d-flex align-items-center gap-2 px-2"
+              >
+                <div className="profile-circle bg-primary text-white">
+                  FI
+                </div>
+                <span className="d-none d-md-inline">User</span>
+              </Dropdown.Toggle>
+              
+              <Dropdown.Menu className="mt-2 shadow">
+                <Dropdown.Item href="/profile">
+                  <i className="bi bi-person-circle me-2"></i>
+                  Mon Profil
+                </Dropdown.Item>
+                <Dropdown.Item href="/create-enterprise">
+                  <i className="bi bi-building-add me-2"></i>
+                  Créer une entreprise
+                </Dropdown.Item>
+                <Dropdown.Item href="/search-instance">
+                  <i className="bi bi-search me-2"></i>
+                  Rechercher une instance
+                </Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item href="/logout" className="text-danger">
+                  <i className="bi bi-box-arrow-right me-2"></i>
+                  Déconnexion
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </Nav>
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );
