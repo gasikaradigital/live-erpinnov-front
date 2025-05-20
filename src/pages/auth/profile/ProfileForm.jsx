@@ -8,7 +8,7 @@ import {
   Card,
   Container,
 } from "react-bootstrap";
-import NavBarProfile from "../../../components/common/navBarProfile";
+import NavBarProfile from "../../../components/common/navbar/navBarProfile";
 import { useDarkMode } from "../../../contexts/DarkModeContext";
 import { HiUser, HiMapPin, HiPencil } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
@@ -94,7 +94,7 @@ export default function ProfileForm({ initialData = {}, onSubmit }) {
         toast.warning("⚠️ Échec de la mise à jour du profil.");
       }
     } catch (error) {
-      toast.error("❌ Une erreur est survenue lors de l'enregistrement.");
+      toast.error("❌ Une erreur est survenue lors de l'enregistrement." + error);
     }
   };
   
