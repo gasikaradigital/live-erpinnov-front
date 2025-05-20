@@ -12,7 +12,7 @@ export default function NavBarProfile({ user = { initials: "KA" } }) {
       className={`custom-navbar ${darkMode ? 'dark-mode-active' : ''}`}
     >
       <Container>
-        <Navbar.Brand href="/" className="navbar-brand">
+        <Navbar.Brand href="/dashboard" className="navbar-brand">
           <img
             src="/assets/img/front-pages/logo/logo.png"
             alt="ERP INNOV"
