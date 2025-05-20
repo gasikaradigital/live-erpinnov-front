@@ -2,11 +2,29 @@ import React from "react";
 import { Navbar, Container, Nav, Button, Dropdown } from "react-bootstrap";
 import { useTheme } from "../../../contexts/ThemeContext";
 import './AppNavbar.css';
+import { logout } from "../../../api/logoutApi";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AppNavbar = () => {
   const { theme, toggleTheme } = useTheme();
+  const navigate = useNavigate();
 
-  return (
+const handleLogout = async () => {
+  try {
+    const response = await logout();
+
+    if (response.status === 200) {
+      toast.success("Déconnexion réussie");
+    }
+    navigate("/");
+  } catch (error) {
+    toast.error("Erreur lors de la déconnexion");
+    navigate("/");
+  }
+};
+
+return (
     <Navbar
       fixed="top"
       bg={theme === "dark" ? "dark" : "light"}
@@ -65,7 +83,7 @@ const AppNavbar = () => {
                   Rechercher une instance
                 </Dropdown.Item>
                 <Dropdown.Divider />
-                <Dropdown.Item href="/logout" className="text-danger">
+                <Dropdown.Item onClick={handleLogout} className="text-danger">
                   <i className="bi bi-box-arrow-right me-2"></i>
                   Déconnexion
                 </Dropdown.Item>
