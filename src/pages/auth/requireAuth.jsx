@@ -2,6 +2,7 @@ import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { user } from "../../api/userApi";
+import { csrf } from "../../api/csrfApi";
 
 axios.defaults.withCredentials = true; // nécessaire pour les cookies httpOnly
 
@@ -13,10 +14,12 @@ const RequireAuth = () => {
   useEffect(() => {
     const verifyAuth = async () => {
       try {
-        const res = await user();
+        await csrf()
+        await user();
         setAuthenticated(true);
       } catch (error) {
         setAuthenticated(false);
+        return <Navigate to="/" />
       } finally {
         setLoading(false);
       }
