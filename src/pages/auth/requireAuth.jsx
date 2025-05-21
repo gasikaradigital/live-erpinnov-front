@@ -25,7 +25,7 @@ const RequireAuth = () => {
     checkAuth();
   }, [navigate]);
 
-  return null;
+  return <div>Authentification en cours...</div>;
 };
 
 export default RequireAuth;
