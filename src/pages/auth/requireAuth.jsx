@@ -27,7 +27,7 @@ const RequireAuth = () => {
 
   if (loading) return <div>Chargement...</div>;
 
-  if (!auth) return <Navigate to="/" state={{ from: location }} replace />;
+  if (!authenticated) return <Navigate to="/" state={{ from: location }} replace />;
 
   return <Outlet />;
 };
