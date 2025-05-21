@@ -19,19 +19,14 @@ const RequireAuth = () => {
         await user();
         setAuthenticated(true);
       } catch (error) {
-        setAuthenticated(false);
-        navigate("/", { replace: true, state: { from: location } });
-      } finally {
-        setLoading(false);
-      }
+        navigate("/", { replace: true });
+      } 
     };
 
     verifyAuth();
   }, [navigate, location]);
 
-  if (loading) return <div>Chargement...</div>;
-
- return authenticated ? <Outlet /> : null;
+ return <div>Vérification en cours...</div>;
 };
 
 export default RequireAuth;
