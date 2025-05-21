@@ -18,7 +18,6 @@ import { DarkModeProvider } from "./contexts/DarkModeContext";
 import { ThemeProvider } from "./contexts/ThemeContext.jsx";
 import "./App.css";
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import RequireAuth from "./pages/auth/requireAuth";
 
 function LandingPage() {
   return (
@@ -55,18 +54,16 @@ function App() {
           <Route path="/confirm-password" element={<ConfirmPassword/>}/>
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/inscription" element={<Inscription />} />
-          <Route element={<RequireAuth />}>
-            <Route path="/verify-otp" element={<VerifyOtp />} />
-            <Route path="/verify-email" element={<VerifyEmail />} />
+          <Route path="/verify-otp" element={<VerifyOtp />} />
+          <Route path="/verify-email" element={<VerifyEmail />} />
 
-            <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path="/landing" element={<LandingPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/landing" element={<LandingPage />} />
             
             
-            <Route path="/confirm-password" element={<ConfirmPassword />} />
-            <Route path="/verify-otp" element={<VerifyOtp />} />
-            <Route path="/profile" element={<ProfileForm />} />
-          </Route>
+          <Route path="/confirm-password" element={<ConfirmPassword />} />
+          <Route path="/verify-otp" element={<VerifyOtp />} />
+          <Route path="/profile" element={<ProfileForm />} />
         </Routes>
       </Router>
     </DarkModeProvider>
