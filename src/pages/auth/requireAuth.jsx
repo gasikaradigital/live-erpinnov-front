@@ -18,6 +18,7 @@ const RequireAuth = () => {
         const response = await user();
         if(response.status !== 200){
           navigate('/', {replace: true});
+          console.log(response.status);
         }
       } catch (error) {
         navigate('/', { replace: true });
