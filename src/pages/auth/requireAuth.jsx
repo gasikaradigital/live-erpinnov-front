@@ -15,11 +15,8 @@ const RequireAuth = () => {
     const checkAuth = async () => {
       try {
         await csrf();
-        const response = await user();
-        if(response.status !== 200){
-          navigate('/', {replace: true});
-          console.log(response.status);
-        }
+        await user();
+        
       } catch (error) {
         navigate('/', { replace: true });
       } 
@@ -28,7 +25,7 @@ const RequireAuth = () => {
     checkAuth();
   }, [navigate]);
 
-  return <div>Authentification en cours...</div>;
+  return null;
 };
 
 export default RequireAuth;
