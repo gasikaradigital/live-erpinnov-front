@@ -1,0 +1,290 @@
+/* PlanCard.css optimisé - Compatible avec la structure existante */
+
+.plan-card {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  margin: 1.5rem auto;
+  max-width: 900px;
+  border: 1px solid #e2e8f0;
+}
+
+.plan-card-header {
+  padding: 1.25rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.plan-card-header.open {
+  border-bottom-color: #e2e8f0;
+}
+
+.plan-info {
+  flex: 1;
+}
+
+.plan-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0;
+  color: #1a202c;
+  text-align: left;
+}
+
+.plan-description {
+  color: #718096;
+  font-size: 0.875rem;
+  margin: 0.25rem 0 0;
+  text-align: left;
+}
+
+.plan-price-info {
+  text-align: right;
+  position: relative;
+  padding-right: 1.5rem;
+}
+
+.plan-price {
+  font-size: 0.875rem;
+  margin: 0;
+  color: #4a5568;
+}
+
+.plan-price span {
+  font-weight: 600;
+}
+
+.discount-badge {
+  background-color: #ebf8ff;
+  color: #2c5282;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  margin-top: 0.375rem;
+  display: inline-block;
+}
+
+.dropdown-arrow {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.2s ease;
+  color: #718096;
+}
+
+.dropdown-arrow.open {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.plan-card-content {
+  padding: 1.5rem;
+}
+
+/* Fonctionnalités incluses */
+.plan-features {
+  width: 30%;
+  padding-right: 1rem;
+  text-align: left;
+}
+
+.plan-features h4,
+.plan-options h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.plan-features ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.plan-features li {
+  display: flex;
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+  text-align: left;
+}
+
+.check-icon {
+  color: #48bb78;
+  margin-right: 0.5rem;
+  flex-shrink: 0;
+}
+
+/* Options disponibles */
+.plan-options {
+  width: 70%;
+  text-align: left;
+}
+
+.option-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.option-card.basic {
+  border-color: #90cdf4;
+  background-color: #ebf8ff;
+}
+
+.option-header {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.option-card.basic .option-header {
+  border-bottom-color: #bee3f8;
+}
+
+.option-header h5 {
+  font-size: 0.938rem;
+  font-weight: 600;
+  margin: 0;
+  color: #2d3748;
+}
+
+.option-price {
+  font-weight: 600;
+  margin: 0;
+  color: #2d3748;
+}
+
+.option-features {
+  list-style: none;
+  padding: 0.75rem 1rem;
+  margin: 0;
+}
+
+.option-features li {
+  font-size: 0.875rem;
+  color: #4a5568;
+  padding-left: 0.75rem;
+  position: relative;
+  margin-bottom: 0.375rem;
+}
+
+.option-features li:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #a0aec0;
+}
+
+.text-end {
+  text-align: right;
+}
+
+.select-option-btn {
+  background-color: #3182ce;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1.5rem;
+  font-weight: 500;
+  font-size: 0.938rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.select-option-btn:hover {
+  background-color: #2b6cb0;
+}
+
+/* Classes d'aide */
+.d-flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
+.me-2 {
+  margin-right: 0.5rem;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
+.mt-3 {
+  margin-top: 0.75rem;
+}
+
+.gap-3 {
+  gap: 0.75rem;
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .flex-md-row {
+    flex-direction: column;
+  }
+  
+  .plan-features,
+  .plan-options {
+    width: 100%;
+  }
+  
+  .plan-features {
+    margin-bottom: 1.5rem;
+  }
+  
+  .plan-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .plan-price-info {
+    margin-top: 1rem;
+    padding-right: 0;
+  }
+  
+  .dropdown-arrow {
+    top: 1.25rem;
+    right: 1.25rem;
+    transform: none;
+  }
+  
+  .dropdown-arrow.open {
+    transform: rotate(180deg);
+  }
+}
+
+@media (min-width: 768px) {
+  .flex-md-row {
+    flex-direction: row;
+  }
+}
