@@ -1,4 +1,3 @@
-// components/RequireAuth.jsx
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -6,7 +5,7 @@ import { user } from "../../api/userApi";
 
 axios.defaults.withCredentials = true; // nécessaire pour les cookies httpOnly
 
-const requireAuth = () => {
+const RequireAuth = () => {
   const location = useLocation();
   const [auth, setAuth] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -33,4 +32,4 @@ const requireAuth = () => {
   return <Outlet />;
 };
 
-export default requireAuth;
+export default RequireAuth;
