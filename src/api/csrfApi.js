@@ -2,7 +2,7 @@ import { api } from "../config";
 
 export const csrf = async () => {
     try {
-        const response = await api.get(`/api/csrf-cookie`,{
+        const response = await api.get(`/api/sanctum/csrf-cookie`,{
             withCredentials: true
         });
     } catch (error) {
