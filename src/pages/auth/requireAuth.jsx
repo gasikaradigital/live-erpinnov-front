@@ -8,6 +8,7 @@ axios.defaults.withCredentials = true; // nécessaire pour les cookies httpOnly
 
 const RequireAuth = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [authenticated, setAuthenticated] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -19,20 +20,18 @@ const RequireAuth = () => {
         setAuthenticated(true);
       } catch (error) {
         setAuthenticated(false);
-        return <Navigate to="/" />
+        navigate("/", { replace: true, state: { from: location } });
       } finally {
         setLoading(false);
       }
     };
 
     verifyAuth();
-  }, []);
+  }, [navigate, location]);
 
   if (loading) return <div>Chargement...</div>;
 
-  if (!authenticated) return <Navigate to="/"  />;
-
-  return <Outlet />;
+ return authenticated ? <Outlet /> : null;
 };
 
 export default RequireAuth;
