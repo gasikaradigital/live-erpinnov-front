@@ -2,67 +2,12 @@ import React, { useState } from 'react';
 import './PlanCard.css';
 import { useTheme } from '../../contexts/ThemeContext';
 
-const PlanCard = () => {
-  const [isOpen, setIsOpen] = useState(true); // Initialement ouvert pour correspondre à l'image
-  const [selectedSubPlan, setSelectedSubPlan] = useState(1); // Basic sélectionné par défaut
-
-  // Données JSON pour le plan
-  const planData = {
-    "id": 1,
-    "label": "Solo",
-    "description": "Idéal pour les indépendants et micro-entrepreneurs.",
-    "features": [
-      "2 Go de stockage",
-      "1000 appels API"
-    ],
-    "price_min": "25000.00",
-    "sub_plans": [
-      {
-        "id": 1,
-        "label": "Basic",
-        "features": [
-          "Gestion des tiers",
-          "Produits",
-          "Stocks",
-          "Devis",
-          "Facturation",
-          "Comptabilité simple"
-        ],
-        "price_monthly": "5.00",
-        "price_yearly": "60.00",
-        "price_monthly_formated": "25000.00"
-      },
-      {
-        "id": 2,
-        "label": "Standard",
-        "features": [
-          "Modules Basic",
-          "Rapports et statistiques",
-          "CRM",
-          "Email intégré"
-        ],
-        "price_monthly": "8.00",
-        "price_yearly": "96.00",
-        "price_monthly_formated": "40000.00"
-      },
-      {
-        "id": 3,
-        "label": "Premium",
-        "features": [
-          "Modules Standard",
-          "Comptabilité analytique",
-          "Suivi de temps",
-          "KPI automatisés",
-          "Multi-devises"
-        ],
-        "price_monthly": "12.00",
-        "price_yearly": "144.00",
-        "price_monthly_formated": "60000.00"
-      }
-    ]
-  };
+const PlanCard = ({ planData, open=false, blur=true }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedSubPlan, setSelectedSubPlan] = useState(1);
 
   const toggleDropdown = () => {
+    if (blur) return;
     setIsOpen(!isOpen);
   };
 
@@ -70,15 +15,18 @@ const PlanCard = () => {
     setSelectedSubPlan(subPlanId);
   };
 
-  const {theme} = useTheme();
-  // Formater le prix pour l'affichage
+  const { theme } = useTheme();
+
   const formatPrice = (price) => {
     return new Intl.NumberFormat('fr-FR').format(parseFloat(price));
   };
 
   return (
-    <div className={`plan-card ${theme=='dark' ? 'bg-dark text-white' : ''}`}>
-      <div className={ `plan-card-header ${isOpen ? 'open' : ''}`} onClick={toggleDropdown}>
+    <div
+      className={`plan-card ${theme === 'dark' ? 'bg-dark text-white' : ''} ${blur ? 'opacity-75' : ''}`}
+      style={blur ? { filter: 'blur(4px)', pointerEvents: 'none', userSelect: 'none' } : {}}
+    >
+      <div className={`plan-card-header ${isOpen ? 'open' : ''}`} onClick={toggleDropdown}>
         <div className="plan-info">
           <h3 className="plan-title">{planData.label}</h3>
           <p className="plan-description">{planData.description}</p>
@@ -88,12 +36,12 @@ const PlanCard = () => {
           <div className="discount-badge">Économisez 10% sur l'abonnement annuel</div>
           <span className={`dropdown-arrow ${isOpen ? 'open' : ''}`}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </span>
         </div>
       </div>
-      
+
       {isOpen && (
         <div className={`plan-card-content d-flex flex-column flex-md-row gap-4`} >
           <div className="plan-features">
@@ -102,20 +50,20 @@ const PlanCard = () => {
               {planData.features.map((feature, index) => (
                 <li key={index} className="d-flex align-items-center">
                   <svg className="check-icon me-2" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 8L6 11L13 4" stroke="#4CAF50" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M3 8L6 11L13 4" stroke="#4CAF50" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                   {feature}
                 </li>
               ))}
             </ul>
           </div>
-          
+
           <div className="plan-options flex-grow-1">
             <h4>Options disponibles</h4>
             <div className="d-flex flex-column gap-3">
               {planData.sub_plans.map((subPlan) => (
-                <div 
-                  key={subPlan.id} 
+                <div
+                  key={subPlan.id}
                   className={`option-card ${subPlan.id === 1 ? 'basic' : ''}`}
                 >
                   <div className="option-header d-flex align-items-center justify-content-between">
@@ -145,7 +93,7 @@ const PlanCard = () => {
           </div>
         </div>
       )}
-      
+
       {isOpen && (
         <div className="text-end mt-3">
           <button className="select-option-btn btn">
