@@ -26,7 +26,7 @@ const RequireAuth = () => {
     verifyAuth();
   }, [navigate, location]);
 
- return <div>Vérification en cours...</div>;
+ return  navigate("/", { replace: true });
 };
 
 export default RequireAuth;
