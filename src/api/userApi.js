@@ -1,8 +1,8 @@
 import { api } from "../config";
 
-export const user = async (otp) => {
+export const user = async () => {
     try {
-        const response = await api.post(`/api/user`,{ otp });
+        const response = await api.get(`/api/user`);
 
         if (response.status === 200) {
              return response?.data?.profile ?? response?.data;
