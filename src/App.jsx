@@ -18,7 +18,7 @@ import { DarkModeProvider } from "./contexts/DarkModeContext";
 import { ThemeProvider } from "./contexts/ThemeContext.jsx";
 import "./App.css";
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import RequireAuth from "./pages/auth/requireAuth.jsx";
+import RequireAuth from "./pages/auth/requireAuth";
 
 function LandingPage() {
   return (
