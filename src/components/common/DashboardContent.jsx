@@ -12,17 +12,18 @@ const DashboardContent = () => {
       try {
         const res = await fetchPlas();
         if (res) {
+          console.log("plans : "+res.data);
           setPlans(res.data);
           console.log(res.data);
         } else {
           console.log("cannot fetch plans");
         }
       } catch (err) {
-        console.log(err);
+        console.log("erro"+err);
       }
     };
     initialize();
-  }, []); // ← ici, il faut [] pour que ça ne boucle pas à l'infini
+  }, []);
   return <Container className="pt-5 mt-5" style={{ maxWidth: "100%" }}>
     <Row className="mb-4 justify-content-center">
       <Col lg={12} md={11} sm={12}>
