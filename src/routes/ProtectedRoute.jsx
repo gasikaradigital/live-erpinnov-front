@@ -13,21 +13,7 @@ const ProtectedRoute = () => {
     }
   }, [authenticated, loading]);
 
-  if (loading) {
-    return (
-      <div
-        className="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center"
-        style={{
-          backgroundColor: 'rgba(255, 255, 255, 0.7)',
-          backdropFilter: 'blur(5px)',
-          zIndex: 1050,
-        }}
-      >
-        <ScaleLoader color="#1d32f3" height={50} width={6} radius={2} />
-      </div>
-    );
-  }
-
+  if (loading) return <ScaleLoader color="#1d32f3" />;
   return authenticated ? <Outlet /> : <Navigate to="/" replace />;
 };
 
