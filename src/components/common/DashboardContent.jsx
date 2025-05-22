@@ -13,6 +13,7 @@ const DashboardContent = () => {
         const res = await fetchPlas();
         if (res) {
           setPlans(res.data);
+          console.log(res.data);
         } else {
           console.log("cannot fetch plans");
         }

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import NavigationBar from "../../components/common/navbar/navbarlogin";
 import { useDarkMode } from "../../contexts/DarkModeContext";
 import axios from "axios";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Login = () => {
   const { darkMode } = useDarkMode();
@@ -11,9 +12,10 @@ const Login = () => {
   const [showPwd, setShowPwd] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
-  const [error,  setError ] = useState("");
-  const [status, setStatus ] = useState("");
+  const [error, setError] = useState("");
+  const [status, setStatus] = useState("");
   const baseUrl = import.meta.env.VITE_API_BASE_URL;
+  const {setAuthenticated} = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,11 +28,11 @@ const Login = () => {
     setError("");
     setStatus("Connexion en cours...");
 
-    try{
+    try {
       /**
        * Obtenir le cookie CSRF 
        */
-      const   csrf_response = await axios.get(`${baseUrl}/sanctum/csrf-cookie`, {
+      const csrf_response = await axios.get(`${baseUrl}/sanctum/csrf-cookie`, {
         withCredentials: true
       });
 
@@ -46,40 +48,40 @@ const Login = () => {
         password,
       }, {
         headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
         withCredentials: true,
-        withXSRFToken : true
+        withXSRFToken: true
       });
-      
+      console.log({ email, password, rememberMe });
       console.log("Réponse reçus:", response.data, "et reponse csrf-cookie");
 
-      if(response.data.token || response.data.user) {
+      if (response.status==200) {
         setStatus("Connexion réussi");
+        setAuthenticated(true);
+        navigate("/dashboard");
       } else {
         setError("Connexion échouée");
       }
-    } catch(err) {
+    } catch (err) {
       console.error("Erreur Api: ", err);
     }
-    console.log({ email, password, rememberMe });
-    navigate("/dashboard");
+
+
   };
 
   return (
     <div className={`vw-100 ${darkMode ? "bg-dark text-white" : "bg-light"}`}>
       <NavigationBar isAuthenticated={false} user={null} />
       <div
-        className={`d-flex container align-items-center justify-content-center min-vh-100 ${
-          darkMode ? "bg-dark text-white" : "bg-light"
-        }`}
+        className={`d-flex container align-items-center justify-content-center min-vh-100 ${darkMode ? "bg-dark text-white" : "bg-light"
+          }`}
         style={{ width: "100%", maxWidth: "100%" }}
       >
         <div
-          className={`card shadow p-4 login-form ${
-            darkMode ? "login-card-dark" : "login-card-white"
-          }`}
+          className={`card shadow p-4 login-form ${darkMode ? "login-card-dark" : "login-card-white"
+            }`}
           style={{ width: "100%", maxWidth: "500px" }}
         >
           <div className="text-center mb-4">

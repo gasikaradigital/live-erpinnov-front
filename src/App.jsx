@@ -18,6 +18,8 @@ import { DarkModeProvider } from "./contexts/DarkModeContext";
 import { ThemeProvider } from "./contexts/ThemeContext.jsx";
 import "./App.css";
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import { AuthProvider } from "./contexts/AuthContext.jsx";
+import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 
 function LandingPage() {
   return (
@@ -47,24 +49,28 @@ function App() {
   return (
     <DarkModeProvider>
       <Router>
-        <Routes>
-          <Route path="/" element={<Login />} />
+        <AuthProvider>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/inscription" element={<Inscription />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/confirm-password" element={<ConfirmPassword />} />
 
-          <Route path="/forgot-password" element={<ForgotPassword/>}/>
-          <Route path="/confirm-password" element={<ConfirmPassword/>}/>
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/inscription" element={<Inscription />} />
-          <Route path="/verify-otp" element={<VerifyOtp />} />
-          <Route path="/verify-email" element={<VerifyEmail />} />
+            <Route element={<ProtectedRoute />}>
 
-          <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/landing" element={<LandingPage />} />
-            
-            
-          <Route path="/confirm-password" element={<ConfirmPassword />} />
-          <Route path="/verify-otp" element={<VerifyOtp />} />
-          <Route path="/profile" element={<ProfileForm />} />
-        </Routes>
+              <Route path="/verify-otp" element={<VerifyOtp />} />
+              <Route path="/verify-email" element={<VerifyEmail />} />
+
+              <Route path="/dashboard" element={<DashboardPage />} />
+              <Route path="/landing" element={<LandingPage />} />
+
+
+              <Route path="/confirm-password" element={<ConfirmPassword />} />
+              <Route path="/verify-otp" element={<VerifyOtp />} />
+              <Route path="/profile" element={<ProfileForm />} />
+            </Route>
+          </Routes>
+        </AuthProvider>
       </Router>
     </DarkModeProvider>
   );
