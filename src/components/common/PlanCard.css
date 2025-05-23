@@ -1,290 +1,347 @@
-/* PlanCard.css optimisé - Compatible avec la structure existante */
-
-.plan-card {
-  background-color: white;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08);
-  overflow: hidden;
-  margin: 1.5rem auto;
-  max-width: 900px;
-  border: 1px solid #e2e8f0;
+/* Variables CSS pour les couleurs */
+:root {
+  --primary-color: #0d6efd;
+  --success-color: #198754;
+  --info-color: #0dcaf0;
+  --light-color: #f8f9fa;
+  --dark-color: #212529;
+  --secondary-color: #6c757d;
+  --border-color: #dee2e6;
+  --border-radius: 0.375rem;
+  --box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  --transition: all 0.2s ease-in-out;
 }
 
-.plan-card-header {
-  padding: 1.25rem;
-  cursor: pointer;
+/* Conteneur principal */
+.plan-card {
+  max-width: 900px;
+  margin: 1rem auto;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+  overflow: hidden;
+}
+
+.plan-card--light {
+  background-color: white;
+  border: 1px solid var(--border-color);
+  color: var(--dark-color);
+}
+
+.plan-card--dark {
+  background-color: var(--dark-color);
+  border: 1px solid var(--secondary-color);
+  color: white;
+}
+
+/* Header */
+.plan-card__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 1.25rem;
+  cursor: pointer;
+  transition: var(--transition);
   position: relative;
-  border-bottom: 1px solid #e2e8f0;
 }
 
-.plan-card-header.open {
-  border-bottom-color: #e2e8f0;
+.plan-card--light .plan-card__header {
+  background-color: white;
+  border-bottom: 1px solid var(--border-color);
 }
 
-.plan-info {
-  flex: 1;
+.plan-card--dark .plan-card__header {
+  background-color: var(--dark-color);
+  border-bottom: 1px solid var(--secondary-color);
 }
 
-.plan-title {
-  font-size: 1.125rem;
+.plan-card__header:hover {
+  background-color: rgba(13, 110, 253, 0.05);
+}
+
+.plan-card--dark .plan-card__header:hover {
+  background-color: rgba(13, 110, 253, 0.1);
+}
+
+.plan-card__header-content {
+  flex-grow: 1;
+}
+
+.plan-card__title {
+  font-size: 1.25rem;
   font-weight: 600;
-  margin: 0;
-  color: #1a202c;
+  margin: 0 0 0.25rem 0;
   text-align: left;
 }
 
-.plan-description {
-  color: #718096;
+.plan-card__description {
   font-size: 0.875rem;
-  margin: 0.25rem 0 0;
+  margin: 0;
   text-align: left;
 }
 
-.plan-price-info {
+.plan-card--light .plan-card__description {
+  color: var(--secondary-color);
+}
+
+.plan-card--dark .plan-card__description {
+  color: #adb5bd;
+}
+
+.plan-card__header-price {
   text-align: right;
   position: relative;
   padding-right: 1.5rem;
 }
 
-.plan-price {
+.plan-card__price-text {
   font-size: 0.875rem;
-  margin: 0;
-  color: #4a5568;
+  margin: 0 0 0.25rem 0;
 }
 
-.plan-price span {
+.plan-card--light .plan-card__price-text {
+  color: var(--secondary-color);
+}
+
+.plan-card--dark .plan-card__price-text {
+  color: #adb5bd;
+}
+
+.plan-card__price-value {
   font-weight: 600;
 }
 
-.discount-badge {
-  background-color: #ebf8ff;
-  color: #2c5282;
+.plan-card__badge {
+  background-color: var(--info-color);
+  color: var(--dark-color);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
   font-size: 0.75rem;
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  margin-top: 0.375rem;
-  display: inline-block;
+  font-weight: 500;
 }
 
-.dropdown-arrow {
+.plan-card__arrow {
   position: absolute;
   right: 0;
   top: 50%;
   transform: translateY(-50%);
-  transition: transform 0.2s ease;
-  color: #718096;
+  transition: transform 0.3s ease;
+  color: currentColor;
 }
 
-.dropdown-arrow.open {
+.plan-card__arrow--open {
   transform: translateY(-50%) rotate(180deg);
 }
 
-.plan-card-content {
+/* Body avec animation */
+.plan-card__body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+}
+
+.plan-card__body--open {
+  max-height: 2000px;
   padding: 1.5rem;
 }
 
-/* Fonctionnalités incluses */
-.plan-features {
-  width: 30%;
-  padding-right: 1rem;
+.plan-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .plan-card__content {
+    flex-direction: row;
+  }
+  
+  .plan-card__features {
+    flex: 0 0 33.333333%;
+  }
+  
+  .plan-card__options {
+    flex: 1;
+  }
+}
+
+/* Section titles */
+.plan-card__section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem 0;
   text-align: left;
 }
 
-.plan-features h4,
-.plan-options h4 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-top: 0;
-  margin-bottom: 1rem;
-}
-
-.plan-features ul {
+/* Features */
+.plan-card__features-list {
   list-style: none;
   padding: 0;
   margin: 0;
   text-align: left;
 }
 
-.plan-features li {
+.plan-card__feature-item {
   display: flex;
-  margin-bottom: 0.75rem;
+  align-items: center;
+  margin-bottom: 0.5rem;
   font-size: 0.875rem;
-  text-align: left;
 }
 
-.check-icon {
-  color: #48bb78;
+.plan-card__check-icon {
   margin-right: 0.5rem;
   flex-shrink: 0;
 }
 
-/* Options disponibles */
-.plan-options {
-  width: 70%;
-  text-align: left;
-}
-
-.option-card {
-  border: 1px solid #e2e8f0;
-  border-radius: 0.375rem;
-  overflow: hidden;
-  margin-bottom: 1rem;
-}
-
-.option-card.basic {
-  border-color: #90cdf4;
-  background-color: #ebf8ff;
-}
-
-.option-header {
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-.option-card.basic .option-header {
-  border-bottom-color: #bee3f8;
-}
-
-.option-header h5 {
-  font-size: 0.938rem;
-  font-weight: 600;
-  margin: 0;
-  color: #2d3748;
-}
-
-.option-price {
-  font-weight: 600;
-  margin: 0;
-  color: #2d3748;
-}
-
-.option-features {
-  list-style: none;
-  padding: 0.75rem 1rem;
-  margin: 0;
-}
-
-.option-features li {
-  font-size: 0.875rem;
-  color: #4a5568;
-  padding-left: 0.75rem;
-  position: relative;
-  margin-bottom: 0.375rem;
-}
-
-.option-features li:before {
-  content: "•";
-  position: absolute;
-  left: 0;
-  color: #a0aec0;
-}
-
-.text-end {
-  text-align: right;
-}
-
-.select-option-btn {
-  background-color: #3182ce;
-  color: white;
-  border: none;
-  border-radius: 0.25rem;
-  padding: 0.5rem 1.5rem;
-  font-weight: 500;
-  font-size: 0.938rem;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.select-option-btn:hover {
-  background-color: #2b6cb0;
-}
-
-/* Classes d'aide */
-.d-flex {
+/* Sub-plans */
+.plan-card__sub-plans {
   display: flex;
-}
-
-.flex-column {
   flex-direction: column;
-}
-
-.align-items-center {
-  align-items: center;
-}
-
-.justify-content-between {
-  justify-content: space-between;
-}
-
-.flex-grow-1 {
-  flex-grow: 1;
-}
-
-.me-2 {
-  margin-right: 0.5rem;
-}
-
-.mb-0 {
-  margin-bottom: 0;
-}
-
-.mt-2 {
-  margin-top: 0.5rem;
-}
-
-.mt-3 {
-  margin-top: 0.75rem;
-}
-
-.gap-3 {
   gap: 0.75rem;
 }
 
-.gap-4 {
-  gap: 1rem;
+.plan-card__sub-plan {
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+  overflow: hidden;
 }
 
-/* Media Queries */
-@media (max-width: 768px) {
-  .flex-md-row {
-    flex-direction: column;
+.plan-card__sub-plan--selected {
+  border-color: var(--primary-color);
+  background-color: rgba(13, 110, 253, 0.1);
+  transform: scale(1.02);
+  box-shadow: 0 0.25rem 0.5rem rgba(13, 110, 253, 0.15);
+}
+
+.plan-card__sub-plan-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+  transition: var(--transition);
+}
+
+.plan-card__sub-plan--selected .plan-card__sub-plan-header {
+  border-bottom-color: rgba(13, 110, 253, 0.25);
+  background-color: rgba(13, 110, 253, 0.05);
+}
+
+.plan-card__sub-plan-info {
+  display: flex;
+  align-items: center;
+}
+
+.form-check-input {
+  margin-right: 0.5rem;
+  transform: scale(1.1);
+}
+
+.plan-card__sub-plan-label {
+  margin: 0;
+  cursor: pointer;
+}
+
+.plan-card__sub-plan-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.plan-card__sub-plan-price {
+  font-weight: 600;
+  margin: 0;
+}
+
+.plan-card__sub-plan-features {
+  list-style: none;
+  padding: 0.75rem;
+  margin: 0;
+  text-align: left;
+}
+
+.plan-card__sub-plan-feature {
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  padding-left: 0.75rem;
+}
+
+.plan-card--light .plan-card__sub-plan-feature {
+  color: var(--secondary-color);
+}
+
+.plan-card--dark .plan-card__sub-plan-feature {
+  color: #adb5bd;
+}
+
+.plan-card__sub-plan-feature::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: currentColor;
+}
+
+/* Footer */
+.plan-card__footer {
+  text-align: right;
+  margin-top: 0.75rem;
+}
+
+.plan-card__button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.plan-card__button:hover {
+  background-color: #0b5ed7;
+  transform: translateY(-1px);
+  box-shadow: 0 0.25rem 0.5rem rgba(13, 110, 253, 0.25);
+}
+
+.plan-card__button:active {
+  transform: translateY(0);
+  box-shadow: 0 0.125rem 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Animations d'entrée */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
   }
-  
-  .plan-features,
-  .plan-options {
-    width: 100%;
-  }
-  
-  .plan-features {
-    margin-bottom: 1.5rem;
-  }
-  
-  .plan-card-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .plan-price-info {
-    margin-top: 1rem;
-    padding-right: 0;
-  }
-  
-  .dropdown-arrow {
-    top: 1.25rem;
-    right: 1.25rem;
-    transform: none;
-  }
-  
-  .dropdown-arrow.open {
-    transform: rotate(180deg);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@media (min-width: 768px) {
-  .flex-md-row {
-    flex-direction: row;
+.plan-card__body--open .plan-card__content {
+  animation: slideDown 0.3s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+  .plan-card {
+    margin: 0.5rem;
+  }
+  
+  .plan-card__header {
+    padding: 1rem;
+  }
+  
+  .plan-card__header-price {
+    padding-right: 1rem;
+  }
+  
+  .plan-card__content {
+    gap: 1rem;
   }
 }

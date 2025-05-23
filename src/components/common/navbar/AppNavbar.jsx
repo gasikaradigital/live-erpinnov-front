@@ -19,7 +19,7 @@ const handleLogout = async () => {
     }
     navigate("/");
   } catch (error) {
-    toast.error("Erreur lors de la déconnexion");
+    toast.error("Erreur lors de la déconnexion"+ error);
     navigate("/");
   }
 };
