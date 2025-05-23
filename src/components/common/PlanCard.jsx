@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import './PlanCard.css';
 import { useTheme } from '../../contexts/ThemeContext';
+import './PlanCard.css';
 
 const PlanCard = ({ planData, open=false, blur=true }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedSubPlan, setSelectedSubPlan] = useState(1);
+
 
   const toggleDropdown = () => {
     if (blur) return;
@@ -22,69 +23,72 @@ const PlanCard = ({ planData, open=false, blur=true }) => {
   };
 
   return (
-    <div
-      className={`plan-card ${theme === 'dark' ? 'bg-dark text-white' : ''} ${blur ? 'opacity-75' : ''}`}
-      style={blur ? { filter: 'blur(4px)', pointerEvents: 'none', userSelect: 'none' } : {}}
-    >
-      <div className={`plan-card-header ${isOpen ? 'open' : ''}`} onClick={toggleDropdown}>
-        <div className="plan-info">
-          <h3 className="plan-title">{planData.label}</h3>
-          <p className="plan-description">{planData.description}</p>
+    <div className={`plan-card ${theme === 'dark' ? 'plan-card--dark' : 'plan-card--light'} ${blur ? 'opacity-75' : ''}`}
+    style={blur ? { filter: 'blur(4px)', pointerEvents: 'none', userSelect: 'none' } : {}}>
+      <div 
+        className="plan-card__header"
+        onClick={toggleDropdown}
+      >
+        <div className="plan-card__header-content">
+          <h3 className="plan-card__title">{planData.label}</h3>
+          <p className="plan-card__description">{planData.description}</p>
         </div>
-        <div className="plan-price-info">
-          <p className="plan-price">À partir de <span>{formatPrice(planData.price_min)} Ar/mois</span></p>
-          <div className="discount-badge">Économisez 10% sur l'abonnement annuel</div>
-          <span className={`dropdown-arrow ${isOpen ? 'open' : ''}`}>
+        <div className="plan-card__header-price">
+          <p className="plan-card__price-text">
+            À partir de <span className="plan-card__price-value">{formatPrice(planData.price_min)} Ar/mois</span>
+          </p>
+          <span className="plan-card__badge">Économisez 10% sur l'abonnement annuel</span>
+          <span className={`plan-card__arrow ${isOpen ? 'plan-card__arrow--open' : ''}`}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </span>
         </div>
       </div>
-
-      {isOpen && (
-        <div className={`plan-card-content d-flex flex-column flex-md-row gap-4`} >
-          <div className="plan-features">
-            <h4>Fonctionnalités incluses</h4>
-            <ul>
+      <div className={`plan-card__body ${isOpen ? 'plan-card__body--open' : ''}`}>
+        <div className="plan-card__content">
+          <div className="plan-card__features">
+            <h4 className="plan-card__section-title">Fonctionnalités incluses</h4>
+            <ul className="plan-card__features-list">
               {planData.features.map((feature, index) => (
-                <li key={index} className="d-flex align-items-center">
-                  <svg className="check-icon me-2" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 8L6 11L13 4" stroke="#4CAF50" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <li key={index} className="plan-card__feature-item">
+                  <svg className="plan-card__check-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 8L6 11L13 4" stroke="#198754" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                   {feature}
                 </li>
               ))}
             </ul>
           </div>
-
-          <div className="plan-options flex-grow-1">
-            <h4>Options disponibles</h4>
-            <div className="d-flex flex-column gap-3">
+          <div className="plan-card__options">
+            <h4 className="plan-card__section-title">Options disponibles</h4>
+            <div className="plan-card__sub-plans">
               {planData.sub_plans.map((subPlan) => (
-                <div
-                  key={subPlan.id}
-                  className={`option-card ${subPlan.id === 1 ? 'basic' : ''}`}
-                >
-                  <div className="option-header d-flex align-items-center justify-content-between">
-                    <div className="d-flex align-items-center">
+                <div 
+                  key={subPlan.id} 
+                  className={`plan-card__sub-plan ${selectedSubPlan === subPlan.id ? 'plan-card__sub-plan--selected' : ''}`}>
+                  <div className="plan-card__sub-plan-header">
+                    <div className="plan-card__sub-plan-info">
                       <input
                         type="radio"
                         id={`subPlan-${subPlan.id}`}
                         name="subPlan"
                         checked={selectedSubPlan === subPlan.id}
                         onChange={() => handleSubPlanChange(subPlan.id)}
-                        className="me-2"
+                        className="form-check-input "
+                        style={{ transform: 'scale(0.5)' }}
                       />
-                      <label htmlFor={`subPlan-${subPlan.id}`} className="mb-0">
-                        <h5 className="mb-0">{subPlan.label}</h5>
+                      <label htmlFor={`subPlan-${subPlan.id}`} className="plan-card__sub-plan-label">
+                        <h5 className="plan-card__sub-plan-title">{subPlan.label}</h5>
                       </label>
                     </div>
-                    <p className="option-price mb-0">{formatPrice(subPlan.price_monthly_formated)} Ar/mois</p>
+                    <p className="plan-card__sub-plan-price">{formatPrice(subPlan.price_monthly_formated)} Ar/mois</p>
                   </div>
-                  <ul className="option-features mt-2">
+                  <ul className="plan-card__sub-plan-features">
                     {subPlan.features.map((feature, index) => (
-                      <li key={index}>{feature}</li>
+                      <li key={index} className="plan-card__sub-plan-feature">
+                        {feature}
+                      </li>
                     ))}
                   </ul>
                 </div>
@@ -92,15 +96,12 @@ const PlanCard = ({ planData, open=false, blur=true }) => {
             </div>
           </div>
         </div>
-      )}
-
-      {isOpen && (
-        <div className="text-end mt-3">
-          <button className="select-option-btn btn">
+        <div className="plan-card__footer">
+          <button className="plan-card__button">
             Continuer
           </button>
         </div>
-      )}
+      </div>
     </div>
   );
 };
