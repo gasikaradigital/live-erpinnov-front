@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import { useTheme } from '../../contexts/ThemeContext';
 import './PlanCard.css';
 
-const PlanCard = ({ planData, open=false, blur=true }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedSubPlan, setSelectedSubPlan] = useState(1);
+ const PlanCard = ({ planData, open=false, blur=true }) => {
+ const [isOpen, setIsOpen] = useState(false);
+ const [selectedSubPlan, setSelectedSubPlan] = useState(1);
 
 
   const toggleDropdown = () => {
@@ -21,6 +22,11 @@ const PlanCard = ({ planData, open=false, blur=true }) => {
   const formatPrice = (price) => {
     return new Intl.NumberFormat('fr-FR').format(parseFloat(price));
   };
+    const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/paiement"); // redirige vers PayementMode.js
+  }
 
   return (
     <div className={`plan-card ${theme === 'dark' ? 'plan-card--dark' : 'plan-card--light'} ${blur ? 'opacity-75' : ''}`}
@@ -97,13 +103,13 @@ const PlanCard = ({ planData, open=false, blur=true }) => {
           </div>
         </div>
         <div className="plan-card__footer">
-          <button className="plan-card__button">
+          <button className="plan-card__button" onClick={handleClick} >
             Continuer
           </button>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default PlanCard;
