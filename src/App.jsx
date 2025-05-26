@@ -20,6 +20,7 @@ import "./App.css";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { AuthProvider } from "./contexts/AuthContext.jsx";
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
+import PaymentModule from "./components/common/PayementProcess.jsx";
 
 function LandingPage() {
   return (
@@ -48,30 +49,33 @@ function DashboardPage() {
 function App() {
   return (
     <DarkModeProvider>
+      <ThemeProvider>
       <Router>
         <AuthProvider>
-          <Routes>
+           <Routes> 
             <Route path="/" element={<Login />} />
             <Route path="/inscription" element={<Inscription />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/confirm-password" element={<ConfirmPassword />} />
 
-            <Route element={<ProtectedRoute />}>
+           <Route element={<ProtectedRoute />}>
 
               <Route path="/verify-otp" element={<VerifyOtp />} />
               <Route path="/verify-email" element={<VerifyEmail />} />
 
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/landing" element={<LandingPage />} />
+              <Route path="/Payement" element={<PaymentModule/>}/>
 
 
               <Route path="/confirm-password" element={<ConfirmPassword />} />
               <Route path="/verify-otp" element={<VerifyOtp />} />
               <Route path="/profile" element={<ProfileForm />} />
-            </Route>
-          </Routes>
+           </Route>
+           </Routes> 
         </AuthProvider>
-      </Router>
+     </Router>
+      </ThemeProvider>
     </DarkModeProvider>
   );
 }
