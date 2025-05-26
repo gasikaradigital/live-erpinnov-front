@@ -52,7 +52,7 @@ function App() {
       <ThemeProvider>
       <Router>
         <AuthProvider>
-          <Routes>
+           <Routes> 
             <Route path="/" element={<Login />} />
             <Route path="/inscription" element={<Inscription />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -71,10 +71,10 @@ function App() {
               <Route path="/confirm-password" element={<ConfirmPassword />} />
               <Route path="/verify-otp" element={<VerifyOtp />} />
               <Route path="/profile" element={<ProfileForm />} />
-            </Route>
-          </Routes>
+           </Route>
+           </Routes> 
         </AuthProvider>
-      </Router>
+     </Router>
       </ThemeProvider>
     </DarkModeProvider>
   );

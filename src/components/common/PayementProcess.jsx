@@ -72,7 +72,7 @@ const PaymentModule = () => {
               </div>
 
               {/* Choix de facturation */}
-              <div className="p-3 bg-light rounded-3 mb-4">
+              <div className="p-3 bg-light rounded-3 mb-4 ">
       <div className="d-flex align-items-start mb-2">
         <Form.Check 
           type="switch"
