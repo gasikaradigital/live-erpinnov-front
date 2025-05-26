@@ -58,7 +58,7 @@ function App() {
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/confirm-password" element={<ConfirmPassword />} />
 
-           <Route element={<ProtectedRoute />}>
+           {/* <Route element={<ProtectedRoute />}> */}
 
               <Route path="/verify-otp" element={<VerifyOtp />} />
               <Route path="/verify-email" element={<VerifyEmail />} />
@@ -71,7 +71,7 @@ function App() {
               <Route path="/confirm-password" element={<ConfirmPassword />} />
               <Route path="/verify-otp" element={<VerifyOtp />} />
               <Route path="/profile" element={<ProfileForm />} />
-           </Route>
+           {/* </Route> */}
            </Routes> 
         </AuthProvider>
      </Router>

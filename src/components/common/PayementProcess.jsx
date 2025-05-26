@@ -4,15 +4,21 @@ import AppNavbar from './navbar/AppNavbar';
 import { Navbar, Nav } from 'react-bootstrap';
 import { useTheme } from '../../contexts/ThemeContext';
 import Form from 'react-bootstrap/Form';
+import CardPayement from './cardPayement';
 import './PayementProcess.css';
 
 const PaymentModule = () => {
   const { theme } = useTheme();
   
    const [isAnnualBilling, setIsAnnualBilling] = useState(false);
+   const [showPaymentCard, setShowPaymentCard] = useState(false);
 
   const handleSwitchChange = () => {
     setIsAnnualBilling(!isAnnualBilling);
+  };
+
+  const handleSubscriptionClick = () => {
+    setShowPaymentCard(true);
   };
 
   return (
@@ -47,14 +53,34 @@ const PaymentModule = () => {
                 Démarrez avec un essai gratuit ou créez directement votre instance
               </p>
 
-              <div className="p-3 rounded-3 border border-white align-items-start border-opacity-25 bg-white bg-opacity-10 mb-3">
-                <h5 className="fw-semibold text-white mb-1">Créer une nouvelle instance</h5>
-                <p className="text-white-50 mb-3">Commencez immédiatement avec toutes les fonctionnalités</p>
-                <Button variant="light" className="w-20 fw-bold rounded-3">
-                  S'abonner maintenant
-                </Button>
+              <div className="row g-3">
+                <div className="col-md-6">
+                  <div className="p-3 rounded-3 border border-white align-items-start border-opacity-25 bg-white bg-opacity-10 mb-3">
+                    <h5 className="fw-semibold text-white mb-1">Créer une nouvelle instance</h5>
+                    <p className="text-white-50 mb-3">Commencez immédiatement avec toutes les fonctionnalités</p>
+                    <Button variant="light" className="w-100 fw-bold rounded-3" onClick={handleSubscriptionClick}>
+                      S'abonner maintenant
+                    </Button>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="p-3 rounded-3 border border-white align-items-start border-opacity-25 bg-white bg-opacity-10 mb-3">
+                    <h5 className="fw-semibold text-white mb-1">Essayer gratuitement</h5>
+                    <p className=" text-white mb-3">Testez pendant 14 jours sans engagement</p>
+                    <Button variant="light" className="w-100 fw-bold bg-light rounded-3" onClick={handleSubscriptionClick}>
+                     Démarrer l'essai
+                    </Button>
+                  </div>
+                </div>
               </div>
             </div>
+
+            {/* Card de paiement - Affichée conditionnellement */}
+            {showPaymentCard && (
+              <div className="mt-4">
+                <CardPayement />
+              </div>
+            )}
           </div>
 
           {/* Partie droite - Résumé de commande */}
