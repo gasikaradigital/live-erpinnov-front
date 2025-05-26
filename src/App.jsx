@@ -16,6 +16,7 @@ import AppNavbar from "./components/common/navbar/AppNavbar.jsx";
 import DashboardContent from "./components/common/DashboardContent.jsx";
 import { DarkModeProvider } from "./contexts/DarkModeContext";
 import { ThemeProvider } from "./contexts/ThemeContext.jsx";
+import EntrepriseCreate from "./components/common/entreprise/EntrepriseCreate.jsx";
 import "./App.css";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { AuthProvider } from "./contexts/AuthContext.jsx";
@@ -62,7 +63,7 @@ function App() {
 
               <Route path="/verify-otp" element={<VerifyOtp />} />
               <Route path="/verify-email" element={<VerifyEmail />} />
-
+              <Route path="entreprise/create" element={<EntrepriseCreate/>} />
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/landing" element={<LandingPage />} />
               <Route path="/Payement" element={<PaymentModule/>}/>
@@ -72,6 +73,7 @@ function App() {
               <Route path="/verify-otp" element={<VerifyOtp />} />
               <Route path="/profile" element={<ProfileForm />} />
             </Route> 
+
            </Routes> 
         </AuthProvider>
      </Router>
