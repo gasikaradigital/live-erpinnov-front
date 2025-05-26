@@ -25,7 +25,7 @@ import './PlanCard.css';
     const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/paiement"); // redirige vers PayementMode.js
+    navigate("/payement"); // redirige vers PayementMode.js
   }
 
   return (
