@@ -4,6 +4,7 @@ import NavigationBar from "../../components/common/navbar/navbarlogin";
 import { useDarkMode } from "../../contexts/DarkModeContext";
 import axios from "axios";
 import { useAuth } from "../../contexts/AuthContext";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const { darkMode } = useDarkMode();
@@ -62,6 +63,7 @@ const Login = () => {
         setAuthenticated(true);
         navigate("/dashboard");
       } else {
+        toast.error("Erreur lors de la déconnexion"+ error);
         setError("Connexion échouée");
       }
     } catch (err) {
