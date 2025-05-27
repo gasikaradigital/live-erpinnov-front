@@ -4,6 +4,7 @@ import NavigationBar from "../../components/common/navbar/navbarlogin";
 import { useDarkMode } from "../../contexts/DarkModeContext";
 import axios from "axios";
 import { useAuth } from "../../contexts/AuthContext";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const { darkMode } = useDarkMode();
@@ -65,6 +66,7 @@ const Login = () => {
         setError("Connexion échouée");
       }
     } catch (err) {
+      toast.error("Échec de l'authentification");
       console.error("Erreur Api: ", err);
     }
 
