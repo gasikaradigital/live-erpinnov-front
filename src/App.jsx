@@ -51,39 +51,35 @@ function App() {
   return (
     <DarkModeProvider>
       <ThemeProvider>
-        <Router>
-          <Routes>
-            {/* Routes publiques sans AuthProvider */}
+      <Router>
+        <AuthProvider>
+           <Routes> 
             <Route path="/" element={<Login />} />
             <Route path="/inscription" element={<Inscription />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/confirm-password" element={<ConfirmPassword />} />
 
-            {/* Routes protégées avec AuthProvider */}
-            <Route
-              path="/*"
-              element={
-                <AuthProvider>
-                  <ProtectedRoute>
-                    <Routes>
-                      <Route path="/verify-otp" element={<VerifyOtp />} />
-                      <Route path="/verify-email" element={<VerifyEmail />} />
-                      <Route path="/entreprise/create" element={<EntrepriseCreate />} />
-                      <Route path="/dashboard" element={<DashboardPage />} />
-                      <Route path="/landing" element={<LandingPage />} />
-                      <Route path="/Payement" element={<PaymentModule />} />
-                      <Route path="/profile" element={<ProfileForm />} />
-                    </Routes>
-                  </ProtectedRoute>
-                </AuthProvider>
-              }
-            />
-          </Routes>
-        </Router>
+           <Route element={<ProtectedRoute />}>
+
+              <Route path="/verify-otp" element={<VerifyOtp />} />
+              <Route path="/verify-email" element={<VerifyEmail />} />
+              <Route path="entreprise/create" element={<EntrepriseCreate/>} />
+              <Route path="/dashboard" element={<DashboardPage />} />
+              <Route path="/landing" element={<LandingPage />} />
+              <Route path="/Payement" element={<PaymentModule/>}/>
+
+
+              <Route path="/confirm-password" element={<ConfirmPassword />} />
+              <Route path="/verify-otp" element={<VerifyOtp />} />
+              <Route path="/profile" element={<ProfileForm />} />
+            </Route> 
+
+           </Routes> 
+        </AuthProvider>
+     </Router>
       </ThemeProvider>
     </DarkModeProvider>
   );
 }
-
 
 export default App;
