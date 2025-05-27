@@ -52,9 +52,9 @@ function App() {
     <DarkModeProvider>
       <ThemeProvider>
       <Router>
+        <Route path="/" element={<Login />} />
         <AuthProvider>
            <Routes> 
-            <Route path="/" element={<Login />} />
             <Route path="/inscription" element={<Inscription />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/confirm-password" element={<ConfirmPassword />} />
