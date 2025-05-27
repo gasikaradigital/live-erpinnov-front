@@ -66,7 +66,7 @@ const Login = () => {
         setError("Connexion échouée");
       }
     } catch (err) {
-      toast.error("Échec de l'authentification");
+      toast.error("Veuillez vérifier votre login et votre mot de passe");
       console.error("Erreur Api: ", err);
     }
 
