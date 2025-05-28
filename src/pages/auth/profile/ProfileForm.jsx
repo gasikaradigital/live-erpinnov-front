@@ -47,11 +47,11 @@ export default function ProfileForm({ initialData = {}, onSubmit }) {
         } else {
           console.log(profile);
           console.warn("Profil introuvable, redirection vers la page de connexion.");
-        navigate('/login');
+          //navigate('/login');
         }
       } catch (err) {
         console.error("Erreur inattendue lors de la récupération du profil :", err);
-        navigate('/login');
+        //navigate('/login');
       }
     };
 
@@ -285,4 +285,4 @@ const ProfileSection = ({ title, children, darkMode, titleIcon }) => (
     </Card.Header>
     <Card.Body>{children}</Card.Body>
   </Card>
-);
+);s
