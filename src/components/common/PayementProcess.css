@@ -1,10 +1,5 @@
 /* CSS personnalisé pour le module de paiement */
 
-/* Forcer la pleine largeur pour tous les containers */
-.container, .container-fluid {
-  max-width: 100% !important;
-  width: 100% !important;
-}
 
 /* Navbar pleine largeur */
 
