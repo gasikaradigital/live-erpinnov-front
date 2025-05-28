@@ -5,6 +5,7 @@ import { useDarkMode } from "../../contexts/DarkModeContext";
 import axios from "axios";
 import { useAuth } from "../../contexts/AuthContext";
 import { toast } from "react-toastify";
+import "./login.css";
 
 const Login = () => {
   const { darkMode } = useDarkMode();
@@ -12,11 +13,11 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [showPwd, setShowPwd] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
-  const navigate = useNavigate();
   const [error, setError] = useState("");
   const [status, setStatus] = useState("");
+  const navigate = useNavigate();
   const baseUrl = import.meta.env.VITE_API_BASE_URL;
-  const {setAuthenticated} = useAuth();
+  const { setAuthenticated } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,61 +31,51 @@ const Login = () => {
     setStatus("Connexion en cours...");
 
     try {
-      /**
-       * Obtenir le cookie CSRF 
-       */
-      const csrf_response = await axios.get(`${baseUrl}/sanctum/csrf-cookie`, {
-        withCredentials: true
-      });
-
-      console.log(csrf_response.data);
-      /**
-       * Requête pour le login
-       * @param {string} email l'email de l'utilisateur
-       * @param {string} password le mot de passe de l'utilisateur
-       * @returns {Promise<AxiosResponse>} La réponse du serveur
-       */
-      const response = await axios.post(`${baseUrl}/api/login`, {
-        email,
-        password,
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
+      await axios.get(`${baseUrl}/sanctum/csrf-cookie`, {
         withCredentials: true,
-        withXSRFToken: true
       });
-      console.log({ email, password, rememberMe });
-      console.log("Réponse reçus:", response.data, "et reponse csrf-cookie");
 
-      if (response.status==200) {
-        setStatus("Connexion réussi");
+      const response = await axios.post(
+        `${baseUrl}/api/login`,
+        { email, password },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+
+      if (response.status === 200) {
+        setStatus("Connexion réussie");
         setAuthenticated(true);
         navigate("/dashboard");
       } else {
         setError("Connexion échouée");
       }
     } catch (err) {
-      toast.error("Veuillez vérifier votre login et votre mot de passe");
-      console.error("Erreur Api: ", err);
+      toast.error("Veuillez vérifier votre email et mot de passe.");
+      console.error("Erreur API: ", err);
     }
-
-
   };
 
   return (
-    <div className={`vw-100 ${darkMode ? "bg-dark text-white" : "bg-light"}`}>
+    <div
+      className={`min-vh-100 vw-100 ${
+        darkMode ? "bg-dark text-white" : "bg-light text-dark"
+      }`}
+    >
       <NavigationBar isAuthenticated={false} user={null} />
-      <div
-        className={`d-flex container align-items-center justify-content-center min-vh-100 ${darkMode ? "bg-dark text-white" : "bg-light"
-          }`}
-        style={{ width: "100%", maxWidth: "100%" }}
-      >
+
+      <div className="container d-flex justify-content-center align-items-center min-vh-100">
         <div
-          className={`card shadow p-4 login-form ${darkMode ? "login-card-dark" : "login-card-white"
-            }`}
-          style={{ width: "100%", maxWidth: "500px" }}
+          className="card shadow p-4 login-form w-100"
+          style={{
+            maxWidth: "500px",
+            backgroundColor: "#ffffff", // blanc fixe
+            color: darkMode ? "#000000" : "#212529", // texte noir en sombre et clair (ou autre)
+          }}
         >
           <div className="text-center mb-4">
             <img
@@ -103,7 +94,7 @@ const Login = () => {
               </label>
               <input
                 type="email"
-                className="form-control"
+                className="form-control bg-white text-dark 	text-start"
                 id="email"
                 placeholder="Entrer votre email"
                 value={email}
@@ -117,14 +108,12 @@ const Login = () => {
                 <label htmlFor="password" className="form-label mb-0">
                   Mot de passe
                 </label>
-                <Link to="/forgot-password" className="small text-primary">
-                  Mot de passe oublié ?
-                </Link>
+            
               </div>
               <div className="input-group">
                 <input
                   type={showPwd ? "text" : "password"}
-                  className="form-control"
+                  className="form-control bg-white text-dark 	text-start"
                   id="password"
                   placeholder="Mot de passe"
                   value={password}
@@ -136,23 +125,39 @@ const Login = () => {
                   className="btn btn-outline-secondary"
                   onClick={() => setShowPwd(!showPwd)}
                 >
-                  <i className={`bi ${showPwd ? "bi-eye-slash" : "bi-eye"}`}></i>
+                  <i
+                    className={`bi ${showPwd ? "bi-eye-slash" : "bi-eye"}`}
+                  ></i>
                 </button>
               </div>
             </div>
 
-            <div className="form-check mb-3 text-start">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                id="remember"
-                checked={rememberMe}
-                onChange={(e) => setRememberMe(e.target.checked)}
-              />
-              <label className="form-check-label" htmlFor="remember">
-                Se souvenir de moi
-              </label>
-            </div>
+          <div className="d-flex justify-content-between align-items-center mb-3">
+  <div className="form-check d-flex align-items-center">
+    <input
+      id="remember"
+      name="remember"
+      type="checkbox"
+      className="form-check-input"
+      checked={rememberMe}
+      onChange={(e) => setRememberMe(e.target.checked)}
+      style={{ backgroundColor: "white", transform: "scale(0.6)" }} // un peu plus gros que 0.5
+    />
+    <label className="form-check-label ms-2 mb-0" htmlFor="remember">
+      Se souvenir de moi
+    </label>
+  </div>
+
+  <Link to="/forgot-password" className="small text-primary">
+    Mot de passe oublié ?
+  </Link>
+</div>
+
+
+            {error && <div className="alert alert-danger">{error}</div>}
+            {status && (
+              <div className="text-center text-muted mb-2">{status}</div>
+            )}
 
             <div className="d-grid">
               <button type="submit" className="btn btn-primary">

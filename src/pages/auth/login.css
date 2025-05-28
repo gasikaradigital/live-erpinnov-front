@@ -1,0 +1,14 @@
+
+.form-check-input {
+  background-color: white !important; /* case blanche quand décochée */
+  border-color: gray;
+}
+
+.form-check-input:checked {
+  background-color: #0d6efd !important; /* bleu bootstrap quand cochée */
+  border-color: #0d6efd !important;
+}
+::placeholder {
+  color: #33333388 !important; /* gris foncé ou #000000 pour noir */
+  opacity: 1; /* assure que la couleur est bien visible */
+}
