@@ -285,4 +285,4 @@ const ProfileSection = ({ title, children, darkMode, titleIcon }) => (
     </Card.Header>
     <Card.Body>{children}</Card.Body>
   </Card>
-);s
+);
