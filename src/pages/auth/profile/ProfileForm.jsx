@@ -12,10 +12,9 @@ import NavBarProfile from "../../../components/common/navbar/navBarProfile";
 import { useDarkMode } from "../../../contexts/DarkModeContext";
 import { HiUser, HiMapPin, HiPencil } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
-import { fetchProfile, updateProfile} from "../../../api/profileApi";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+import { fetchProfile, updateProfile } from "../../../api/profileApi";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function ProfileForm({ initialData = {}, onSubmit }) {
   const { darkMode } = useDarkMode();
@@ -32,7 +31,6 @@ export default function ProfileForm({ initialData = {}, onSubmit }) {
     bio: initialData?.bio ?? "",
     is_public: initialData?.is_public ?? false,
   });
-  
 
   const navigate = useNavigate();
 
@@ -46,11 +44,16 @@ export default function ProfileForm({ initialData = {}, onSubmit }) {
           setFormData(profile);
         } else {
           console.log(profile);
-          console.warn("Profil introuvable, redirection vers la page de connexion.");
+          console.warn(
+            "Profil introuvable, redirection vers la page de connexion."
+          );
           //navigate('/login');
         }
       } catch (err) {
-        console.error("Erreur inattendue lors de la récupération du profil :", err);
+        console.error(
+          "Erreur inattendue lors de la récupération du profil :",
+          err
+        );
         //navigate('/login');
       }
     };
@@ -81,7 +84,7 @@ export default function ProfileForm({ initialData = {}, onSubmit }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const result = await updateProfile(formData);
       if (result) {
@@ -94,27 +97,45 @@ export default function ProfileForm({ initialData = {}, onSubmit }) {
         toast.warning("⚠️ Échec de la mise à jour du profil.");
       }
     } catch (error) {
-      toast.error("❌ Une erreur est survenue lors de l'enregistrement." + error);
+      toast.error(
+        "❌ Une erreur est survenue lors de l'enregistrement." + error
+      );
     }
   };
-  
 
-  const inputClass = darkMode ? "bg-secondary text-white border-0" : "";
+  const inputClass = darkMode ? "bg-dark text-white text-start" : "bg-light text-dark text-start";
 
   return (
-    <div className={`vw-100 min-vh-100  ${darkMode ? "bg-dark text-white" : "bg-light"}`}>
+    <div
+      className={`vw-100 min-vh-100  ${
+        darkMode ? "bg-dark text-white" : "bg-light"
+      }`}
+    >
       <NavBarProfile
         user={{
-          initials: `${formData?.fname?.[0] ?? ""}${formData?.lname?.[0] ?? ""}`.toUpperCase(),
-        }}        
+          initials: `${formData?.fname?.[0] ?? ""}${
+            formData?.lname?.[0] ?? ""
+          }`.toUpperCase(),
+        }}
       />
       <div className="container d-flex align-items-center justify-content-center min-vh-100">
-        <Container className="py-5" style={{ width: "100%", maxWidth: "700px", borderRadius: "12px" }}>
-          <h2 className="mb-3">Profil</h2>
-          <p className={'text-start w-100 fs-3 ${darkMode ? " text-white" : "bg-light"}'}>
+        <Container
+          className="py-5 mt-4"
+          style={{ width: "100%", maxWidth: "700px", borderRadius: "12px" }}
+        >
+          <p
+            className={`text-start w-100 fs-3 ${
+              darkMode ? "text-white" : "bg-light text-dark"
+            }`}
+          >
             Profil
           </p>
-          <p className={'text-start w-100 ${darkMode ? " text-white" : "bg-light"}'}>
+
+          <p
+            className={`text-start w-100 fs-3 ${
+              darkMode ? "text-white" : "bg-light text-dark"
+            }`}
+          >
             Mettre à jour vos informations personnelles
           </p>
 
@@ -180,7 +201,10 @@ export default function ProfileForm({ initialData = {}, onSubmit }) {
               darkMode={darkMode}
               titleIcon={<HiMapPin size={20} className="text-primary" />}
             >
-              <Form.Group className="mb-3 text-start w-100 " controlId="adresse">
+              <Form.Group
+                className="mb-3 text-start w-100 "
+                controlId="adresse"
+              >
                 <Form.Label>Adresse complète</Form.Label>
                 <Form.Control
                   type="text"
@@ -232,7 +256,7 @@ export default function ProfileForm({ initialData = {}, onSubmit }) {
               darkMode={darkMode}
               titleIcon={<HiPencil size={20} className="text-primary" />}
             >
-              <Form.Group className="mb-3" controlId="bio">
+              <Form.Group className="mb-3 text-start" controlId="bio">
                 <Form.Label>À propos de moi</Form.Label>
                 <Form.Control
                   as="textarea"
@@ -251,8 +275,16 @@ export default function ProfileForm({ initialData = {}, onSubmit }) {
                 name="is_public"
                 checked={formData.is_public}
                 onChange={handleChange}
-                className={darkMode ? "text-white text-start w-100 " : ""}
+                className={`text-start w-100 ${darkMode ? "text-white" : ""}`}
+                style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
               />
+              <style>
+                {`
+    #is_public.form-check-input {
+      transform: scale(0.6); /* Réduit uniquement la case */
+    }
+  `}
+              </style>
             </ProfileSection>
 
             <div className="text-end mt-4">
