@@ -16,14 +16,13 @@ const Inscription = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [acceptConditions, setAcceptConditions] = useState(false);
   const [acceptPolitique, setAcceptPolitique] = useState(false);
-  const [error,  setError ] = useState("");
-  const [status, setStatus ] = useState("");
+
   const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if(!email){
+    if (!email) {
       alert("Entrer votre email");
       return;
     }
@@ -38,65 +37,67 @@ const Inscription = () => {
       return;
     }
 
-    try{
-      /**
-       * Obtenir le cookie CSRF 
-       */
-      const responseCsrf = await axios.get(`${baseUrl}/sanctum/csrf-cookie`, {
+    try {
+      await axios.get(`${baseUrl}/sanctum/csrf-cookie`, {
         withCredentials: true,
       });
 
-      /**
-       * Requête pour le login
-       * @param {string} email l'email de l'utilisateur
-       * @param {string} password le mot de passe de l'utilisateur
-       * @returns {Promise<AxiosResponse>} La réponse du serveur
-       */
       const response = await axios.post(`${baseUrl}/api/register`, {
-        email: email,
-        password: password,
+        email,
+        password,
         password_confirmation: confirmPassword,
       }, {
         headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
-        withCredentials: true
+        withCredentials: true,
       });
-      
-      console.log("Utilisateur enregistré:", response.data);
 
-      navigate("/verify-otp");      
-    } catch(error) {
+      console.log("Utilisateur enregistré:", response.data);
+      navigate("/verify-otp");
+
+    } catch (error) {
       if (error.response && error.response.status === 422) {
-        console.log("Validation errors:", error.response.data);
         alert("Erreur validation : " + JSON.stringify(error.response.data));
       } else {
         console.error("Erreur API: ", error);
       }
     }
-    
+  };
+
+  const inputStyle = {
+    textAlign: "left",
+    backgroundColor: darkMode ? "#2c2f3f" : "#fff",
+    color: darkMode ? "#fff" : "#000",
+    border: darkMode ? "1px solid #555" : "1px solid #ccc",
+  };
+
+  const labelStyle = {
+    color: darkMode ? "#fff" : "#000",
   };
 
   return (
-    <div className={`vw-100 ${darkMode ? "bg-dark text-white" : "bg-light"}`}>
+    <div className={`vw-100 ${darkMode ? "bg-dark text-white" : "bg-light text-dark"}`}>
       <NavigationBar isAuthenticated={false} user={null} />
       <div className="container d-flex align-items-center justify-content-center min-vh-100">
         <div
-          className={`card shadow p-4 ${
-            darkMode ? "bg-dark text-white" : "bg-white"
-          }`}
+          className="card shadow p-4"
           style={{
             width: "100%",
+            marginTop: "70px",
             maxWidth: "500px",
             borderRadius: "12px",
             backgroundColor: darkMode ? "#1c2333" : "#fff",
+            color: darkMode ? "#fff" : "#000",
           }}
         >
           <h2 className="text-center mb-4">Créer un compte gratuit</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
-              <label className="form-label text-start w-100">Adresse email</label>
+              <label className="form-label text-start w-100" style={labelStyle}>
+                Adresse email
+              </label>
               <input
                 type="email"
                 className="form-control"
@@ -104,12 +105,15 @@ const Inscription = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                style={inputStyle}
               />
             </div>
 
             {/* Mot de passe */}
             <div className="mb-3 position-relative">
-              <label className="form-label text-start w-100">Mot de passe</label>
+              <label className="form-label text-start w-100" style={labelStyle}>
+                Mot de passe
+              </label>
               <input
                 type={showPassword ? "text" : "password"}
                 className="form-control pe-5"
@@ -117,6 +121,7 @@ const Inscription = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                style={inputStyle}
               />
               <span
                 onClick={() => setShowPassword(!showPassword)}
@@ -126,8 +131,8 @@ const Inscription = () => {
                   right: "15px",
                   transform: "translateY(-50%)",
                   cursor: "pointer",
-                  color: "#6c757d",
-                  fontSize: "2rem" // 👈 ajuste ici la taille
+                  color: darkMode ? "#ccc" : "#6c757d",
+                  fontSize: "1.5rem"
                 }}
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
@@ -136,7 +141,9 @@ const Inscription = () => {
 
             {/* Confirmation mot de passe */}
             <div className="mb-3 position-relative">
-              <label className="form-label text-start w-100">Confirmer le mot de passe</label>
+              <label className="form-label text-start w-100" style={labelStyle}>
+                Confirmer le mot de passe
+              </label>
               <input
                 type={showConfirmPassword ? "text" : "password"}
                 className="form-control pe-5"
@@ -144,6 +151,7 @@ const Inscription = () => {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
+                style={inputStyle}
               />
               <span
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
@@ -153,56 +161,73 @@ const Inscription = () => {
                   right: "15px",
                   transform: "translateY(-50%)",
                   cursor: "pointer",
-                  color: "#6c757d",
-                  fontSize: "2rem" // 👈 ajuste ici la taille
+                  color: darkMode ? "#ccc" : "#6c757d",
+                  fontSize: "1.5rem"
                 }}
               >
                 {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
               </span>
             </div>
 
+            {/* Conditions d'utilisation */}
             <div className="mb-3">
-              <div className="form-check">
+              <div className="form-check d-flex align-items-center">
                 <input
                   type="checkbox"
                   className="form-check-input"
                   id="acceptConditions"
                   checked={acceptConditions}
                   onChange={() => setAcceptConditions(!acceptConditions)}
+                  style={{
+                    backgroundColor: darkMode ? "#444" : "#fff",
+                    transform: "scale(0.6)",
+                  }}
                 />
-                <label className="form-check-label text-start w-100" htmlFor="acceptConditions">
+                <label
+                  className="form-check-label ms-2"
+                  htmlFor="acceptConditions"
+                  style={labelStyle}
+                >
                   J'accepte les{" "}
-                  <Link to="/conditions" className="text-primary">
+                  <Link
+                    to="/conditions"
+                    style={{
+                      color: darkMode ? "#66b2ff" : "#0d6efd",
+                      textDecoration: "none",
+                      cursor: "pointer",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.textDecoration = "underline";
+                      e.target.style.color = darkMode ? "#99ccff" : "#0056b3";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.textDecoration = "none";
+                      e.target.style.color = darkMode ? "#66b2ff" : "#0d6efd";
+                    }}
+                  >
                     conditions d'utilisation
-                  </Link>.
-                </label>
-              </div>
-
-              <div className="form-check mt-2">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="acceptPolitique"
-                  checked={acceptPolitique}
-                  onChange={() => setAcceptPolitique(!acceptPolitique)}
-                />
-                <label className="form-check-label text-start w-100" htmlFor="acceptPolitique">
-                  J'accepte la{" "}
-                  <Link to="/confidentialite" className="text-primary">
-                    politique de confidentialité
-                  </Link>.
+                  </Link>
+                  .
                 </label>
               </div>
             </div>
-
 
             <button type="submit" className="btn btn-primary w-100">
               Créer mon compte
             </button>
 
-            <p className="text-center mt-3">
+            <p className="text-center mt-3" style={labelStyle}>
               Déjà inscrit ?{" "}
-              <Link to="/" className="text-primary">
+              <Link
+                to="/"
+                style={{
+                  color: darkMode ? "#66b2ff" : "#0d6efd",
+                  textDecoration: "none",
+                  cursor: "pointer"
+                }}
+                onMouseEnter={(e) => (e.target.style.textDecoration = "underline")}
+                onMouseLeave={(e) => (e.target.style.textDecoration = "none")}
+              >
                 Se connecter
               </Link>
             </p>

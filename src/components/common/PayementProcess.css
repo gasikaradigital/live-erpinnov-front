@@ -1,29 +1,30 @@
 /* CSS personnalisé pour le module de paiement */
 
 /* Forcer la pleine largeur pour tous les containers */
-.container, .container-fluid {
+.paymentModuleContainer .container, 
+.paymentModuleContainer .container-fluid {
   max-width: 100% !important;
   width: 100% !important;
 }
 
 /* Navbar pleine largeur */
-
-.navbar .container-fluid {
+.paymentNavbarContainer {
   max-width: 100% !important;
   width: 100% !important;
 }
 
 /* Navbar spacing et séparation */
-.navbar:nth-of-type(2) {
-  margin-top: 4rem !important;
+.paymentNavbar {
+  margin-top: 4.9rem !important;
   padding: 1.5rem 0;
   position: relative;
   z-index: 1000;
   width: 100%;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
+
 /* Correction pour la Navbar */
-.navbar {
+.paymentNavbar {
   width: 100% !important;
   max-width: 100% !important;
   left: 0;
@@ -31,72 +32,74 @@
 }
 
 /* Navigation items spacing */
-.navbar > .container-fluid {
+.paymentNavbarContainer {
   padding-left: 0 !important;
   padding-right: 0 !important;
   margin-left: 0 !important;
   margin-right: 0 !important;
 }
 
-.navbar .nav {
+.paymentNav {
   width: 100%;
 }
 
 /* Suppression du padding-top inutile */
-.navbar .pt-5 {
+.paymentNavbar .pt-5 {
   padding-top: 0 !important;
 }
+
 /* Row pleine largeur */
-.row {
+.paymentRow {
   margin-left: 0 !important;
   margin-right: 0 !important;
   width: 100% !important;
-  padding-right: 0 !important; /* Modifier */
+  padding-right: 0 !important;
 }
 
-
 /* Nav link styling */
-.navbar:nth-of-type(2) .nav-link {
+.paymentNavLink {
   font-weight: 500;
   padding: 0.5rem 1rem;
   border-radius: 6px;
   transition: background-color 0.2s ease;
 }
 
-.navbar:nth-of-type(2) .nav-link:hover {
+.paymentNavLink:hover {
   background-color: rgba(0,0,0,0.05);
 }
+
 /* Button spacing dans la navbar */
-.navbar:nth-of-type(2) .btn {
+.paymentNavButton {
   margin-right: 30px;
   border-radius: 6px;
- 
 }
+
 /* Espacement du container principal */
-.min-vh-100 > .container {
+.paymentMainContainer {
   margin-top: 1rem;
 }
+
 /* Ajustement du Container principal */
-.py-5 {
+.paymentMainContainer {
   padding-top: 1.5rem !important;
   padding-bottom: 3rem !important;
 }
+
 /* Partie gauche - Section bleue - Pleine largeur */
-.col-lg-7 {
+.paymentLeftColumn {
   padding-right: none !important;
   flex: 0 0 auto;
   width: 60%;
 }
 
-.col-lg-7 > div {
+.paymentLeftCard {
   border-radius: 20px !important;
   box-shadow: 0 8px 24px rgba(0, 102, 255, 0.15) !important;
   width: 100%;
 }
+
 /* Partie droite - Résumé de commande - Ajustement largeur */
-
-
-.col-lg-4 .card {
+.paymentSummaryCard {
   width: 100%;
   max-width: none !important;
   margin: 0;
@@ -105,23 +108,22 @@
   height: fit-content;
 }
 
-
-
 /* Titre principal */
-.col-lg-4 .card h5 {
+.paymentSummaryTitle {
   font-size: 1.1rem;
   font-weight: 600;
   color: #2c3e50;
   margin-bottom: 1.5rem;
 }
+
 /* Section du plan - Badge et prix */
-.col-lg-4 .d-flex.justify-content-between.align-items-center.mb-4 {
+.paymentPlanSection {
   align-items: flex-start !important;
   margin-bottom: 1.8rem !important;
 }
 
 /* Badge du plan */
-.col-lg-4 .badge.bg-success {
+.paymentPlanBadge {
   background-color: #28a745 !important;
   font-size: 0.8rem;
   font-weight: 500;
@@ -130,7 +132,7 @@
 }
 
 /* Prix principal */
-.col-lg-4 .text-end .fw-bold.fs-5 {
+.paymentPriceMain {
   font-size: 1.4rem !important;
   font-weight: 700 !important;
   color: #2c3e50;
@@ -138,13 +140,13 @@
 }
 
 /* Prix en EUR */
-.col-lg-4 .text-end .text-muted.small {
+.paymentPriceEur {
   font-size: 0.85rem;
   color: #6c757d !important;
 }
 
 /* Section facturation annuelle */
-.col-lg-4 .p-3.bg-light.rounded-3.mb-4 {
+.paymentBillingSection {
   background-color: #f8f9fa !important;
   padding: 1rem !important;
   border-radius: 8px !important;
@@ -154,7 +156,7 @@
 
 /* Switch de facturation */
 /* Style personnalisé pour le switch ovale */
-.form-switch .form-check-input {
+.paymentSwitch .form-check-input {
   width: 3.5rem !important; /* Largeur de l'ovale */
   height: 1.75rem !important; /* Hauteur de l'ovale */
   border-radius: 2rem !important; /* Bordure arrondie pour l'effet ovale */
@@ -165,66 +167,64 @@
 }
 
 /* Style quand le switch est activé */
-.form-switch .form-check-input:checked {
+.paymentSwitch .form-check-input:checked {
   background-color: #0d6efd !important; /* Couleur bleue Bootstrap pour l'état actif */
   border-color: #0d6efd !important;
 }
 
 /* Style du "bouton" intérieur */
-.form-switch .form-check-input::after {
+.paymentSwitch .form-check-input::after {
   width: 1.5rem !important; /* Largeur du bouton intérieur */
   height: 0.5rem !important; /* Hauteur du bouton intérieur */
   border-radius: 20% !important; /* Forme ronde */
- 
 }
 
 /* Position du bouton intérieur quand activé */
-.form-switch .form-check-input:checked::after {
+.paymentSwitch .form-check-input:checked::after {
   transform: translateX(1.75rem) !important; /* Déplacement vers la droite */
 }
 
-
-
 /* Texte facturation annuelle */
-.col-lg-4 .fw-medium {
+.paymentSwitchLabel {
   font-weight: 500;
   font-size: 0.9rem;
   color: #2c3e50;
 }
 
 /* Message d'économie */
-.col-lg-4 .text-success.animate__animated {
+.paymentSavingsMessage {
   margin-top: 0.5rem;
   font-size: 0.8rem;
   color: #28a745 !important;
 }
 
-.col-lg-4 .text-success svg {
+.paymentSavingsIcon {
   width: 14px;
   height: 14px;
   margin-right: 0.3rem;
 }
 
 /* Section garanties */
-.col-lg-4 .border-top {
+.paymentGuaranteesSection {
   border-top: 1px solid #e9ecef !important;
   padding-top: 1.2rem !important;
   margin-bottom: 1.2rem !important;
 }
 
 /* Icônes des garanties */
-.col-lg-4 .bg-light.rounded-circle {
+.paymentGuaranteeIcon {
   background-color: #f1f3f4 !important;
   width: 35px !important;
   height: 35px !important;
 }
 
-.col-lg-4 .bg-light.rounded-circle svg {
+.paymentGuaranteeIcon svg {
   width: 18px !important;
   height: 18px !important;
 }
+
 /* Textes des garanties */
-.col-lg-4 .fw-medium {
+.paymentGuaranteeTitle {
   font-size: 0.9rem;
   font-weight: 500;
   color: #2c3e50;
@@ -232,120 +232,124 @@
   text-align: left;
 }
 
-.col-lg-4 .text-muted.small {
+.paymentGuaranteeDesc {
   font-size: 0.8rem;
   color: #6c757d !important;
   line-height: 1.3;
 }
 
 /* Espacement entre les garanties */
-.col-lg-4 .d-flex.align-items-center.mt-3 {
+.paymentGuaranteeItem:not(:first-child) {
   margin-top: 1rem !important;
 }
+
 /* Texte des conditions générales */
-.col-lg-4 .text-muted.small.mt-3 {
+.paymentTerms {
   font-size: 0.75rem;
   line-height: 1.4;
   margin-top: 1.5rem !important;
   color: #6c757d !important;
 }
+
 /* Liens dans le texte des conditions */
-.col-lg-4 .text-muted.small.mt-3 a {
+.paymentTermsLink {
   color: #007bff;
   text-decoration: none;
 }
 
-.col-lg-4 .text-muted.small.mt-3 a:hover {
+.paymentTermsLink:hover {
   text-decoration: underline;
 }
 
 /* Ajustements généraux pour l'espacement */
-.col-lg-4 .card .mb-4 {
+.paymentSummaryCard .mb-4 {
   margin-bottom: 1.5rem !important;
 }
 
-.col-lg-4 .card .mb-2 {
+.paymentSummaryCard .mb-2 {
   margin-bottom: 0.8rem !important;
 }
 
-.col-lg-4 .card .mb-3 {
+.paymentSummaryCard .mb-3 {
   margin-bottom: 1.2rem !important;
 }
+
 /* Responsive navbar adjustments */
 @media (max-width: 991px) {
-  .container, .container-fluid {
+  .paymentModuleContainer .container, 
+  .paymentModuleContainer .container-fluid {
     padding-left: none !important;
     padding-right: none !important;
   }
   
-  .navbar .container-fluid {
+  .paymentNavbarContainer {
     padding-left: none !important;
     padding-right: none !important;
   }
   
-  .navbar:nth-of-type(2) {
+  .paymentNavbar {
     margin-top: 2rem !important;
     padding: 1rem 0;
   }
   
-  .navbar:nth-of-type(2) .ms-auto {
+  .paymentNav {
     flex-direction: column;
     align-items: stretch;
     gap: 0.8rem;
   }
   
-  .navbar:nth-of-type(2) .nav-link {
+  .paymentNavLink {
     text-align: center;
   }
   
-  .col-lg-7 {
+  .paymentLeftColumn {
     width: 100%;
     padding-right: 1rem;
     margin-bottom: 2rem;
   }
   
-  .col-lg-4 {
+  .paymentRightColumn {
     width: 100%;
   }
 }
+
 @media (max-width: 768px) {
-  .container, .container-fluid {
+  .paymentModuleContainer .container, 
+  .paymentModuleContainer .container-fluid {
     padding-left: none !important;
-    padding-right:none!important;
-  }
-  
-  .navbar .container-fluid {
-    padding-left: none!important;
     padding-right: none !important;
   }
   
-  .navbar:nth-of-type(2) {
+  .paymentNavbarContainer {
+    padding-left: none !important;
+    padding-right: none !important;
+  }
+  
+  .paymentNavbar {
     margin-top: 1.5rem !important;
     padding: 0.8rem 0;
   }
   
-  .navbar:nth-of-type(2) .ms-auto {
-    gap: 0.5rem;
-  }
   
-  .navbar:nth-of-type(2) .btn {
+  
+  .paymentNavButton {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
   }
   
-  .col-lg-4 .card h5 {
+  .paymentSummaryTitle {
     font-size: 1rem;
   }
   
-  .col-lg-4 .text-end .fw-bold.fs-5 {
+  .paymentPriceMain {
     font-size: 1.2rem !important;
   }
   
-  .col-lg-7 h2 {
+  .paymentTitle {
     font-size: 1.5rem;
   }
   
-  .py-5 {
-    padding-top: rem !important;
+  .paymentMainContainer {
+    padding-top: 1rem !important;
   }
 }
