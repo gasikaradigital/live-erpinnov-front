@@ -210,6 +210,34 @@ const Inscription = () => {
                   .
                 </label>
               </div>
+		 <div className="form-check d-flex align-items-center gap-2 mt-2">
+    <input
+      type="checkbox"
+      className="form-check-input"
+      id="acceptPolitique"
+      checked={acceptPolitique}
+      onChange={() => setAcceptPolitique(!acceptPolitique)}
+      style={{ backgroundColor: "white", transform: "scale(0.6)" ,}}
+    />
+    <label className="form-check-label" htmlFor="acceptPolitique">
+      J'accepte la{" "}
+      <Link to="/confidentialite" className="text-primary" style={{
+                      color: darkMode ? "#66b2ff" : "#0d6efd",
+                      textDecoration: "none",
+                      cursor: "pointer",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.textDecoration = "underline";
+                      e.target.style.color = darkMode ? "#99ccff" : "#0056b3";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.textDecoration = "none";
+                      e.target.style.color = darkMode ? "#66b2ff" : "#0d6efd";
+                    }}>
+        politique de confidentialité
+      </Link>.
+    </label>
+  </div>
             </div>
 
             <button type="submit" className="btn btn-primary w-100">
