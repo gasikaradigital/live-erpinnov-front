@@ -5,10 +5,12 @@ import { Navbar, Nav } from 'react-bootstrap';
 import { useTheme } from '../../contexts/ThemeContext';
 import Form from 'react-bootstrap/Form';
 import CardPayement from './cardPayement';
+import { useNavigate } from "react-router";
 import './PayementProcess.css';
 
 const PaymentModule = () => {
   const { theme } = useTheme();
+  const navigate = navigate = useNavigate();
 
   const [isAnnualBilling, setIsAnnualBilling] = useState(false);
   const [showPaymentCard, setShowPaymentCard] = useState(false);
@@ -18,8 +20,13 @@ const PaymentModule = () => {
   };
 
   const handleSubscriptionClick = () => {
+    
     setShowPaymentCard(true);
   };
+
+  const handleFreeTrialClick=()=>{
+    navigate("/entreprise/create");
+  }
 
   return (
      <div className="text-dark min-vh-100 w-100 mw-100 mx-0 px-0 paymentModuleContainer" style={{ maxWidth: '100%', overflowX: 'hidden' }}>
@@ -76,7 +83,7 @@ const PaymentModule = () => {
                   <div className="p-3 rounded-3 border border-white align-items-start border-opacity-25 bg-white bg-opacity-10 mb-3 paymentOptionCard">
                     <h5 className="fw-semibold text-white mb-1 paymentOptionTitle">Essayer gratuitement</h5>
                     <p className="text-white mb-3 paymentOptionDesc">Testez pendant 14 jours sans engagement</p>
-                    <Button variant="light" className="w-100 fw-bold bg-light rounded-3 paymentTrialButton" onClick={handleSubscriptionClick}>
+                    <Button variant="light" className="w-100 fw-bold bg-light rounded-3 paymentTrialButton" onClick={handleFreeTrialClick}>
                       Démarrer l'essai
                     </Button>
                   </div>
