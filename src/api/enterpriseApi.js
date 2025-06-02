@@ -5,7 +5,7 @@ export const fetchEntreprises = async () => {
         const res = await api.get('/api/entreprises');
 
         console.log(res);
-        if (res.status === 200) {
+        if (res.status === 201) {
             return res.data;
         }
 
