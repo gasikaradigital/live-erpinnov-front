@@ -10,7 +10,7 @@ import './PayementProcess.css';
 
 const PaymentModule = () => {
   const { theme } = useTheme();
-  const navigate = navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [isAnnualBilling, setIsAnnualBilling] = useState(false);
   const [showPaymentCard, setShowPaymentCard] = useState(false);
