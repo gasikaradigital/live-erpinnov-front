@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { FiArrowLeft } from "react-icons/fi";
-import "./EntrepriseCreate.css";
 import {
   Container,
   Button,
@@ -14,9 +13,21 @@ import {
 import AppNavbar from "../navbar/AppNavbar"; // adapte le chemin si besoin
 import { useTheme } from "../../../contexts/ThemeContext"; // adapte le chemin si besoin
 
+/**
+ * Page de création d'organisation
+ * ▸ Affiche la liste des organisations à gauche (boucle .map())
+ * ▸ Formulaire de création à droite
+ * ▸ Dark / Light theme géré via ThemeContext
+ */
 const EntrepriseCreatePage = () => {
   const { theme } = useTheme();
 
+  /** Liste d'organisations existantes (exemple) */
+  const [organisations, setOrganisations] = useState([
+    { nom: "gasy", ville: "Mahajanga", pays: "Madagascar" },
+  ]);
+
+  /** état du formulaire */
   const [form, setForm] = useState({
     nom: "",
     nif: "",
@@ -27,81 +38,124 @@ const EntrepriseCreatePage = () => {
     pays: "",
   });
 
+  /** gère la saisie */
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
+  /** soumission du formulaire */
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Formulaire soumis :", form);
-    // TODO : appel API ou autre logique
+
+    // 👉 log + ajout dans la liste pour aperçu immédiat
+    console.log("Nouvelle organisation :", form);
+    setOrganisations((prev) => [
+      ...prev,
+      { nom: form.nom, ville: form.ville, pays: form.pays || "—" },
+    ]);
+
+    // reset simple des champs (optionnel)
+    setForm({
+      nom: "",
+      nif: "",
+      tel: "",
+      nbEmployes: "",
+      adresse: "",
+      ville: "",
+      pays: "",
+    });
   };
 
   return (
-   <div
-  className={`text-light w-100 mx-0 px-0 ${
+  <div
+  className={`text-light mx-0 px-0 ${
     theme === "dark" ? "bg-dark" : "bg-light"
   }`}
-  style={{ overflowX: "hidden", maxWidth: "1600px", margin: "0 auto" }}
+  style={{ width: "100vw", overflowX: "hidden", margin: "0", padding: "0" }}
 >
 
+      {/* -------- NAVBAR PRINCIPALE -------- */}
       <AppNavbar />
 
-      {/* Sous-navbar « action » */}
+      {/* -------- SOUS-NAVBAR RETOUR -------- */}
       <Navbar
         expand="lg"
         className={theme === "dark" ? "bg-dark" : "bg-light"}
         variant={theme === "dark" ? "dark" : "light"}
       >
-      <Container fluid className="p-0">
-  <div
-    className={`d-flex justify-content-between align-items-center py-2 ${
-      theme === "dark" ? "bg-dark text-white" : "bg-light text-dark"
-    }`}
-    style={{
-      maxWidth: "1400px", // ← largeur maximale
-      margin: "0 auto",    // ← centré dans le container
-      width: "100%",       // ← prend toute la largeur dispo
-      paddingLeft: "2rem", // ← padding interne
-      paddingRight: "2rem"
-    }}
-  >
-    <Nav>
-      <Nav.Link
-        href="#"
-        className={`d-flex align-items-center gap-2 text-start ${
-          theme === "dark" ? "text-white" : "text-dark"
-        }`}
-      >
-        <FiArrowLeft size={20} />
-        Retour à l’espace client
-      </Nav.Link>
-    </Nav>
-  </div>
-</Container>
-
+        <Container fluid className="p-0">
+          <div
+            className={`d-flex justify-content-between align-items-center py-2 ${
+              theme === "dark" ? "bg-dark text-white" : "bg-light text-dark"
+            }`}
+            style={{ maxWidth: "1400px", margin: "0 auto", width: "100%", padding: "0 2rem" }}
+          >
+            <Nav>
+              <Nav.Link
+                href="#"
+                className={`d-flex align-items-center gap-2 text-start ${
+                  theme === "dark" ? "text-white" : "text-dark"
+                }`}
+              >
+                <FiArrowLeft size={20} /> Retour à l’espace client
+              </Nav.Link>
+            </Nav>
+          </div>
+        </Container>
       </Navbar>
 
-      {/* Contenu principal */}
+      {/* -------- CONTENU PRINCIPAL -------- */}
       <Container className="py-5">
         <Row className="g-4 justify-content-center text-start">
-          {/* Colonne gauche */}
-          <Col lg={3}>
-            <Card
-              bg={theme === "dark" ? "dark" : "light"}
-              text={theme === "dark" ? "white" : "dark"}
-              className="text-start w-100 p-0 m-0"
-            >
-              <Card.Header className="d-flex justify-content-between align-items-center">
-                <span>Mes organisations</span>
-                <span className="badge bg-danger">0</span>
-              </Card.Header>
-              <Card.Body className="text-muted text-start">
-                Aucune organisation ajoutée
-              </Card.Body>
-            </Card>
-          </Col>
+      <Col lg={3}>
+  <Card
+    bg={theme === "dark" ? "dark" : "light"}
+    text={theme === "dark" ? "white" : "dark"}
+    className="text-start w-100 p-0 m-0"
+  >
+    <Card.Header className="d-flex justify-content-between align-items-center">
+      <span>Mes organisations</span>
+      <span className="badge bg-danger">{organisations.length}</span>
+    </Card.Header>
 
-          {/* Colonne droite : formulaire */}
+    <Card.Body className="text-start">
+      {organisations.length === 0 ? (
+        <p className="text-muted mb-0">Aucune organisation ajoutée</p>
+      ) : (
+        <>
+          <div className="d-flex align-items-start gap-3 p-2 border rounded mb-3">
+            <div
+              className="d-flex align-items-center justify-content-center rounded-circle"
+              style={{
+                background: "linear-gradient(135deg, #7F00FF, #E100FF)",
+                color: "white",
+                width: 36,
+                height: 36,
+                fontWeight: "bold",
+                textTransform: "capitalize",
+              }}
+            >
+              {organisations[0].nom.charAt(0)}
+            </div>
+            <div>
+              <div className="fw-bold">{organisations[0].nom}</div>
+              <div className="text-muted small">
+                {organisations[0].ville}, {organisations[0].pays}
+              </div>
+            </div>
+          </div>
+
+        
+        </>
+      )}
+    </Card.Body>
+  </Card>
+    <Button variant="success" className="w-100">
+            Continuer vers l'espace de travail
+          </Button>
+</Col>
+
+
+          {/* ----- Colonne droite : formulaire ----- */}
           <Col lg={8}>
             <Card
               bg={theme === "dark" ? "dark" : "light"}
@@ -121,7 +175,6 @@ const EntrepriseCreatePage = () => {
                     <Col md={12}>
                       <RBForm.Label>Nom de l’organisation</RBForm.Label>
                       <RBForm.Control
-                        className="text-start"
                         type="text"
                         placeholder="Ex : Space X"
                         name="nom"
@@ -135,7 +188,6 @@ const EntrepriseCreatePage = () => {
                     <Col md={6}>
                       <RBForm.Label>NIF ou SIREN</RBForm.Label>
                       <RBForm.Control
-                        className="text-start"
                         type="text"
                         placeholder="Numéro fiscal"
                         name="nif"
@@ -146,7 +198,6 @@ const EntrepriseCreatePage = () => {
                     <Col md={6}>
                       <RBForm.Label>Téléphone</RBForm.Label>
                       <RBForm.Control
-                        className="text-start"
                         type="tel"
                         placeholder="+261 xx xx xxx xx"
                         name="tel"
@@ -157,7 +208,6 @@ const EntrepriseCreatePage = () => {
                     <Col>
                       <RBForm.Label>Nombre d’employés</RBForm.Label>
                       <RBForm.Select
-                        className="text-start"
                         name="nbEmployes"
                         value={form.nbEmployes}
                         onChange={handleChange}
@@ -187,7 +237,6 @@ const EntrepriseCreatePage = () => {
                     <Col md={6}>
                       <RBForm.Label>Ville</RBForm.Label>
                       <RBForm.Control
-                        className="text-start"
                         type="text"
                         placeholder="Ex : Antananarivo"
                         name="ville"
@@ -198,15 +247,14 @@ const EntrepriseCreatePage = () => {
                     <Col md={6}>
                       <RBForm.Label>Pays</RBForm.Label>
                       <RBForm.Select
-                        className="text-start"
                         name="pays"
                         value={form.pays}
                         onChange={handleChange}
                       >
                         <option value="">-- Choisir pays --</option>
-                        <option value="MG">Madagascar</option>
-                        <option value="FR">France</option>
-                        <option value="US">États-Unis</option>
+                        <option value="Madagascar">Madagascar</option>
+                        <option value="France">France</option>
+                        <option value="États-Unis">États-Unis</option>
                       </RBForm.Select>
                     </Col>
                   </Row>
@@ -216,11 +264,7 @@ const EntrepriseCreatePage = () => {
 
             {/* Bouton de soumission */}
             <div className="mt-3 d-flex justify-content-start">
-              <Button
-                type="submit"
-                form="org-create-form"
-                className="btn btn-primary"
-              >
+              <Button type="submit" form="org-create-form" className="btn btn-primary">
                 Ajouter l'organisation <span className="fs-5">+</span>
               </Button>
             </div>
@@ -228,7 +272,7 @@ const EntrepriseCreatePage = () => {
         </Row>
       </Container>
 
-      {/* Footer */}
+      {/* -------- FOOTER -------- */}
       <footer
         className={`w-100 py-3 mt-auto ${
           theme === "dark" ? "bg-dark text-light" : "bg-light text-dark"
