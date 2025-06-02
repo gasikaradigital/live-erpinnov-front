@@ -5,7 +5,7 @@ export const fetchEntreprises = async () => {
         const res = await api.get('/api/entreprises');
 
         console.log(res);
-        if (res.status === 201) {
+        if (res.status === 200) {
             return res.data;
         }
 
@@ -20,7 +20,7 @@ export const createEntreprise = async (entreprise) => {
     try {
       const res = await api.post('/api/create-entreprise', entreprise);
   
-      if (res.status === 200) {
+      if (res.status === 201) {
         return res.data;
       }
   
