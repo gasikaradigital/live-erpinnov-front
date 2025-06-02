@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FiArrowLeft } from "react-icons/fi";
 import {
   Container,
@@ -12,6 +12,8 @@ import {
 } from "react-bootstrap";
 import AppNavbar from "../navbar/AppNavbar"; // adapte le chemin si besoin
 import { useTheme } from "../../../contexts/ThemeContext"; // adapte le chemin si besoin
+import { createEntreprise, fetchEntreprises } from "../../../api/enterpriseApi";
+import { toast } from "react-toastify";
 
 /**
  * Page de création d'organisation
@@ -23,9 +25,7 @@ const EntrepriseCreatePage = () => {
   const { theme } = useTheme();
 
   /** Liste d'organisations existantes (exemple) */
-  const [organisations, setOrganisations] = useState([
-    { nom: "gasy", ville: "Mahajanga", pays: "Madagascar" },
-  ]);
+  const [organisations, setOrganisations] = useState([]);
 
   /** état du formulaire */
   const [form, setForm] = useState({
@@ -43,35 +43,72 @@ const EntrepriseCreatePage = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
 
   /** soumission du formulaire */
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // 👉 log + ajout dans la liste pour aperçu immédiat
-    console.log("Nouvelle organisation :", form);
-    setOrganisations((prev) => [
-      ...prev,
-      { nom: form.nom, ville: form.ville, pays: form.pays || "—" },
-    ]);
+    const mapped = {
+      name: form.nom,
+      nif: form.nif,
+      employees_count: form.nbEmployes,
+      ville: form.ville,
+      pays: form.pays,
+      phone: form.tel,
+      adresse: form.adresse,
+    };
 
-    // reset simple des champs (optionnel)
-    setForm({
-      nom: "",
-      nif: "",
-      tel: "",
-      nbEmployes: "",
-      adresse: "",
-      ville: "",
-      pays: "",
-    });
+    const res = await createEntreprise(mapped);
+
+    if (res && res.validationErrors) {
+      const errors = res.validationErrors;
+      Object.entries(errors).forEach(([field, messages]) => {
+        messages.forEach((msg) => {
+          toast.error(msg);
+        });
+      });
+      return;
+    }
+
+    if (res) {
+      toast.success("Organisation créée avec succès !");
+      console.log("Nouvelle organisation :", form);
+      setOrganisations((prev) => [
+        ...prev,
+        { nom: form.nom, ville: form.ville, pays: form.pays || "—" },
+      ]);
+
+      setForm({
+        nom: "",
+        nif: "",
+        tel: "",
+        nbEmployes: "",
+        adresse: "",
+        ville: "",
+        pays: "",
+      });
+    } else {
+      toast.error("Une erreur est survenue lors de la création.");
+    }
   };
 
+  useEffect(() => {
+    const getEnterprises = async () => {
+      const res = await fetchEntreprises();
+      const mapped = res.map((entreprise) => ({
+        nom: entreprise.name,
+        ville: entreprise.ville,
+        pays: entreprise.pays,
+      }));
+      setOrganisations(mapped);
+
+    }
+    getEnterprises();
+  }, [])
   return (
-  <div
-  className={`text-light mx-0 px-0 ${
-    theme === "dark" ? "bg-dark" : "bg-light"
-  }`}
-  style={{ width: "100vw", overflowX: "hidden", margin: "0", padding: "0" }}
->
+    <div
+      className={`text-light mx-0 px-0 ${theme === "dark" ? "bg-dark" : "bg-light"
+        }`}
+      style={{ width: "100vw", overflowX: "hidden", margin: "0", padding: "0" }}
+    >
 
       {/* -------- NAVBAR PRINCIPALE -------- */}
       <AppNavbar />
@@ -84,17 +121,15 @@ const EntrepriseCreatePage = () => {
       >
         <Container fluid className="p-0">
           <div
-            className={`d-flex justify-content-between align-items-center py-2 ${
-              theme === "dark" ? "bg-dark text-white" : "bg-light text-dark"
-            }`}
+            className={`d-flex justify-content-between align-items-center py-2 ${theme === "dark" ? "bg-dark text-white" : "bg-light text-dark"
+              }`}
             style={{ maxWidth: "1400px", margin: "0 auto", width: "100%", padding: "0 2rem" }}
           >
             <Nav>
               <Nav.Link
                 href="#"
-                className={`d-flex align-items-center gap-2 text-start ${
-                  theme === "dark" ? "text-white" : "text-dark"
-                }`}
+                className={`d-flex align-items-center gap-2 text-start ${theme === "dark" ? "text-white" : "text-dark"
+                  }`}
               >
                 <FiArrowLeft size={20} /> Retour à l’espace client
               </Nav.Link>
@@ -106,53 +141,55 @@ const EntrepriseCreatePage = () => {
       {/* -------- CONTENU PRINCIPAL -------- */}
       <Container className="py-5">
         <Row className="g-4 justify-content-center text-start">
-      <Col lg={3}>
-  <Card
-    bg={theme === "dark" ? "dark" : "light"}
-    text={theme === "dark" ? "white" : "dark"}
-    className="text-start w-100 p-0 m-0"
-  >
-    <Card.Header className="d-flex justify-content-between align-items-center">
-      <span>Mes organisations</span>
-      <span className="badge bg-danger">{organisations.length}</span>
-    </Card.Header>
-
-    <Card.Body className="text-start">
-      {organisations.length === 0 ? (
-        <p className="text-muted mb-0">Aucune organisation ajoutée</p>
-      ) : (
-        <>
-          <div className="d-flex align-items-start gap-3 p-2 border rounded mb-3">
-            <div
-              className="d-flex align-items-center justify-content-center rounded-circle"
-              style={{
-                background: "linear-gradient(135deg, #7F00FF, #E100FF)",
-                color: "white",
-                width: 36,
-                height: 36,
-                fontWeight: "bold",
-                textTransform: "capitalize",
-              }}
+          <Col lg={3}>
+            <Card
+              bg={theme === "dark" ? "dark" : "light"}
+              text={theme === "dark" ? "white" : "dark"}
+              className="text-start w-100 p-0 m-0"
             >
-              {organisations[0].nom.charAt(0)}
-            </div>
-            <div>
-              <div className="fw-bold">{organisations[0].nom}</div>
-              <div className="text-muted small">
-                {organisations[0].ville}, {organisations[0].pays}
-              </div>
-            </div>
-          </div>
-
-        
-        </>
-      )}
-    </Card.Body>
-  </Card>
-    <Button variant="success" className="w-100">
-            Continuer vers l'espace de travail
-          </Button>
-</Col>
+              <Card.Header className="d-flex justify-content-between align-items-center">
+                <span>Mes organisations</span>
+                <span className="badge bg-danger">{organisations.length}</span>
+              </Card.Header>
+              <Card.Body className="text-start">
+                {organisations.length === 0 ? (
+                  <p className="text-muted mb-0">Aucune organisation ajoutée</p>
+                ) : (
+                  <>
+                    {organisations.map((org, index) => (
+                      <div
+                        key={index}
+                        className="d-flex align-items-start gap-3 p-2 border rounded mb-3"
+                      >
+                        <div
+                          className="d-flex align-items-center justify-content-center rounded-circle"
+                          style={{
+                            background: "linear-gradient(135deg, #7F00FF, #E100FF)",
+                            color: "white",
+                            width: 36,
+                            height: 36,
+                            fontWeight: "bold",
+                            textTransform: "capitalize",
+                          }}
+                        >
+                          {org.nom.charAt(0)}
+                        </div>
+                        <div>
+                          <div className="fw-bold">{org.nom}</div>
+                          <div className="text-muted small">
+                            {org.ville}, {org.pays}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </>
+                )}
+              </Card.Body>
+            </Card>
+            <Button variant="success" className="w-100">
+              Continuer vers l'espace de travail
+            </Button>
+          </Col>
 
 
           {/* ----- Colonne droite : formulaire ----- */}
@@ -213,10 +250,10 @@ const EntrepriseCreatePage = () => {
                         onChange={handleChange}
                       >
                         <option value="">Sélectionnez</option>
-                        <option value="1-10">1 – 10</option>
-                        <option value="11-50">11 – 50</option>
-                        <option value="51-200">51 – 200</option>
-                        <option value="200+">Plus de 200</option>
+                        <option value="10">1 – 10</option>
+                        <option value="50">11 – 50</option>
+                        <option value="200">51 – 200</option>
+                        <option value="201">Plus de 200</option>
                       </RBForm.Select>
                     </Col>
                   </Row>
@@ -274,9 +311,8 @@ const EntrepriseCreatePage = () => {
 
       {/* -------- FOOTER -------- */}
       <footer
-        className={`w-100 py-3 mt-auto ${
-          theme === "dark" ? "bg-dark text-light" : "bg-light text-dark"
-        } text-start`}
+        className={`w-100 py-3 mt-auto ${theme === "dark" ? "bg-dark text-light" : "bg-light text-dark"
+          } text-start`}
       >
         <Container className="d-flex justify-content-between text-start">
           <div className="d-flex gap-3">
