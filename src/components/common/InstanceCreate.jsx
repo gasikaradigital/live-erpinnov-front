@@ -136,7 +136,7 @@ const InstanceCreate = () => {
                       value={instanceName}
                       onChange={(e) => setInstanceName(e.target.value)}
                     />
-                    <span className="input-group-text suffix">.epinov.com</span>
+                    <span className="input-group-text suffix">.erpinnov.com</span>
                   </div>
                 </div>
                 <small className="helper-text">Votre nom d'instance personnalisé</small>
