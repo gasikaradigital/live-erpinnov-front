@@ -41,7 +41,7 @@ const EntrepriseCreatePage = () => {
 const navigate = useNavigate();
   
   const handleRedirect = ()=>{
-    navigate("/dashboard");
+    navigate("/instance/create");
   }
   /** gère la saisie */
   const handleChange = (e) =>
