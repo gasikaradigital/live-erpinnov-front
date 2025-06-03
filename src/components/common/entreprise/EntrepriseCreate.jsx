@@ -14,6 +14,7 @@ import AppNavbar from "../navbar/AppNavbar"; // adapte le chemin si besoin
 import { useTheme } from "../../../contexts/ThemeContext"; // adapte le chemin si besoin
 import { createEntreprise, fetchEntreprises } from "../../../api/enterpriseApi";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 
 /**
  * Page de création d'organisation
@@ -37,7 +38,11 @@ const EntrepriseCreatePage = () => {
     ville: "",
     pays: "",
   });
-
+const navigate = useNavigate();
+  
+  const handleRedirect = ()=>{
+    navigate("/dashboard");
+  }
   /** gère la saisie */
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -186,7 +191,7 @@ const EntrepriseCreatePage = () => {
                 )}
               </Card.Body>
             </Card>
-            <Button variant="success" className="w-100">
+            <Button variant="success" className="w-100" onClick={handleRedirect}>
               Continuer vers l'espace de travail
             </Button>
           </Col>
