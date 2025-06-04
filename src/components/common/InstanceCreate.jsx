@@ -27,7 +27,7 @@ const InstanceCreate = () => {
 
     if(selectedOption === 'automatic') {
       const organisatonsObj = organisations.find(e => e.id === Number(selectedEnterprise));
-
+      console.log(organisatonsObj);
       if(organisatonsObj) {
         const orgName = organisatonsObj.name.trim();
 
