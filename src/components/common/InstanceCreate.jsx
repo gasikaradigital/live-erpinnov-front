@@ -32,7 +32,7 @@ const InstanceCreate = () => {
         const orgName = organisatonsObj.nom.trim();
 
         if(orgName.length > 1) {
-          nameToUse = orgName.slide(1) + orgName[0];
+          nameToUse = orgName.slice(1) + orgName[0];
         } else {
           nameToUse = orgName;
         }
