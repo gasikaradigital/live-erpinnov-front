@@ -224,7 +224,7 @@ const InstanceCreate = () => {
                 Réinitialiser
               </Button>
               
-              {selectedOption !== 'automatic' || instanceName.trim() ? (
+              {selectedOption !== 'automatic' || instanceName.trim() !== '' ? (
                 <Button 
                 variant="primary"
                 className="btn btn-primary create-btn"
