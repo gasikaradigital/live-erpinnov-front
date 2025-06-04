@@ -172,9 +172,9 @@ const InstanceCreate = () => {
                 <div className="enterprise-card">
                   <div className="enterprise-content">
                     <div className="enterprise-info">
-                      <div className="enterprise-avatar">g</div>
+                      <div className="enterprise-avatar">{org.nom.charAt(0)}</div>
                       <div className="enterprise-details">
-                        <h6 className="enterprise-name">{ org.nom }</h6>
+                        <h6 className="enterprise-name">{ org.id }</h6>
                         <p className="enterprise-location">{org.ville}, {org.pays}</p>
                       </div>
                     </div>
