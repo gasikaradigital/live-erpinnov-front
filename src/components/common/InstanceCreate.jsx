@@ -4,6 +4,7 @@ import AppNavbar from './navbar/AppNavbar';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useNavigate } from "react-router";
 import './InstanceCreate.css';
+import { createEntreprise, fetchEntreprises } from "../../../api/enterpriseApi";
 
 const InstanceCreate = () => {
   const { theme } = useTheme();
@@ -34,6 +35,24 @@ const InstanceCreate = () => {
     setSelectedOption('manual');
     setSelectedEnterprise('gasy');
   };
+
+  //Liste des organisations
+  const [organisations, setOrganisations] = useState([]);
+
+  useEffect(() => {
+    const getEnterprises = async () => {
+      const res = await fetchEntreprises();
+      const mapped = res.map((entreprise) => ({
+        id: entreprise.id,
+        nom: entreprise.name,
+        ville: entreprise.ville,
+        pays: entreprise.pays,
+      }));
+      setOrganisations(mapped);
+
+    }
+    getEnterprises();
+  }, [])
 
   return (
     <div className={`instance-create-container ${theme} min-vh-100 w-100 mw-100 mx-0 px-0`} >
@@ -149,27 +168,29 @@ const InstanceCreate = () => {
                 Entreprise associée <span className="required">*</span>
               </label>
               <p className="section-desc">Cette instance sera liée à l'entreprise sélectionnée.</p>
-              
-              <div className="enterprise-card">
-                <div className="enterprise-content">
-                  <div className="enterprise-info">
-                    <div className="enterprise-avatar">g</div>
-                    <div className="enterprise-details">
-                      <h6 className="enterprise-name">gasy</h6>
-                      <p className="enterprise-location">Mahajanga, Mahajanga, Madagascar, Madagascar</p>
+              {organisations.map((org, index) => (
+                <div className="enterprise-card">
+                  <div className="enterprise-content">
+                    <div className="enterprise-info">
+                      <div className="enterprise-avatar">g</div>
+                      <div className="enterprise-details">
+                        <h6 className="enterprise-name">{ org.nom }</h6>
+                        <p className="enterprise-location">{org.ville}, {org.pays}</p>
+                      </div>
+                    </div>
+                    <div className="enterprise-radio">
+                      <input 
+                        type="radio" 
+                        name="enterprise" 
+                        className="form-check-input" 
+                        checked={selectedEnterprise === 'gasy'}
+                        onChange={() => setSelectedEnterprise('gasy')}
+                      />
                     </div>
                   </div>
-                  <div className="enterprise-radio">
-                    <input 
-                      type="radio" 
-                      name="enterprise" 
-                      className="form-check-input" 
-                      checked={selectedEnterprise === 'gasy'}
-                      onChange={() => setSelectedEnterprise('gasy')}
-                    />
-                  </div>
                 </div>
-              </div>
+              ))}
+              
               
               <div className="location-info">
                 <div className="location-content">
