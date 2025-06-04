@@ -23,8 +23,28 @@ const InstanceCreate = () => {
   };
 
   const handleCreateInstance = () => {
+    let nameToUse;
+
+    if(selectedOption === 'automatic') {
+      const organisatonsObj = organisations.find(e => e.id === selectedEnterprise);
+
+      if(organisatonsObj) {
+        const orgName = organisatonsObj.name.trim();
+
+        if(orgName.length > 1) {
+          nameToUse = orgName.slide(1) + orgName[0];
+        } else {
+          nameToUse = orgName;
+        }
+      } else {
+        console.warn("Entreprise non trouvée pour l'ID", selectedEnterprise);
+         nameToUse = "";
+      }
+    } else {
+      nameToUse = instanceName.trim();
+    }
     console.log('Creating instance with:', {
-      name: instanceName,
+      name: nameToUse,
       option: selectedOption,
       enterprise: selectedEnterprise
     });
