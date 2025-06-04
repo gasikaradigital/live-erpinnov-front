@@ -12,7 +12,7 @@ const InstanceCreate = () => {
 
   const [instanceName, setInstanceName] = useState('');
   const [selectedOption, setSelectedOption] = useState('manual');
-  const [selectedEnterprise, setSelectedEnterprise] = useState('gasy');
+  const [selectedEnterprise, setSelectedEnterprise] = useState(1);
 
   const handleBackClick = () => {
     navigate(-1);
@@ -53,6 +53,7 @@ const InstanceCreate = () => {
     }
     getEnterprises();
   }, [])
+
 
   return (
     <div className={`instance-create-container ${theme} min-vh-100 w-100 mw-100 mx-0 px-0`} >
@@ -174,7 +175,7 @@ const InstanceCreate = () => {
                     <div className="enterprise-info">
                       <div className="enterprise-avatar">{org.nom.charAt(0)}</div>
                       <div className="enterprise-details">
-                        <h6 className="enterprise-name">{ org.id }</h6>
+                        <h6 className="enterprise-name">{ org.nom }</h6>
                         <p className="enterprise-location">{org.ville}, {org.pays}</p>
                       </div>
                     </div>
@@ -183,8 +184,8 @@ const InstanceCreate = () => {
                         type="radio" 
                         name="enterprise" 
                         className="form-check-input" 
-                        checked={selectedEnterprise === 'gasy'}
-                        onChange={() => setSelectedEnterprise('gasy')}
+                        checked={selectedEnterprise === org.id}
+                        onChange={() => setSelectedEnterprise(org.id)}
                       />
                     </div>
                   </div>
