@@ -48,7 +48,7 @@ const Login = () => {
       );
 
       if (response.status === 200) {
-        console.log(response.jsson());
+        console.log(response.json());
         setStatus("Connexion réussie");
         setAuthenticated(true);
         navigate("/dashboard");
