@@ -4,7 +4,7 @@ import AppNavbar from './navbar/AppNavbar';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useNavigate } from "react-router";
 import './InstanceCreate.css';
-import { createEntreprise, fetchEntreprises } from "../../../api/enterpriseApi";
+import { createEntreprise, fetchEntreprises } from "../../api/enterpriseApi";
 
 const InstanceCreate = () => {
   const { theme } = useTheme();
