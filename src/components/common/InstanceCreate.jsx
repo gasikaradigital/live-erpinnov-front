@@ -27,9 +27,9 @@ const InstanceCreate = () => {
 
     if(selectedOption === 'automatic') {
       const organisatonsObj = organisations.find(e => e.id === Number(selectedEnterprise));
-      console.log(organisatonsObj);
+      
       if(organisatonsObj) {
-        const orgName = organisatonsObj.name.trim();
+        const orgName = organisatonsObj.nom.trim();
 
         if(orgName.length > 1) {
           nameToUse = orgName.slide(1) + orgName[0];
