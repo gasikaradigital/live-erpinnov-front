@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import { Container, Button } from 'react-bootstrap';
+
+import React, { useState, useEffect } from 'react';
+import { Container, Button, Form, Card } from 'react-bootstrap';
 import AppNavbar from './navbar/AppNavbar';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useNavigate } from "react-router";
 import './InstanceCreate.css';
+import { createEntreprise, fetchEntreprises } from "../../api/enterpriseApi";
 
 const InstanceCreate = () => {
   const { theme } = useTheme();
@@ -11,7 +13,7 @@ const InstanceCreate = () => {
 
   const [instanceName, setInstanceName] = useState('');
   const [selectedOption, setSelectedOption] = useState('manual');
-  const [selectedEnterprise, setSelectedEnterprise] = useState('gasy');
+  const [selectedEnterprise, setSelectedEnterprise] = useState(1);
 
   const handleBackClick = () => {
     navigate(-1);
@@ -22,8 +24,28 @@ const InstanceCreate = () => {
   };
 
   const handleCreateInstance = () => {
+    let nameToUse;
+
+    if(selectedOption === 'automatic') {
+      const organisatonsObj = organisations.find(e => e.id === Number(selectedEnterprise));
+      
+      if(organisatonsObj) {
+        const orgName = organisatonsObj.nom.trim();
+
+        if(orgName.length > 1) {
+          nameToUse = orgName.slice(1) + orgName[0];
+        } else {
+          nameToUse = orgName;
+        }
+      } else {
+        console.warn("Entreprise non trouvée pour l'ID", selectedEnterprise);
+         nameToUse = "";
+      }
+    } else {
+      nameToUse = instanceName.trim();
+    }
     console.log('Creating instance with:', {
-      name: instanceName,
+      name: nameToUse,
       option: selectedOption,
       enterprise: selectedEnterprise
     });
@@ -34,6 +56,25 @@ const InstanceCreate = () => {
     setSelectedOption('manual');
     setSelectedEnterprise('gasy');
   };
+
+  //Liste des organisations
+  const [organisations, setOrganisations] = useState([]);
+
+  useEffect(() => {
+    const getEnterprises = async () => {
+      const res = await fetchEntreprises();
+      const mapped = res.map((entreprise) => ({
+        id: entreprise.id,
+        nom: entreprise.name,
+        ville: entreprise.ville,
+        pays: entreprise.pays,
+      }));
+      setOrganisations(mapped);
+
+    }
+    getEnterprises();
+  }, [])
+
 
   return (
     <div className={`instance-create-container ${theme}`}>
@@ -137,17 +178,41 @@ const InstanceCreate = () => {
                       onChange={(e) => setInstanceName(e.target.value)}
                     />
                     <span className={`input-group-text suffix ${theme}`}>.epinov.com</span>
+            {selectedOption !== 'automatic' &&(
+              <div className="form-section">
+                <div className="form-group">
+                  <label className="form-label">
+                    Nom de l'instance <span className="required">*</span>
+                  </label>
+                  <div className="input-container">
+                    <div className="input-group">
+                      <span className="input-group-text">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                          <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z"/>
+                          <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z"/>
+                        </svg>
+                      </span>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="votreinstance"
+                        value={instanceName}
+                        onChange={(e) => setInstanceName(e.target.value)}
+                      />
+                      <span className="input-group-text suffix">.erpinnov.com</span>
+                    </div>
                   </div>
-                </div>
                 <small className={`helper-text ${theme}`}>Votre nom d'instance personnalisé</small>
               </div>
-            </div>
+            )}
+            
 
             {/* Enterprise Section */}
             <div className="enterprise-section">
               <label className={`form-label ${theme}`}>
                 Entreprise associée <span className="required">*</span>
               </label>
+
               <p className={`section-desc ${theme}`}>Cette instance sera liée à l'entreprise sélectionnée.</p>
               
               <div className={`enterprise-card ${theme}`}>
@@ -157,19 +222,30 @@ const InstanceCreate = () => {
                     <div className="enterprise-details">
                       <h6 className={`enterprise-name ${theme}`}>gasy</h6>
                       <p className={`enterprise-location ${theme}`}>Mahajanga, Mahajanga, Madagascar, Madagascar</p>
+              <p className="section-desc">Cette instance sera liée à l'entreprise sélectionnée.</p>
+              {organisations.map((org, index) => (
+                <div className="enterprise-card">
+                  <div className="enterprise-content">
+                    <div className="enterprise-info">
+                      <div className="enterprise-avatar">{org.nom.charAt(0)}</div>
+                      <div className="enterprise-details">
+                        <h6 className="enterprise-name">{ org.nom }</h6>
+                        <p className="enterprise-location">{org.ville}, {org.pays}</p>
+                      </div>
+                    </div>
+                    <div className="enterprise-radio">
+                      <input 
+                        type="radio" 
+                        name="enterprise" 
+                        className="form-check-input" 
+                        checked={selectedEnterprise === org.id}
+                        onChange={() => setSelectedEnterprise(org.id)}
+                      />
                     </div>
                   </div>
-                  <div className="enterprise-radio">
-                    <input 
-                      type="radio" 
-                      name="enterprise" 
-                      className="form-check-input" 
-                      checked={selectedEnterprise === 'gasy'}
-                      onChange={() => setSelectedEnterprise('gasy')}
-                    />
-                  </div>
                 </div>
-              </div>
+              ))}
+              
               
               <div className="location-info">
                 <div className={`location-content ${theme}`}>
@@ -203,7 +279,7 @@ const InstanceCreate = () => {
                 variant="primary"
                 className="btn btn-primary create-btn"
                 onClick={handleCreateInstance}
-                disabled={!instanceName.trim()}
+                disabled={selectedOption !== 'automatic' && !instanceName.trim()}
               >
                 Créer l'instance
                 <svg width="16" height="16" className="ms-2" fill="currentColor" viewBox="0 0 16 16">
