@@ -69,7 +69,6 @@ function App() {
               <Route path="/landing" element={<LandingPage />} />
               <Route path="/Payement" element={<PaymentModule/>}/>
               <Route path="instance/create" element={<InstanceCreate/>} />
-
               <Route path="/confirm-password" element={<ConfirmPassword />} />
               <Route path="/verify-otp" element={<VerifyOtp />} />
               <Route path="/profile" element={<ProfileForm />} />

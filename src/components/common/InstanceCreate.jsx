@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Button, Form, Card } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Container, Button } from 'react-bootstrap';
 import AppNavbar from './navbar/AppNavbar';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useNavigate } from "react-router";
 import './InstanceCreate.css';
-import { createEntreprise, fetchEntreprises } from "../../api/enterpriseApi";
 
 const InstanceCreate = () => {
   const { theme } = useTheme();
@@ -12,7 +11,7 @@ const InstanceCreate = () => {
 
   const [instanceName, setInstanceName] = useState('');
   const [selectedOption, setSelectedOption] = useState('manual');
-  const [selectedEnterprise, setSelectedEnterprise] = useState(1);
+  const [selectedEnterprise, setSelectedEnterprise] = useState('gasy');
 
   const handleBackClick = () => {
     navigate(-1);
@@ -23,28 +22,8 @@ const InstanceCreate = () => {
   };
 
   const handleCreateInstance = () => {
-    let nameToUse;
-
-    if(selectedOption === 'automatic') {
-      const organisatonsObj = organisations.find(e => e.id === Number(selectedEnterprise));
-      
-      if(organisatonsObj) {
-        const orgName = organisatonsObj.nom.trim();
-
-        if(orgName.length > 1) {
-          nameToUse = orgName.slice(1) + orgName[0];
-        } else {
-          nameToUse = orgName;
-        }
-      } else {
-        console.warn("Entreprise non trouvée pour l'ID", selectedEnterprise);
-         nameToUse = "";
-      }
-    } else {
-      nameToUse = instanceName.trim();
-    }
     console.log('Creating instance with:', {
-      name: nameToUse,
+      name: instanceName,
       option: selectedOption,
       enterprise: selectedEnterprise
     });
@@ -56,34 +35,15 @@ const InstanceCreate = () => {
     setSelectedEnterprise('gasy');
   };
 
-  //Liste des organisations
-  const [organisations, setOrganisations] = useState([]);
-
-  useEffect(() => {
-    const getEnterprises = async () => {
-      const res = await fetchEntreprises();
-      const mapped = res.map((entreprise) => ({
-        id: entreprise.id,
-        nom: entreprise.name,
-        ville: entreprise.ville,
-        pays: entreprise.pays,
-      }));
-      setOrganisations(mapped);
-
-    }
-    getEnterprises();
-  }, [])
-
-
   return (
-    <div className={`instance-create-container ${theme} min-vh-100 w-100 mw-100 mx-0 px-0`} >
+    <div className={`instance-create-container ${theme}`}>
       <AppNavbar />
       
-      <div className="instance-back-nav">
+      <div className={`instance-back-nav ${theme}`}>
         <Container>
           <Button 
             variant="link" 
-            className="btn btn-link text-decoration-none p-0 back-button"
+            className={`btn btn-link text-decoration-none p-0 back-button`}
             onClick={handleBackClick}
           >
             <svg width="16" height="16" className="me-2" fill="currentColor" viewBox="0 0 16 16">
@@ -96,7 +56,7 @@ const InstanceCreate = () => {
 
       <Container className="main-content">
         <div className="content-layout">
-          <div className="left-content">
+          <div className={`info-card sidebar-card ${theme}`}>
             {/* Header Section */}
             <div className="header-section">
               <div className="header-icon">
@@ -106,8 +66,8 @@ const InstanceCreate = () => {
                 </svg>
               </div>
               <div className="header-text">
-                <h1 className="header-title">Créez votre espace de travail</h1>
-                <p className="header-subtitle">
+                <h1 className={`header-title ${theme}`}>Créez votre espace de travail</h1>
+                <p className={`header-subtitle ${theme}`}>
                   <svg width="16" height="16" className="me-2" fill="currentColor" viewBox="0 0 16 16">
                     <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
                     <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
@@ -123,7 +83,7 @@ const InstanceCreate = () => {
             <div className="options-section">
               <div className="option-cards">
                 <div 
-                  className={`option-card ${selectedOption === 'automatic' ? 'selected' : ''}`}
+                  className={`option-card ${selectedOption === 'automatic' ? 'selected' : ''} ${theme}`}
                   onClick={() => handleOptionChange('automatic')}
                 >
                   <div className="option-icon">
@@ -132,13 +92,13 @@ const InstanceCreate = () => {
                     </svg>
                   </div>
                   <div className="option-content">
-                    <h6 className="option-title">Génér automatiquement</h6>
-                    <p className="option-desc">Basé sur votre entreprise (acronyme généré)</p>
+                    <h6 className={`option-title ${theme}`}>Génér automatiquement</h6>
+                    <p className={`option-desc ${theme}`}>Basé sur votre entreprise (acronyme généré)</p>
                   </div>
                 </div>
                 
                 <div 
-                  className={`option-card ${selectedOption === 'manual' ? 'selected' : ''}`}
+                  className={`option-card ${selectedOption === 'manual' ? 'selected' : ''} ${theme}`}
                   onClick={() => handleOptionChange('manual')}
                 >
                   <div className="option-icon">
@@ -148,83 +108,78 @@ const InstanceCreate = () => {
                     </svg>
                   </div>
                   <div className="option-content">
-                    <h6 className="option-title">Création Manuelle</h6>
-                    <p className="option-desc">Personnalisez votre nom (non-personnalisé)</p>
+                    <h6 className={`option-title ${theme}`}>Création Manuelle</h6>
+                    <p className={`option-desc ${theme}`}>Personnalisez votre nom (non-personnalisé)</p>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Form Section */}
-            {selectedOption !== 'automatic' &&(
-              <div className="form-section">
-                <div className="form-group">
-                  <label className="form-label">
-                    Nom de l'instance <span className="required">*</span>
-                  </label>
-                  <div className="input-container">
-                    <div className="input-group">
-                      <span className="input-group-text">
-                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                          <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z"/>
-                          <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z"/>
-                        </svg>
-                      </span>
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="votreinstance"
-                        value={instanceName}
-                        onChange={(e) => setInstanceName(e.target.value)}
-                      />
-                      <span className="input-group-text suffix">.erpinnov.com</span>
-                    </div>
+            <div className="form-section">
+              <div className="form-group">
+                <label className={`form-label ${theme}`}>
+                  Nom de l'instance <span className="required">*</span>
+                </label>
+                <div className="input-container">
+                  <div className="input-group">
+                    <span className={`input-group-text ${theme}`}>
+                      <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z"/>
+                        <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z"/>
+                      </svg>
+                    </span>
+                    <input
+                      type="text"
+                      className={`form-control ${theme}`}
+                      placeholder="votreinstance"
+                      value={instanceName}
+                      onChange={(e) => setInstanceName(e.target.value)}
+                    />
+                    <span className={`input-group-text suffix ${theme}`}>.epinov.com</span>
                   </div>
-                  <small className="helper-text">Votre nom d'instance personnalisé</small>
                 </div>
+                <small className={`helper-text ${theme}`}>Votre nom d'instance personnalisé</small>
               </div>
-            )}
-            
+            </div>
 
             {/* Enterprise Section */}
             <div className="enterprise-section">
-              <label className="form-label">
+              <label className={`form-label ${theme}`}>
                 Entreprise associée <span className="required">*</span>
               </label>
-              <p className="section-desc">Cette instance sera liée à l'entreprise sélectionnée.</p>
-              {organisations.map((org, index) => (
-                <div className="enterprise-card">
-                  <div className="enterprise-content">
-                    <div className="enterprise-info">
-                      <div className="enterprise-avatar">{org.nom.charAt(0)}</div>
-                      <div className="enterprise-details">
-                        <h6 className="enterprise-name">{ org.nom }</h6>
-                        <p className="enterprise-location">{org.ville}, {org.pays}</p>
-                      </div>
-                    </div>
-                    <div className="enterprise-radio">
-                      <input 
-                        type="radio" 
-                        name="enterprise" 
-                        className="form-check-input" 
-                        checked={selectedEnterprise === org.id}
-                        onChange={() => setSelectedEnterprise(org.id)}
-                      />
+              <p className={`section-desc ${theme}`}>Cette instance sera liée à l'entreprise sélectionnée.</p>
+              
+              <div className={`enterprise-card ${theme}`}>
+                <div className="enterprise-content">
+                  <div className="enterprise-info">
+                    <div className="enterprise-avatar">g</div>
+                    <div className="enterprise-details">
+                      <h6 className={`enterprise-name ${theme}`}>gasy</h6>
+                      <p className={`enterprise-location ${theme}`}>Mahajanga, Mahajanga, Madagascar, Madagascar</p>
                     </div>
                   </div>
+                  <div className="enterprise-radio">
+                    <input 
+                      type="radio" 
+                      name="enterprise" 
+                      className="form-check-input" 
+                      checked={selectedEnterprise === 'gasy'}
+                      onChange={() => setSelectedEnterprise('gasy')}
+                    />
+                  </div>
                 </div>
-              ))}
-              
+              </div>
               
               <div className="location-info">
-                <div className="location-content">
+                <div className={`location-content ${theme}`}>
                   <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                     <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
                   </svg>
                   <div className="flag-icon"></div>
                   <span>Madagascar</span>
                 </div>
-                <small className="location-desc">Localisation de l'entreprise</small>
+                <small className={`location-desc ${theme}`}>Localisation de l'entreprise</small>
               </div>
             </div>
 
@@ -234,7 +189,7 @@ const InstanceCreate = () => {
             <div className="action-buttons">
               <Button 
                 variant="outline-secondary"
-                className="btn btn-outline-secondary reinitialize-btn"
+                className={`btn btn-outline-secondary reinitialize-btn ${theme}`}
                 onClick={handleReinitialize}
               >
                 <svg width="16" height="16" className="me-2" fill="currentColor" viewBox="0 0 16 16">
@@ -248,7 +203,7 @@ const InstanceCreate = () => {
                 variant="primary"
                 className="btn btn-primary create-btn"
                 onClick={handleCreateInstance}
-                disabled={selectedOption !== 'automatic' && !instanceName.trim()}
+                disabled={!instanceName.trim()}
               >
                 Créer l'instance
                 <svg width="16" height="16" className="ms-2" fill="currentColor" viewBox="0 0 16 16">
@@ -260,44 +215,44 @@ const InstanceCreate = () => {
 
           {/* Right Sidebar Cards */}
           <div className="right-sidebar">
-            <div className="sidebar-card guide-card">
-              <h5 className="card-title">Guide de création</h5>
+            <div className={`sidebar-card guide-card ${theme}`}>
+              <h5 className={`card-title ${theme}`}>Guide de création</h5>
               <div className="guide-steps">
                 <div className="guide-step">
                   <span className="step-number">1</span>
-                  <p className="step-text">Choisissez un nom unique pour votre instance</p>
+                  <p className={`step-text ${theme}`}>Choisissez un nom unique pour votre instance</p>
                 </div>
                 <div className="guide-step">
                   <span className="step-number">2</span>
-                  <p className="step-text">Sélectionnez votre entreprise dans la liste</p>
+                  <p className={`step-text ${theme}`}>Sélectionnez votre entreprise dans la liste</p>
                 </div>
                 <div className="guide-step">
                   <span className="step-number">3</span>
-                  <p className="step-text">Confirmez la création de votre instance</p>
+                  <p className={`step-text ${theme}`}>Confirmez la création de votre instance</p>
                 </div>
               </div>
             </div>
 
-            <div className="sidebar-card info-card">
-              <h6 className="card-title">Informations utiles</h6>
+            <div className={`sidebar-card info-card ${theme}`}>
+              <h6 className={`card-title ${theme}`}>Informations utiles</h6>
               <div className="info-item">
                 <svg width="16" height="16" className="info-icon" fill="currentColor" viewBox="0 0 16 16">
                   <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                   <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
                 </svg>
-                <p className="info-text">Le nom de votre instance doit être unique et ne peut pas être modifié ultérieurement</p>
+                <p className={`info-text ${theme}`}>Le nom de votre instance doit être unique et ne peut pas être modifié ultérieurement</p>
               </div>
               <div className="info-item">
                 <svg width="16" height="16" className="info-icon" fill="currentColor" viewBox="0 0 16 16">
                   <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                   <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
                 </svg>
-                <p className="info-text">La création de votre instance peut prendre quelques minutes</p>
+                <p className={`info-text ${theme}`}>La création de votre instance peut prendre quelques minutes</p>
               </div>
             </div>
 
-            <div className="sidebar-card help-card">
-              <h6 className="card-title">Besoin d'aide ?</h6>
+            <div className={`sidebar-card help-card ${theme}`}>
+              <h6 className={`card-title ${theme}`}>Besoin d'aide ?</h6>
               <div className="help-links">
                 <a href="#" className="help-link">
                   <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
@@ -308,7 +263,7 @@ const InstanceCreate = () => {
                 </a>
                 <a href="#" className="help-link">
                   <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 14H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+                    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
                   </svg>
                   Contacter le support
                 </a>
