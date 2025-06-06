@@ -56,10 +56,11 @@
 }
 
 .content-layout {
+   max-width: 100% !important;
   display: grid;
   grid-template-columns: 1fr 500px;
   gap: 3rem;
-  align-items: start;
+  
 }
 
 /* Colonne de gauche */
