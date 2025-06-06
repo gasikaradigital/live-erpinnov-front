@@ -22,6 +22,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import { AuthProvider } from "./contexts/AuthContext.jsx";
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import PaymentModule from "./components/common/PayementProcess.jsx";
+import InstanceCreate from "./components/common/InstanceCreate.jsx";
 
 function LandingPage() {
   return (
@@ -67,7 +68,7 @@ function App() {
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/landing" element={<LandingPage />} />
               <Route path="/Payement" element={<PaymentModule/>}/>
-
+              <Route path="instance/create" element={<InstanceCreate/>} />
 
               <Route path="/confirm-password" element={<ConfirmPassword />} />
               <Route path="/verify-otp" element={<VerifyOtp />} />
