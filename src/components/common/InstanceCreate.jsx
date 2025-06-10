@@ -58,7 +58,7 @@ const InstanceCreate = () => {
       nom: nameToUse,
       option: selectedOption,
       entreprise: selectedEnterprise,
-      plan: planChoose
+      plan: planChoose.plan
     });
   };
 
