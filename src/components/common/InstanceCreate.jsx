@@ -15,17 +15,6 @@ const InstanceCreate = () => {
   const [selectedOption, setSelectedOption] = useState('manual');
   const [selectedEnterprise, setSelectedEnterprise] = useState(1);
 
-  useEffect(() => {
-    const data = localStorage.getItem('planChoose');
-
-    if(data) {
-      setPlanChoose(JSON.parse(data));
-      localStorage.removeItem('planChoose');
-    } else {
-      console.warn("data vide");
-    }
-  }, []);
-
   const handleBackClick = () => {
     navigate(-1);
   };
@@ -59,7 +48,9 @@ const InstanceCreate = () => {
     console.log('Creation instance avec:', {
       nom: nameToUse,
       option: selectedOption,
-      entreprise: selectedEnterprise
+      entreprise: selectedEnterprise,
+      plan: planChoose.plan,
+      subplan: planChoose.subPlan
     });
   };
 
@@ -84,7 +75,19 @@ const InstanceCreate = () => {
       setOrganisations(mapped);
 
     }
+
+    const getChoosePlan = () => {
+      const data = localStorage.getItem('planChoose');
+
+      if(data) {
+        setPlanChoose(JSON.parse(data));
+        localStorage.removeItem('planChoose');
+      } else {
+        console.warn("data vide");
+      }
+    }
     getEnterprises();
+    getChoosePlan();
   }, [])
 
   return (
