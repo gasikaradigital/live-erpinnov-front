@@ -5,7 +5,7 @@ import { Navbar, Nav } from 'react-bootstrap';
 import { useTheme } from '../../contexts/ThemeContext';
 import Form from 'react-bootstrap/Form';
 import CardPayement from './cardPayement';
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import './PayementProcess.css';
 
 const PaymentModule = () => {

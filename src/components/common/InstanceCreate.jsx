@@ -9,10 +9,20 @@ import { fetchEntreprises } from "../../api/enterpriseApi";
 const InstanceCreate = () => {
   const { theme } = useTheme();
   const navigate = useNavigate();
+  const [planChoose, setPlanChoose] = useState(null);
 
   const [instanceName, setInstanceName] = useState('');
   const [selectedOption, setSelectedOption] = useState('manual');
   const [selectedEnterprise, setSelectedEnterprise] = useState(1);
+
+  useEffect(() => {
+    const data = localStorage.getItem('planChoose');
+
+    if(data) {
+      setPlanChoose(JSON.parse(data));
+      localStorage.removeItem('planChoose');
+    }
+  }, []);
 
   const handleBackClick = () => {
     navigate(-1);
@@ -47,7 +57,8 @@ const InstanceCreate = () => {
     console.log('Creation instance avec:', {
       nom: nameToUse,
       option: selectedOption,
-      entreprise: selectedEnterprise
+      entreprise: selectedEnterprise,
+      plan: planChoose
     });
   };
 

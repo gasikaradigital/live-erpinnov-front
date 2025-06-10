@@ -25,6 +25,10 @@ import './PlanCard.css';
     const navigate = useNavigate();
 
   const handleClick = () => {
+    localStorage.setItem('planChoose', JSON.stringify({
+      plan: 1,
+      subPlan: selectedSubPlan
+    }));
     navigate("/payement"); // redirige vers PayementMode.js
   }
 
