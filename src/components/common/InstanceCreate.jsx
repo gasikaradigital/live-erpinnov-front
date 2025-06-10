@@ -41,7 +41,7 @@ const InstanceCreate = () => {
       const organisationObj = organisations.find(e => e.id === Number(selectedEnterprise));
       
       if(organisationObj) {
-        const orgName = organisationObj.name.trim();
+        const orgName = organisationObj.nom.trim();
 
         if(orgName.length > 1) {
           nameToUse = orgName.slice(1) + orgName[0];
@@ -59,8 +59,7 @@ const InstanceCreate = () => {
     console.log('Creation instance avec:', {
       nom: nameToUse,
       option: selectedOption,
-      entreprise: selectedEnterprise,
-      plan: planChoose
+      entreprise: selectedEnterprise
     });
   };
 
