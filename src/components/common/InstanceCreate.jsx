@@ -21,6 +21,8 @@ const InstanceCreate = () => {
     if(data) {
       setPlanChoose(JSON.parse(data));
       localStorage.removeItem('planChoose');
+    } else {
+      console.warn("data vide");
     }
   }, []);
 
@@ -39,7 +41,7 @@ const InstanceCreate = () => {
       const organisationObj = organisations.find(e => e.id === Number(selectedEnterprise));
       
       if(organisationObj) {
-        const orgName = organisationObj.nom.trim();
+        const orgName = organisationObj.name.trim();
 
         if(orgName.length > 1) {
           nameToUse = orgName.slice(1) + orgName[0];
@@ -58,7 +60,7 @@ const InstanceCreate = () => {
       nom: nameToUse,
       option: selectedOption,
       entreprise: selectedEnterprise,
-      plan: planChoose.plan
+      plan: planChoose
     });
   };
 
