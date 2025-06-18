@@ -56,8 +56,7 @@ function App() {
       <Router>
         <AuthProvider>
            <Routes> 
-            <Route path="/" element={<TicketDashboard/>} />
-            {/* <Route path="/" element={<Login />} /> */}
+            <Route path="/" element={<Login />} />
             <Route path="/inscription" element={<Inscription />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/confirm-password" element={<ConfirmPassword />} />
@@ -74,6 +73,8 @@ function App() {
               <Route path="/confirm-password" element={<ConfirmPassword />} />
               <Route path="/verify-otp" element={<VerifyOtp />} />
               <Route path="/profile" element={<ProfileForm />} />
+            <Route path="/ticket" element={<TicketDashboard/>} />
+
             {/* </Route>  */}
 
            </Routes> 
