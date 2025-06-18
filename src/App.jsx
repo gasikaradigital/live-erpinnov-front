@@ -23,6 +23,7 @@ import { AuthProvider } from "./contexts/AuthContext.jsx";
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import PaymentModule from "./components/common/PayementProcess.jsx";
 import InstanceCreate from "./components/common/InstanceCreate.jsx";
+import TicketDashboard from "./pages/Ticket/TicketDashboard.jsx";
 
 function LandingPage() {
   return (
@@ -55,7 +56,8 @@ function App() {
       <Router>
         <AuthProvider>
            <Routes> 
-            <Route path="/" element={<Login />} />
+            <Route path="/" element={<TicketDashboard/>} />
+            {/* <Route path="/" element={<Login />} /> */}
             <Route path="/inscription" element={<Inscription />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/confirm-password" element={<ConfirmPassword />} />

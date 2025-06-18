@@ -1,4 +1,9 @@
-export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+if (!API_BASE_URL) {
+  throw new Error('API_BASE_URL is not defined in .env');
+}
+
 import axios from 'axios';
 
 const axiosInstance = axios.create({
@@ -9,12 +14,8 @@ const axiosInstance = axios.create({
     'Content-Type': 'application/json',
   },
 });
+
 axiosInstance.defaults.withCredentials = true;
 axiosInstance.defaults.withXSRFToken = true;
 
-export { axiosInstance as api };
-
-if (!API_BASE_URL) {
-    throw new Error('API_BASE_URL is not defined in .env');
-}
-
+export { axiosInstance as api, API_BASE_URL };
