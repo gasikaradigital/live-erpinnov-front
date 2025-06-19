@@ -1,10 +1,12 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import { Navbar, Container, Nav, Button, Dropdown } from "react-bootstrap";
 import { useTheme } from "../../../contexts/ThemeContext";
 import './AppNavbar.css';
 import { logout } from "../../../api/logoutApi";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { fetchProfile } from "../../../api/profileApi";
 
 const AppNavbar = () => {
   const { theme, toggleTheme } = useTheme();
@@ -23,6 +25,31 @@ const handleLogout = async () => {
     navigate("/");
   }
 };
+
+const {profileData, setProfileData} = useState();
+useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const profile = await fetchProfile();
+        if (profile) {
+          console.log(profile.fname);
+          setProfileData(profile);
+        } else {
+          console.log(profile);
+          console.warn(
+            "Profil introuvable, redirection vers la page de connexion."
+          );
+        }
+      } catch (err) {
+        console.error(
+          "Erreur inattendue lors de la récupération du profil :",
+          err
+        );
+      }
+    };
+
+    fetchUser();
+  }, [navigate]);
 
 return (
     <Navbar
