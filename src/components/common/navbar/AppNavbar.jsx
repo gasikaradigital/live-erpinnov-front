@@ -26,16 +26,19 @@ const handleLogout = async () => {
   }
 };
 
-const [profileData, setProfileData] = useState(null);
+const [initiales, setInitiales] = useState('');
 useEffect(() => {
     const fetchUser = async () => {
       try {
         const profile = await fetchProfile();
         if (profile) {
-          console.log(profile.fname);
-          setProfileData(profile);
+          //Extraction des initiales
+          const prenom = profile.fname || '';
+          const nom = profile.lname || '';
+          const initiales = (prenom.charAt(0) || '').toUpperCase() + (nom.charAt(0) || '').toUpperCase();
+
+          setInitiales(initiales);
         } else {
-          console.log(profile);
           console.warn(
             "Profil introuvable, redirection vers la page de connexion."
           );
@@ -91,7 +94,7 @@ return (
                 className="d-flex align-items-center gap-2 px-2"
               >
                 <div className="profile-circle bg-primary text-white">
-                  FI
+                  {initiales || '??'}
                 </div>
                 <span className="d-none d-md-inline">User</span>
               </Dropdown.Toggle>
