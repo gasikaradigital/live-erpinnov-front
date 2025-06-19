@@ -32,7 +32,7 @@ useEffect(() => {
       try {
         const profile = await fetchProfile();
         if (profile) {
-          console.log(profile.lname);
+          console.log(profile);
           setProfileData(profile);
         } else {
           console.log(profile);
