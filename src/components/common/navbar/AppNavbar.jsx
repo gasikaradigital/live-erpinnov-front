@@ -26,13 +26,13 @@ const handleLogout = async () => {
   }
 };
 
-const {profileData, setProfileData} = useState();
+const [profileData, setProfileData] = useState(null);
 useEffect(() => {
     const fetchUser = async () => {
       try {
         const profile = await fetchProfile();
         if (profile) {
-          console.log(profile);
+          console.log(profile.fname);
           setProfileData(profile);
         } else {
           console.log(profile);
