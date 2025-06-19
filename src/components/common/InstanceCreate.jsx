@@ -5,6 +5,7 @@ import { useTheme } from '../../contexts/ThemeContext';
 import { useNavigate } from "react-router";
 import './InstanceCreate.css';
 import { fetchEntreprises } from "../../api/enterpriseApi";
+import { createInstance } from "../../api/instanceApi";
 
 const InstanceCreate = () => {
   const { theme } = useTheme();
@@ -23,7 +24,7 @@ const InstanceCreate = () => {
     setSelectedOption(option);
   };
 
-  const handleCreateInstance = () => {
+  const handleCreateInstance = async () => {
     let nameToUse;
 
     if(selectedOption === 'automatic') {
@@ -45,6 +46,22 @@ const InstanceCreate = () => {
       nameToUse = instanceName.trim();
     }
 
+    const mapped = {
+      nom: nameToUse,
+      option: selectedOption,
+      entreprise: selectedEnterprise,
+      plan: planChoose.plan,
+      subplan: planChoose.subPlan 
+    };
+
+    const res = await createInstance(mapped);
+
+    if (res) {
+      toast.success("Instance créée avec succès !");
+    } else {
+      toast.error("Une erreur est survenue lors de la création.");
+    }
+
     console.log('Creation instance avec:', {
       nom: nameToUse,
       option: selectedOption,
@@ -57,7 +74,7 @@ const InstanceCreate = () => {
   const handleReinitialize = () => {
     setInstanceName('');
     setSelectedOption('manual');
-    setSelectedEnterprise('gasy');
+    setSelectedEnterprise(1);
   };
 
   //Liste des organisationsAdd commentMore actions
