@@ -74,6 +74,10 @@ return (
                   <i className="bi bi-person-circle me-2"></i>
                   Mon Profil
                 </Dropdown.Item>
+                <Dropdown.Item href="/ticket">
+                  <i className="bi bi-ticket-detailed me-2"></i>
+                  Mon Ticket
+                </Dropdown.Item>
                 <Dropdown.Item href="/entreprise/create">
                   <i className="bi bi-building-add me-2"></i>
                   Créer une entreprise
