@@ -1,14 +1,5 @@
 /* Variables CSS pour les thèmes */
-:root {
-  --primary-color: #0066FF;
-  --text-dark: #212529;
-  --text-muted: #6c757d;
-  --border-color: #dee2e6;
-  --bg-white: #ffffff;
-  --bg-light: #f8f9fa;
-  --shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-  --shadow-lg: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-}
+
 
 /* Container principal */
 .instance-create-container {
