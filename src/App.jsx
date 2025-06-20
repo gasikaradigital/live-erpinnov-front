@@ -22,6 +22,7 @@ import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import PaymentModule from "./components/common/PayementProcess.jsx";
 import InstanceCreate from "./components/common/InstanceCreate.jsx";
 import TicketDashboard from "./pages/Ticket/TicketDashboard.jsx";
+import AppNavbar from "./components/common/navbar/AppNavbar.jsx";
 
 function LandingPage() {
   return (
