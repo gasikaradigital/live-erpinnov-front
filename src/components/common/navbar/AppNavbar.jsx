@@ -1,12 +1,10 @@
 import React from "react";
-import { useState, useEffect } from "react";
 import { Navbar, Container, Nav, Button, Dropdown } from "react-bootstrap";
 import { useTheme } from "../../../contexts/ThemeContext";
 import './AppNavbar.css';
 import { logout } from "../../../api/logoutApi";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { fetchProfile } from "../../../api/profileApi";
 
 const AppNavbar = () => {
   const { theme, toggleTheme } = useTheme();
@@ -26,7 +24,7 @@ const AppNavbar = () => {
     }
   };
 
-return (
+  return (
     <Navbar
       fixed="top"
       bg={theme === "dark" ? "dark" : "light"}
@@ -66,7 +64,7 @@ return (
                 className="d-flex align-items-center gap-2 px-2 border-0 shadow-none bg-transparent"
               >
                 <div className="profile-circle bg-primary text-white">
-                  {initiales || '??'}
+                  FI
                 </div>
                 <span className="d-none d-md-inline">User</span>
               </Dropdown.Toggle>
@@ -75,10 +73,6 @@ return (
                 <Dropdown.Item href="/profile">
                   <i className="bi bi-person-circle me-2"></i>
                   Mon Profil
-                </Dropdown.Item>
-                <Dropdown.Item href="/ticket">
-                  <i className="bi bi-ticket-detailed me-2"></i>
-                  Mon Ticket
                 </Dropdown.Item>
                 <Dropdown.Item href="/entreprise/create">
                   <i className="bi bi-building-add me-2"></i>
