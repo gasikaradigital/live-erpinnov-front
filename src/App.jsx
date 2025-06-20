@@ -1,6 +1,5 @@
 // App.jsx
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import NavSection from "./components/common/navbar/navBare";
 import PricingSection from "./pages/landing-page/PrincingSection/PricingSection";
 import HeroSection from "./pages/landing-page/HomeSection/HeroSection";
 import ModuleSection from "./pages/GestionSection/ModuleSection";
@@ -12,7 +11,6 @@ import ConfirmPassword from "./pages/auth/confirm-password.jsx";
 import ProfileForm from "./pages/auth/profile/ProfileForm";
 import VerifyOtp from "./pages/auth/profile/verify-otp.jsx";
 import VerifyEmail from "./pages/auth/profile/verify-email.jsx";
-import AppNavbar from "./components/common/navbar/AppNavbar.jsx";
 import DashboardContent from "./components/common/DashboardContent.jsx";
 import { DarkModeProvider } from "./contexts/DarkModeContext";
 import { ThemeProvider } from "./contexts/ThemeContext.jsx";

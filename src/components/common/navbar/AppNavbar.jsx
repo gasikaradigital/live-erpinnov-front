@@ -12,47 +12,19 @@ const AppNavbar = () => {
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
-const handleLogout = async () => {
-  try {
-    const response = await logout();
+  const handleLogout = async () => {
+    try {
+      const response = await logout();
 
-    if (response.status === 200) {
-      toast.success("Déconnexion réussie");
-    }
-    navigate("/");
-  } catch (error) {
-    toast.error("Erreur lors de la déconnexion"+ error);
-    navigate("/");
-  }
-};
-
-const [initiales, setInitiales] = useState('');
-useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const profile = await fetchProfile();
-        if (profile) {
-          //Extraction des initiales
-          const prenom = profile.fname || '';
-          const nom = profile.lname || '';
-          const initiales = (prenom.charAt(0) || '').toUpperCase() + (nom.charAt(0) || '').toUpperCase();
-
-          setInitiales(initiales);
-        } else {
-          console.warn(
-            "Profil introuvable, redirection vers la page de connexion."
-          );
-        }
-      } catch (err) {
-        console.error(
-          "Erreur inattendue lors de la récupération du profil :",
-          err
-        );
+      if (response.status === 200) {
+        toast.success("Déconnexion réussie");
       }
-    };
-
-    fetchUser();
-  }, [navigate]);
+      navigate("/");
+    } catch (error) {
+      toast.error("Erreur lors de la déconnexion" + error);
+      navigate("/");
+    }
+  };
 
 return (
     <Navbar
@@ -90,15 +62,15 @@ return (
             </Button>
             <Dropdown align="end">
               <Dropdown.Toggle
-                variant="light"
-                className="d-flex align-items-center gap-2 px-2"
+                variant="transparent"
+                className="d-flex align-items-center gap-2 px-2 border-0 shadow-none bg-transparent"
               >
                 <div className="profile-circle bg-primary text-white">
                   {initiales || '??'}
                 </div>
                 <span className="d-none d-md-inline">User</span>
               </Dropdown.Toggle>
-              
+
               <Dropdown.Menu className="mt-2 shadow">
                 <Dropdown.Item href="/profile">
                   <i className="bi bi-person-circle me-2"></i>
@@ -124,7 +96,7 @@ return (
               </Dropdown.Menu>
             </Dropdown>
           </Nav>
-          
+
         </Navbar.Collapse>
       </Container>
     </Navbar>
