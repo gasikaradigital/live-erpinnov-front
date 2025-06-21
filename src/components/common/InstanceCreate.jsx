@@ -8,7 +8,7 @@ import { fetchEntreprises } from "../../api/enterpriseApi";
 import { createInstance } from "../../api/instanceApi";
 
 const InstanceCreate = () => {
-  const { theme } = useTheme();
+   const { theme } = useTheme(); // Utilisez le hook pour obtenir le thème
   const navigate = useNavigate();
   const [planChoose, setPlanChoose] = useState(null);
 
@@ -108,7 +108,7 @@ const InstanceCreate = () => {
   }, [])
 
   return (
-    <div className={`instance-create-container ${theme}`}>
+     <div className={`${theme}`}>
       <AppNavbar />
       
       <div className={`instance-back-nav ${theme}`}>
@@ -188,7 +188,7 @@ const InstanceCreate = () => {
             </div>
 
             {/* Form Section */}
-            {selectedOption !== 'automatic' &&(
+            {selectedOption !== 'automatic' && (
               <div className="form-section">
                 <div className="form-group">
                   <label className={`form-label ${theme}`}>
@@ -216,7 +216,6 @@ const InstanceCreate = () => {
                 </div>
               </div>
             )}
-            
 
             {/* Enterprise Section */}
             <div className="enterprise-section">
@@ -225,12 +224,12 @@ const InstanceCreate = () => {
               </label>
               <p className={`section-desc ${theme}`}>Cette instance sera liée à l'entreprise sélectionnée.</p>
               {organisations.map((org, index) => (
-                <div className={`enterprise-card ${theme}`}>
+                <div key={org.id} className={`enterprise-card ${theme}`}>
                   <div className="enterprise-content">
                     <div className="enterprise-info">
                       <div className="enterprise-avatar">{org.nom.charAt(0)}</div>
                       <div className="enterprise-details">
-                        <h6 className={`enterprise-name ${theme}`}>{ org.nom }</h6>
+                        <h6 className={`enterprise-name ${theme}`}>{org.nom}</h6>
                         <p className={`enterprise-location ${theme}`}>{org.ville}, {org.pays}</p>
                       </div>
                     </div>
@@ -246,7 +245,6 @@ const InstanceCreate = () => {
                   </div>
                 </div>
               ))}
-              
               
               <div className="location-info">
                 <div className={`location-content ${theme}`}>
