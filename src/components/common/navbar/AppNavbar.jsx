@@ -4,13 +4,18 @@ import { Navbar, Container, Nav, Button, Dropdown } from "react-bootstrap";
 import { useTheme } from "../../../contexts/ThemeContext";
 import './AppNavbar.css';
 import { logout } from "../../../api/logoutApi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { fetchProfile } from "../../../api/profileApi";
 
 const AppNavbar = () => {
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleGoBack = () => {
+    navigate(-1); // Retour à la page précédente
+  };
 
   const handleLogout = async () => {
     try {
@@ -27,7 +32,7 @@ const AppNavbar = () => {
   };
 
   const [initiales, setInitiales] = useState('');
-useEffect(() => {
+  useEffect(() => {
     const fetchUser = async () => {
       try {
         const profile = await fetchProfile();
@@ -54,6 +59,9 @@ useEffect(() => {
     fetchUser();
   }, [navigate]);
 
+  // Ne pas afficher le bouton retour sur la page dashboard
+  const showBackButton = location.pathname !== "/dashboard";
+
   return (
     <Navbar
       fixed="top"
@@ -64,6 +72,16 @@ useEffect(() => {
       data-bs-theme={theme}
     >
       <Container>
+        {showBackButton && (
+          <Button 
+            variant="transparent" 
+            onClick={handleGoBack}
+            className="me-2 border-0"
+            title="Retour"
+          >
+            <i className="bi bi-arrow-left fs-4"></i>
+          </Button>
+        )}
         <Navbar.Brand href="/dashboard" className="d-flex align-items-center gap-2">
           <img
             src="/assets/img/front-pages/logo/logo.png"
@@ -124,7 +142,6 @@ useEffect(() => {
               </Dropdown.Menu>
             </Dropdown>
           </Nav>
-
         </Navbar.Collapse>
       </Container>
     </Navbar>
