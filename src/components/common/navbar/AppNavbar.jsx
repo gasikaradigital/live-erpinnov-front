@@ -5,6 +5,7 @@ import './AppNavbar.css';
 import { logout } from "../../../api/logoutApi";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { fetchProfile } from "../../../api/profileApi";
 
 const AppNavbar = () => {
   const { theme, toggleTheme } = useTheme();
@@ -23,6 +24,34 @@ const AppNavbar = () => {
       navigate("/");
     }
   };
+
+  const [initiales, setInitiales] = useState('');
+useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const profile = await fetchProfile();
+        if (profile) {
+          //Extraction des initiales
+          const prenom = profile.fname || '';
+          const nom = profile.lname || '';
+          const initiales = (prenom.charAt(0) || '').toUpperCase() + (nom.charAt(0) || '').toUpperCase();
+
+          setInitiales(initiales);
+        } else {
+          console.warn(
+            "Profil introuvable, redirection vers la page de connexion."
+          );
+        }
+      } catch (err) {
+        console.error(
+          "Erreur inattendue lors de la récupération du profil :",
+          err
+        );
+      }
+    };
+
+    fetchUser();
+  }, [navigate]);
 
   return (
     <Navbar
@@ -64,7 +93,7 @@ const AppNavbar = () => {
                 className="d-flex align-items-center gap-2 px-2 border-0 shadow-none bg-transparent"
               >
                 <div className="profile-circle bg-primary text-white">
-                  FI
+                  {initiales || '??'}
                 </div>
                 <span className="d-none d-md-inline">User</span>
               </Dropdown.Toggle>
@@ -73,6 +102,10 @@ const AppNavbar = () => {
                 <Dropdown.Item href="/profile">
                   <i className="bi bi-person-circle me-2"></i>
                   Mon Profil
+                </Dropdown.Item>
+                <Dropdown.Item href="/ticket">
+                  <i className="bi bi-ticket-detailed me-2"></i>
+                  Mon Ticket
                 </Dropdown.Item>
                 <Dropdown.Item href="/entreprise/create">
                   <i className="bi bi-building-add me-2"></i>
