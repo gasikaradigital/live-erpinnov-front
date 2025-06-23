@@ -241,7 +241,7 @@ const DashboardContent = () => {
       <Row className="mb-4 justify-content-center">
         <Col lg={{ span: 10, offset: 1 }}>
           {plans.map((plan) => (
-            <PlanCard key={plan.id} planData={plan} blur={true} />
+            <PlanCard key={plan.id} planData={plan} blur={!(activeTab === "dolisaas" && plan.id === 1)} />
           ))}
         </Col>
       </Row>
