@@ -5,7 +5,7 @@ import { useTheme } from '../../contexts/ThemeContext';
 import { useNavigate } from "react-router";
 import './InstanceCreate.css';
 import { fetchEntreprises } from "../../api/enterpriseApi";
-import { createInstance } from "../../api/instanceApi";
+//import { createInstance } from "../../api/instanceApi";
 
 const InstanceCreate = () => {
    const { theme } = useTheme(); // Utilisez le hook pour obtenir le thème
@@ -56,11 +56,11 @@ const InstanceCreate = () => {
 
     //const res = await createInstance(mapped);
 
-    if (res) {
+    /*if (res) {
       toast.success("Instance créée avec succès !");
     } else {
       toast.error("Une erreur est survenue lors de la création.");
-    }
+    }*/
 
     console.log('Creation instance avec:', {
       nom: nameToUse,
