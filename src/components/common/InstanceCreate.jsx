@@ -4,7 +4,7 @@ import AppNavbar from './navbar/AppNavbar';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useNavigate } from "react-router";
 import './InstanceCreate.css';
-import { fetchEntreprises } from "../../api/enterpriseApi";
+import { fetchEntreprises, fetchUser } from "../../api/enterpriseApi";
 import { createDolisaas } from "../../api/instanceApi";
 
 const InstanceCreate = () => {
@@ -102,6 +102,11 @@ const InstanceCreate = () => {
 
     }
 
+    const getUser = async () => {
+      const res = await fetchUser();
+      console.log(res);
+    }
+
     const getChoosePlan = () => {
       const data = localStorage.getItem('planChoose');
 
@@ -114,6 +119,7 @@ const InstanceCreate = () => {
     }
     getEnterprises();
     getChoosePlan();
+    getUser();
   }, [])
 
   return (
