@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useTheme } from '../../contexts/ThemeContext';
 import './PlanCard.css';
 
- const PlanCard = ({ planData, open=false, blur=true }) => {
+ const PlanCard = ({ planData, open=false, blur=true, source = "dolisaas" }) => {
  const [isOpen, setIsOpen] = useState(false);
  const [selectedSubPlan, setSelectedSubPlan] = useState(1);
 
@@ -27,7 +27,8 @@ import './PlanCard.css';
   const handleClick = () => {
     localStorage.setItem('planChoose', JSON.stringify({
       plan: 1,
-      subPlan: selectedSubPlan
+      subPlan: selectedSubPlan,
+      source: source
     }));
     navigate("/payement"); // redirige vers PayementMode.js
   }
