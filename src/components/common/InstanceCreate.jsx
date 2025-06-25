@@ -4,7 +4,7 @@ import AppNavbar from './navbar/AppNavbar';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useNavigate } from "react-router";
 import './InstanceCreate.css';
-import { fetchEntreprises, fetchUser } from "../../api/enterpriseApi";
+import { fetchEntreprises } from "../../api/enterpriseApi";
 import { createDolisaas } from "../../api/instanceApi";
 
 const InstanceCreate = () => {
@@ -53,7 +53,7 @@ const InstanceCreate = () => {
       subplan: planChoose.subPlan, 
     };
 
-    /*if(planChoose.source == "dolisaas") {
+    if(planChoose.source == "dolisaas") {
       const res = await createDolisaas(mapped);
 
       if(res) {
@@ -70,14 +70,14 @@ const InstanceCreate = () => {
       toast.error("Une erreur est survenue lors de la création.");
     }*/
 
-    console.log('Creation instance avec:', {
+    /*console.log('Creation instance avec:', {
       nom: nameToUse,
       option: selectedOption,
       entreprise: selectedEnterprise,
       plan: planChoose.plan,
       subplan: planChoose.subPlan,
       source: planChoose.source
-    });
+    });*/
   };
 
   const handleReinitialize = () => {
@@ -102,11 +102,6 @@ const InstanceCreate = () => {
 
     }
 
-    const getUser = async () => {
-      const res = await fetchUser();
-      console.log(res);
-    }
-
     const getChoosePlan = () => {
       const data = localStorage.getItem('planChoose');
 
@@ -119,7 +114,6 @@ const InstanceCreate = () => {
     }
     getEnterprises();
     getChoosePlan();
-    getUser();
   }, [])
 
   return (
