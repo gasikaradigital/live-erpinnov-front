@@ -5,7 +5,7 @@ import { useTheme } from '../../contexts/ThemeContext';
 import { useNavigate } from "react-router";
 import './InstanceCreate.css';
 import { fetchEntreprises } from "../../api/enterpriseApi";
-//import { createInstance } from "../../api/instanceApi";
+import { createDolisaas } from "../../api/instanceApi";
 
 const InstanceCreate = () => {
    const { theme } = useTheme(); // Utilisez le hook pour obtenir le thème
@@ -48,12 +48,20 @@ const InstanceCreate = () => {
 
     const mapped = {
       nom: nameToUse,
-      option: selectedOption,
       entreprise: selectedEnterprise,
       plan: planChoose.plan,
-      subplan: planChoose.subPlan 
+      subplan: planChoose.subPlan, 
     };
 
+    if(planChoose.source == "dolisaas") {
+      const res = await createDolisaas(mapped);
+
+      if(res) {
+        toast.succes("Compte Dolisaas créer avec succès");
+      } else {
+        toast.error("Une erreur est survenue lors de la création");
+      }
+    }
     //const res = await createInstance(mapped);
 
     /*if (res) {
