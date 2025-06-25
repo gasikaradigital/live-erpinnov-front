@@ -239,7 +239,7 @@ const DashboardContent = () => {
 
       {/* 4) Plans floutés */}
       <Row className="mb-4 justify-content-center">
-        <Col lg={{ span: 10, offset: 1 }}>
+        <Col lg={{ span: 10, offset: 2 }}>
           {plans.map((plan) => (
             <PlanCard key={plan.id} planData={plan} blur={!(activeTab === "dolisaas" && plan.id === 1)} />
           ))}
