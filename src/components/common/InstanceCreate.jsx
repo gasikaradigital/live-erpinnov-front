@@ -59,9 +59,10 @@ const InstanceCreate = () => {
       const res = await createDolisaas(mapped);
 
       if(res) {
-        toast.succes("Compte Dolisaas créer avec succès");
+        toast.success("Compte Dolisaas créer avec succès");
       } else {
         toast.error("Une erreur est survenue lors de la création");
+        console.log(res?.data || res);
       }
     }
     //const res = await createInstance(mapped);
