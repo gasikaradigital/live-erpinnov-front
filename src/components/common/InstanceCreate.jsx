@@ -30,11 +30,11 @@ const InstanceCreate = () => {
     let nameToUse;
 
     if(selectedOption === 'automatic') {
-      const organisationObj = organisations.find(e => e.id === selectedEnterprise);
+      const organisationObj = organisations.find(e => e.id === Number(selectedEnterprise));
       
       if(organisationObj) {
         const orgName = organisationObj.nom.trim();
-
+        
         if(orgName.length > 1) {
           nameToUse = orgName.slice(1) + orgName[0];
         } else {
@@ -95,6 +95,10 @@ const InstanceCreate = () => {
   useEffect(() => {
     const getEnterprises = async () => {
       const res = await fetchEntreprises();
+      if(!res) {
+        console.warn('erreur lors de la recupération des entreprises');
+      } 
+      
       const mapped = res.map((entreprise) => ({
         id: entreprise.id,
         nom: entreprise.name,
