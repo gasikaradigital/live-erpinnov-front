@@ -57,7 +57,7 @@ const InstanceCreate = () => {
 
     if(planChoose.source == "dolisaas") {
       const res = await createDolisaas(mapped);
-
+      console.log(mapped);
       if(res) {
         toast.success("Compte Dolisaas créer avec succès");
       } else {
@@ -98,7 +98,7 @@ const InstanceCreate = () => {
       if(!res) {
         console.warn('erreur lors de la recupération des entreprises');
       } 
-      
+
       const mapped = res.map((entreprise) => ({
         id: entreprise.id,
         nom: entreprise.name,
