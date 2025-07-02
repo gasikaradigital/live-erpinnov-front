@@ -47,10 +47,10 @@ const InstanceCreate = () => {
     }
 
     const mapped = {
-      nom: nameToUse,
-      entreprise: selectedEnterprise,
-      plan: planChoose.plan,
-      subplan: planChoose.subPlan, 
+      name: nameToUse,
+      entrepriseId: selectedEnterprise,
+      //plan: planChoose.plan,
+      //subplan: planChoose.subPlan, 
     };
 
     if(planChoose.source == "dolisaas") {
