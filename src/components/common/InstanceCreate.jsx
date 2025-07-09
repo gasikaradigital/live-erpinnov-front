@@ -5,7 +5,7 @@ import { useTheme } from '../../contexts/ThemeContext';
 import { useNavigate } from "react-router";
 import './InstanceCreate.css';
 import { fetchEntreprises } from "../../api/enterpriseApi";
-import { createDolisaas } from "../../api/instanceApi";
+import { createInstance } from "../../api/instanceApi";
 import { toast } from 'react-toastify';
 
 
