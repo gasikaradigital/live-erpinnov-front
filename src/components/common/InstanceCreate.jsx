@@ -23,7 +23,7 @@ const InstanceCreate = () => {
     setSelectedOption(option);
   };
 
-  const handleCreateInstance = () => {
+  const handleCreateInstance = async () => {
     let nameToUse;
 
     if(selectedOption === 'automatic') {
@@ -31,7 +31,7 @@ const InstanceCreate = () => {
       
       if(organisationObj) {
         const orgName = organisationObj.nom.trim();
-
+        
         if(orgName.length > 1) {
           nameToUse = orgName.slice(1) + orgName[0];
         } else {
@@ -45,13 +45,28 @@ const InstanceCreate = () => {
       nameToUse = instanceName.trim();
     }
 
-    console.log('Creation instance avec:', {
+    const mapped = {
+      name: nameToUse,
+      entrepriseId: selectedEnterprise,
+      source: planChoose.source
+    };
+
+    const res = await createInstance(mapped);
+
+    if (res) {
+      toast.success("Instance créée avec succès !");
+    } else {
+      toast.error("Une erreur est survenue lors de la création.");
+    }
+
+    /*console.log('Creation instance avec:', {
       nom: nameToUse,
       option: selectedOption,
       entreprise: selectedEnterprise,
       plan: planChoose.plan,
-      subplan: planChoose.subPlan
-    });
+      subplan: planChoose.subPlan,
+      source: planChoose.source
+    });*/
   };
 
   const handleReinitialize = () => {
