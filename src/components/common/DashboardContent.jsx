@@ -206,12 +206,7 @@ const DashboardContent = () => {
         </Col>
       </Row>
 
-      {/* 2) SolutionsTeaser */}
-      <Row className="mb-4 justify-content-center">
-        <Col lg={{ span: 10, offset: 1 }}>
-          <SolutionsTeaser />
-        </Col>
-      </Row>
+  
 
       {/* 3) Onglets à 50/50 */}
       <Row className="mb-4 justify-content-center">
@@ -241,7 +236,7 @@ const DashboardContent = () => {
       <Row className="mb-4 justify-content-center">
         <Col lg={{ span: 10, offset: 1 }}>
           {plans.map((plan) => (
-            <PlanCard key={plan.id} planData={plan} blur={!(activeTab === "dolisaas" && plan.id === 1)}  source={activeTab}/>
+            <PlanCard key={plan.id} planData={plan} blDécouvrez nos solutionsur={!(activeTab === "dolisaas" && plan.id === 1)}  source={activeTab}/>
           ))}
         </Col>
       </Row>
