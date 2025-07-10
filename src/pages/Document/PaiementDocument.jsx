@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Container, Row, Col, Card, Table, Button, Modal } from "react-bootstrap";
-import { HiTicket, HiPlus, HiOutlineFolder, HiEye, HiFolder } from 'react-icons/hi';
+import { HiEye, HiFolder, HiDocumentDownload } from 'react-icons/hi';
 import 'react-toastify/dist/ReactToastify.css';
 import { useTheme } from "../../contexts/ThemeContext";
 import AppNavbar from '../../components/common/navbar/AppNavbar';
@@ -10,39 +10,7 @@ const PaiementDocument = () => {
   const { theme } = useTheme();
   const darkMode = theme === 'dark';
 
-  const invoice = {
-    number: "INV-001235",
-    issueDate: "2025-07-10",
-    dueDate: "2025-07-17",
-    company: {
-      name: "Vuexy Inc.",
-      address: "123 Vuexy Street, New York, NY",
-      phone: "+1 (123) 456-7890",
-      email: "info@vuexy.com",
-    },
-    client: {
-      name: "Selestino Hajaniaina",
-      company: "Client Corp.",
-      address: "456 Client Road, Paris, France",
-      email: "client@example.com",
-    },
-    items: [
-      { description: "Website Design", quantity: 1, price: 1200 },
-      { description: "Hosting (1 year)", quantity: 1, price: 200 },
-      { description: "Domain (1 year)", quantity: 1, price: 10 },
-    ],
-    taxRate: 0.1,
-  };
-
-  const subtotal = invoice.items.reduce(
-    (acc, item) => acc + item.quantity * item.price,
-    0
-  );
-  const tax = subtotal * invoice.taxRate;
-  const total = subtotal + tax;
-
   // Couleurs personnalisées
-
   const bgColor = darkMode ? '#222' : '#fff';         // gris foncé ou blanc
   const textColor = darkMode ? '#eee' : '#222';       // clair ou sombre
   const cardBg = darkMode ? '#222' : '#f8f9fa';    // gris moyen ou gris clair
@@ -95,16 +63,15 @@ const PaiementDocument = () => {
       <div style={{ backgroundColor: bgColor, color: textColor, minHeight: '100vh', width: '100vw', display: 'flex', flexDirection: 'column' }}>
         <AppNavbar />
         <div className="container d-flex align-items-center justify-content-center">
-    <Container
-      className="py-5 mt-4"
-      style={{
-        width: "100%",
-        maxWidth: "100%",
-        borderRadius: "12px",
-        backgroundColor: cardBg,
-      }}
-    >
-    
+          <Container
+            className="py-5 mt-4"
+            style={{
+              width: "100%",
+              maxWidth: "100%",
+              borderRadius: "12px",
+              // backgroundColor: cardBg,
+            }}
+          >
     
               {/* En-tête avec bouton */}
               <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center pt-4 gap-3 mb-4">
@@ -114,16 +81,18 @@ const PaiementDocument = () => {
                 </h2>
               </div>
     
+              <h4>Visualisation – Gestion des documents PDF d’abonnement</h4>
+              <p>Pour tout abonnement validé (paiement effectué), un fichier PDF de confirmation doit être automatiquement généré et mis à disposition du client.</p>
               {/* Documents listes */}
               <Row className="m-4 g-4">
                 
                 {paiements.map((paiement, index) => (
                   <Col key={index}>
-                    <Card className="h-100 text-start">
+                    <Card className="h-100 p-0 text-start">
                       <Card.Body>
                         <Card.Title>{paiement.title}</Card.Title>
-                        <Card.Subtitle className="mb-2 text-muted">{paiement.subtitle}</Card.Subtitle>
-                        <Card.Text>{paiement.text}</Card.Text>
+                        <Card.Subtitle className="my-2 text-muted fw-semibold">{paiement.subtitle}</Card.Subtitle>
+                        <Card.Text style={{ textAlign: 'justify', opacity: '0.7' }}>{paiement.text}</Card.Text>
                         <Button variant="primary" className="mt-auto" onClick={()=>handleShow(paiement)}>
                           <HiEye className="me-1" />
                           Vusualiser
@@ -202,7 +171,10 @@ const PaiementDocument = () => {
                               <p className="text-muted">Merci!</p>
                             </Col>
                             <Col className="text-end">
-                              <Button variant="primary" className="me-2">Télécharger le PDF</Button>
+                              <Button variant="primary" className="me-2">
+                                <HiDocumentDownload className="me-1" />
+                                Télécharger le PDF
+                              </Button>
                             </Col>
                           </Row>
                         </Card.Body>
