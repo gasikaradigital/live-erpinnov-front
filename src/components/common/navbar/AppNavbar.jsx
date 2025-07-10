@@ -130,10 +130,6 @@ const AppNavbar = () => {
                   <i className="bi bi-building-add me-2"></i>
                   Créer une entreprise
                 </Dropdown.Item>
-                <Dropdown.Item href="/search-instance">
-                  <i className="bi bi-search me-2"></i>
-                  Rechercher une instance
-                </Dropdown.Item>
                 <Dropdown.Divider />
                 <Dropdown.Item onClick={handleLogout} className="text-danger">
                   <i className="bi bi-box-arrow-right me-2"></i>
