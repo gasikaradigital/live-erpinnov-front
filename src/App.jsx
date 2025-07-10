@@ -23,6 +23,7 @@ import PaymentModule from "./components/common/PayementProcess.jsx";
 import InstanceCreate from "./components/common/InstanceCreate.jsx";
 import TicketDashboard from "./pages/Ticket/TicketDashboard.jsx";
 import AppNavbar from "./components/common/navbar/AppNavbar.jsx";
+import PaiementDocument from "./pages/Document/PaiementDocument.jsx"
 
 function LandingPage() {
   return (
@@ -73,6 +74,7 @@ function App() {
               <Route path="/verify-otp" element={<VerifyOtp />} />
               <Route path="/profile" element={<ProfileForm />} />
             <Route path="/ticket" element={<TicketDashboard/>} />
+            <Route path="/document" element={<PaiementDocument/>} />
 
             {/* </Route>  */}
 
