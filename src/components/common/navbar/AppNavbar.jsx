@@ -126,6 +126,10 @@ const AppNavbar = () => {
                   <i className="bi bi-ticket-detailed me-2"></i>
                   Mon Ticket
                 </Dropdown.Item>
+                <Dropdown.Item href="/document">
+                  <i className="bi bi-files me-2"></i>
+                  Mes Documents
+                </Dropdown.Item>
                 <Dropdown.Item href="/entreprise/create">
                   <i className="bi bi-building-add me-2"></i>
                   Créer une entreprise
