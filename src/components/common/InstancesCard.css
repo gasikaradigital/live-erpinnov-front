@@ -236,7 +236,11 @@ small.text-body-secondary {
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 768px) {<Accordion.Body><Row className="align-items-center"> {
+    /* ... (le reste du contenu reste inchangé) ... */
+  }
+
+  </Row></Accordion.Body>
   .instances-header {
     flex-direction: column;
     align-items: stretch;
