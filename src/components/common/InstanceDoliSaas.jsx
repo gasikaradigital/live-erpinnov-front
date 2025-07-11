@@ -9,7 +9,7 @@ import {
   InputGroup,
   Form,
 } from "react-bootstrap";
-import "./InstanceDoliSaas.css";
+// import "./InstanceDoliSaas.css";
 import { useTheme } from "../../contexts/ThemeContext";
 import dolibarrCover from "../../assets/dolibarr-pdf-bien-gerer-son-entreprisec2171d20240202113929-image_cover.jpg";
 
