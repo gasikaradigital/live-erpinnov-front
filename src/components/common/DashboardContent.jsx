@@ -10,7 +10,7 @@ import { useTheme } from "../../contexts/ThemeContext";
 const DashboardContent = () => {
   const { theme } = useTheme();
   const [plans, setPlans] = useState([]);
-  const [activeTab, setActiveTab] = useState("erpinnov");
+  const [activeTab, setActiveTab] = useState("dolisaas");
 
   useEffect(() => {
     const initialize = async () => {
