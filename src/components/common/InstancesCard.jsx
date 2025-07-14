@@ -11,7 +11,7 @@ const InstancesCard = () => {
           <div className="d-flex justify-content-between align-items-start flex-wrap gap-3">
             <div className="instances-header-left">
               <div className="title-badges">
-                <h5 className="mb-0">Mes instances</h5>
+                <h5 className="mb-0">Instances</h5>
                 <Badge bg="secondary" className="me-2">
                   Total: 0
                 </Badge>

@@ -32,20 +32,13 @@
   margin-bottom: 0.25rem;
 }
 
-.instances-header-left {
-  flex: 1;
-  min-width: 200px;
-}
-
+.instances-header-left,
 .instances-header-right {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  justify-content: flex-end;
-  gap: 1rem;
-  min-width: auto; /* ou retire complètement */
-  flex: 0 0 auto;
+  gap: 5rem;
 }
+
 .btn-primary {
   white-space: nowrap;
 }
@@ -240,11 +233,15 @@ small.text-body-secondary {
     /* ... (le reste du contenu reste inchangé) ... */
   }
 
-  </Row></Accordion.Body>
-  .instances-header {
-    flex-direction: column;
-    align-items: stretch;
-  }
+/* En-tête */
+.instances-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
 
   .instances-header-right {
     flex-direction: column;
@@ -265,7 +262,13 @@ small.text-body-secondary {
     width: 100%;
   }
 
-  .instances-card {
-    margin: 1rem 0;
-  }
+ .instances-card {
+   border-radius: var(--border-radius);
+   box-shadow: var(--shadow);
+   border: var(--border);
+   overflow: hidden;
+   animation: fadeIn 0.5s ease-out forwards;
+   margin-bottom: 1.5rem;
+   background: white;
+ }
 }
