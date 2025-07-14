@@ -88,7 +88,7 @@ const InstanceDoliSaas = () => {
               <Badge bg="info" className="me-2">
                 Simple
               </Badge>
-              <Badge bg={selectedPlanData.badgeVariant}>{selectedPlan}</Badge>
+              <Badge bg={selectedPlanData?.badgeVariant || "secondary"}>{selectedPlanData.name || "Chargement"}</Badge>
               <br />
               <small style={{ color: theme === "dark" ? "#bbb" : "#666" }}>
                 Une solution Dolibarr hébergée, clé en main, prête à l'emploi.
