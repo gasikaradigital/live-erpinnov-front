@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   Accordion,
@@ -16,6 +16,7 @@ import dolibarrCover from "../../assets/dolibarr-pdf-bien-gerer-son-entreprisec2
 const InstanceDoliSaas = () => {
   const { theme } = useTheme();
   const navigate = useNavigate();
+  const [selectedPlan, setSelectedPlan] = useState("5 Go");
 
   const bgColor = theme === "dark" ? "#1e1e2f" : "#ffffff";
   const textColor = theme === "dark" ? "#f8f9fa" : "#212529";
@@ -26,6 +27,34 @@ const InstanceDoliSaas = () => {
     navigate("/entreprise/create");
   };
 
+  const pricingPlans = [
+    {
+      name: "2 Go",
+      monthlyPrice: "25 000 Ar",
+      annualPrice: "270 000 Ar",
+      description: "~5 €/mois par utilisateur",
+      badgeVariant: "info",
+    },
+    {
+      name: "5 Go",
+      monthlyPrice: "35 000 Ar",
+      annualPrice: "378 000 Ar",
+      description: "~7 €/mois par utilisateur",
+      badgeVariant: "primary",
+    },
+    {
+      name: "10 Go",
+      monthlyPrice: "45 000 Ar",
+      annualPrice: "486 000 Ar",
+      description: "~9 €/mois par utilisateur",
+      badgeVariant: "warning",
+    },
+  ];
+
+  const selectedPlanData = pricingPlans.find(
+    (plan) => plan.name === selectedPlan
+  );
+
   return (
     <Card
       className="instances-card"
@@ -33,7 +62,7 @@ const InstanceDoliSaas = () => {
         backgroundColor: bgColor,
         color: textColor,
         borderColor: secondaryColor,
-        width: "100%", // important pour occuper toute la largeur dispo
+        width: "100%",
       }}
     >
       <Card.Body>
@@ -46,7 +75,7 @@ const InstanceDoliSaas = () => {
               <Badge bg="info" className="me-2">
                 Simple
               </Badge>
-              <Badge bg="primary">5 Go</Badge>
+              <Badge bg={selectedPlanData.badgeVariant}>{selectedPlan}</Badge>
               <br />
               <small style={{ color: theme === "dark" ? "#bbb" : "#666" }}>
                 Une solution Dolibarr hébergée, clé en main, prête à l'emploi.
@@ -84,7 +113,7 @@ const InstanceDoliSaas = () => {
             }}
           >
             <Accordion.Header>
-              💼 Offre unique DoliSaaS – 5 Go / utilisateur
+              💼 Choisissez votre offre DoliSaaS
             </Accordion.Header>
             <Accordion.Body
               style={{ backgroundColor: bgColor, color: textColor }}
@@ -118,6 +147,30 @@ const InstanceDoliSaas = () => {
                     <i className="bi bi-gift-fill text-primary me-1"></i>
                     Livre offert (valeur 32 €)
                   </p>
+
+                  {/* Plan selection */}
+                  <div className="w-100 mt-3">
+                    <h6>Choisissez votre offre:</h6>
+                    <div className="d-flex flex-column gap-2">
+                      {pricingPlans.map((plan) => (
+                        <Button
+                          key={plan.name}
+                          variant={
+                            selectedPlan === plan.name
+                              ? plan.badgeVariant
+                              : "outline-" + plan.badgeVariant
+                          }
+                          onClick={() => setSelectedPlan(plan.name)}
+                          className="text-start"
+                        >
+                          <div className="d-flex justify-content-between align-items-center">
+                            <span>{plan.name}</span>
+                            <span>{plan.monthlyPrice}</span>
+                          </div>
+                        </Button>
+                      ))}
+                    </div>
+                  </div>
                 </Col>
 
                 <Col md={8}>
@@ -169,13 +222,15 @@ const InstanceDoliSaas = () => {
                       <div>
                         <p className="mb-1">Tarif mensuel :</p>
                         <h5 className="text-success">
-                          35 000 Ar{" "}
+                          {selectedPlanData.monthlyPrice}{" "}
                           <small className="text-muted">/utilisateur</small>
                         </h5>
+                        <small>{selectedPlanData.description}</small>
                       </div>
                       <div>
-                        <p className="mb-1">Tarif de lancement promotionnel</p>
-                        <h5 className="text-primary mb-0">
+                        <p className="mb-1">Tarif promotionnel :</p>
+                        <h5 className="text-primary">
+                          {selectedPlanData.annualPrice}{" "}
                           <small className="text-danger">(-10%)</small>
                         </h5>
                         <small style={{ color: "#aaa" }}>
@@ -192,7 +247,7 @@ const InstanceDoliSaas = () => {
                     onClick={handleStartTrial}
                   >
                     <i className="bi bi-play-circle-fill me-2"></i>
-                    Démarrer l'essai gratuit
+                    Démarrer l'essai gratuit ({selectedPlan})
                   </Button>
                 </Col>
               </Row>
