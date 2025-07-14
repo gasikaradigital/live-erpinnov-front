@@ -249,6 +249,16 @@ const InstanceDoliSaas = () => {
                     <i className="bi bi-play-circle-fill me-2"></i>
                     Démarrer l'essai gratuit ({selectedPlan})
                   </Button>
+
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    className="w-100 rounded-pill shadow-sm"
+                    onClick={handleStartTrial}
+                  >
+                    <i className="bi bi-play-circle-fill me-2"></i>
+                    Commencer directement sur le tarif de {selectedPlan}
+                  </Button>
                 </Col>
               </Row>
             </Accordion.Body>
