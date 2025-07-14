@@ -9,18 +9,23 @@ import {
   InputGroup,
   Form,
 } from "react-bootstrap";
-// import "./InstanceDoliSaas.css";
+import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../contexts/ThemeContext";
 import dolibarrCover from "../../assets/dolibarr-pdf-bien-gerer-son-entreprisec2171d20240202113929-image_cover.jpg";
 
 const InstanceDoliSaas = () => {
   const { theme } = useTheme();
+  const navigate = useNavigate();
 
   // Couleurs dynamiques
   const bgColor = theme === "dark" ? "#1e1e2f" : "#ffffff";
   const textColor = theme === "dark" ? "#f8f9fa" : "#212529";
   const secondaryColor = theme === "dark" ? "#444" : "#ccc";
   const grayBg = theme === "dark" ? "#2b2b3c" : "#f8f9fa";
+
+  const handleStartTrial = () => {
+    navigate("/entreprise/create");
+  };
 
   return (
     <Card
@@ -108,11 +113,9 @@ const InstanceDoliSaas = () => {
                         style={{
                           width: "100%",
                           height: "10%",
-                          // objectFit: "cover",
                           borderRadius: "8px",
                           border: `1px solid ${secondaryColor}`,
                           maxHeight: "300px",
-                          // marginTop: "10 0px",
                         }}
                       />
                     </div>
@@ -210,6 +213,7 @@ const InstanceDoliSaas = () => {
                       variant="primary"
                       size="lg"
                       className="w-100 rounded-pill shadow-sm"
+                      onClick={handleStartTrial}
                     >
                       <i className="bi bi-play-circle-fill me-2"></i>
                       Démarrer l'essai gratuit
