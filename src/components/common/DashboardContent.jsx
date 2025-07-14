@@ -93,7 +93,7 @@ const DashboardContent = () => {
         </Row>
       )}
 
-      {/* Plans */}
+      {/* Plans
       <Row className="mb-4 justify-content-center">
         <Col lg={10}>
           {plans.map((plan) => (
@@ -107,7 +107,7 @@ const DashboardContent = () => {
             />
           ))}
         </Col>
-      </Row>
+      </Row> */}
     </Container>
   );
 };
