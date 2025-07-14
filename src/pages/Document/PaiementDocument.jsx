@@ -170,10 +170,13 @@ const PaiementDocument = () => {
                             <Col>
                               <p className="text-muted">Merci!</p>
                             </Col>
-                            <Col className="text-end">
+                            <Col className="text-end d-flex justify-content-end flex-wrap gap-2">
                               <Button variant="primary" className="me-2">
                                 <HiDocumentDownload className="me-1" />
                                 Télécharger le PDF
+                              </Button>
+                              <Button variant="outline-primary" className="me-2" onClick={()=>handleClose(false)}>
+                                Annuler
                               </Button>
                             </Col>
                           </Row>
