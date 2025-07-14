@@ -2,6 +2,8 @@ import { api } from "../config"
 
 export const createInstance = async (instance) => {
     try {
+      await api.get('/api/sanctum/csrf-cookie');
+
       const res = await api.post('/api/create-instance', instance);
   
       if (res.status === 201) {
