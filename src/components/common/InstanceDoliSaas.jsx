@@ -27,8 +27,19 @@ const InstanceDoliSaas = () => {
     navigate("/entreprise/create");
   };
 
+  const handleStartSubscription = () => {
+    /*localStorage.setItem('planChoose', JSON.stringify({
+      plan: 1,
+      subPlan: 1,
+      source: source
+    }));
+    navigate("/payement");*/
+    console.log(selectedPlan);
+  }
+
   const pricingPlans = [
     {
+      id: 1,
       name: "2 Go",
       monthlyPrice: "25 000 Ar",
       annualPrice: "270 000 Ar",
@@ -36,6 +47,7 @@ const InstanceDoliSaas = () => {
       badgeVariant: "info",
     },
     {
+      id: 2,
       name: "5 Go",
       monthlyPrice: "35 000 Ar",
       annualPrice: "378 000 Ar",
@@ -43,6 +55,7 @@ const InstanceDoliSaas = () => {
       badgeVariant: "primary",
     },
     {
+      id: 3,
       name: "10 Go",
       monthlyPrice: "45 000 Ar",
       annualPrice: "486 000 Ar",
@@ -52,7 +65,7 @@ const InstanceDoliSaas = () => {
   ];
 
   const selectedPlanData = pricingPlans.find(
-    (plan) => plan.name === selectedPlan
+    (plan) => plan.id === selectedPlan
   );
 
   return (
@@ -154,13 +167,13 @@ const InstanceDoliSaas = () => {
                     <div className="d-flex flex-column gap-2">
                       {pricingPlans.map((plan) => (
                         <Button
-                          key={plan.name}
+                          key={plan.id}
                           variant={
-                            selectedPlan === plan.name
+                            selectedPlan === plan.id
                               ? plan.badgeVariant
                               : "outline-" + plan.badgeVariant
                           }
-                          onClick={() => setSelectedPlan(plan.name)}
+                          onClick={() => setSelectedPlan(plan.id)}
                           className="text-start"
                         >
                           <div className="d-flex justify-content-between align-items-center">
@@ -254,7 +267,7 @@ const InstanceDoliSaas = () => {
                     variant="primary"
                     size="lg"
                     className="w-100 rounded-pill shadow-sm"
-                    onClick={handleStartTrial}
+                    onClick={handleStartSubscription}
                   >
                     <i className="bi bi-play-circle-fill me-2"></i>
                     Commencer directement sur le tarif de {selectedPlan}
