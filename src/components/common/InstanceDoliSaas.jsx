@@ -243,7 +243,7 @@ const InstanceDoliSaas = () => {
                   <Button
                     variant="primary"
                     size="lg"
-                    className="w-100 rounded-pill shadow-sm"
+                    className="w-100 rounded-pill shadow-sm mb-2"
                     onClick={handleStartTrial}
                   >
                     <i className="bi bi-play-circle-fill me-2"></i>
