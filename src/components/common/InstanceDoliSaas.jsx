@@ -23,23 +23,14 @@ const InstanceDoliSaas = () => {
   const secondaryColor = theme === "dark" ? "#444" : "#ccc";
   const grayBg = theme === "dark" ? "#2b2b3c" : "#f8f9fa";
 
-  const handleStartTrial = () => {
-    localStorage.setItem('planChoose', JSON.stringify({
-      planId: 3,
-      subPlanId: selectedPlan,
-      source: "dolisaas"
-    }));
-    navigate("/entreprise/create");
-  };
-
-  const handleStartSubscription = () => {
+  const handleStart = () => {
     localStorage.setItem('planChoose', JSON.stringify({
       planId: 3,
       subPlanId: selectedPlan,
       source: "dolisaas"
     }));
     navigate("/payement");
-  }
+  };
 
   const pricingPlans = [
     {
@@ -261,21 +252,12 @@ const InstanceDoliSaas = () => {
                     variant="primary"
                     size="lg"
                     className="w-100 rounded-pill shadow-sm mb-2"
-                    onClick={handleStartTrial}
+                    onClick={handleStart}
                   >
                     <i className="bi bi-play-circle-fill me-2"></i>
-                    Démarrer l'essai gratuit ({selectedPlanData.name})
+                    Commencer maintenant ({selectedPlanData.name})
                   </Button>
 
-                  <Button
-                    variant="primary"
-                    size="lg"
-                    className="w-100 rounded-pill shadow-sm"
-                    onClick={handleStartSubscription}
-                  >
-                    <i className="bi bi-play-circle-fill me-2"></i>
-                    Commencer directement sur le tarif de {selectedPlanData.name}
-                  </Button>
                 </Col>
               </Row>
             </Accordion.Body>
