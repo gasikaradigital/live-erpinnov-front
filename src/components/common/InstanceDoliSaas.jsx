@@ -24,17 +24,21 @@ const InstanceDoliSaas = () => {
   const grayBg = theme === "dark" ? "#2b2b3c" : "#f8f9fa";
 
   const handleStartTrial = () => {
+    localStorage.setItem('planChoose', JSON.stringify({
+      planId: 3,
+      subPlanId: selectedPlan,
+      source: "dolisaas"
+    }));
     navigate("/entreprise/create");
   };
 
   const handleStartSubscription = () => {
-    /*localStorage.setItem('planChoose', JSON.stringify({
-      plan: 1,
-      subPlan: 1,
-      source: source
+    localStorage.setItem('planChoose', JSON.stringify({
+      planId: 3,
+      subPlanId: selectedPlan,
+      source: "dolisaas"
     }));
-    navigate("/payement");*/
-    console.log(selectedPlan);
+    navigate("/payement");
   }
 
   const pricingPlans = [
