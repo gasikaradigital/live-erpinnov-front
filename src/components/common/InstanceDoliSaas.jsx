@@ -16,7 +16,7 @@ import dolibarrCover from "../../assets/dolibarr-pdf-bien-gerer-son-entreprisec2
 const InstanceDoliSaas = () => {
   const { theme } = useTheme();
   const navigate = useNavigate();
-  const [selectedPlan, setSelectedPlan] = useState("5 Go");
+  const [selectedPlan, setSelectedPlan] = useState("1");
 
   const bgColor = theme === "dark" ? "#1e1e2f" : "#ffffff";
   const textColor = theme === "dark" ? "#f8f9fa" : "#212529";
