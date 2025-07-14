@@ -260,7 +260,7 @@ const InstanceDoliSaas = () => {
                     onClick={handleStartTrial}
                   >
                     <i className="bi bi-play-circle-fill me-2"></i>
-                    Démarrer l'essai gratuit ({selectedPlan})
+                    Démarrer l'essai gratuit ({selectedPlanData.name})
                   </Button>
 
                   <Button
@@ -270,7 +270,7 @@ const InstanceDoliSaas = () => {
                     onClick={handleStartSubscription}
                   >
                     <i className="bi bi-play-circle-fill me-2"></i>
-                    Commencer directement sur le tarif de {selectedPlan}
+                    Commencer directement sur le tarif de {selectedPlanData.name}
                   </Button>
                 </Col>
               </Row>
