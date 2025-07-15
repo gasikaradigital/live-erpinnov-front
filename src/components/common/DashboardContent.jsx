@@ -31,13 +31,6 @@ const DashboardContent = () => {
 
   return (
     <Container className="pt-5 mt-5" fluid style={{ maxWidth: "100%" }}>
-      {/* InstancesCard toujours visible */}
-      <Row className="mb-4 justify-content-center">
-        <Col lg={10}>
-          <InstancesCard />
-        </Col>
-      </Row>
-
       {/* Onglets */}
       <Row className="mb-4 g-0 justify-content-center">
         <Col lg={10}>
@@ -108,6 +101,12 @@ const DashboardContent = () => {
           ))}
         </Col>
       </Row> */}
+      {/* InstancesCard toujours visible */}
+      <Row className="mb-4 justify-content-center">
+        <Col lg={10}>
+          <InstancesCard />
+        </Col>
+      </Row>
     </Container>
   );
 };

@@ -74,9 +74,9 @@ const InstanceDoliSaas = () => {
       }}
     >
       <Card.Body>
-        <div className="d-flex flex-column gap-3 mb-4">
-          <div className="d-flex justify-content-between align-items-start flex-wrap gap-3">
-            <div>
+        {/* <div className="d-flex flex-column gap-3 mb-4">
+          <div className="d-flex justify-content-between align-items-start flex-wrap gap-3"> */}
+            {/* <div>
               <h5 className="mb-0" style={{ color: textColor }}>
                 Offre DoliSaaS
               </h5>
@@ -88,9 +88,9 @@ const InstanceDoliSaas = () => {
               <small style={{ color: theme === "dark" ? "#bbb" : "#666" }}>
                 Une solution Dolibarr hébergée, clé en main, prête à l'emploi.
               </small>
-            </div>
+            </div> */}
 
-            <InputGroup style={{ width: "260px" }}>
+            {/* <InputGroup style={{ width: "260px" }}>
               <InputGroup.Text
                 style={{
                   backgroundColor: bgColor,
@@ -108,9 +108,9 @@ const InstanceDoliSaas = () => {
                   borderColor: secondaryColor,
                 }}
               />
-            </InputGroup>
-          </div>
-        </div>
+            </InputGroup> */}
+          {/* </div>
+        </div> */}
 
         <Accordion defaultActiveKey="0">
           <Accordion.Item
