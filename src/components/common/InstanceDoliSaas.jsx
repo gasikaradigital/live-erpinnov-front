@@ -242,7 +242,7 @@ const InstanceDoliSaas = () => {
                           <small className="text-danger">(-10%)</small>
                         </h5>
                         <small style={{ color: "#aaa" }}>
-                          Valable jusqu'au 1er août 2025
+                          Valable jusqu'au 1er Septembre 2025
                         </small>
                       </div>
                     </div>
