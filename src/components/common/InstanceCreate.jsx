@@ -58,6 +58,7 @@ const InstanceCreate = () => {
 
     if (res) {
       toast.success("Instance créée avec succès !");
+      console.log(res);
     } else {
       toast.error("Une erreur est survenue lors de la création.");
     }
