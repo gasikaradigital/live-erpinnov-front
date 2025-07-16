@@ -54,8 +54,6 @@ const InstanceCreate = () => {
       source: planChoose.source
     };
 
-    console.log(mapped);
-
     const res = await createInstance(mapped);
 
     if (res) {
