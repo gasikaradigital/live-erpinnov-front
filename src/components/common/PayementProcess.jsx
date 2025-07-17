@@ -4,7 +4,8 @@ import AppNavbar from './navbar/AppNavbar';
 import { Navbar, Nav } from 'react-bootstrap';
 import { useTheme } from '../../contexts/ThemeContext';
 import Form from 'react-bootstrap/Form';
-import CardPayement from './cardPayement';
+// import CardPayement from './cardPayement';
+import PayementCard from './PayementCard';
 import { useLocation, useNavigate } from "react-router";
 import './PayementProcess.css';
 
@@ -93,7 +94,7 @@ const PaymentModule = () => {
 
             {showPaymentCard && (
               <div className="mt-4 paymentCardContainer">
-                <CardPayement />
+                <PayementCard isOpen={showPaymentCard} onClose={() => setShowPaymentCard(false)}/>
               </div>
             )}
           </div>

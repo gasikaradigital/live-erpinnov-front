@@ -5,7 +5,7 @@ import { useTheme } from '../../contexts/ThemeContext';
 import { useNavigate } from "react-router";
 import './InstanceCreate.css';
 import { fetchEntreprises } from "../../api/enterpriseApi";
-import { createDolisaas } from "../../api/instanceApi";
+import { createInstance } from "../../api/instanceApi";
 import { toast } from 'react-toastify';
 
 
@@ -51,27 +51,17 @@ const InstanceCreate = () => {
     const mapped = {
       name: nameToUse,
       entrepriseId: selectedEnterprise,
-      //plan: planChoose.plan,
-      //subplan: planChoose.subPlan, 
+      source: planChoose.source
     };
 
-    if(planChoose.source == "dolisaas") {
-      const res = await createDolisaas(mapped);
-      console.log(mapped);
-      console.log(res);
-      if(res) {
-        toast.success("Compte Dolisaas créer avec succès");
-      } else {
-        toast.error("Une erreur est survenue lors de la création");
-      }
-    }
-    //const res = await createInstance(mapped);
+    const res = await createInstance(mapped);
 
-    /*if (res) {
+    if (res) {
       toast.success("Instance créée avec succès !");
+      console.log(res);
     } else {
       toast.error("Une erreur est survenue lors de la création.");
-    }*/
+    }
 
     /*console.log('Creation instance avec:', {
       nom: nameToUse,
