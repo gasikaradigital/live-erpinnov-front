@@ -118,9 +118,9 @@ const AppNavbar = () => {
               </Dropdown.Toggle>
 
               <Dropdown.Menu className="mt-2 shadow">
-                <Dropdown.Item href="/profile">
-                  <i className="bi bi-person-circle me-2"></i>
-                  Mon Profil
+                <Dropdown.Item href="/dashboard">
+                  <i className="bi bi-bar-chart me-2"></i>
+                  Dashboard
                 </Dropdown.Item>
                 <Dropdown.Item href="/ticket">
                   <i className="bi bi-ticket-detailed me-2"></i>
@@ -133,6 +133,10 @@ const AppNavbar = () => {
                 <Dropdown.Item href="/entreprise/create">
                   <i className="bi bi-building-add me-2"></i>
                   Créer une entreprise
+                </Dropdown.Item>
+                <Dropdown.Item href="/profile">
+                  <i className="bi bi-person-circle me-2"></i>
+                  Profil
                 </Dropdown.Item>
                 <Dropdown.Divider />
                 <Dropdown.Item onClick={handleLogout} className="text-danger">
