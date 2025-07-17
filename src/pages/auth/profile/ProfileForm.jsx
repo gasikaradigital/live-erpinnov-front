@@ -109,7 +109,7 @@ export default function ProfileForm({ initialData = {}, onSubmit }) {
     darkMode={darkMode}
     titleIcon={<HiUser size={20} className="text-primary" />}
   >
-    <Row className="mb-3">
+    <Row className="mb-3 text-start">
       <Form.Group as={Col} md={2} controlId="civilite">
         <Form.Label className={darkMode ? "text-white" : "text-dark"}>
           Civilité
@@ -153,7 +153,7 @@ export default function ProfileForm({ initialData = {}, onSubmit }) {
       </Form.Group>
     </Row>
 
-    <Form.Group className="mb-3" controlId="telephone">
+    <Form.Group className="mb-3 text-start" controlId="telephone">
       <Form.Label className={darkMode ? "text-white" : "text-dark"}>
         Téléphone
       </Form.Label>
@@ -175,7 +175,7 @@ export default function ProfileForm({ initialData = {}, onSubmit }) {
   >
     <Form.Group className="mb-3 text-start w-100" controlId="adresse">
       <Form.Label className={darkMode ? "text-white" : "text-dark"}>
-        Adresse complète
+        Adresse
       </Form.Label>
       <Form.Control
         type="text"
@@ -186,7 +186,7 @@ export default function ProfileForm({ initialData = {}, onSubmit }) {
       />
     </Form.Group>
 
-    <Row className="mb-3">
+    <Row className="mb-3 text-start">
       <Form.Group as={Col} md={4} controlId="zipcode">
         <Form.Label className={darkMode ? "text-white" : "text-dark"}>
           Code postal
