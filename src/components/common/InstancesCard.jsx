@@ -12,18 +12,18 @@ const InstancesCard = () => {
             <div className="instances-header-left">
               <div className="title-badges">
                 <h5 className="mb-0">Instances</h5>
-                <Badge bg="secondary" className="me-2">
+                <Badge bg="secondary" className="me-2">  
                   Total: 0
                 </Badge>
                 <Badge bg="success">Actives: 0</Badge>
               </div>
-              {/* <small className="text-body-secondary">
+              <small className="text-body-secondary">
                 Gérez vos espaces de travail et suivez leur état en temps réel
-              </small> */}
+              </small>
             </div>
 
             {/* Colonne droite : recherche + bouton */}
-            {/* <div className="d-flex align-items-center gap-3">
+            <div className="d-flex align-items-center gap-3">
               <InputGroup style={{ width: "260px" }}>
                 <InputGroup.Text>
                   <i className="bi bi-search" />
@@ -33,7 +33,7 @@ const InstancesCard = () => {
               <Button variant="primary">
                 <i className="bi bi-plus-lg" /> Nouvelle instance
               </Button>
-            </div> */}
+            </div>
           </div>
         </div>
 
