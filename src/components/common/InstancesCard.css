@@ -1,47 +1,26 @@
-/* Général et structure principale */
 .instances-card {
   border-radius: 16px !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
   border: 1px solid #e9ecef !important;
   width: 100%;
+  margin: 0 auto;
   overflow: hidden;
   animation: fadeIn 0.5s ease-out forwards;
-  max-width: 1600px; /* optionnel : pour éviter qu'elle soit trop large sur écran géant */
-  margin: 0 auto; /* pour la centrer horizontalement */
+  /* max-width: 1600px; ← commente ou ajuste si trop petit */
 }
 
-.card-body {
-  padding: 1.5rem !important;
-  width: 100%;
-}
-
-/* En-tête flex avec espacement */
-.instances-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-.title-badges {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 0.25rem;
-}
-
-
-.instances-header-left,
-.instances-header-right {
+.instances-header-left {
   display: flex;
   flex: 1;
   align-items: center;
-  gap: 5rem;
+  gap:25cm;
 }
-.btn-primary {
-  white-space: nowrap;
+
+.title-badges {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  /* flex-wrap: wrap; */
 }
 
 

@@ -18,22 +18,11 @@ const InstancesCard = () => {
                 <Badge bg="success">Actives: 0</Badge>
               </div>
               <small className="text-body-secondary">
-                Gérez vos espaces de travail et suivez leur état en temps réel
+                
               </small>
             </div>
 
-            {/* Colonne droite : recherche + bouton */}
-            <div className="d-flex align-items-center gap-3">
-              <InputGroup style={{ width: "260px" }}>
-                <InputGroup.Text>
-                  <i className="bi bi-search" />
-                </InputGroup.Text>
-                <Form.Control placeholder="Rechercher une instance…" />
-              </InputGroup>
-              <Button variant="primary">
-                <i className="bi bi-plus-lg" /> Nouvelle instance
-              </Button>
-            </div>
+         
           </div>
         </div>
 
