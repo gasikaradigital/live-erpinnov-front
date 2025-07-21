@@ -115,7 +115,7 @@ const AppNavbar = () => {
                 <div className="profile-circle bg-primary text-white">
                   {initiales || '??'}
                 </div>
-                <span className="d-none d-md-inline">{user?.user.name}</span>
+                <span className="d-none d-md-inline">{user?.profile.fname}</span>
               </Dropdown.Toggle>
 
               <Dropdown.Menu className="mt-2 shadow">
