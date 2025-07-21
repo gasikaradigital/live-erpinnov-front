@@ -71,9 +71,10 @@ function App() {
   return (
     <DarkModeProvider>
       <ThemeProvider>
-        <UserProvider>
+        
           <Router>
             <AuthProvider>
+              <UserProvider>
               <Routes> 
                 <Route path="/" element={<Login />} />
                 <Route path="/inscription" element={<Inscription />} />
@@ -98,9 +99,9 @@ function App() {
                 {/* </Route>  */}
 
               </Routes> 
+              </UserProvider>
             </AuthProvider>
           </Router>
-        </UserProvider>
       </ThemeProvider>
     </DarkModeProvider>
   );
