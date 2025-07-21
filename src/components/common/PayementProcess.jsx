@@ -28,7 +28,7 @@ const PaymentModule = () => {
     setShowPaymentCard(true);
   };
 
-  const handleFreeTrialClick= ()=>{
+  const handleFreeTrialClick= async ()=>{
     const mapped = {
       planId: planChoose.planId,
       subPlanId: planChoose.subPlanId
