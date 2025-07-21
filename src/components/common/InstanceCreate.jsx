@@ -7,6 +7,7 @@ import './InstanceCreate.css';
 import { fetchEntreprises } from "../../api/enterpriseApi";
 import { createInstance } from "../../api/instanceApi";
 import { toast } from 'react-toastify';
+import { createSubscription } from '../../api/subscriptionApi';
 
 
 const InstanceCreate = () => {
@@ -54,14 +55,24 @@ const InstanceCreate = () => {
       source: planChoose.source
     };
 
-    const res = await createInstance(mapped);
+    const mappedDolisass = {
+      planId: planChoose.planId,
+      subPlanId: planChoose.subPlanId,
+    };
+
+    const resSubscription = await createSubscription(mappedDolisass);
+    if(!resSubscription) {
+      toast.error("Une erreur est servenue lors de la création du subscription");
+    }
+
+    /*const res = await createInstance(mapped);
 
     if (res) {
       toast.success("Instance créée avec succès !");
       console.log(res);
     } else {
       toast.error("Une erreur est survenue lors de la création.");
-    }
+    }*/
 
     /*console.log('Creation instance avec:', {
       nom: nameToUse,

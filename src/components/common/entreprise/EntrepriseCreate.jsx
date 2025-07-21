@@ -40,7 +40,8 @@ const EntrepriseCreatePage = () => {
   });
 const navigate = useNavigate();
   
-  const handleRedirect = ()=>{
+  const handleRedirect = async ()=>{
+    const res = await createSubscription();
     navigate("/instance/create");
   }
   /** gère la saisie */
@@ -296,6 +297,7 @@ const navigate = useNavigate();
                         <option value="">-- Choisir pays --</option>
                         <option value="Madagascar">Madagascar</option>
                         <option value="France">France</option>
+                        <option value="États-Unis">États-Unis</option>
                       </RBForm.Select>
                     </Col>
                   </Row>
