@@ -40,8 +40,7 @@ const EntrepriseCreatePage = () => {
   });
 const navigate = useNavigate();
   
-  const handleRedirect = async ()=>{
-    const res = await createSubscription();
+  const handleRedirect = ()=>{
     navigate("/instance/create");
   }
   /** gère la saisie */
