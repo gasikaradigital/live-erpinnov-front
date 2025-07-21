@@ -7,7 +7,7 @@ import { logout } from "../../../api/logoutApi";
 import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { fetchProfile } from "../../../api/profileApi";
-import { useUser } from "../contexts/UserContext";
+import { useUser } from "../../../contexts/UserContext";
 const AppNavbar = () => {
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
