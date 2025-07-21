@@ -25,7 +25,7 @@ const InstanceDoliSaas = () => {
 
   const handleStart = () => {
     localStorage.setItem('planChoose', JSON.stringify({
-      planId: 3,
+      planId: 5,
       subPlanId: selectedPlan,
       source: "dolisaas"
     }));
