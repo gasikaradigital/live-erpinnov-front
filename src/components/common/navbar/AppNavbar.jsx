@@ -126,16 +126,16 @@ const AppNavbar = () => {
                 </Dropdown.Item>
                 <Dropdown.Item href="/ticket">
                   <i className="bi bi-ticket-detailed me-2"></i>
-                  Mon Ticket
+                  Ticket
                 </Dropdown.Item>
                 <Dropdown.Item href="/document">
                   <i className="bi bi-files me-2"></i>
-                  Mes Documents
+                  Documents
                 </Dropdown.Item>
-                <Dropdown.Item href="/entreprise/create">
+                {/* <Dropdown.Item href="/entreprise/create">
                   <i className="bi bi-building-add me-2"></i>
                   Créer une entreprise
-                </Dropdown.Item>
+                </Dropdown.Item> */}
                 <Dropdown.Item href="/profile">
                   <i className="bi bi-person-circle me-2"></i>
                   Profil
