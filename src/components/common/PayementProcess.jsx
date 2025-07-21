@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Button, FormCheck } from 'react-bootstrap';
 import AppNavbar from './navbar/AppNavbar';
 import { Navbar, Nav } from 'react-bootstrap';
@@ -8,10 +8,13 @@ import Form from 'react-bootstrap/Form';
 import PayementCard from './PayementCard';
 import { useLocation, useNavigate } from "react-router";
 import './PayementProcess.css';
+import { createSubscription } from '../../api/subscriptionApi';
+import { toast } from 'react-toastify';
 
 const PaymentModule = () => {
   const { theme } = useTheme();
   const navigate = useNavigate();
+  const [planChoose, setPlanChoose] = useState(null);
 
   const [isAnnualBilling, setIsAnnualBilling] = useState(false);
   const [showPaymentCard, setShowPaymentCard] = useState(false);
@@ -25,9 +28,33 @@ const PaymentModule = () => {
     setShowPaymentCard(true);
   };
 
-  const handleFreeTrialClick=()=>{
+  const handleFreeTrialClick= async ()=>{
+    const mapped = {
+      planId: planChoose.planId,
+      subPlanId: planChoose.subPlanId
+    }
+
+    const res = await createSubscription(mapped);
+    if(!res) {
+      toast.error("Une erreur est servenue lors de la subscription");
+    }
+    
     navigate("/entreprise/create");
   }
+
+  useEffect(() => {
+    const getChoosePlan = () => {
+      const data = localStorage.getItem('planChoose');
+
+      if(data) {
+        setPlanChoose(JSON.parse(data));
+      } else {
+        console.warn("data vide");
+      }
+    }
+
+    getChoosePlan();
+  });
 
   return (
      <div className="text-dark min-vh-100 w-100 mw-100 mx-0 px-0 paymentModuleContainer" style={{ maxWidth: '100%', overflowX: 'hidden' }}>
