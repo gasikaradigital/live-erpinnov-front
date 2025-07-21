@@ -39,7 +39,7 @@ const PaymentModule = () => {
     navigate("/entreprise/create");
   }
 
-  useEffect(() => {
+  /*useEffect(() => {
     const getChoosePlan = () => {
       const data = localStorage.getItem('planChoose');
 
@@ -51,7 +51,7 @@ const PaymentModule = () => {
     }
 
     getChoosePlan();
-  });
+  });*/
 
   return (
      <div className="text-dark min-vh-100 w-100 mw-100 mx-0 px-0 paymentModuleContainer" style={{ maxWidth: '100%', overflowX: 'hidden' }}>
