@@ -60,9 +60,7 @@ const InstanceCreate = () => {
       subPlanId: planChoose.subPlanId,
     };
 
-    console.log(mappedDolisass);
-
-    //const resSubscription = await createSubscription(mappedDolisass);
+    const resSubscription = await createSubscription(mappedDolisass);
     
     if(!resSubscription) {
       toast.error("Une erreur est servenue lors de la création du subscription");
