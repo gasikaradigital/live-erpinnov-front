@@ -3,6 +3,7 @@ import { Container, Button, FormCheck } from 'react-bootstrap';
 import AppNavbar from './navbar/AppNavbar';
 import { Navbar, Nav } from 'react-bootstrap';
 import { useTheme } from '../../contexts/ThemeContext';
+import { useAuth } from '../../contexts/AuthContext';
 import Form from 'react-bootstrap/Form';
 // import CardPayement from './cardPayement';
 import PayementCard from './PayementCard';
@@ -18,6 +19,8 @@ const PaymentModule = () => {
 
   const [isAnnualBilling, setIsAnnualBilling] = useState(false);
   const [showPaymentCard, setShowPaymentCard] = useState(false);
+
+  const { user } = useAuth();
 
   const handleSwitchChange = () => {
     setIsAnnualBilling(!isAnnualBilling);
@@ -104,7 +107,9 @@ const PaymentModule = () => {
                   </div>
                 </div>
 
-                <div className="col-md-6 paymentOptionColumn">
+                {
+                  user?.subscriptions && 
+                  <div className="col-md-6 paymentOptionColumn">
                   <div className="p-3 rounded-3 border border-white align-items-start border-opacity-25 bg-white bg-opacity-10 mb-3 paymentOptionCard">
                     <h5 className="fw-semibold text-white mb-1 paymentOptionTitle">Essayer gratuitement</h5>
                     <p className="text-white mb-3 paymentOptionDesc">Testez pendant 14 jours sans engagement</p>
@@ -113,6 +118,8 @@ const PaymentModule = () => {
                     </Button>
                   </div>
                 </div>
+                }
+                
               </div>
             </div>
 
