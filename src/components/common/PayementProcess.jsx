@@ -28,13 +28,13 @@ const PaymentModule = () => {
     setShowPaymentCard(true);
   };
 
-  const handleFreeTrialClick= async ()=>{
-    const mapped = {
+  const handleFreeTrialClick= ()=>{
+    /*const mapped = {
       planId: planChoose.planId,
       subPlanId: planChoose.subPlanId
     }
 
-    const res = await createSubscription(mapped);
+    const res = await createSubscription(mapped);*/
 
     navigate("/entreprise/create");
   }
