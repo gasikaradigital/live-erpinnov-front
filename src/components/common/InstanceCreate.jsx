@@ -62,8 +62,8 @@ const InstanceCreate = () => {
 
     const resSubscription = await createSubscription(mappedDolisass);
     
-    if(!resSubscription) {
-      toast.error("Une erreur est servenue lors de la création du subscription");
+    if(resSubscription) {
+      toast.error("Subscription réussi");
     }
 
     /*const res = await createInstance(mapped);
