@@ -35,10 +35,10 @@ const PaymentModule = () => {
     }
 
     const res = await createSubscription(mapped);
-    if(!res) {
-      toast.error("Une erreur est servenue lors de la subscription");
+    if(res) {
+      toast.error("Subscription faite");
     }
-    
+
     navigate("/entreprise/create");
   }
 
