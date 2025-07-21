@@ -37,10 +37,6 @@ const PaymentModule = () => {
     const res = await createSubscription(mapped);
 
     navigate("/entreprise/create");
-    
-    if(res) {
-      toast.success("Subscription faite");
-    }
   }
 
   useEffect(() => {
