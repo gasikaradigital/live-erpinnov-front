@@ -108,7 +108,7 @@ const PaymentModule = () => {
                 </div>
 
                 {
-                  user?.subscriptions?.length = 0 && user?.subscriptions?.[0]?.status !== "trial" && (
+                  user?.subscriptions?.length == 0 && user?.subscriptions?.[0]?.status !== "trial" && (
                   <div className="col-md-6 paymentOptionColumn">
                     <div className="p-3 rounded-3 border border-white align-items-start border-opacity-25 bg-white bg-opacity-10 mb-3 paymentOptionCard">
                       <h5 className="fw-semibold text-white mb-1 paymentOptionTitle">Essayer gratuitement</h5>
