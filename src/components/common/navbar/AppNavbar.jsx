@@ -7,11 +7,12 @@ import { logout } from "../../../api/logoutApi";
 import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { fetchProfile } from "../../../api/profileApi";
-
+import { useUser } from "../contexts/UserContext";
 const AppNavbar = () => {
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
+  const { user } = useUser();
 
   const handleGoBack = () => {
     navigate(-1); // Retour à la page précédente
@@ -114,7 +115,7 @@ const AppNavbar = () => {
                 <div className="profile-circle bg-primary text-white">
                   {initiales || '??'}
                 </div>
-                <span className="d-none d-md-inline">User</span>
+                <span className="d-none d-md-inline">{user?.user.name}</span>
               </Dropdown.Toggle>
 
               <Dropdown.Menu className="mt-2 shadow">

@@ -24,6 +24,9 @@ import InstanceCreate from "./components/common/InstanceCreate.jsx";
 import TicketDashboard from "./pages/Ticket/TicketDashboard.jsx";
 import AppNavbar from "./components/common/navbar/AppNavbar.jsx";
 import PaiementDocument from "./pages/Document/PaiementDocument.jsx"
+import { useEffect } from "react";
+import { api } from "./config";
+import { useUser } from "./contexts/UserContext.jsx";
 
 function LandingPage() {
   return (
@@ -50,37 +53,54 @@ function DashboardPage() {
 }
 
 function App() {
+  const { setUser } = useUser(); 
+  useEffect(() => {
+    const fetchUser = async () => {
+      try{
+        const res = await api.get("/api/me");
+        setUser(res.data);
+      } catch(err) {
+        console.warn("Utilisateur non connecté ou erreur API");
+        setUser(null);
+      }
+    };
+    fetchUser();
+
+  }, [setUser]);
+
   return (
     <DarkModeProvider>
       <ThemeProvider>
-      <Router>
-        <AuthProvider>
-           <Routes> 
-            <Route path="/" element={<Login />} />
-            <Route path="/inscription" element={<Inscription />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/confirm-password" element={<ConfirmPassword />} />
+        <UserProvider>
+          <Router>
+            <AuthProvider>
+              <Routes> 
+                <Route path="/" element={<Login />} />
+                <Route path="/inscription" element={<Inscription />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route path="/confirm-password" element={<ConfirmPassword />} />
 
-           {/* <Route element={<ProtectedRoute />}> */}
+              {/* <Route element={<ProtectedRoute />}> */}
 
-              <Route path="/verify-otp" element={<VerifyOtp />} />
-              <Route path="/verify-email" element={<VerifyEmail />} />
-              <Route path="entreprise/create" element={<EntrepriseCreate/>} />
-              <Route path="/dashboard" element={<DashboardPage />} />
-              <Route path="/landing" element={<LandingPage />} />
-              <Route path="/Payement" element={<PaymentModule/>}/>
-              <Route path="instance/create" element={<InstanceCreate/>} />
-              <Route path="/confirm-password" element={<ConfirmPassword />} />
-              <Route path="/verify-otp" element={<VerifyOtp />} />
-              <Route path="/profile" element={<ProfileForm />} />
-            <Route path="/ticket" element={<TicketDashboard/>} />
-            <Route path="/document" element={<PaiementDocument/>} />
+                  <Route path="/verify-otp" element={<VerifyOtp />} />
+                  <Route path="/verify-email" element={<VerifyEmail />} />
+                  <Route path="entreprise/create" element={<EntrepriseCreate/>} />
+                  <Route path="/dashboard" element={<DashboardPage />} />
+                  <Route path="/landing" element={<LandingPage />} />
+                  <Route path="/Payement" element={<PaymentModule/>}/>
+                  <Route path="instance/create" element={<InstanceCreate/>} />
+                  <Route path="/confirm-password" element={<ConfirmPassword />} />
+                  <Route path="/verify-otp" element={<VerifyOtp />} />
+                  <Route path="/profile" element={<ProfileForm />} />
+                <Route path="/ticket" element={<TicketDashboard/>} />
+                <Route path="/document" element={<PaiementDocument/>} />
 
-            {/* </Route>  */}
+                {/* </Route>  */}
 
-           </Routes> 
-        </AuthProvider>
-     </Router>
+              </Routes> 
+            </AuthProvider>
+          </Router>
+        </UserProvider>
       </ThemeProvider>
     </DarkModeProvider>
   );
