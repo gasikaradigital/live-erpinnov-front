@@ -76,7 +76,7 @@ const InstanceDoliSaas = () => {
       <Card.Body>
         {/* <div className="d-flex flex-column gap-3 mb-4">
           <div className="d-flex justify-content-between align-items-start flex-wrap gap-3"> */}
-            {/* <div>
+        {/* <div>
               <h5 className="mb-0" style={{ color: textColor }}>
                 Offre DoliSaaS
               </h5>
@@ -90,7 +90,7 @@ const InstanceDoliSaas = () => {
               </small>
             </div> */}
 
-            {/* <InputGroup style={{ width: "260px" }}>
+        {/* <InputGroup style={{ width: "260px" }}>
               <InputGroup.Text
                 style={{
                   backgroundColor: bgColor,
@@ -109,7 +109,7 @@ const InstanceDoliSaas = () => {
                 }}
               />
             </InputGroup> */}
-          {/* </div>
+        {/* </div>
         </div> */}
 
         <Accordion defaultActiveKey="0">
@@ -195,26 +195,26 @@ const InstanceDoliSaas = () => {
                       Accessible en ligne, sécurisé, prêt à l'emploi. Parfait
                       pour TPE, artisans ou associations.
                     </p>
-                    <ul className="list-unstyled">
-                      <li>
-                        <i className="bi bi-check-circle-fill text-success me-2"></i>
-                        Clé en main, sans installation
+                    <ul className="list-unstyled mb-0">
+                      <li className="mb-2 d-flex align-items-center">
+                        <i className="bi bi-check-circle-fill text-success me-2 fs-5"></i>
+                        <span>Clé en main, sans installation</span>
                       </li>
-                      <li>
-                        <i className="bi bi-cloud-fill text-info me-2"></i>
-                        Hébergement en France
+                      <li className="mb-2 d-flex align-items-center">
+                        <i className="bi bi-cloud-fill text-info me-2 fs-5"></i>
+                        <span>Hébergement en France</span>
                       </li>
-                      <li>
-                        <i className="bi bi-file-earmark-text-fill text-warning me-2"></i>
-                        PCG Madagascar + France inclus
+                      <li className="mb-2 d-flex align-items-center">
+                        <i className="bi bi-file-earmark-text-fill text-warning me-2 fs-5"></i>
+                        <span>PCG Madagascar + France inclus</span>
                       </li>
-                      <li>
-                        <i className="bi bi-mortarboard-fill text-secondary me-2"></i>
-                        Tutoriels, FAQ, forum communautaire
+                      <li className="mb-2 d-flex align-items-center">
+                        <i className="bi bi-mortarboard-fill text-secondary me-2 fs-5"></i>
+                        <span>Tutoriels, FAQ, forum communautaire</span>
                       </li>
-                      <li>
-                        <i className="bi bi-gift-fill text-danger me-2"></i>
-                        Essai gratuit 14 jours, sans engagement
+                      <li className="mb-2 d-flex align-items-center">
+                        <i className="bi bi-gift-fill text-danger me-2 fs-5"></i>
+                        <span>Essai gratuit 14 jours, sans engagement</span>
                       </li>
                     </ul>
                   </div>
@@ -257,7 +257,6 @@ const InstanceDoliSaas = () => {
                     <i className="bi bi-play-circle-fill me-2"></i>
                     Commencer maintenant ({selectedPlanData.name})
                   </Button>
-
                 </Col>
               </Row>
             </Accordion.Body>
