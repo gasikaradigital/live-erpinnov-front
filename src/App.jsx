@@ -24,9 +24,6 @@ import InstanceCreate from "./components/common/InstanceCreate.jsx";
 import TicketDashboard from "./pages/Ticket/TicketDashboard.jsx";
 import AppNavbar from "./components/common/navbar/AppNavbar.jsx";
 import PaiementDocument from "./pages/Document/PaiementDocument.jsx"
-import { useEffect } from "react";
-import { api } from "./config";
-import { useUser } from "./contexts/UserContext.jsx";
 
 function LandingPage() {
   return (
@@ -53,28 +50,11 @@ function DashboardPage() {
 }
 
 function App() {
-  const { setUser } = useUser(); 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try{
-        const res = await api.get("/api/me");
-        setUser(res.data);
-      } catch(err) {
-        console.warn("Utilisateur non connecté ou erreur API");
-        setUser(null);
-      }
-    };
-    fetchUser();
-
-  }, [setUser]);
-
   return (
     <DarkModeProvider>
       <ThemeProvider>
-        
           <Router>
             <AuthProvider>
-              <UserProvider>
               <Routes> 
                 <Route path="/" element={<Login />} />
                 <Route path="/inscription" element={<Inscription />} />
@@ -99,7 +79,6 @@ function App() {
                 {/* </Route>  */}
 
               </Routes> 
-              </UserProvider>
             </AuthProvider>
           </Router>
       </ThemeProvider>

@@ -9,15 +9,25 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
         const checkAuth = async () => {
             try {
                 const { data } = await api.get('/api/user');
-                setAuthenticated(!!data);
+
+                if(data.user) {
+                    setAuthenticated(true); 
+                    setUser(data.user);  
+                } else {
+                    setAuthenticated(false);
+                    setUser(null);
+                }
+                
             } catch (err) {
                 console.log("error : "+err);
                 setAuthenticated(false);
+                setUser(null);
             } finally {
                 setLoading(false);
             }

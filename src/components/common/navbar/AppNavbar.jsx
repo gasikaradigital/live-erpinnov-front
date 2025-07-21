@@ -7,12 +7,13 @@ import { logout } from "../../../api/logoutApi";
 import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { fetchProfile } from "../../../api/profileApi";
-import { useUser } from "../../../contexts/UserContext";
+import { useAuth } from "../../../contexts/AuthContext";
+
 const AppNavbar = () => {
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
-  const { user } = useUser();
+  const { user } = useAuth();
 
   const handleGoBack = () => {
     navigate(-1); // Retour à la page précédente
