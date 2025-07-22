@@ -64,9 +64,7 @@ const InstanceCreate = () => {
       }
       const resTrial = await createSubscription(trialData);
     } 
-    
-
-    toast.success("Instance créée avec succès !");
+ 
     const res = await createInstance(mapped);
 
     if (res) {
