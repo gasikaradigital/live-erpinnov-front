@@ -28,10 +28,12 @@ import PaiementDocument from "./pages/Document/PaiementDocument.jsx"
 function LandingPage() {
   return (
     <>
-      <NavSection />
-      <HeroSection />
-      <ModuleSection />
-      <PricingSection />
+      <AuthProvider>
+        <NavSection />
+        <HeroSection />
+        <ModuleSection />
+        <PricingSection />
+      </AuthProvider>
     </>
   );
 }
@@ -39,12 +41,14 @@ function LandingPage() {
 function DashboardPage() {
   return (
     <ThemeProvider>
+      <AuthProvider>
       <div className="d-flex flex-column min-vh-100 bg-body">
         <AppNavbar />
         <main className="flex-grow-1">
           <DashboardContent />
         </main>
       </div>
+      </AuthProvider>
     </ThemeProvider>
   );
 }
