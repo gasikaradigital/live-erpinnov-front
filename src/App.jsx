@@ -28,12 +28,10 @@ import PaiementDocument from "./pages/Document/PaiementDocument.jsx"
 function LandingPage() {
   return (
     <>
-      <AuthProvider>
-        <NavSection />
-        <HeroSection />
-        <ModuleSection />
-        <PricingSection />
-      </AuthProvider>
+      <NavSection />
+      <HeroSection />
+      <ModuleSection />
+      <PricingSection />
     </>
   );
 }
@@ -41,14 +39,12 @@ function LandingPage() {
 function DashboardPage() {
   return (
     <ThemeProvider>
-      <AuthProvider>
       <div className="d-flex flex-column min-vh-100 bg-body">
         <AppNavbar />
         <main className="flex-grow-1">
           <DashboardContent />
         </main>
       </div>
-      </AuthProvider>
     </ThemeProvider>
   );
 }
@@ -65,7 +61,7 @@ function App() {
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/confirm-password" element={<ConfirmPassword />} />
 
-              {/* <Route element={<ProtectedRoute />}> */}
+                <Route element={<ProtectedRoute />}>
 
                   <Route path="/verify-otp" element={<VerifyOtp />} />
                   <Route path="/verify-email" element={<VerifyEmail />} />
@@ -77,10 +73,10 @@ function App() {
                   <Route path="/confirm-password" element={<ConfirmPassword />} />
                   <Route path="/verify-otp" element={<VerifyOtp />} />
                   <Route path="/profile" element={<ProfileForm />} />
-                <Route path="/ticket" element={<TicketDashboard/>} />
-                <Route path="/document" element={<PaiementDocument/>} />
+                  <Route path="/ticket" element={<TicketDashboard/>} />
+                  <Route path="/document" element={<PaiementDocument/>} />
 
-                {/* </Route>  */}
+                </Route>
 
               </Routes> 
             </AuthProvider>
