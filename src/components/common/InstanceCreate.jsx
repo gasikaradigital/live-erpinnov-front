@@ -8,7 +8,6 @@ import { fetchEntreprises } from "../../api/enterpriseApi";
 import { createInstance } from "../../api/instanceApi";
 import { toast } from 'react-toastify';
 import { createSubscription } from '../../api/subscriptionApi';
-import { ScaleLoader } from "react-spinners";
 
 
 const InstanceCreate = () => {
@@ -19,7 +18,6 @@ const InstanceCreate = () => {
   const [instanceName, setInstanceName] = useState('');
   const [selectedOption, setSelectedOption] = useState('manual');
   const [selectedEnterprise, setSelectedEnterprise] = useState(1);
-  const [loading, setLoading] = useState(false);
 
   const handleBackClick = () => {
     navigate(-1);
@@ -30,7 +28,6 @@ const InstanceCreate = () => {
   };
 
   const handleCreateInstance = async () => {
-    setLoading(true);
     let nameToUse;
 
     if(selectedOption === 'automatic') {
@@ -59,32 +56,25 @@ const InstanceCreate = () => {
     };
     
     
-    try{
-      if(planChoose.subscription == "trial") {
+    
+    if(planChoose.subscription == "trial") {
       const trialData = {
         planId: planChoose.planId,
         subPlanId: planChoose.subPlanId
       }
       const resTrial = await createSubscription(trialData);
-      }
-    } catch(err) {
-      console.warn(err);
-    } finally {
-      setLoading(false);
-    }
-    
-    
+    } 
     
 
     toast.success("Instance créée avec succès !");
-    /*const res = await createInstance(mapped);
+    const res = await createInstance(mapped);
 
     if (res) {
       toast.success("Instance créée avec succès !");
       console.log(res);
     } else {
       toast.error("Une erreur est survenue lors de la création.");
-    }*/
+    }
 
     /*console.log('Creation instance avec:', {
       nom: nameToUse,
@@ -309,16 +299,11 @@ const InstanceCreate = () => {
                 onClick={handleCreateInstance}
                 disabled={selectedOption !== 'automatic' && !instanceName.trim()}
               >
-                {loading ? "Chargement..." : "Créer l'instance"}
+                Créer l'instance
                 <svg width="16" height="16" className="ms-2" fill="currentColor" viewBox="0 0 16 16">
                   <path fillRule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
                 </svg>
               </Button>
-              {loading && (
-                <div style="{{ marginTop: 10 }}">
-                  <ScaleLoader color="#0d6efd" height={20} width={4} radius={2} />
-                </div>
-              )}
             </div>
           </div>
 
