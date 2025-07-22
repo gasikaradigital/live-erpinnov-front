@@ -129,7 +129,7 @@ const AppNavbar = () => {
                   Ticket
                 </Dropdown.Item>
                 {
-                  user?.subscriptions?.length > 0 && user?.subscriptions?.[0]?.status === "active" && (
+                  user?.subscriptions?.length > 0 && user?.subscriptions?.[0]?.status !== "trial" && (
                     <Dropdown.Item href="/document">
                       <i className="bi bi-files me-2"></i>
                       Documents
