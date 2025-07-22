@@ -55,22 +55,26 @@ const InstanceCreate = () => {
       source: planChoose.source
     };
     
-    const mappedTrial = {
-          planId: planChoose.planId,
-          subPlanId: planChoose.subPlanId
-        }
     
-    const res = await createSubscription(mappedTrial);
+    
+    if(planChoose.subscription == "trial") {
+      const trialData = {
+        planId: planChoose.planId,
+        subPlanId: planChoose.subPlanId
+      }
+      const resTrial = await createSubscription(trialData);
+    } 
+    
 
     toast.success("Instance créée avec succès !");
-    /*const res = await createInstance(mapped);
+    const res = await createInstance(mapped);
 
     if (res) {
       toast.success("Instance créée avec succès !");
       console.log(res);
     } else {
       toast.error("Une erreur est survenue lors de la création.");
-    }*/
+    }
 
     /*console.log('Creation instance avec:', {
       nom: nameToUse,

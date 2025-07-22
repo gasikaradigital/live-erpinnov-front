@@ -30,9 +30,17 @@ const PaymentModule = () => {
     setShowPaymentCard(true);
   };
 
-  const handleFreeTrialClick= ()=>{
-    navigate("/entreprise/create");
-  }
+  const handleFreeTrialClick = () => {
+    const storedPlan = localStorage.getItem('planChoose');
+    if (!storedPlan) {
+      console.error('No plan found in local storage');
+      return;
+    }
+    const plan = JSON.parse(storedPlan);
+    plan.subscription = 'trial';
+    localStorage.setItem('planChoose', JSON.stringify(plan));
+    navigate('/entreprise/create');
+  };
 
   return (
      <div className="text-dark min-vh-100 w-100 mw-100 mx-0 px-0 paymentModuleContainer" style={{ maxWidth: '100%', overflowX: 'hidden' }}>
@@ -86,7 +94,7 @@ const PaymentModule = () => {
                 </div>
 
                 {
-                  user?.subscriptions?.length == 0 && user?.subscriptions?.[0]?.status !== "trial" && (
+                  user?.subscriptions?.length == 0 && (
                   <div className="col-md-6 paymentOptionColumn">
                     <div className="p-3 rounded-3 border border-white align-items-start border-opacity-25 bg-white bg-opacity-10 mb-3 paymentOptionCard">
                       <h5 className="fw-semibold text-white mb-1 paymentOptionTitle">Essayer gratuitement</h5>
