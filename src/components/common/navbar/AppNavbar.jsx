@@ -22,11 +22,13 @@ const AppNavbar = () => {
   const handleLogout = async () => {
     try {
       const response = await logout();
+      sessionStorage.clear();
 
       if (response.status === 200) {
         toast.success("Déconnexion réussie");
       }
-      navigate("/");
+      navigate("/", {replace: true});
+      window.location.reload();
     } catch (error) {
       toast.error("Erreur lors de la déconnexion" + error);
       navigate("/");

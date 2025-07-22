@@ -2,6 +2,7 @@ import { api } from "../config";
 
 export const logout = async (otp) => {
     try {
+        await api.get('/api/sanctum/csrf-cookie');
         const response = await api.post(`/api/logout`,{ otp });
 
         if (response.status === 200) {
