@@ -31,8 +31,6 @@ const AppNavbar = () => {
       toast.error("Erreur lors de la déconnexion" + error);
       navigate("/");
     } finally {
-      setAuthenticated(false);
-      setUser(null);
       sessionStorage.clear();
       navigate("/");
       window.location.reload();
