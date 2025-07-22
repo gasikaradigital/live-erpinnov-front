@@ -296,7 +296,8 @@ const navigate = useNavigate();
                         <option value="">-- Choisir pays --</option>
                         <option value="Madagascar">Madagascar</option>
                         <option value="France">France</option>
-                        <option value="États-Unis">États-Unis</option>
+                        <option value="Belgique">Belgique</option>
+                        <option value="Suisse">Suisse</option>
                       </RBForm.Select>
                     </Col>
                   </Row>
