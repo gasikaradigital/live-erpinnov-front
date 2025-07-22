@@ -7,6 +7,7 @@ import './InstanceCreate.css';
 import { fetchEntreprises } from "../../api/enterpriseApi";
 import { createInstance } from "../../api/instanceApi";
 import { toast } from 'react-toastify';
+import { createSubscription } from '../../api/subscriptionApi';
 
 
 const InstanceCreate = () => {
@@ -54,7 +55,14 @@ const InstanceCreate = () => {
       source: planChoose.source
     };
     
-     toast.success("Instance créée avec succès !");
+    const mappedTrial = {
+          planId: planChoose.planId,
+          subPlanId: planChoose.subPlanId
+        }
+    
+    const res = await createSubscription(mappedTrial);
+
+    toast.success("Instance créée avec succès !");
     /*const res = await createInstance(mapped);
 
     if (res) {
