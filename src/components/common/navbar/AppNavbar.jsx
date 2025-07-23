@@ -79,8 +79,8 @@ const AppNavbar = () => {
     >
       <Container>
         {showBackButton && (
-          <Button 
-            variant="transparent" 
+          <Button
+            variant="transparent"
             onClick={handleGoBack}
             className="me-2 border-0"
             title="Retour"
@@ -88,7 +88,10 @@ const AppNavbar = () => {
             <i className="bi bi-arrow-left fs-4"></i>
           </Button>
         )}
-        <Navbar.Brand href="/dashboard" className="d-flex align-items-center gap-2">
+        <Navbar.Brand
+          href="/dashboard"
+          className="d-flex align-items-center gap-2"
+        >
           <img
             src="/assets/img/front-pages/logo/logo.png"
             alt="ERP INNOV"
@@ -118,9 +121,11 @@ const AppNavbar = () => {
                 className="d-flex align-items-center gap-2 px-2 border-0 shadow-none bg-transparent"
               >
                 <div className="profile-circle bg-primary text-white">
-                  {initiales || '??'}
+                  {initiales || "??"}
                 </div>
-                <span className="d-none d-md-inline">{user?.profile.fname}</span>
+                <span className="d-none d-md-inline">
+                  {user?.profile.fname}
+                </span>
               </Dropdown.Toggle>
 
               <Dropdown.Menu className="mt-2 shadow">
@@ -130,7 +135,7 @@ const AppNavbar = () => {
                 </Dropdown.Item>
                 <Dropdown.Item href="/ticket">
                   <i className="bi bi-ticket-detailed me-2"></i>
-                  Ticket
+                  Ticketk
                 </Dropdown.Item>
                 {
                   user?.subscriptions?.length > 0 && user?.subscriptions?.[0]?.status !== "trial" && (
