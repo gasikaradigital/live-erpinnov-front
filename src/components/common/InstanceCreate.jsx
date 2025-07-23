@@ -52,7 +52,8 @@ const InstanceCreate = () => {
     const mapped = {
       name: nameToUse,
       entrepriseId: selectedEnterprise,
-      source: planChoose.source
+      planId: planChoose.planId,
+      source: planChoose.source,
     };
     
     
