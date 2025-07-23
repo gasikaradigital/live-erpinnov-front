@@ -56,7 +56,7 @@ const InstanceCreate = () => {
       source: planChoose.source,
     };
     
-    
+    console.log(mapped);
     
     if(planChoose.subscription == "trial") {
       const trialData = {
