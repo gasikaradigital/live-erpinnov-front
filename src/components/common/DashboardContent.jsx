@@ -30,83 +30,61 @@ const DashboardContent = () => {
   const borderCol = theme === "dark" ? "#444" : "#dee2e6";
 
   return (
-    <Container className="pt-5 mt-5" fluid style={{ maxWidth: "100%" }}>
-      {/* Onglets */}
-      <Row className="mb-4 g-0 justify-content-center">
-        <Col lg={10}>
-          <div
-            className="border rounded shadow-sm p-4"
+    <Container fluid className="pt-5 mt-5">
+      {/* Navigation des onglets */}
+      <Nav className="mb-3 justify-content-center">
+        <Nav.Item className="flex-fill text-center">
+          <Nav.Link
+            active={activeTab === "dolisaas"}
+            onClick={() => setActiveTab("dolisaas")}
             style={{
-              backgroundColor: bgColor,
+              padding: "6px 0",
+              fontSize: "14px",
+              backgroundColor:
+                activeTab === "dolisaas" ? activeBg : "transparent",
               color: textColor,
-              border: "1px solid",
-              borderColor: borderCol,
+              borderRadius: "6px",
+              transition: "all 0.3s ease",
             }}
           >
-            <Nav variant="tabs" className="mb-3 justify-content-center">
-              <Nav.Item className="flex-fill text-center">
-                <Nav.Link
-                  active={activeTab === "dolisaas"}
-                  onClick={() => setActiveTab("dolisaas")}
-                  style={{
-                    padding: "12px 0",
-                    backgroundColor:
-                      activeTab === "dolisaas" ? activeBg : "transparent",
-                    color: textColor,
-                  }}
-                >
-                  Dolisaas
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item className="flex-fill text-center">
-                <Nav.Link
-                  active={activeTab === "erpinnov"}
-                  onClick={() => setActiveTab("erpinnov")}
-                  style={{
-                    padding: "12px 0",
-                    backgroundColor:
-                      activeTab === "erpinnov" ? activeBg : "transparent",
-                    color: textColor,
-                  }}
-                >
-                  Erpinnov
-                </Nav.Link>
-              </Nav.Item>
-            </Nav>
-          </div>
-        </Col>
-      </Row>
+            Dolisaas
+          </Nav.Link>
+        </Nav.Item>
 
-      {/* Contenu dynamique si dolisaas sélectionné */}
+        <Nav.Item className="flex-fill text-center">
+          <Nav.Link
+            active={activeTab === "erpinnov"}
+            onClick={() => setActiveTab("erpinnov")}
+            style={{
+              padding: "6px 0",
+              fontSize: "14px",
+              backgroundColor:
+                activeTab === "erpinnov" ? activeBg : "transparent",
+              color: textColor,
+              borderRadius: "6px",
+              transition: "all 0.3s ease",
+            }}
+          >
+            Erpinnov
+          </Nav.Link>
+        </Nav.Item>
+      </Nav>
+
+      {/* Affichage unique : une seule interface visible à la fois */}
       {activeTab === "dolisaas" && (
-        <Row className="mb-4 justify-content-center">
-          <Col lg={10}>
+        <Row className="min-vh-100 overflow-auto">
+          <Col xs={12} className="px-3 ">
             <InstanceDoliSaas />
           </Col>
         </Row>
       )}
 
-      {/* Plans
-      <Row className="mb-4 justify-content-center">
-        <Col lg={10}>
-          {plans.map((plan) => (
-            <PlanCard
-              key={plan.id}
-              planData={plan}
-              blDécouvrez
-              nos
-              solutionsur={!(activeTab === "erpinnov" && plan.id === 1)}
-              source={activeTab}
-            />
-          ))}
-        </Col>
-      </Row> */}
-      {/* InstancesCard toujours visible */}
-      <Row className="mb-4 justify-content-center">
-        <Col lg={10}>
-          <InstancesCard />
-        </Col>
-      </Row>
+        <Row className="min-vh-100 overflow-auto">
+          <Col xs={12} className="px-3">
+            <InstancesCard />
+          </Col>
+        </Row>
+    
     </Container>
   );
 };

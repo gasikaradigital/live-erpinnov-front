@@ -71,47 +71,10 @@ const InstanceDoliSaas = () => {
         color: textColor,
         borderColor: secondaryColor,
         width: "100%",
+        maxHeight: "90vh", // 👈 empêche de dépasser l’écran
       }}
     >
-      <Card.Body>
-        {/* <div className="d-flex flex-column gap-3 mb-4">
-          <div className="d-flex justify-content-between align-items-start flex-wrap gap-3"> */}
-        {/* <div>
-              <h5 className="mb-0" style={{ color: textColor }}>
-                Offre DoliSaaS
-              </h5>
-              <Badge bg="info" className="me-2">
-                Simple
-              </Badge>
-              <Badge bg={selectedPlanData?.badgeVariant || "secondary"}>{selectedPlanData.name || "Chargement"}</Badge>
-              <br />
-              <small style={{ color: theme === "dark" ? "#bbb" : "#666" }}>
-                Une solution Dolibarr hébergée, clé en main, prête à l'emploi.
-              </small>
-            </div> */}
-
-        {/* <InputGroup style={{ width: "260px" }}>
-              <InputGroup.Text
-                style={{
-                  backgroundColor: bgColor,
-                  color: "#999",
-                  borderColor: secondaryColor,
-                }}
-              >
-                <i className="bi bi-search" />
-              </InputGroup.Text>
-              <Form.Control
-                placeholder="Rechercher..."
-                style={{
-                  backgroundColor: bgColor,
-                  color: textColor,
-                  borderColor: secondaryColor,
-                }}
-              />
-            </InputGroup> */}
-        {/* </div>
-        </div> */}
-
+    
         <Accordion defaultActiveKey="0">
           <Accordion.Item
             eventKey="0"
@@ -120,9 +83,6 @@ const InstanceDoliSaas = () => {
               borderColor: secondaryColor,
             }}
           >
-            <Accordion.Header>
-              💼 Choisissez votre offre DoliSaaS
-            </Accordion.Header>
             <Accordion.Body
               style={{ backgroundColor: bgColor, color: textColor }}
             >
@@ -262,7 +222,6 @@ const InstanceDoliSaas = () => {
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
-      </Card.Body>
     </Card>
   );
 };
