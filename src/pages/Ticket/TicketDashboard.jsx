@@ -25,6 +25,9 @@ const TicketDashboard = () => {
   const { theme } = useTheme();
   const darkMode = theme === "dark";
 
+  const today = new Date().toISOString().split("T")[0];
+  console.log(today);
+
   const [tickets, setTickets] = useState([
     {
       id: 1,
@@ -33,7 +36,7 @@ const TicketDashboard = () => {
       note: "Client B2B",
       status: "finnish",
       reference: "EB54321",
-      createdAt: "3/06/2025",
+      createdAt: "2025-06-03",
     },
     {
       id: 2,
@@ -42,7 +45,7 @@ const TicketDashboard = () => {
       note: "Poste RH",
       status: "in progress",
       reference: "EB12345",
-      createdAt: "4/06/2025",
+      createdAt: "2025-06-03",
     },
   ]);
   const [showModal, setShowModal] = useState(false);
@@ -51,6 +54,9 @@ const TicketDashboard = () => {
     sujet: "",
     categorie: "Commercial",
     note: "",
+    status: "in progress",
+    reference: "",
+    createdAt: today,
   });
 
   const commercialCount = tickets.filter(
@@ -76,7 +82,7 @@ const TicketDashboard = () => {
 
     setShowModal(false);
     setEditTicket(null);
-    setFormData({ sujet: "", categorie: "Commercial", note: "" });
+    setFormData({ sujet: "", categorie: "Commercial", note: "", status: "in progress", reference: "", createdAt: today});
   };
 
   const handleEdit = (ticket) => {
@@ -85,6 +91,9 @@ const TicketDashboard = () => {
       sujet: ticket.sujet,
       categorie: ticket.categorie,
       note: ticket.note,
+      status: ticket.status,
+      reference: ticket.reference,
+      createdAt: ticket.createdAt,
     });
     setShowModal(true);
   };
@@ -136,7 +145,7 @@ const TicketDashboard = () => {
               style={{ backgroundColor: badgeBlue, borderColor: badgeBlue }}
               onClick={() => {
                 setEditTicket(null);
-                setFormData({ sujet: "", categorie: "Commercial", note: "" });
+                setFormData({ sujet: "", categorie: "Commercial", note: "", status: "in progress", reference: "", createdAt: today});
                 setShowModal(true);
               }}
             >
@@ -263,54 +272,115 @@ const TicketDashboard = () => {
           </Modal.Header>
           <Modal.Body style={{ backgroundColor: bgColor, color: textColor }}>
             <Form onSubmit={handleSubmit}>
-              <Form.Group className="mb-3">
-                <Form.Label>Sujet</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={formData.sujet}
-                  onChange={(e) =>
-                    setFormData({ ...formData, sujet: e.target.value })
-                  }
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Catégorie</Form.Label>
-                <Form.Select
-                  value={formData.categorie}
-                  onChange={(e) =>
-                    setFormData({ ...formData, categorie: e.target.value })
-                  }
-                >
-                  <option value="Commercial">Commercial</option>
-                  <option value="Administratif">Administratif</option>
-                </Form.Select>
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Note</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={formData.note}
-                  onChange={(e) =>
-                    setFormData({ ...formData, note: e.target.value })
-                  }
-                  placeholder="Remarques, précisions..."
-                />
-              </Form.Group>
-              <div className="d-flex justify-content-end gap-2">
-                <Button
-                  variant="outline-secondary"
-                  onClick={() => setShowModal(false)}
-                >
-                  Annuler
-                </Button>
-                <Button
-                  type="submit"
-                  style={{ backgroundColor: badgeBlue, borderColor: badgeBlue }}
-                >
-                  {editTicket ? "Mettre à jour" : "Ajouter"}
-                </Button>
-              </div>
+              <Row className="g-3">
+                <Col md={6}>
+                  <Form.Group>
+                    <Form.Label>Date</Form.Label>
+                    <Form.Control
+                      type="date"
+                      value={formData.createdAt}
+                      onChange={(e) =>
+                        setFormData({ ...formData, createdAt: e.target.value })
+                      }
+                      style={{ textAlign: "left" }}
+                      required
+                    />
+                  </Form.Group>
+                </Col>
+
+                <Col md={6}>
+                  <Form.Group>
+                    <Form.Label>Réference</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={formData.reference}
+                      onChange={(e) =>
+                        setFormData({ ...formData, reference: e.target.value })
+                      }
+                      style={{ textAlign: "left" }}
+                      placeholder="ex: EBxxxxx"
+                      required
+                    />
+                  </Form.Group>
+                </Col>
+
+                <Col md={6}>
+                  <Form.Group>
+                    <Form.Label>Sujet</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={formData.sujet}
+                      onChange={(e) =>
+                        setFormData({ ...formData, sujet: e.target.value })
+                      }
+                      style={{ textAlign: "left" }}
+                      placeholder="ex: Devi..."
+                      required
+                    />
+                  </Form.Group>
+                </Col>
+
+                <Col md={6}>
+                  <Form.Group>
+                    <Form.Label>Catégorie</Form.Label>
+                    <Form.Select
+                      value={formData.categorie}
+                      onChange={(e) =>
+                        setFormData({ ...formData, categorie: e.target.value })
+                      }
+                    >
+                      <option value="Commercial">Commercial</option>
+                      <option value="Administratif">Administratif</option>
+                    </Form.Select>
+                  </Form.Group>
+                </Col>
+
+                <Col md={12}>
+                  <Form.Group>
+                    <Form.Label>Note</Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      value={formData.note}
+                      onChange={(e) =>
+                        setFormData({ ...formData, note: e.target.value })
+                      }
+                      placeholder="Remarques, précisions..."
+                    />
+                  </Form.Group>
+                </Col>
+
+                <Col md={6}>
+                  <Form.Group>
+                    <Form.Label>Status</Form.Label>
+                    <Form.Select
+                      value={formData.status}
+                      onChange={(e) =>
+                        setFormData({ ...formData, status: e.target.value })
+                      }
+                    >
+                      <option value="finnish">Terminé</option>
+                      <option value="in progress">en cours</option>
+                    </Form.Select>
+                  </Form.Group>
+                </Col>
+
+                <Col md={12}>
+                  <div className="d-flex justify-content-end gap-2 mt-3">
+                    <Button
+                      variant="outline-secondary"
+                      onClick={() => setShowModal(false)}
+                    >
+                      Annuler
+                    </Button>
+                    <Button
+                      type="submit"
+                      style={{ backgroundColor: badgeBlue, borderColor: badgeBlue }}
+                    >
+                      {editTicket ? "Mettre à jour" : "Ajouter"}
+                    </Button>
+                  </div>
+                </Col>
+              </Row>
             </Form>
           </Modal.Body>
         </Modal>
