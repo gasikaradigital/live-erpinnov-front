@@ -31,12 +31,18 @@ const TicketDashboard = () => {
       sujet: "Demande de devis",
       categorie: "Commercial",
       note: "Client B2B",
+      status: "finnish",
+      reference: "EB54321",
+      createdAt: "3/06/2025",
     },
     {
       id: 2,
       sujet: "Recrutement",
       categorie: "Administratif",
       note: "Poste RH",
+      status: "in progress",
+      reference: "EB12345",
+      createdAt: "4/06/2025",
     },
   ]);
   const [showModal, setShowModal] = useState(false);
@@ -206,18 +212,22 @@ const TicketDashboard = () => {
               >
                 <thead style={{ backgroundColor: badgeBlue, color: "#fff" }}>
                   <tr>
-                    <th>#</th>
+                    <th>Réference</th>
+                    <th>Date</th>
                     <th>Sujet</th>
                     <th>Catégorie</th>
                     <th>Note</th>
                     <th>Destination</th>
-                    <th className="text-end">Actions</th>
+                    <th>Satus</th>
                   </tr>
                 </thead>
                 <tbody>
                   {tickets.map((ticket, index) => (
                     <tr key={ticket.id}>
-                      <td>{index + 1}</td>
+                      <td>{ticket.reference}</td>
+                      <td className="text-start">
+                        {ticket.createdAt}
+                      </td>
                       <td>{ticket.sujet}</td>
                       <td>{ticket.categorie}</td>
                       <td>{ticket.note}</td>
@@ -226,24 +236,12 @@ const TicketDashboard = () => {
                           ? "Vers Administratif"
                           : "Vers Commercial"}
                       </td>
-                      <td className="text-end">
-                        <Button
-                          variant="outline-primary"
-                          size="sm"
-                          className="me-2"
-                          style={{ borderColor: badgeBlue, color: badgeBlue }}
-                          onClick={() => handleEdit(ticket)}
-                        >
-                          <HiOutlinePencil />
-                        </Button>
-                        <Button
-                          variant="outline-danger"
-                          size="sm"
-                          style={{ borderColor: "#dc3545", color: "#dc3545" }}
-                          onClick={() => handleDelete(ticket.id)}
-                        >
-                          <HiOutlineTrash />
-                        </Button>
+                      <td>
+                        {ticket.status === "finnish" ? (
+                          <Badge bg="success">terminé</Badge>
+                        ) : (
+                          <Badge bg="warning" text="dark">en cours</Badge>
+                        )}
                       </td>
                     </tr>
                   ))}
