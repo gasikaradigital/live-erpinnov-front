@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Container, Row, Col, Card, Table, Button, Modal } from "react-bootstrap";
+import { Container, Row, Col, Card, Table, Button, Form } from "react-bootstrap";
 import { HiEye, HiFolder, HiDocumentDownload } from 'react-icons/hi';
 import 'react-toastify/dist/ReactToastify.css';
 import { useTheme } from "../../contexts/ThemeContext";
@@ -39,7 +39,50 @@ const PaiementDocument = () => {
               </div>
     
               <h4 className="text-start">Documents offerts pour les abonements validés</h4>
-              <p className="border text-start" style={{ marginLeft: "5%" }}>Pour tout abonnement validé, un fichier document PDF seront offert et automatiquement généré après votre abonement.</p>
+              <div className="text-start ms-lg-5">
+                <p className="text-secondary">Pour tout abonnement validé, un fichier document PDF seront offert et automatiquement généré après votre abonement.</p>
+                <Card className="p-3 rounded-4 border border-primary-subtle" style={{ maxWidth: '720px' }}>
+                  <Row className="g-0 align-items-center">
+
+                    {/* Radio button */}
+                    <Col xs="auto">
+                      <Form.Check
+                        type="radio"
+                        name="dolibarr-option"
+                        defaultChecked
+                        style={{ transform: 'scale(0.5)'}}
+                      />
+                    </Col>
+
+                    {/* Image */}
+                    <Col xs="auto" className="h-100">
+                      <img
+                        src="/src/assets/dolibarr-pdf-bien-gerer-son-entreprisec2171d20240202113929-image_cover.jpg"
+                        alt="Dolibarr ebook"
+                        style={{ width: '80px', height: 'auto', objectFit: 'cover', borderRadius: '10px' }}
+                      />
+                    </Col>
+
+                    {/* contenue */}
+                    <Col className="ps-3 d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center align-items-lg-center">
+                      <div className="mb-2 mb-lg-0 me-lg-3">
+                        <h6 className="fw-bold text-primary mb-1">
+                          BIEN GÉRER SON ENTREPRISE AVEC DOLIBARR
+                        </h6>
+                        <p className="mb-0 text-secondary" style={{ fontSize: '0.875rem' }}>
+                          Pour simplifier l'accès à Dolibarr, nous avons conçu DoliSaaS : une version en ligne, prête à l'emploi, accessible sans aucun besoin de serveur …
+                        </p>
+                      </div>
+                      <div>
+                        <Button variant="primary d-flex">
+                          <i className="bi bi-download me-2" /> Télécharger
+                        </Button>
+                      </div>
+                    </Col>
+                    
+                  </Row>
+                </Card>
+              </div>
               {/* Documents listes */}
               
     
