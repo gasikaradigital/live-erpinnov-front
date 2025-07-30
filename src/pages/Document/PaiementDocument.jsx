@@ -38,8 +38,8 @@ const PaiementDocument = () => {
                 </h2>
               </div>
     
-              <h4>Visualisation – Gestion des documents PDF d’abonnement</h4>
-              <p>Pour tout abonnement validé (paiement effectué), un fichier PDF de confirmation doit être automatiquement généré et mis à disposition du client.</p>
+              <h4 className="text-start">Documents offerts pour les abonements validés</h4>
+              <p className="border text-start" style={{ marginLeft: "5%" }}>Pour tout abonnement validé, un fichier document PDF seront offert et automatiquement généré après votre abonement.</p>
               {/* Documents listes */}
               
     
