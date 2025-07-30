@@ -135,7 +135,7 @@ const AppNavbar = () => {
                 </Dropdown.Item>
                 <Dropdown.Item href="/ticket">
                   <i className="bi bi-ticket-detailed me-2"></i>
-                  Ticketk
+                  Tickets
                 </Dropdown.Item>
                 {
                   user?.subscriptions?.length > 0 && user?.subscriptions?.[0]?.status !== "trial" && (
