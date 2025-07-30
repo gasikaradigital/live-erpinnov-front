@@ -215,7 +215,7 @@ const InstanceDoliSaas = () => {
                     onClick={handleStart}
                   >
                     <i className="bi bi-play-circle-fill me-2"></i>
-                    Commencer maintenant ({selectedPlanData.name})
+                    Création d’instance (offre 14 jours gratuits)
                   </Button>
                 </Col>
               </Row>
