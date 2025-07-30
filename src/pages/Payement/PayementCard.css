@@ -1,0 +1,21 @@
+*{
+    font-family: MontSerrat;
+}
+
+.custom-options input{
+    transform: scale(0.4);
+    margin-top: 8px;
+    border: 2px solid black;
+    cursor: pointer;
+
+}
+.custom-options label{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+.custom-control{
+    padding: 14px;
+}

@@ -25,6 +25,7 @@ import TicketDashboard from "./pages/Ticket/TicketDashboard.jsx";
 import AppNavbar from "./components/common/navbar/AppNavbar.jsx";
 import PaiementDocument from "./pages/Document/PaiementDocument.jsx"
 import InstanceErpinnov from "./components/common/InstanceErpinnov.jsx";
+import PayementCard from "./pages/Payement/PayementCard.jsx";
 
 function LandingPage() {
   return (
@@ -76,6 +77,7 @@ function App() {
                   <Route path="/profile" element={<ProfileForm />} />
                   <Route path="/ticket" element={<TicketDashboard/>} />
                   <Route path="/document" element={<PaiementDocument/>} />
+                  <Route path="/payement-card" element={<PayementCard/>}/>
 
                 {/* </Route> */}
 

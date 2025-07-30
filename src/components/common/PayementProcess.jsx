@@ -6,7 +6,7 @@ import { useTheme } from '../../contexts/ThemeContext';
 import { useAuth } from '../../contexts/AuthContext';
 import Form from 'react-bootstrap/Form';
 // import CardPayement from './cardPayement';
-import PayementCard from './PayementCard';
+import PayementCard from '../../pages/Payement/PayementCard';
 import { useLocation, useNavigate } from "react-router";
 import './PayementProcess.css';
 
@@ -17,17 +17,11 @@ const PaymentModule = () => {
   const [planChoose, setPlanChoose] = useState(null);
 
   const [isAnnualBilling, setIsAnnualBilling] = useState(false);
-  const [showPaymentCard, setShowPaymentCard] = useState(false);
 
   const { user } = useAuth();
 
   const handleSwitchChange = () => {
     setIsAnnualBilling(!isAnnualBilling);
-  };
-
-  const handleSubscriptionClick = () => {
-    
-    setShowPaymentCard(true);
   };
 
   const handleFreeTrialClick = () => {
@@ -87,7 +81,7 @@ const PaymentModule = () => {
                   <div className="p-3 rounded-3 border border-white align-items-start border-opacity-25 bg-white bg-opacity-10 mb-3 paymentOptionCard">
                     <h5 className="fw-semibold text-white mb-1 paymentOptionTitle">Créer une nouvelle instance</h5>
                     <p className="text-white-50 mb-3 paymentOptionDesc">Commencez immédiatement avec toutes les fonctionnalités</p>
-                    <Button variant="light" className="w-100 fw-bold rounded-3 paymentSubscribeButton" onClick={handleSubscriptionClick}>
+                    <Button variant="light" className="w-100 fw-bold rounded-3 paymentSubscribeButton" href='/payement-card'>
                       S'abonner maintenant
                     </Button>
                   </div>
@@ -108,12 +102,6 @@ const PaymentModule = () => {
                 
               </div>
             </div>
-
-            {showPaymentCard && (
-              <div className="mt-4 paymentCardContainer">
-                <PayementCard isOpen={showPaymentCard} onClose={() => setShowPaymentCard(false)}/>
-              </div>
-            )}
           </div>
 
           <div className="col-lg-4 paymentRightColumn">
