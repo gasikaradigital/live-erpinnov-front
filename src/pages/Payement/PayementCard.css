@@ -1,9 +1,9 @@
-*{
+/* *{
     font-family: MontSerrat;
-}
+} */
 
 .custom-options input{
-    transform: scale(0.4);
+    transform: scale(0.5);
     margin-top: 8px;
     border: 2px solid black;
     cursor: pointer;
@@ -18,4 +18,9 @@
 }
 .custom-control{
     padding: 14px;
+}
+.btnBillingInfos:hover{
+    border: none;
+    transform: none;
+    outline: none;
 }
