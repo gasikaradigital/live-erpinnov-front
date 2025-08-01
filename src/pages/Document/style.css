@@ -1,0 +1,47 @@
+.document-card:hover {
+    background: #0d6dfd27;
+}
+
+@media (max-width: 385px) {
+    .document-card-content button{
+        margin-top: -40px !important;
+    }
+
+    .document-card-content p {
+        max-height: 60%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+@media (max-width: 575.98px) {
+  /* Styles pour xs uniquement */
+
+  .document-card-body {
+    height: 250px !important;
+  }
+
+  .document-radio-btn {
+    display: none;
+    visibility: hidden;
+    width: 0;
+  }
+
+  .document-img-file {
+    width: 100%;
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+
+  .document-img-file img {
+    height: 100% !important;
+    width: 100% !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+
+  .document-card-content h6 {
+    font-size: small;
+  }
+
+}
