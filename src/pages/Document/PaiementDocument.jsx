@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useTheme } from "../../contexts/ThemeContext";
 import AppNavbar from '../../components/common/navbar/AppNavbar';
 import './style.css';
+import dolibarrCover from "../../assets/dolibarr-pdf-bien-gerer-son-entreprisec2171d20240202113929-image_cover.jpg";
 
 const PaiementDocument = () => {
   const { theme } = useTheme();
@@ -99,7 +100,7 @@ const PaiementDocument = () => {
                       {/* Image */}
                       <div className="d-flex align-items-center document-img-file">
                         <img
-                          src={`/assets/${ebook.image}`}
+                          src={dolibarrCover}
                           alt={ebook.title}
                           style={{
                             width: '80px',
