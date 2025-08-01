@@ -6,6 +6,9 @@ import './PayementCard.css';
 import orangeMoneyImg from '../../assets/logo_cartes/orange_money.jpeg';
 import bankTransferImg from '../../assets/logo_cartes/bank_transfer.jpg';
 import pmPlaceImg from '../../assets/logo_cartes/pm_place.jpeg';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
 
 function PayementCard(){
 
@@ -28,7 +31,9 @@ function PayementCard(){
     ]
     
     const [selectedRadio, setSelectedRadio] = useState(paymentMethod[0].value);
+    const [selectedSwitch, setSelectedSwitch] = useState('annuel');
     const [showBillingForm, setShowBillingForm] = useState(true);
+    const [selectedDate, setSelectedDate] = useState(null);
 
     // Styles répétitives
     const formControlStyle = {border: '1px solid rgb(176, 173, 173)', textAlign: 'left', textIndent: '5px', backgroundColor: '#fff', color: 'black', fontWeight: 'normal'};
@@ -105,26 +110,24 @@ function PayementCard(){
                                                 type='text'
                                                 placeholder='Nom complet | eg : John Doe'
                                                 style={formControlStyle}
-                                                className='py-2 inputInfos'
+                                                className='py-2'
                                             />
                                             <input
                                                 type='email'
                                                 placeholder='Email | eg : johndoe@gmail.com'
                                                 style={formControlStyle}
-                                                className='py-2 inputInfos'
+                                                className='py-2'
                                             />
-                                            <input
-                                                type='text'
-                                                placeholder='Pays'
-                                                style={formControlStyle}
-                                                className='py-2 inputInfos'
-                                                
-                                            />
+                                            <select className='py-2 rounded text-dark' style={{backgroundColor: 'white', border: '1px solid #b2adad'}}>
+                                                <option value="null">Sélectionnez votre pays...</option>
+                                                <option value="MG">🇲🇬 Madagascar</option>
+                                                <option value="FR">🇫🇷 France</option>
+                                            </select>
                                             <input
                                                 type='text'
                                                 placeholder='Adresse | eg : Lot7B Majunga Be'
                                                 style={formControlStyle}
-                                                className='py-2 inputInfos'
+                                                className='py-2'
                                                 
                                             />
                                         </Form>
@@ -138,7 +141,7 @@ function PayementCard(){
                             <div className='w-100 d-flex align-items-start' style={{flexDirection: 'column'}}>
                                 <h5 className='fw-bold'>Résumé de commande</h5>
                                 <div className='w-100 card-price-info rounded p-2 mt-2 d-flex gap-2' style={{backgroundColor: '#e9eaf0', flexDirection: 'column'}}>
-                                    <span className='py-1 px-2 rounded text-light title-com' style={{backgroundColor: 'green', width: '60%', fontSize: '14px'}}>Paiement d'abonnement</span>
+                                    <span className='py-1 px-2 rounded text-light title-com fw-bold' style={{backgroundColor: '#56b449', width: '60%', fontSize: '14px'}}>Paiement d'abonnement</span>
                                     <div className='w-100 p-4'>
                                         <span className='fs-4 fw-bold'>167 755 Ar</span>
                                     </div>
@@ -149,6 +152,8 @@ function PayementCard(){
                                             id="custom-switch"
                                             className="paymentSwitch"
                                             name='sw'
+                                            checked={selectedSwitch === 'annuel'}
+                                            onChange={() => setSelectedSwitch('annuel')}
                                             style={{transform: 'scale(0.6'}}
                                             />
                                             <label style={{fontSize: '14px'}}>Payer annuellement</label>
@@ -160,6 +165,8 @@ function PayementCard(){
                                             id="custom-switch"
                                             className="paymentSwitch"
                                             name='sw'
+                                            checked={selectedSwitch === 'mensuel'}
+                                            onChange={() => setSelectedSwitch('mensuel')}
                                             style={{transform: 'scale(0.6'}}
                                             />
                                             <label style={{fontSize: '14px'}}>Payer mensuellement</label>
@@ -169,7 +176,7 @@ function PayementCard(){
                                 <div className='d-flex gap-2 w-100 py-2' style={{flexDirection: 'column'}}>
                                     <div className='d-flex align-items-center justify-between' style={{flexDirection: 'row'}}>
                                         <label>Offre</label>
-                                        <span className='py-1 px-4 rounded text-light fw-bold' style={{backgroundColor: 'orange', fontSize: '14px'}}>Solo-Basic</span>
+                                        <span className='py-1 px-4 rounded text-light fw-bold' style={{backgroundColor: '#fc8600', fontSize: '14px'}}>Solo-Basic</span>
                                     </div>
                                     <div className='d-flex align-items-center justify-between' style={{flexDirection: 'row'}}>
                                         <label>Frais</label>
@@ -181,27 +188,97 @@ function PayementCard(){
                                     </div>
                                 </div>
                                 <hr className='w-100' style={{height: '2px', backgroundColor: 'black', border: 'none'}} />
-                                <div className='w-100'>
-                                    <div className='d-flex gap-2' style={{flexDirection: 'column'}}>
-                                        <h5 className='fw-bold' style={{fontSize: '16px', textAlign: 'left'}}>Détails Orange money</h5>
-                                        <Form className='d-flex px-4' style={{flexDirection: 'column', gap: '15px'}}>
-                                            <input
-                                                type='text'
-                                                placeholder='Numéro de téléphone orange'
-                                                style={formControlStyle}
-                                                className='py-2'
-                                            />
-                                            <input
-                                                type='email'
-                                                placeholder='Nom du titulaire du numéro'
-                                                style={formControlStyle}
-                                                className='py-2'
-                                            />
-                                            <Button type='submit' className='mt-3 fw-bold p-2'>
-                                                Payer
-                                            </Button>
-                                        </Form>
-                                    </div>
+                                <div className='w-100 container-form-payment-method'>
+                                    {
+                                        selectedRadio === "orange_money" &&(
+                                            <div className='d-flex gap-2 form-method-1' style={{flexDirection: 'column'}}>
+                                                <h5 className='fw-bold' style={{textAlign: 'left'}}>Détails Orange money</h5>
+                                                <Form className='d-flex px-4' style={{flexDirection: 'column', gap: '15px'}}>
+                                                    <input
+                                                        type='text'
+                                                        placeholder='Numéro de téléphone orange'
+                                                        style={formControlStyle}
+                                                        className='py-2'
+                                                    />
+                                                    <input
+                                                        type='text'
+                                                        placeholder='Nom du titulaire du numéro'
+                                                        style={formControlStyle}
+                                                        className='py-2'
+                                                    />
+                                                    <Button type='submit' className='mt-3 fw-bold p-2'>
+                                                        Payer
+                                                    </Button>
+                                                </Form>
+                                            </div>
+                                        )
+                                    }
+
+                                    {
+                                        selectedRadio === "virement_bancaire" &&(
+                                           <div className='d-flex gap-2 form-method-2' style={{flexDirection: 'column'}}>
+                                                <h5 className='fw-bold' style={{textAlign: 'left'}}>Informations de virement</h5>
+                                                <Form className='d-flex px-4' style={{flexDirection: 'column', gap: '15px'}}>
+                                                    <div className='d-flex w-100' style={{flexDirection: 'column'}}>
+                                                        <label className='mb-2' style={{textAlign: 'left'}}>Compte à créditer</label>
+                                                        <div
+                                                            style={{border: '2px solid '+badgeBlue, textAlign: 'left', textIndent: '5px', backgroundColor: 'grey', color: 'white', fontWeight: 'bold'}}
+                                                            className='py-2 text-center rounded'
+                                                        >
+                                                            <span>FR76 3000 6000 0112 3456 7890 189</span>
+                                                        </div>
+                                                    </div>
+                                                    <input
+                                                        type='text'
+                                                        placeholder='Nom de la banque du virement | eg: BOA'
+                                                        style={formControlStyle}
+                                                        className='py-2'
+                                                    />
+                                                    <input
+                                                        type='text'
+                                                        placeholder='Référence du virement'
+                                                        style={formControlStyle}
+                                                        className='py-2'
+                                                    />
+                                                    <Button type='submit' className='mt-3 fw-bold p-2'>
+                                                        Enregistrer le paiement
+                                                    </Button>
+                                                </Form>
+                                           </div>
+                                        )
+                                    }
+
+                                    {
+                                        selectedRadio === "paiement_place" &&(
+                                           <div className='d-flex gap-2 form-method-3' style={{flexDirection: 'column'}}>
+                                                <h5 className='fw-bold' style={{textAlign: 'left'}}>Détails pour paiement sur place</h5>
+                                                <Form className='d-flex px-4' style={{flexDirection: 'column', gap: '15px'}}>
+                                                    <div className='d-flex w-100' style={{flexDirection: 'column'}}>
+                                                        <label className='mb-2' style={{textAlign: 'left'}}>Prise de rendez-vous(RDV)</label>
+                                                        <DatePicker
+                                                        selected={selectedDate}
+                                                        onChange={(date) => setSelectedDate(date)}
+                                                        placeholderText="Choisir une date..."
+                                                        dateFormat="dd/MM/yyyy"
+                                                        className='custom-input-calendar py-2 w-100'
+                                                        />
+                                                    </div>
+                                                    <div className='d-flex w-100' style={{flexDirection: 'column'}}>
+                                                        <label className='mb-2' style={{textAlign: 'left'}}>Lieu de notre société</label>
+                                                        <div
+                                                            style={{border: '1px solid rgb(176, 173, 173)', color: 'black', fontWeight: 'normal'}}
+                                                            className='py-2 text-center rounded'
+                                                        >
+                                                            <span>Rue George V Majunga Be</span>
+                                                        </div>
+                                                    </div>
+                                                    <Button type='submit' className='mt-3 fw-bold p-2'>
+                                                        Envoyer
+                                                    </Button>
+                                                </Form>
+                                           </div>
+                                        )
+                                    }
                                 </div>
                             </div>
                         </Col>
