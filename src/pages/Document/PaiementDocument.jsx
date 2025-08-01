@@ -99,7 +99,7 @@ const PaiementDocument = () => {
                       {/* Image */}
                       <div className="d-flex align-items-center document-img-file">
                         <img
-                          src={`/src/assets/${ebook.image}`}
+                          src={`/assets/${ebook.image}`}
                           alt={ebook.title}
                           style={{
                             width: '80px',
