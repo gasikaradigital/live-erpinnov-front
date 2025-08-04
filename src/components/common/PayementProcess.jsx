@@ -16,7 +16,7 @@ const PaymentModule = () => {
   const navigate = useNavigate();
   const [planChoose, setPlanChoose] = useState(null);
 
-  const [isAnnualBilling, setIsAnnualBilling] = useState(false);
+  // const [isAnnualBilling, setIsAnnualBilling] = useState(false);
 
   const { user } = useAuth();
 
@@ -116,8 +116,8 @@ const PaymentModule = () => {
                 </div>
               </div>
 
-              <div className="p-3 bg-light rounded-3 mb-4 paymentBillingSection">
-                <div className="d-flex align-items-start">
+              <div className="p-2 bg-light rounded-3 mb-4 paymentBillingSection">
+                {/* <div className="d-flex align-items-start">
                   <Form.Check
                     type="switch"
                     id="custom-switch"
@@ -127,19 +127,19 @@ const PaymentModule = () => {
                     style={{ backgroundColor: 'white', transform: 'scale(0.6)' }}
                   />
                   <span className={`fw-medium mt-2 paymentSwitchLabel ${theme === 'dark' ? 'text-dark' : 'text-dark'}`}>Facturation annuelle</span>
-                </div>
+                </div> */}
 
-                {isAnnualBilling && (
-                  <div
-                    className="d-flex align-items-center text-success animate__animated animate__fadeIn paymentSavingsMessage"
-                    style={{ animationDuration: '0.3s' }}
-                  >
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" className="paymentSavingsIcon">
-                      <path d="M8 0C3.58 0 0 3.58 0 8C0 12.42 3.58 16 8 16C12.42 16 16 12.42 16 8C16 3.58 12.42 0 8 0ZM11.54 6.29L7.7 10.29C7.52 10.47 7.26 10.6 7 10.6C6.74 10.6 6.48 10.47 6.3 10.29L4.46 8.29C4.1 7.9 4.1 7.27 4.46 6.88C4.83 6.49 5.42 6.49 5.79 6.88L7 8.17L10.21 4.71C10.58 4.32 11.17 4.32 11.54 4.71C11.9 5.1 11.9 5.9 11.54 6.29Z" />
-                    </svg>
-                    <span className="ms-2 small paymentSavingsText">Économisez 10% sur l'abonnement annuel</span>
-                  </div>
-                )}
+                {/* {isAnnualBilling && ( */}
+                <div
+                  className="d-flex align-items-center text-success animate__animated animate__fadeIn paymentSavingsMessage"
+                  // style={{ animationDuration: '0.3s'}}
+                >
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" className="paymentSavingsIcon">
+                    <path d="M8 0C3.58 0 0 3.58 0 8C0 12.42 3.58 16 8 16C12.42 16 16 12.42 16 8C16 3.58 12.42 0 8 0ZM11.54 6.29L7.7 10.29C7.52 10.47 7.26 10.6 7 10.6C6.74 10.6 6.48 10.47 6.3 10.29L4.46 8.29C4.1 7.9 4.1 7.27 4.46 6.88C4.83 6.49 5.42 6.49 5.79 6.88L7 8.17L10.21 4.71C10.58 4.32 11.17 4.32 11.54 4.71C11.9 5.1 11.9 5.9 11.54 6.29Z" />
+                  </svg>
+                  <span className="ms-2 small paymentSavingsText">Économisez 10% sur l'abonnement annuel</span>
+                </div>
+                {/* )} */}
               </div>
 
               <div className="border-top pt-3 mb-3 paymentGuaranteesSection">
