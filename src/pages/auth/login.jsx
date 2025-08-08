@@ -68,13 +68,14 @@ const Login = () => {
     >
       <NavigationBar isAuthenticated={false} user={null} />
 
-      <div className="container d-flex justify-content-center align-items-center min-vh-100">
+      <div className="container d-flex justify-content-center align-items-center min-vh-100 py-4">
         <div
-          className="card shadow p-4 login-form w-100"
+          className={`card shadow p-3 p-md-4 login-form w-100 ${
+            darkMode ? "dark-card" : ""
+          }`}
           style={{
             maxWidth: "500px",
-            backgroundColor: "#ffffff", // blanc fixe
-            color: darkMode ? "#000000" : "#212529", // texte noir en sombre et clair (ou autre)
+            backgroundColor: darkMode ? "#2c3034" : "#ffffff",
           }}
         >
           <div className="text-center mb-4">
@@ -94,7 +95,9 @@ const Login = () => {
               </label>
               <input
                 type="email"
-                className="form-control bg-white text-dark 	text-start"
+                className={`form-control ${
+                  darkMode ? "bg-dark text-white" : "bg-white text-dark"
+                } text-start`}
                 id="email"
                 placeholder="Entrer votre email"
                 value={email}
@@ -108,12 +111,13 @@ const Login = () => {
                 <label htmlFor="password" className="form-label mb-0">
                   Mot de passe
                 </label>
-            
               </div>
               <div className="input-group">
                 <input
                   type={showPwd ? "text" : "password"}
-                  className="form-control bg-white text-dark 	text-start"
+                  className={`form-control ${
+                    darkMode ? "bg-dark text-white" : "bg-white text-dark"
+                  } text-start`}
                   id="password"
                   placeholder="Mot de passe"
                   value={password}
@@ -122,7 +126,9 @@ const Login = () => {
                 />
                 <button
                   type="button"
-                  className="btn btn-outline-secondary"
+                  className={`btn ${
+                    darkMode ? "btn-outline-light" : "btn-outline-secondary"
+                  }`}
                   onClick={() => setShowPwd(!showPwd)}
                 >
                   <i
@@ -132,44 +138,79 @@ const Login = () => {
               </div>
             </div>
 
-          <div className="d-flex justify-content-between align-items-center mb-3">
-  <div className="form-check d-flex align-items-center">
-    <input
-      id="remember"
-      name="remember"
-      type="checkbox"
-      className="form-check-input"
-      checked={rememberMe}
-      onChange={(e) => setRememberMe(e.target.checked)}
-      style={{ backgroundColor: "white", transform: "scale(0.6)" }} // un peu plus gros que 0.5
-    />
-    <label className="form-check-label ms-2 mb-0" htmlFor="remember">
-      Se souvenir de moi
-    </label>
-  </div>
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <div className="form-check d-flex align-items-center">
+                <input
+                  id="remember"
+                  name="remember"
+                  type="checkbox"
+                  className="form-check-input"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                  style={{
+                    backgroundColor: darkMode ? "#495057" : "white",
+                    transform: "scale(0.8)",
+                  }}
+                />
+                <label
+                  className={`form-check-label ms-2 mb-0 ${
+                    darkMode ? "text-white" : ""
+                  }`}
+                  htmlFor="remember"
+                >
+                  Se souvenir de moi
+                </label>
+              </div>
 
-  <Link to="/forgot-password" className="small text-primary">
-    Mot de passe oublié ?
-  </Link>
-</div>
+              <Link
+                to="/forgot-password"
+                className={`small ${
+                  darkMode ? "text-light" : "text-primary"
+                } text-decoration-none`}
+              >
+                Mot de passe oublié ?
+              </Link>
+            </div>
 
-
-            {error && <div className="alert alert-danger">{error}</div>}
+            {error && (
+              <div
+                className={`alert ${
+                  darkMode ? "alert-warning" : "alert-danger"
+                }`}
+              >
+                {error}
+              </div>
+            )}
             {status && (
-              <div className="text-center text-muted mb-2">{status}</div>
+              <div
+                className={`text-center mb-2 ${
+                  darkMode ? "text-light" : "text-muted"
+                }`}
+              >
+                {status}
+              </div>
             )}
 
             <div className="d-grid">
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary py-2">
                 Se connecter
               </button>
             </div>
           </form>
 
-          <div className="text-center mt-3">
+          <div
+            className={`text-center mt-3 ${
+              darkMode ? "text-light" : "text-dark"
+            }`}
+          >
             <small>
               Nouveau sur notre plateforme ?{" "}
-              <Link to="/inscription" className="text-primary">
+              <Link
+                to="/inscription"
+                className={`${
+                  darkMode ? "text-info" : "text-primary"
+                } text-decoration-none`}
+              >
                 S'inscrire
               </Link>
             </small>

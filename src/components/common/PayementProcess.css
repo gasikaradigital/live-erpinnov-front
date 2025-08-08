@@ -75,6 +75,67 @@
   border-radius: 6px;
 }
 
+/* Dashboard Preview */
+.dashboard-wrapper {
+  position: relative;
+  transition: transform 0.3s ease-out;
+}
+
+.dashboard-image {
+  width: 100%;
+  border-radius: 1rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.stats-card {
+  position: absolute;
+  background: white;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 600;
+  animation: float 6s ease-in-out infinite;
+  z-index: 10;
+}
+
+.stats-card-1 {
+  top: 5%;
+  right: -5%;
+}
+
+.stats-card-2 {
+  bottom: 10%;
+  left: -5%;
+  animation-delay: -3s;
+}
+
+.stats-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.success {
+  background: #22c55e;
+}
+
+.primary {
+  background: #2563eb;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+
 /* Espacement du container principal */
 .paymentMainContainer {
   margin-top: 1rem;

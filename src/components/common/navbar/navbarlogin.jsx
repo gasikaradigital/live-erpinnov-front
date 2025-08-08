@@ -9,17 +9,17 @@ import {
 } from "react-bootstrap";
 import { useDarkMode } from "../../../contexts/DarkModeContext";
 
-
 export default function NavigationBar({ isAuthenticated, user }) {
   const { darkMode, toggleDarkMode } = useDarkMode();
 
   return (
     <Navbar
       fixed="top"
-      bg={darkMode ? "dark" : "light"}
+      bg={darkMode ? "dark" : "white"}
       variant={darkMode ? "dark" : "light"}
       expand="lg"
-      className="border-bottom shadow-sm"
+      className={`border-bottom shadow-sm ${darkMode ? "" : "bg-white"}`}
+      collapseOnSelect
     >
       <Container>
         <Navbar.Brand href="/" className="d-flex align-items-center gap-2">
@@ -32,13 +32,29 @@ export default function NavigationBar({ isAuthenticated, user }) {
           <span className="fw-semibold text-primary">ERP INNOV</span>
         </Navbar.Brand>
 
+        {/* Bouton dark mode mobile seulement */}
+        <Button
+          variant={darkMode ? "light" : "outline-secondary"}
+          onClick={toggleDarkMode}
+          className="rounded-circle p-2 d-lg-none me-2"
+          title="Basculer en mode sombre"
+        >
+          {darkMode ? (
+            <i className="bi bi-sun-fill"></i>
+          ) : (
+            <i className="bi bi-moon-fill"></i>
+          )}
+        </Button>
+
         <Navbar.Toggle aria-controls="main-navbar-nav" />
+
         <Navbar.Collapse id="main-navbar-nav">
           <Nav className="ms-auto d-flex align-items-center gap-3">
+            {/* Bouton dark mode desktop seulement */}
             <Button
               variant={darkMode ? "light" : "outline-secondary"}
               onClick={toggleDarkMode}
-              className="rounded-circle p-2"
+              className="rounded-circle p-2 d-none d-lg-block"
               title="Basculer en mode sombre"
             >
               {darkMode ? (
@@ -51,7 +67,7 @@ export default function NavigationBar({ isAuthenticated, user }) {
             {isAuthenticated ? (
               <Dropdown align="end">
                 <Dropdown.Toggle
-                  variant="light"
+                  variant={darkMode ? "dark" : "light"}
                   className="d-flex align-items-center gap-2 px-2"
                 >
                   <Image
@@ -90,12 +106,34 @@ export default function NavigationBar({ isAuthenticated, user }) {
               </Dropdown>
             ) : (
               <>
-                <Button variant="outline-primary" href="/">
+                <Button
+                  variant="outline-primary"
+                  href="/"
+                  className="d-none d-lg-block"
+                >
                   Se connecter
                 </Button>
-                <Button variant="primary" href="/inscription">
+                <Button
+                  variant="primary"
+                  href="/inscription"
+                  className="d-none d-lg-block"
+                >
                   S'inscrire
                 </Button>
+
+                {/* Version mobile seulement */}
+                <div className="d-flex flex-column gap-2 d-lg-none w-100 px-3">
+                  <Button variant="outline-primary" href="/" className="w-100">
+                    Se connecter
+                  </Button>
+                  <Button
+                    variant="primary"
+                    href="/inscription"
+                    className="w-100"
+                  >
+                    S'inscrire
+                  </Button>
+                </div>
               </>
             )}
           </Nav>
