@@ -68,7 +68,7 @@ const Login = () => {
     >
       <NavigationBar isAuthenticated={false} user={null} />
 
-      <div className="container d-flex justify-content-center align-items-center min-vh-100 py-4">
+      <div className="container d-flex justify-content-center align-items-center min-vh-100 px-3 py-4">
         <div
           className={`card shadow p-3 p-md-4 login-form w-100 ${
             darkMode ? "dark-card" : ""
@@ -76,6 +76,8 @@ const Login = () => {
           style={{
             maxWidth: "500px",
             backgroundColor: darkMode ? "#2c3034" : "#ffffff",
+            border: darkMode ? "1px solid #495057" : "none",
+            color: darkMode ? "#f8f9fa" : "#212529",
           }}
         >
           <div className="text-center mb-4">
@@ -96,7 +98,9 @@ const Login = () => {
               <input
                 type="email"
                 className={`form-control ${
-                  darkMode ? "bg-dark text-white" : "bg-white text-dark"
+                  darkMode
+                    ? "bg-dark text-white border-secondary"
+                    : "bg-white text-dark"
                 } text-start`}
                 id="email"
                 placeholder="Entrer votre email"
@@ -116,7 +120,9 @@ const Login = () => {
                 <input
                   type={showPwd ? "text" : "password"}
                   className={`form-control ${
-                    darkMode ? "bg-dark text-white" : "bg-white text-dark"
+                    darkMode
+                      ? "bg-dark text-white border-secondary"
+                      : "bg-white text-black"
                   } text-start`}
                   id="password"
                   placeholder="Mot de passe"
@@ -127,7 +133,9 @@ const Login = () => {
                 <button
                   type="button"
                   className={`btn ${
-                    darkMode ? "btn-outline-light" : "btn-outline-secondary"
+                    darkMode
+                      ? "btn-outline-light border-secondary"
+                      : "btn-outline-secondary"
                   }`}
                   onClick={() => setShowPwd(!showPwd)}
                 >
@@ -138,8 +146,8 @@ const Login = () => {
               </div>
             </div>
 
-            <div className="d-flex justify-content-between align-items-center mb-3">
-              <div className="form-check d-flex align-items-center">
+            <div className="d-flex flex-column flex-sm-row justify-content-between align-items-center mb-3">
+              <div className="form-check d-flex align-items-center mb-2 mb-sm-0">
                 <input
                   id="remember"
                   name="remember"
@@ -150,11 +158,12 @@ const Login = () => {
                   style={{
                     backgroundColor: darkMode ? "#495057" : "white",
                     transform: "scale(0.8)",
+                    borderColor: darkMode ? "#6c757d" : "#adb5bd",
                   }}
                 />
                 <label
                   className={`form-check-label ms-2 mb-0 ${
-                    darkMode ? "text-white" : ""
+                    darkMode ? "text-white-50" : "text-black"
                   }`}
                   htmlFor="remember"
                 >
@@ -165,7 +174,7 @@ const Login = () => {
               <Link
                 to="/forgot-password"
                 className={`small ${
-                  darkMode ? "text-light" : "text-primary"
+                  darkMode ? "text-info" : "text-primary"
                 } text-decoration-none`}
               >
                 Mot de passe oublié ?
@@ -176,14 +185,14 @@ const Login = () => {
               <div
                 className={`alert ${
                   darkMode ? "alert-warning" : "alert-danger"
-                }`}
+                } mb-3`}
               >
                 {error}
               </div>
             )}
             {status && (
               <div
-                className={`text-center mb-2 ${
+                className={`text-center mb-3 ${
                   darkMode ? "text-light" : "text-muted"
                 }`}
               >
@@ -192,7 +201,12 @@ const Login = () => {
             )}
 
             <div className="d-grid">
-              <button type="submit" className="btn btn-primary py-2">
+              <button
+                type="submit"
+                className={`btn py-2 ${
+                  darkMode ? "btn-info text-dark" : "btn-primary"
+                }`}
+              >
                 Se connecter
               </button>
             </div>
@@ -209,7 +223,7 @@ const Login = () => {
                 to="/inscription"
                 className={`${
                   darkMode ? "text-info" : "text-primary"
-                } text-decoration-none`}
+                } text-decoration-none fw-semibold`}
               >
                 S'inscrire
               </Link>
