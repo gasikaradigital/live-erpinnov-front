@@ -157,7 +157,7 @@ const Login = () => {
                   onChange={(e) => setRememberMe(e.target.checked)}
                   style={{
                     backgroundColor: darkMode ? "#495057" : "white",
-                    transform: "scale(0.8)",
+                    transform: "scale(0.6)",
                     borderColor: darkMode ? "#6c757d" : "#adb5bd",
                   }}
                 />

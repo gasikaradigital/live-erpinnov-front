@@ -22,7 +22,8 @@ import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import PaymentModule from "./components/common/PayementProcess.jsx";
 import InstanceCreate from "./components/common/InstanceCreate.jsx";
 import TicketDashboard from "./pages/Ticket/TicketDashboard.jsx";
-import AppNavbar from "./components/common/navbar/AppNavbar.jsx";
+import NavbarSelector from "./components/common/navbar/NavbarSelector.jsx";
+
 import PaiementDocument from "./pages/Document/PaiementDocument.jsx"
 import InstanceErpinnov from "./components/common/InstanceErpinnov.jsx";
 import PayementCard from "./pages/Payement/PayementCard.jsx";
@@ -40,14 +41,15 @@ function LandingPage() {
 
 function DashboardPage() {
   return (
-    <ThemeProvider>
-      <div className="d-flex flex-column min-vh-100 bg-body">
-        <AppNavbar />
-        <main className="flex-grow-1">
-          <DashboardContent />
-        </main>
-      </div>
-    </ThemeProvider>
+    <AuthProvider>
+      <DarkModeProvider>
+        <ThemeProvider>
+          {/* ... autres providers si nécessaire ... */}
+          <NavbarSelector />
+          {/* ... reste de votre application ... */}
+        </ThemeProvider>
+      </DarkModeProvider>
+    </AuthProvider>
   );
 }
 

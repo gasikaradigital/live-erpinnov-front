@@ -7,6 +7,7 @@ import PlanCard from "./PlanCard";
 import { fetchPlas } from "../../api/planApi";
 import { useTheme } from "../../contexts/ThemeContext";
 
+
 const DashboardContent = () => {
   const { theme } = useTheme();
   const [plans, setPlans] = useState([]);
@@ -31,6 +32,7 @@ const DashboardContent = () => {
 
   return (
     <Container fluid className="pt-5 mt-5">
+      
       {/* Navigation des onglets */}
       <Nav className="mb-3 justify-content-center">
         <Nav.Item className="flex-fill text-center">

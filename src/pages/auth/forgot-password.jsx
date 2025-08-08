@@ -30,7 +30,7 @@ const ForgotPassword = () => {
           className={`card shadow p-4 login-form ${
             darkMode ? "login-card-dark" : "login-card-white"
           }`}
-          style={{ width: "100%", maxWidth: "500px" }}
+          style={{ width: "100%", maxWidth: "500px", marginTop: "70px" }}
         >
           <div className="text-center mb-4">
             <img
