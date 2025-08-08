@@ -5,7 +5,6 @@ import { useDarkMode } from "../../contexts/DarkModeContext";
 import axios from "axios";
 import { useAuth } from "../../contexts/AuthContext";
 import { toast } from "react-toastify";
-import "./login.css";
 
 const Login = () => {
   const { darkMode } = useDarkMode();

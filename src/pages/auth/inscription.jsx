@@ -10,6 +10,8 @@ const Inscription = () => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
+    const [showPwd, setShowPwd] = useState(false);
+  
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -95,7 +97,7 @@ const Inscription = () => {
             Créer un compte gratuit
           </h2>
           <form onSubmit={handleSubmit}>
-            <div className="mb-3">
+            <div className="mb-3 position-relative">
               <label
                 className={`form-label text-start w-100 ${
                   darkMode ? "text-white" : "text-dark"
@@ -105,7 +107,7 @@ const Inscription = () => {
               </label>
               <input
                 type="email"
-                className={`form-control ${
+                className={`form-control text-start ${
                   darkMode
                     ? "bg-dark text-white border-secondary"
                     : "bg-white text-dark"
@@ -125,32 +127,32 @@ const Inscription = () => {
               >
                 Mot de passe
               </label>
-              <input
-                type={showPassword ? "text" : "password"}
-                className={`form-control pe-5 ${
-                  darkMode
-                    ? "bg-dark text-white border-secondary"
-                    : "bg-white text-dark"
-                }`}
-                placeholder="Mot de passe"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-              <span
-                onClick={() => setShowPassword(!showPassword)}
-                style={{
-                  position: "absolute",
-                  top: "65%",
-                  right: "15px",
-                  transform: "translateY(-50%)",
-                  cursor: "pointer",
-                  color: darkMode ? "#ccc" : "#6c757d",
-                  fontSize: "1.5rem",
-                }}
-              >
-                {showPassword ? <FaEyeSlash /> : <FaEye />}
-              </span>
+              <div className="input-group">
+                <input
+                  type={showPassword ? "text" : "password"} // Utiliser showPassword ici
+                  className={`form-control ${
+                    darkMode
+                      ? "bg-dark text-white border-secondary"
+                      : "bg-white text-black"
+                  } text-start`}
+                  id="password"
+                  placeholder="Mot de passe"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <button
+                  type="button"
+                  className={`btn ${
+                    darkMode
+                      ? "btn-outline-light border-secondary"
+                      : "btn-outline-secondary"
+                  }`}
+                  onClick={() => setShowPassword(!showPassword)} // Utiliser setShowPassword ici
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </div>
             </div>
 
             <div className="mb-3 position-relative">
@@ -161,32 +163,32 @@ const Inscription = () => {
               >
                 Confirmer le mot de passe
               </label>
-              <input
-                type={showConfirmPassword ? "text" : "password"}
-                className={`form-control pe-5 ${
-                  darkMode
-                    ? "bg-dark text-white border-secondary"
-                    : "bg-white text-dark"
-                }`}
-                placeholder="Confirmer le mot de passe"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-              />
-              <span
-                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                style={{
-                  position: "absolute",
-                  top: "65%",
-                  right: "15px",
-                  transform: "translateY(-50%)",
-                  cursor: "pointer",
-                  color: darkMode ? "#ccc" : "#6c757d",
-                  fontSize: "1.5rem",
-                }}
-              >
-                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
-              </span>
+              <div className="input-group">
+                <input
+                  type={showConfirmPassword ? "text" : "password"} // Utiliser showConfirmPassword ici
+                  className={`form-control ${
+                    darkMode
+                      ? "bg-dark text-white border-secondary"
+                      : "bg-white text-black"
+                  } text-start`}
+                  id="confirmPassword"
+                  placeholder="Confirmer le mot de passe"
+                  value={confirmPassword} // Utiliser confirmPassword ici
+                  onChange={(e) => setConfirmPassword(e.target.value)} // Utiliser setConfirmPassword ici
+                  required
+                />
+                <button
+                  type="button"
+                  className={`btn ${
+                    darkMode
+                      ? "btn-outline-light border-secondary"
+                      : "btn-outline-secondary"
+                  }`}
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)} // Utiliser setShowConfirmPassword ici
+                >
+                  {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </div>
             </div>
 
             <div className="mb-3">
