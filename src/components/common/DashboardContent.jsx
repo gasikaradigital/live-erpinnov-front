@@ -3,6 +3,7 @@ import { Container, Row, Col, Nav } from "react-bootstrap";
 
 import InstancesCard from "./InstancesCard";
 import InstanceDoliSaas from "./InstanceDoliSaas";
+import InstanceErpi from "./InstanceErpi";
 import PlanCard from "./PlanCard";
 import { fetchPlas } from "../../api/planApi";
 import { useTheme } from "../../contexts/ThemeContext";
@@ -67,6 +68,7 @@ const DashboardContent = () => {
               transition: "all 0.3s ease",
             }}
           >
+            
             Erpinnov
           </Nav.Link>
         </Nav.Item>
@@ -81,6 +83,9 @@ const DashboardContent = () => {
         </Row>
       )}
 
+      {activeTab === "erpinnov" && (
+        <div>fddfdfdfd</div>
+      )}
         <Row className="min-vh-100 overflow-auto">
           <Col xs={12} className="px-3">
             <InstancesCard />
