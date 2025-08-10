@@ -1,6 +1,21 @@
+.fade-bar {
+    height: 85px; 
+    width: 100vw;
+}
+.div-transparent {
+    background-color: transparent;
+}
+.row-payment {
+    box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.2); 
+    background-color: var(--row-bg-color);
+}
+.custom-options {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.15); 
+    cursor: pointer; 
+}
 .custom-options input{
     transform: scale(0.5);
-    margin-top: 8px;
+    margin-top: 6px;
     border: 4px solid rgb(128, 124, 124);
     cursor: pointer;
     background-color: transparent !important;
@@ -13,18 +28,36 @@
     justify-content: space-between;
     cursor: pointer;
 }
-.custom-control{
-    padding: 14px;
+.billing-infos-container {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.15); 
+    cursor: pointer; 
+    border: 1px solid #0d6efd; 
+}
+.form-control-style {
+    border: 1px solid rgb(176, 173, 173); 
+    text-align: left; 
+    text-indent: 5px; 
+    background-color: transparent; 
+    font-weight: normal; 
+}
+.customize-select {
+    border: 1px solid rgb(176, 173, 173); 
+    background-color: transparent; 
+    font-weight: normal; 
+    cursor: pointer;
 }
 .btnBillingInfos:hover{
-    border: none;
-    transform: none;
-    outline: none;
-    color: #b2adad;
+    border-color: transparent;
 }
-.custom-input-calendar{
-    text-align: left;
-    font-weight: normal;
-    cursor: pointer;
-    border: 1px solid rgb(176, 173, 173);
+.small-font-size {
+    font-size: 14px;
+}
+.card-price-info {
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+}
+.plan-chooser-container {
+    border: 1px solid #0d6efd;
+}
+.btn-change-offer:hover {
+    border-color: transparent;
 }
