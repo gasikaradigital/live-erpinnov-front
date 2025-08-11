@@ -41,10 +41,12 @@ function PayementCard(){
     const [selectedRadio, setSelectedRadio] = useState(paymentMethod[0].value);
     const [switchState, setSwitchState] = useState(true);
     const [showBillingForm, setShowBillingForm] = useState(true);
-    const [selectedDate, setSelectedDate] = useState(null);
+    const [date, setDate] = useState(null);
 
     // Réference du formulaire dans le fichier BillingInfosSection
     const billingFormRef = useRef();
+
+    const flatCalRef = useRef();
 
     // Fonction de soumission du formulaire de paiement
     const onSubmitForm = (e) => {
@@ -63,15 +65,12 @@ function PayementCard(){
 
     };
 
-    // const [planData, setPlanData] = useState(null);
+    const openCalendar = () => {
+        if(flatCalRef.current?.flatpickr){
+            flatCalRef.current.flatpickr.open();
+        }
+    };
 
-    // useEffect(() => {
-    //     const storageData = localStorage.getItem("planChoose");
-
-    //     if(storageData){
-    //         setPlanData(JSON.parse(storageData));
-    //     }
-    // }, [])
 
     // Variable de contrôle responsive, catégorie : xl, lg, md, sm
     const padStyleXlLgMdSmExternal = 'p-xl-4 p-lg-4 p-md-3 p-sm-2';
@@ -144,10 +143,12 @@ function PayementCard(){
                                 padStyleXlLgMdSmExternalInput={padStyleXlLgMdSmExternalInput}
                                 padStyleXsExternal={padStyleXsExternal}
                                 badgeBlue={badgeBlue}
-                                selectedDate={selectedDate}
-                                setSelectedDate={setSelectedDate}
                                 textColor={textColor}
                                 onSubmit={onSubmitForm}
+                                date={date}
+                                setDate={setDate}
+                                openCalendar={openCalendar}
+                                flatCalRef={flatCalRef}
                                 />
 
                                 {/* Fin de la section 4 */}
@@ -163,11 +164,9 @@ function PayementCard(){
                             color: ${placeholderColor} !important;
                             opacity: 1
                         }
-                        .customize-datepicker{
-                            color: ${textColor}
-                        }
-                        .customize-datepicker::placeholder{
+                        .customize-input-date::placeholder{
                             color: ${placeholderColor} !important;
+
                         }
                     `}
                 </style>

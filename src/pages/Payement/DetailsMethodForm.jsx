@@ -1,9 +1,12 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
+import Flatpickr from 'react-flatpickr';
+import 'flatpickr/dist/themes/material_blue.css';
+
 
 
 function DetailsMethodForm({selectedRadio, padStyleXlLgMdSmExternalInput, 
-    padStyleXsExternal, badgeBlue, selectedDate, setSelectedDate, textColor, inputRef, handleIconClick, onSubmit}){
+    padStyleXsExternal, badgeBlue, textColor, onSubmit, date, setDate, openCalendar, flatCalRef}){
     return(
         <div className='w-100 container-form-payment-method'>
             {
@@ -85,23 +88,32 @@ function DetailsMethodForm({selectedRadio, padStyleXlLgMdSmExternalInput,
                         <h5 className='fw-bold' style={{textAlign: 'left'}}>Détails pour paiement sur place</h5>
                         <Form onSubmit={onSubmit} className={'d-flex'+' '+padStyleXlLgMdSmExternalInput+' '+padStyleXsExternal} style={{flexDirection: 'column', gap: '15px'}}>
                             <div className='d-flex w-100' style={{flexDirection: 'column'}}>
-                                <label className='mb-2' style={{textAlign: 'left'}}>Prise de rendez-vous(RDV)</label>
-                                <input
-                                    type="datetime-local"
-                                    id="appointment"
-                                    name="appointment"
-                                    className="form-control py-2 rounded input-date-time"
-                                    style={{ border: '1px solid rgb(176, 173, 173)', cursor: 'pointer', backgroundColor: 'transparent'}}
-                                    required
-                                />
+                                <label className='mb-2' style={{textAlign: 'left'}}>Prise de rendez-vous (RDV)</label>
+                                <div className='d-flex flex-row align-items-center rounded container-date-input'>
+                                    <span className='px-3 py-2 span-container-calendar' onClick={openCalendar}>
+                                        <i className='bi bi-calendar-event' onClick={openCalendar}></i>
+                                    </span>
+                                    <Flatpickr
+                                    ref={flatCalRef}
+                                    value={date}
+                                    onChange={([selectedDate]) => setDate(selectedDate)}
+                                    options={{
+                                    enableTime: true,
+                                    dateFormat: "d/m/Y H:i",
+                                    locale: "fr"
+                                    }}
+                                    placeholder="JJ/MM/AAAA HH:MM"
+                                    className={`form-control customize-input-date ${textColor}`}
+                                    />
+                                </div>
                             </div>
                             <div className='d-flex w-100' style={{flexDirection: 'column'}}>
                                 <label className='mb-2' style={{textAlign: 'left'}}>Lieu de notre société</label>
                                 <div
                                     style={{border: '1px solid rgb(176, 173, 173)'}}
-                                    className='py-2 text-center rounded'
+                                    className='p-2 text-center rounded'
                                 >
-                                    <span style={{color: textColor, fontWeight: 'bold'}}>Rue George V, Kakal Majunga Be</span>
+                                    <span style={{color: textColor}}>Espace Gasikakara, 1er étage, Rue georges V , Majunga Be, 401 Mahajanga , Madagascar</span>
                                 </div>
                             </div>
                             <Button type='submit' className='mt-3 fw-bold p-2 btn-form-submit'>
