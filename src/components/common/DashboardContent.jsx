@@ -33,7 +33,6 @@ const DashboardContent = () => {
 
   return (
     <Container fluid className="pt-5 mt-5">
-      
       {/* Navigation des onglets */}
       <Nav className="mb-3 justify-content-center">
         <Nav.Item className="flex-fill text-center">
@@ -68,7 +67,6 @@ const DashboardContent = () => {
               transition: "all 0.3s ease",
             }}
           >
-            
             Erpinnov
           </Nav.Link>
         </Nav.Item>
@@ -84,14 +82,17 @@ const DashboardContent = () => {
       )}
 
       {activeTab === "erpinnov" && (
-        <div>fddfdfdfd</div>
-      )}
         <Row className="min-vh-100 overflow-auto">
-          <Col xs={12} className="px-3">
-            <InstancesCard />
+          <Col xs={12} className="px-3 ">
+            <InstanceErpi />
           </Col>
         </Row>
-    
+      )}
+      <Row className="min-vh-100 overflow-auto">
+        <Col xs={12} className="px-3">
+          <InstancesCard />
+        </Col>
+      </Row>
     </Container>
   );
 };
