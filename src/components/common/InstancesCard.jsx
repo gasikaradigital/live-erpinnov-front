@@ -3,28 +3,48 @@ import { Card, Badge, Container } from "react-bootstrap";
 
 const InstancesCard = () => {
   // Exemple de données venant du formulaire (fake data)
-  const instances = [
-    {
-      name: "Space X",
-      nif: "123 456 789",
-      tel: "+261 34 12 345 67",
-      nbEmployes: "51 – 200",
-      adresse: "Lot II A 12 Bis, Andavamamba",
-      ville: "Antananarivo",
-      pays: "Madagascar",
-      active: true,
-    },
-    {
-      name: "Tesla Inc.",
-      nif: "987 654 321",
-      tel: "+33 1 23 45 67 89",
-      nbEmployes: "Plus de 200",
-      adresse: "3500 Deer Creek Road, Palo Alto",
-      ville: "Palo Alto",
-      pays: "USA",
-      active: false,
-    },
-  ];
+   const instances = [
+     {
+       name: "Space X",
+       nif: "123 456 789",
+       tel: "+261 34 12 345 67",
+       nbEmployes: "51 – 200",
+       adresse: "Lot II A 12 Bis, Andavamamba",
+       ville: "Antananarivo",
+       pays: "Madagascar",
+       active: true,
+     },
+     {
+       name: "Tesla Inc.",
+       nif: "987 654 321",
+       tel: "+33 1 23 45 67 89",
+       nbEmployes: "Plus de 200",
+       adresse: "3500 Deer Creek Road, Palo Alto",
+       ville: "Palo Alto",
+       pays: "USA",
+       active: false,
+     },
+     {
+       name: "Amazon",
+       nif: "741 852 963",
+       tel: "+1 206 266 1000",
+       nbEmployes: "Plus de 5000",
+       adresse: "410 Terry Ave N, Seattle",
+       ville: "Seattle",
+       pays: "USA",
+       active: true,
+     },
+     {
+       name: "Orange Madagascar",
+       nif: "159 753 486",
+       tel: "+261 32 11 222 33",
+       nbEmployes: "201 – 500",
+       adresse: "Zone Galaxy Andraharo",
+       ville: "Antananarivo",
+       pays: "Madagascar",
+       active: true,
+     },
+   ];
 
   return (
     <Container
@@ -40,9 +60,9 @@ const InstancesCard = () => {
         }}
       >
         {/* Titre centré */}
-        <Card.Header className="bg-white border-bottom text-center py-3">
+        
           <h5 className="mb-0 fw-bold">Choisissez votre solution</h5>
-        </Card.Header>
+    
 
         <Card.Body className="p-4 d-flex flex-column h-100">
           {/* Header section */}
