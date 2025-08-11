@@ -13,18 +13,11 @@
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.15); 
     cursor: pointer; 
 }
-/* .custom-options input{
-    transform: scale(0.5);
-    margin-top: 6px;
-    border: 4px solid rgb(128, 124, 124) !important;
-    cursor: pointer;
-    background-color: transparent !important;
-
-} */
  .custom-options .form-check-input {
     transform: scale(0.5);
-    margin-top: 8px;
+    margin-top: 6px;
     border: 4px solid rgb(128, 124, 124);
+    cursor: pointer;
  }
 .custom-options label{
     display: flex;
@@ -65,4 +58,17 @@
 }
 .btn-change-offer:hover {
     border-color: transparent;
+}
+.customize-input-date {
+    border: none !important;
+    background-color: transparent !important;
+}
+.container-date-input {
+    border: 1px solid rgb(176, 173, 173); 
+    background-color: transparent; 
+    font-weight: normal; 
+}
+.span-container-calendar {
+    border-right: 1px solid rgb(176, 173, 173);
+    cursor: pointer;
 }
