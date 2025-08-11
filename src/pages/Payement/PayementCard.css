@@ -13,17 +13,19 @@
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.15); 
     cursor: pointer; 
 }
-.custom-options input{
+/* .custom-options input{
     transform: scale(0.5);
     margin-top: 6px;
     border: 4px solid rgb(128, 124, 124) !important;
     cursor: pointer;
     background-color: transparent !important;
 
-}
-.custom-options input:checked {
-    border: 4px solid #0d6efd !important;
-}
+} */
+ .custom-options .form-check-input {
+    transform: scale(0.5);
+    margin-top: 8px;
+    border: 4px solid rgb(128, 124, 124);
+ }
 .custom-options label{
     display: flex;
     flex-direction: row;
