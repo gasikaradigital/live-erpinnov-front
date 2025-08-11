@@ -146,7 +146,7 @@ const navigate = useNavigate();
       {/* -------- CONTENU PRINCIPAL -------- */}
       <Container className="py-5">
         <Row className="g-4 justify-content-center text-start">
-          <Col lg={3}>
+          {/* <Col lg={3}>
             <Card
               bg={theme === "dark" ? "dark" : "light"}
               text={theme === "dark" ? "white" : "dark"}
@@ -194,7 +194,7 @@ const navigate = useNavigate();
             <Button variant="success" className="w-100" onClick={handleRedirect}>
               Continuer vers l'espace de travail
             </Button>
-          </Col>
+          </Col> */}
 
 
           {/* ----- Colonne droite : formulaire ----- */}
