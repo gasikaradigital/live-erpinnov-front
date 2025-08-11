@@ -110,7 +110,7 @@ const PaymentModule = () => {
                   </div>
                 </div>
 
-                {user?.subscriptions?.length === 0 && (
+                
                   <div className="col-md-6">
                     <div className="p-3 rounded-3 border border-white border-opacity-25 bg-white bg-opacity-10 mb-3 h-100 d-flex flex-column justify-content-between">
                       <div>
@@ -130,7 +130,6 @@ const PaymentModule = () => {
                       </Button>
                     </div>
                   </div>
-                )}
               </div>
             </div>
           </div>
