@@ -10,7 +10,7 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
             <h5 className='fw-bold'>Résumé de commande</h5>
             <div className='w-100 rounded p-3 mt-2 d-flex flex-column gap-2 card-price-info' style={{backgroundColor: cardOrderSummaryBgColor}}>
                 <span className='w-100 text-start'>💳 Profitez du paiement annuel sans frais ni souci.</span>
-                <div className='d-flex flex-column w-100 align-items-center p-2 m-0 mt-2 gap-2 price-container' style={{backgroundColor: '#c8c8cc'}}>
+                <div className='d-flex flex-column w-100 align-items-center p-2 m-0 mt-2 gap-2 price-container' style={{backgroundColor: '#e0e0e3'}}>
                     <div className='d-flex flex-row align-items-center w-100 justify-center rounded gap-2 plan-chooser-container' style={{backgroundColor: cardOrderSummaryBgColor}}>
                        <span className='fw-bold opacity-75'>Annuel</span>
                        <button className='border-0 div-transparent p-0 m-0 btn-change-chooser-sw' onClick={() => setSwitchState(!switchState)}>
