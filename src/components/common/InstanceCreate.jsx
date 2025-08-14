@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import { createSubscription } from "../../api/subscriptionApi";
 
 const InstanceCreate = () => {
-  const { theme } = useTheme(); // Utilisez le hook pour obtenir le thème
+  const { theme } = useTheme();
   const navigate = useNavigate();
   const [planChoose, setPlanChoose] = useState(null);
 
@@ -75,24 +75,9 @@ const InstanceCreate = () => {
     } else {
       toast.error("Une erreur est survenue lors de la création.");
     }
-
-    /*console.log('Creation instance avec:', {
-      nom: nameToUse,
-      option: selectedOption,
-      entreprise: selectedEnterprise,
-      plan: planChoose.plan,
-      subplan: planChoose.subPlan,
-      source: planChoose.source
-    });*/
   };
 
-  const handleReinitialize = () => {
-    setInstanceName("");
-    setSelectedOption("manual");
-    setSelectedEnterprise(1);
-  };
-
-  //Liste des organisationsAdd commentMore actions
+  //Liste des organisations
   const [organisations, setOrganisations] = useState([]);
 
   useEffect(() => {
@@ -179,74 +164,13 @@ const InstanceCreate = () => {
                     <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
                     <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z" />
                   </svg>
-                  Configurez votre environnement professionnel en quelques
-                  étapes simples
+                  Choisissez un autre nom d'instance si celui proposé ne
+                  convient pas
                 </p>
               </div>
             </div>
 
             <div className="divider"></div>
-
-            {/* Options Section */}
-            <div className="options-section">
-              <div className="option-cards">
-                <div
-                  className={`option-card ${
-                    selectedOption === "automatic" ? "selected" : ""
-                  } ${theme}`}
-                  onClick={() => handleOptionChange("automatic")}
-                >
-                  <div className="option-icon">
-                    <svg
-                      width="20"
-                      height="20"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z" />
-                    </svg>
-                  </div>
-                  <div className="option-content">
-                    <h6 className={`option-title ${theme}`}>
-                      Génér automatiquement
-                    </h6>
-                    <p className={`option-desc ${theme}`}>
-                      Basé sur votre entreprise (acronyme généré)
-                    </p>
-                  </div>
-                </div>
-
-                <div
-                  className={`option-card ${
-                    selectedOption === "manual" ? "selected" : ""
-                  } ${theme}`}
-                  onClick={() => handleOptionChange("manual")}
-                >
-                  <div className="option-icon">
-                    <svg
-                      width="20"
-                      height="20"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                      <path
-                        fillRule="evenodd"
-                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
-                      />
-                    </svg>
-                  </div>
-                  <div className="option-content">
-                    <h6 className={`option-title ${theme}`}>
-                      Création Manuelle
-                    </h6>
-                    <p className={`option-desc ${theme}`}>
-                      Personnalisez votre nom (non-personnalisé)
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
 
             {/* Form Section */}
             {selectedOption !== "automatic" && (
@@ -258,15 +182,7 @@ const InstanceCreate = () => {
                   <div className="input-container">
                     <div className="input-group">
                       <span className={`input-group-text ${theme}`}>
-                        <svg
-                          width="16"
-                          height="16"
-                          fill="currentColor"
-                          viewBox="0 0 16 16"
-                        >
-                          <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
-                          <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
-                        </svg>
+                        https://
                       </span>
                       <input
                         type="text"
@@ -276,7 +192,7 @@ const InstanceCreate = () => {
                         onChange={(e) => setInstanceName(e.target.value)}
                       />
                       <span className={`input-group-text suffix ${theme}`}>
-                        .eprinnov.com
+                        .erpinnov.com
                       </span>
                     </div>
                   </div>
@@ -349,8 +265,8 @@ const InstanceCreate = () => {
             <div className="action-buttons">
               <Button
                 variant="outline-secondary"
-                className={`btn btn-outline-secondary reinitialize-btn ${theme}`}
-                onClick={handleReinitialize}
+                className={`btn btn-outline-secondary previous-btn ${theme}`}
+                onClick={handleBackClick}
               >
                 <svg
                   width="16"
@@ -361,11 +277,10 @@ const InstanceCreate = () => {
                 >
                   <path
                     fillRule="evenodd"
-                    d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"
+                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
                   />
-                  <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
                 </svg>
-                Réinitialiser
+                Précédent
               </Button>
 
               <Button
@@ -376,7 +291,7 @@ const InstanceCreate = () => {
                   selectedOption !== "automatic" && !instanceName.trim()
                 }
               >
-                Créer l'instance
+                Suivant
                 <svg
                   width="16"
                   height="16"
@@ -395,30 +310,6 @@ const InstanceCreate = () => {
 
           {/* Right Sidebar Cards */}
           <div className="right-sidebar">
-            <div className={`sidebar-card guide-card ${theme}`}>
-              <h5 className={`card-title ${theme}`}>Guide de création</h5>
-              <div className="guide-steps">
-                <div className="guide-step">
-                  <span className="step-number">1</span>
-                  <p className={`step-text ${theme}`}>
-                    Choisissez un nom unique pour votre instance
-                  </p>
-                </div>
-                <div className="guide-step">
-                  <span className="step-number">2</span>
-                  <p className={`step-text ${theme}`}>
-                    Sélectionnez votre entreprise dans la liste
-                  </p>
-                </div>
-                <div className="guide-step">
-                  <span className="step-number">3</span>
-                  <p className={`step-text ${theme}`}>
-                    Confirmez la création de votre instance
-                  </p>
-                </div>
-              </div>
-            </div>
-
             <div className={`sidebar-card info-card ${theme}`}>
               <h6 className={`card-title ${theme}`}>Informations utiles</h6>
               <div className="info-item">
