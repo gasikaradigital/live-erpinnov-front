@@ -82,7 +82,7 @@ const AppNavbar = () => {
         {/* Version mobile - éléments alignés horizontalement */}
         <div className="d-flex d-lg-none w-100 align-items-center justify-content-between">
           <Navbar.Brand
-            href="/dashboard"
+            href="/tableau-de-bord"
             className="d-flex align-items-center gap-2 m-0"
           >
             <img
