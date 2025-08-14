@@ -209,9 +209,9 @@ const AppNavbar = () => {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu className="mt-2 dropdown-menu-custom">
-                  <Dropdown.Item href="/dashboard">
+                  <Dropdown.Item href="/tableau-de-bord">
                     <i className="bi bi-bar-chart me-2"></i>
-                    Dashboard
+                    Tableau de bord
                   </Dropdown.Item>
                   <Dropdown.Item href="/ticket">
                     <i className="bi bi-ticket-detailed me-2"></i>
@@ -224,7 +224,7 @@ const AppNavbar = () => {
                         Documents
                       </Dropdown.Item>
                     )}
-                  <Dropdown.Item href="/profile">
+                  <Dropdown.Item href="/profil">
                     <i className="bi bi-person-circle me-2"></i>
                     Profil
                   </Dropdown.Item>

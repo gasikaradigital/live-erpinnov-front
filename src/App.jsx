@@ -16,14 +16,14 @@ import { DarkModeProvider } from "./contexts/DarkModeContext";
 import { ThemeProvider } from "./contexts/ThemeContext.jsx";
 import EntrepriseCreate from "./components/common/entreprise/EntrepriseCreate.jsx";
 import "./App.css";
-import 'bootstrap-icons/font/bootstrap-icons.css';
+import "bootstrap-icons/font/bootstrap-icons.css";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import PaymentModule from "./components/common/PayementProcess.jsx";
 import InstanceCreate from "./components/common/InstanceCreate.jsx";
 import TicketDashboard from "./pages/Ticket/TicketDashboard.jsx";
 import AppNavbar from "./components/common/navbar/AppNavbar.jsx";
-import PaiementDocument from "./pages/Document/PaiementDocument.jsx"
+import PaiementDocument from "./pages/Document/PaiementDocument.jsx";
 import InstanceErpinnov from "./components/common/InstanceErpinnov.jsx";
 import PayementCard from "./pages/Payement/PayementCard.jsx";
 
@@ -60,25 +60,34 @@ function App() {
             <Routes>
               <Route path="/" element={<Login />} />
               <Route path="/inscription" element={<Inscription />} />
-              <Route path="/forgot-password" element={<ForgotPassword />} />
-              <Route path="/confirm-password" element={<ConfirmPassword />} />
+              <Route path="/mot-de-passe-oublie" element={<ForgotPassword />} />
+              <Route
+                path="/confirmer-mot-de-passe"
+                element={<ConfirmPassword />}
+              />
 
               {/* <Route element={<ProtectedRoute />}> */}
 
-              <Route path="/verify-otp" element={<VerifyOtp />} />
-              <Route path="/verify-email" element={<VerifyEmail />} />
-              <Route path="entreprise/create" element={<EntrepriseCreate />} />
-              <Route path="/dashboard" element={<DashboardPage />} />
-              <Route path="/landing" element={<LandingPage />} />
-              <Route path="/Payement" element={<PaymentModule />} />
-              <Route path="instance/create" element={<InstanceCreate />} />
-              <Route path="/confirm-password" element={<ConfirmPassword />} />
-              <Route path="/verify-otp" element={<VerifyOtp />} />
-              <Route path="/profile" element={<ProfileForm />} />
+              <Route path="/verifier-otp" element={<VerifyOtp />} />
+              <Route path="/verifier-email" element={<VerifyEmail />} />
+              <Route
+                path="/organisation/nouvelle"
+                element={<EntrepriseCreate />}
+              />
+              <Route path="/tableau-de-bord" element={<DashboardPage />} />
+              <Route path="/accueil" element={<LandingPage />} />
+              <Route path="/paiement" element={<PaymentModule />} />
+              <Route path="/instance/nouvelle" element={<InstanceCreate />} />
+              <Route
+                path="/confirmer-mot-de-passe"
+                element={<ConfirmPassword />}
+              />
+              <Route path="/verifier-otp" element={<VerifyOtp />} />
+              <Route path="/profil" element={<ProfileForm />} />
               <Route path="/ticket" element={<TicketDashboard />} />
               <Route path="/document" element={<PaiementDocument />} />
-              <Route path="/payement-card" element={<PayementCard />} />
-              <Route path="/create/instance" element={<InstanceCreate />} />
+              <Route path="/paiement-carte" element={<PayementCard />} />
+              <Route path="/instance/nouvelle" element={<InstanceCreate />} />
 
               {/* </Route> */}
             </Routes>

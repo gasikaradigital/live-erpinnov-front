@@ -136,7 +136,7 @@ const InstanceErpi = () => {
                   variant="primary"
                   size="lg"
                   className="w-100 rounded-pill shadow-sm"
-                  href="https://portail.erpinnov.com/inscription"
+                  href="#"
                   target="_blank"
                 >
                   Essai gratuit 14 jours

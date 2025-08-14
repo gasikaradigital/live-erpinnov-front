@@ -23,7 +23,7 @@ const PaymentModule = () => {
     const plan = JSON.parse(storedPlan);
     plan.subscription = "trial";
     localStorage.setItem("planChoose", JSON.stringify(plan));
-    navigate("/entreprise/create");
+    navigate("/organisation/nouvelle");
   };
 
   useEffect(() => {
@@ -64,7 +64,6 @@ const PaymentModule = () => {
           paddingTop: "6rem",
         }}
       >
-       
         <div className="row g-4 justify-content-center align-items-center">
           {/* Bloc gauche */}
           <div className="col-lg-6 d-flex justify-content-center">
@@ -103,33 +102,32 @@ const PaymentModule = () => {
                     <Button
                       variant="light"
                       className="w-100 fw-bold rounded-3"
-                      href="/payement-card"
+                      href="/paiement-carte"
                     >
                       S'abonner
                     </Button>
                   </div>
                 </div>
 
-                
-                  <div className="col-md-6">
-                    <div className="p-3 rounded-3 border border-white border-opacity-25 bg-white bg-opacity-10 mb-3 h-100 d-flex flex-column justify-content-between">
-                      <div>
-                        <h6 className="fw-semibold text-white mb-1 fs-6">
-                          Essayer gratuitement
-                        </h6>
-                        <p className="text-white small mb-3">
-                          Testez pendant 14 jours sans engagement.
-                        </p>
-                      </div>
-                      <Button
-                        variant="light"
-                        className="w-100 fw-bold bg-light rounded-3"
-                        onClick={handleFreeTrialClick}
-                      >
-                        Démarrer l'essai
-                      </Button>
+                <div className="col-md-6">
+                  <div className="p-3 rounded-3 border border-white border-opacity-25 bg-white bg-opacity-10 mb-3 h-100 d-flex flex-column justify-content-between">
+                    <div>
+                      <h6 className="fw-semibold text-white mb-1 fs-6">
+                        Essayer gratuitement
+                      </h6>
+                      <p className="text-white small mb-3">
+                        Testez pendant 14 jours sans engagement.
+                      </p>
                     </div>
+                    <Button
+                      variant="light"
+                      className="w-100 fw-bold bg-light rounded-3"
+                      onClick={handleFreeTrialClick}
+                    >
+                      Démarrer l'essai
+                    </Button>
                   </div>
+                </div>
               </div>
             </div>
           </div>
@@ -153,7 +151,6 @@ const PaymentModule = () => {
                 <span className="small">35% d'économies sur vos coûts</span>
               </div>
             </div>
-
           </div>
         </div>
       </Container>

@@ -50,7 +50,7 @@ const InstancesCard = () => {
   ];
 
   const handleInstanceClick = (instance) => {
-    navigate("/instance/create", {
+    navigate("/instance/nouvelle", {
       state: {
         prefillData: {
           name:

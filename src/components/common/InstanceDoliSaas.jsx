@@ -29,7 +29,7 @@ const InstanceDoliSaas = () => {
       subPlanId: selectedPlan,
       source: "dolisaas"
     }));
-    navigate("/payement");
+    navigate("/paiement");
   };
 
   const pricingPlans = [
