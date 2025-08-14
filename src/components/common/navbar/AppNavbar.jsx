@@ -66,8 +66,8 @@ const AppNavbar = () => {
     fetchUser();
   }, [navigate]);
 
-  // Ne pas afficher le bouton retour sur la page dashboard
-  const showBackButton = location.pathname !== "/dashboard";
+  // Ne pas afficher le bouton retour sur la page tableau de bord
+  const showBackButton = location.pathname !== "/tableau-de-bord";
 
   return (
     <Navbar
@@ -169,7 +169,7 @@ const AppNavbar = () => {
             </Button>
           )}
           <Navbar.Brand
-            href="/dashboard"
+            href="/tableau-de-bord"
             className="d-flex align-items-center gap-2"
           >
             <img
