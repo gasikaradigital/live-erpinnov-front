@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Container, Button, Row, Col, Form } from "react-bootstrap";
+import {
+  Container,
+  Button,
+  Row,
+  Col,
+  Form,
+  Card,
+  Badge,
+} from "react-bootstrap";
 import AppNavbar from "./navbar/AppNavbar";
 import { useTheme } from "../../contexts/ThemeContext";
-import { useNavigate } from "react-router";
-import "./InstanceCreate.css";
+import { useNavigate, useLocation } from "react-router-dom";
 import { fetchEntreprises } from "../../api/enterpriseApi";
 import { createInstance } from "../../api/instanceApi";
 import { toast } from "react-toastify";
@@ -13,39 +20,69 @@ import { faker } from "@faker-js/faker";
 const InstanceCreate = () => {
   const { theme } = useTheme();
   const navigate = useNavigate();
+  const location = useLocation();
   const [planChoose, setPlanChoose] = useState(null);
   const [instanceName, setInstanceName] = useState("");
   const [selectedEnterprise, setSelectedEnterprise] = useState(1);
   const [organisations, setOrganisations] = useState([]);
   const [generatedName, setGeneratedName] = useState("");
+  const [prefillData, setPrefillData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const generateRandomName = () => {
     return faker.word.adjective() + "-" + faker.word.noun();
   };
 
   useEffect(() => {
-    if (organisations.length > 0) {
-      const selectedOrg = organisations.find(
-        (org) => org.id === Number(selectedEnterprise)
-      );
-      if (selectedOrg) {
-        const orgName = selectedOrg.nom.trim();
-        let nameBasedOnOrg = orgName.toLowerCase().replace(/\s+/g, "-");
-        const randomSuffix = Math.floor(Math.random() * 1000);
-        setGeneratedName(`${nameBasedOnOrg}-${randomSuffix}`);
-      } else {
-        setGeneratedName(generateRandomName());
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+
+        if (location.state?.prefillData) {
+          const { prefillData } = location.state;
+          setPrefillData(prefillData);
+
+          // Créer une entreprise fictive avec les données pré-remplies
+          const fakeEnterprise = {
+            id: 1,
+            nom: prefillData.entreprise.nom,
+            nif: prefillData.entreprise.nif,
+            tel: prefillData.entreprise.tel,
+            ville: prefillData.entreprise.ville,
+            pays: prefillData.entreprise.pays,
+            adresse: prefillData.entreprise.adresse,
+            nbEmployes: prefillData.entreprise.nbEmployes,
+          };
+
+          setOrganisations([fakeEnterprise]);
+          setSelectedEnterprise(1);
+          setInstanceName(prefillData.name);
+        } else {
+          // Logique normale si pas de pré-remplissage
+          const data = await fetchEntreprises();
+          setOrganisations(data || []);
+          if (data && data.length > 0) {
+            setSelectedEnterprise(data[0].id);
+          }
+          setGeneratedName(generateRandomName());
+        }
+      } catch (err) {
+        setError("Erreur lors du chargement des entreprises");
+        console.error(err);
+      } finally {
+        setLoading(false);
       }
-    } else {
-      setGeneratedName(generateRandomName());
-    }
-  }, [selectedEnterprise, organisations]);
+    };
+
+    fetchData();
+  }, [location.state]);
 
   useEffect(() => {
-    if (generatedName) {
+    if (!prefillData && generatedName) {
       setInstanceName(generatedName);
     }
-  }, [generatedName]);
+  }, [generatedName, prefillData]);
 
   const handleBackClick = () => {
     navigate(-1);
@@ -57,23 +94,24 @@ const InstanceCreate = () => {
     const mapped = {
       name: nameToUse,
       entrepriseId: selectedEnterprise,
-      planId: planChoose.planId,
-      source: planChoose.source,
+      planId: planChoose?.planId || 1,
+      source: planChoose?.source || "manual",
+      isActive: prefillData?.isActive || true,
     };
 
-    if (planChoose.subscription == "trial") {
+    if (planChoose?.subscription === "trial") {
       const trialData = {
         planId: planChoose.planId,
         subPlanId: planChoose.subPlanId,
       };
-      const resTrial = await createSubscription(trialData);
+      await createSubscription(trialData);
     }
 
     const res = await createInstance(mapped);
 
     if (res) {
       toast.success("Instance créée avec succès !");
-      navigate("/instances"); // Redirection après succès
+      navigate("/instances");
     } else {
       toast.error("Une erreur est survenue lors de la création.");
     }
@@ -83,206 +121,257 @@ const InstanceCreate = () => {
     window.history.back();
   };
 
+  if (loading) {
+    return <div>Chargement...</div>;
+  }
+
+  if (error) {
+    return <div className="alert alert-danger">{error}</div>;
+  }
+
   return (
-    <div className={`instance-create-page ${theme}`}>
+    <div
+      className={`d-flex flex-column min-vh-100 bg-${
+        theme === "dark" ? "dark" : "light"
+      }`}
+    >
       <AppNavbar />
 
       {/* Header avec bouton retour */}
-      <div className={`instance-back-nav ${theme}`}>
+      <div
+        className={`py-3 border-bottom ${
+          theme === "dark"
+            ? "bg-dark border-secondary"
+            : "bg-white border-light"
+        }`}
+      >
         <Container>
           <Button
             variant="link"
-            className={`btn btn-link text-decoration-none p-0 back-button`}
+            className={`p-0 text-decoration-none d-flex align-items-center ${
+              theme === "dark" ? "text-light" : "text-dark"
+            }`}
             onClick={handleBackClick}
           >
-            <svg
-              width="16"
-              height="16"
-              className="me-2"
-              fill="currentColor"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fillRule="evenodd"
-                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
-              />
-            </svg>
+            <i className="bi bi-arrow-left me-2"></i>
             Retour
           </Button>
         </Container>
       </div>
 
-      <Container className="main-container py-4">
+      <Container className="flex-grow-1 py-4">
         <Row className="justify-content-center">
-          <Col xl={8} lg={10} md={12}>
-            <div className={`info-card ${theme} p-3 p-md-4`}>
-              {/* En-tête */}
-              <div className="d-flex align-items-start mb-4">
-                <div className="me-3">
-                  <svg
-                    width="32"
-                    height="32"
-                    fill="#0066FF"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                    <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
-                  </svg>
-                </div>
-                <div>
-                  <h1 className={`header-title ${theme} mb-2`}>
-                    Créez votre espace de travail
-                  </h1>
-                  <p
-                    className={`header-subtitle ${theme} mb-0 d-flex align-items-center`}
-                  >
-                    <svg
-                      width="16"
-                      height="16"
-                      className="me-2"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
-                      <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z" />
-                    </svg>
-                    Choisissez un autre nom d'instance si celui proposé ne
-                    convient pas
-                  </p>
-                </div>
-              </div>
-
-              <div className={`divider ${theme} my-4`}></div>
-
-              {/* Champ nom d'instance */}
-              <Form.Group className="mb-4">
-                <Form.Label className={`${theme} mb-2`}>
-                  Nom de l'instance
-                </Form.Label>
-                <div className="input-group">
-                  <span className={`input-group-text ${theme}`}>https://</span>
-                  <Form.Control
-                    type="text"
-                    className={`form-control ${theme}`}
-                    value={instanceName}
-                    onChange={(e) => setInstanceName(e.target.value)}
-                  />
-                  <span className={`input-group-text ${theme}`}>
-                    .erpinnov.com
-                  </span>
-                </div>
-                <Form.Text className={`helper-text ${theme} mt-1 d-block`}>
-                  Nom généré automatiquement - vous pouvez le modifier
-                </Form.Text>
-              </Form.Group>
-
-              {/* Sélection entreprise */}
-              <Form.Group className="mb-4">
-                <Form.Label className={`${theme} mb-2`}>
-                  Entreprise associée <span className="text-danger">*</span>
-                </Form.Label>
-                <p className={`section-desc ${theme} mb-3`}>
-                  Cette instance sera liée à l'entreprise sélectionnée.
-                </p>
-
-                <div className="enterprise-list">
-                  {organisations.map((org) => (
-                    <div
-                      key={org.id}
-                      className={`enterprise-card ${theme} mb-3 p-3 ${
-                        selectedEnterprise === org.id ? "selected" : ""
-                      }`}
-                      onClick={() => setSelectedEnterprise(org.id)}
-                    >
-                      <div className="d-flex justify-content-between align-items-center">
-                        <div className="d-flex align-items-center">
-                          <div className={`enterprise-avatar ${theme} me-3`}>
-                            {org.nom.charAt(0)}
-                          </div>
-                          <div>
-                            <h6 className={`enterprise-name ${theme} mb-1`}>
-                              {org.nom}
-                            </h6>
-                            <p className={`enterprise-location ${theme} mb-0`}>
-                              {org.ville}, {org.pays}
-                            </p>
-                          </div>
-                        </div>
-                        <Form.Check
-                          type="radio"
-                          name="enterprise"
-                          checked={selectedEnterprise === org.id}
-                          onChange={() => {}}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className={`location-info ${theme} mt-3 p-3`}>
-                  <div className="d-flex align-items-center">
-                    <svg
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                      className="me-2"
-                    >
-                      <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
-                    </svg>
-                    <span>Madagascar</span>
+          <Col xl={8} lg={10}>
+            <Card
+              className={`shadow-sm ${
+                theme === "dark" ? "bg-dark text-light border-secondary" : ""
+              }`}
+            >
+              <Card.Body className="p-4">
+                {/* En-tête */}
+                <div className="d-flex align-items-start mb-4">
+                  <div className="me-3 text-primary">
+                    <i className="bi bi-question-circle-fill fs-3"></i>
                   </div>
-                  <Form.Text className={`location-desc ${theme} mt-1 d-block`}>
-                    Localisation de l'entreprise
-                  </Form.Text>
+                  <div>
+                    <h1 className="h3 mb-2">Créez votre espace de travail</h1>
+                    {prefillData ? (
+                      <Badge bg="info" className="mb-2">
+                        Pré-rempli à partir d'une instance existante
+                      </Badge>
+                    ) : null}
+                    <p
+                      className={`d-flex align-items-center mb-0 ${
+                        theme === "dark" ? "text-light" : "text-muted"
+                      }`}
+                    >
+                      <i className="bi bi-info-circle me-2"></i>
+                      Choisissez un autre nom d'instance si celui proposé ne
+                      convient pas
+                    </p>
+                  </div>
                 </div>
-              </Form.Group>
 
-              <div className={`divider ${theme} my-4`}></div>
+                <hr
+                  className={`my-4 ${
+                    theme === "dark" ? "border-secondary" : ""
+                  }`}
+                />
 
-              {/* Boutons d'action */}
-              <div className="d-flex justify-content-between">
-                <Button
-                  variant="outline-secondary"
-                  className={`previous-btn ${theme} me-2`}
-                  onClick={handlePrevious}
-                >
-                  <svg
-                    width="16"
-                    height="16"
-                    className="me-2"
-                    fill="currentColor"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M11 1.5a.5.5 0 0 1 0 .707L5.707 7.5H15.5a.5.5 0 0 1 0 1H5.707l5.293 5.293a.5.5 0 0 1-.707.707l-6-6a.5.5 0 0 1 0-.707l6-6a.5.5 0 0 1 .707 0z"
+                {/* Champ nom d'instance */}
+                <Form.Group className="mb-4">
+                  <Form.Label className="fw-bold mb-2">
+                    Nom de l'instance
+                  </Form.Label>
+                  <div className="input-group">
+                    <span
+                      className={`input-group-text ${
+                        theme === "dark"
+                          ? "bg-dark text-light border-secondary"
+                          : ""
+                      }`}
+                    >
+                      https://
+                    </span>
+                    <Form.Control
+                      type="text"
+                      className={`${
+                        theme === "dark"
+                          ? "bg-dark text-light border-secondary"
+                          : ""
+                      }`}
+                      value={instanceName}
+                      onChange={(e) => setInstanceName(e.target.value)}
                     />
-                  </svg>
-                  Précédent
-                </Button>
-                <Button
-                  variant="primary"
-                  className="create-btn"
-                  onClick={handleCreateInstance}
-                  disabled={!instanceName.trim()}
-                >
-                  Suivant
-                  <svg
-                    width="16"
-                    height="16"
-                    className="ms-2"
-                    fill="currentColor"
-                    viewBox="0 0 16 16"
+                    <span
+                      className={`input-group-text ${
+                        theme === "dark"
+                          ? "bg-dark text-light border-secondary"
+                          : ""
+                      }`}
+                    >
+                      .erpinnov.com
+                    </span>
+                  </div>
+                  <Form.Text
+                    className={`mt-1 d-block ${
+                      theme === "dark" ? "text-light" : "text-muted"
+                    }`}
                   >
-                    <path
-                      fillRule="evenodd"
-                      d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
-                    />
-                  </svg>
-                </Button>
-              </div>
-            </div>
+                    {prefillData
+                      ? "Nom généré à partir de l'instance sélectionnée"
+                      : "Nom généré automatiquement - vous pouvez le modifier"}
+                  </Form.Text>
+                </Form.Group>
+
+                {/* Sélection entreprise */}
+                <Form.Group className="mb-4">
+                  <Form.Label className="fw-bold mb-2">
+                    Entreprise associée <span className="text-danger">*</span>
+                  </Form.Label>
+                  <p
+                    className={`mb-3 ${
+                      theme === "dark" ? "text-light" : "text-muted"
+                    }`}
+                  >
+                    Cette instance sera liée à l'entreprise sélectionnée.
+                  </p>
+
+                  <div className="enterprise-list">
+                    {organisations && organisations.length > 0 ? (
+                      organisations.map((org) => (
+                        <Card
+                          key={org.id}
+                          className={`mb-3 cursor-pointer ${
+                            selectedEnterprise === org.id
+                              ? "border-primary"
+                              : ""
+                          } ${
+                            theme === "dark"
+                              ? "bg-dark text-light border-secondary"
+                              : ""
+                          }`}
+                          onClick={() => setSelectedEnterprise(org.id)}
+                        >
+                          <Card.Body>
+                            <div className="d-flex justify-content-between align-items-center">
+                              <div className="d-flex align-items-center">
+                                <div
+                                  className="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3"
+                                  style={{ width: "40px", height: "40px" }}
+                                >
+                                  {org.nom.charAt(0)}
+                                </div>
+                                <div>
+                                  <h6 className="mb-1">{org.nom}</h6>
+                                  <p
+                                    className={`mb-0 ${
+                                      theme === "dark"
+                                        ? "text-light"
+                                        : "text-muted"
+                                    }`}
+                                  >
+                                    <i className="bi bi-geo-alt me-1"></i>
+                                    {org.ville}, {org.pays}
+                                  </p>
+                                  <small className="text-muted">
+                                    <i className="bi bi-people me-1"></i>
+                                    {org.nbEmployes}
+                                  </small>
+                                </div>
+                              </div>
+                              <Form.Check
+                                type="radio"
+                                name="enterprise"
+                                checked={selectedEnterprise === org.id}
+                                onChange={() => setSelectedEnterprise(org.id)}
+                              />
+                            </div>
+                          </Card.Body>
+                        </Card>
+                      ))
+                    ) : (
+                      <p>Aucune entreprise disponible.</p>
+                    )}
+                  </div>
+
+                  <Card
+                    className={`mt-3 ${
+                      theme === "dark"
+                        ? "bg-dark text-light border-secondary"
+                        : ""
+                    }`}
+                  >
+                    <Card.Body>
+                      <div className="d-flex align-items-center">
+                        <i className="bi bi-geo-fill text-primary me-2"></i>
+                        <span>
+                          {organisations.length > 0 && selectedEnterprise
+                            ? organisations.find(
+                                (o) => o.id === selectedEnterprise
+                              )?.pays || "Madagascar"
+                            : "Madagascar"}
+                        </span>
+                      </div>
+                      <Form.Text
+                        className={`mt-1 d-block ${
+                          theme === "dark" ? "text-light" : "text-muted"
+                        }`}
+                      >
+                        Localisation de l'entreprise
+                      </Form.Text>
+                    </Card.Body>
+                  </Card>
+                </Form.Group>
+
+                <hr
+                  className={`my-4 ${
+                    theme === "dark" ? "border-secondary" : ""
+                  }`}
+                />
+
+                {/* Boutons d'action */}
+                <div className="d-flex justify-content-between">
+                  <Button
+                    variant="outline-secondary"
+                    className="d-flex align-items-center"
+                    onClick={handlePrevious}
+                  >
+                    <i className="bi bi-chevron-left me-2"></i>
+                    Précédent
+                  </Button>
+                  <Button
+                    variant="primary"
+                    className="d-flex align-items-center"
+                    onClick={handleCreateInstance}
+                    disabled={!instanceName.trim()}
+                  >
+                    {prefillData ? "Créer à partir de l'instance" : "Suivant"}
+                    <i className="bi bi-chevron-right ms-2"></i>
+                  </Button>
+                </div>
+              </Card.Body>
+            </Card>
           </Col>
         </Row>
       </Container>
