@@ -8,7 +8,6 @@ import PlanCard from "./PlanCard";
 import { fetchPlas } from "../../api/planApi";
 import { useTheme } from "../../contexts/ThemeContext";
 
-
 const DashboardContent = () => {
   const { theme } = useTheme();
   const [plans, setPlans] = useState([]);
@@ -72,24 +71,16 @@ const DashboardContent = () => {
         </Nav.Item>
       </Nav>
 
-      {/* Affichage unique : une seule interface visible à la fois */}
-      {activeTab === "dolisaas" && (
-        <Row className="min-vh-100 overflow-auto">
-          <Col xs={12} className="px-3 ">
-            <InstanceDoliSaas />
-          </Col>
-        </Row>
-      )}
-
-      {activeTab === "erpinnov" && (
-        <Row className="min-vh-100 overflow-auto">
-          <Col xs={12} className="px-3 ">
-            <InstanceErpi />
-          </Col>
-        </Row>
-      )}
-      <Row className="min-vh-100 overflow-auto">
-        <Col xs={12} className="px-3">
+      {/* Contenu principal avec hauteur uniforme */}
+      <Row
+        className="overflow-auto"
+        style={{ minHeight: "calc(100vh - 200px)" }}
+      >
+        <Col xs={12} className="p-0">
+          {activeTab === "dolisaas" && <InstanceDoliSaas />}
+          {activeTab === "erpinnov" && <InstanceErpi />}
+        </Col>
+        <Col xs={12} className="p-5">
           <InstancesCard />
         </Col>
       </Row>
