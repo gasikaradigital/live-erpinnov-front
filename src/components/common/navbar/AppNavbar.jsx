@@ -127,13 +127,25 @@ const AppNavbar = () => {
                 </div>
               </Dropdown.Toggle>
               <Dropdown.Menu className="mt-2 shadow">
-                <Dropdown.Item href="/dashboard">
-                  <i className="bi bi-bar-chart me-2"></i>
-                  Dashboard
+                <Dropdown.Item href="/tableau-de-bord">
+                  <i className="bi bi-speedometer2 me-2"></i>
+                  Tableau de bord
+                </Dropdown.Item>
+                <Dropdown.Item href="/profil">
+                  <i className="bi bi-person-circle me-2"></i>
+                  Profil
+                </Dropdown.Item>
+                <Dropdown.Item href="/paiement-carte">
+                  <i className="bi bi-credit-card me-2"></i>
+                  Paiement
                 </Dropdown.Item>
                 <Dropdown.Item href="/ticket">
                   <i className="bi bi-ticket-detailed me-2"></i>
                   Tickets
+                </Dropdown.Item>
+                <Dropdown.Item href="/faq">
+                  <i className="bi bi-question-circle me-2"></i>
+                  Tutoriel/FAQ
                 </Dropdown.Item>
                 {user?.subscriptions?.length > 0 &&
                   user?.subscriptions?.[0]?.status !== "trial" && (
@@ -142,10 +154,6 @@ const AppNavbar = () => {
                       Documents
                     </Dropdown.Item>
                   )}
-                <Dropdown.Item href="/profile">
-                  <i className="bi bi-person-circle me-2"></i>
-                  Profil
-                </Dropdown.Item>
                 <Dropdown.Divider />
                 <Dropdown.Item onClick={handleLogout} className="text-danger">
                   <i className="bi bi-box-arrow-right me-2"></i>
@@ -156,7 +164,7 @@ const AppNavbar = () => {
           </div>
         </div>
 
-        {/* Version desktop - inchangée */}
+        {/* Version desktop */}
         <div className="d-none d-lg-flex w-100">
           {showBackButton && (
             <Button
@@ -182,7 +190,10 @@ const AppNavbar = () => {
           </Navbar.Brand>
 
           <Navbar.Collapse id="main-navbar-nav">
-            <Nav className="ms-auto d-flex align-items-center gap-3">
+            <Nav className="me-auto">
+            </Nav>
+
+            <Nav className="d-flex align-items-center gap-3">
               <Button
                 variant={theme === "dark" ? "light" : "outline-secondary"}
                 onClick={toggleTheme}
@@ -210,12 +221,24 @@ const AppNavbar = () => {
 
                 <Dropdown.Menu className="mt-2 dropdown-menu-custom">
                   <Dropdown.Item href="/tableau-de-bord">
-                    <i className="bi bi-bar-chart me-2"></i>
+                    <i className="bi bi-speedometer2 me-2"></i>
                     Tableau de bord
+                  </Dropdown.Item>
+                  <Dropdown.Item href="/profil">
+                    <i className="bi bi-person-circle me-2"></i>
+                    Profil
+                  </Dropdown.Item>
+                  <Dropdown.Item href="/paiement-carte">
+                    <i className="bi bi-credit-card me-2"></i>
+                    Paiement
                   </Dropdown.Item>
                   <Dropdown.Item href="/ticket">
                     <i className="bi bi-ticket-detailed me-2"></i>
                     Tickets
+                  </Dropdown.Item>
+                  <Dropdown.Item href="/faq">
+                    <i className="bi bi-question-circle me-2"></i>
+                    Tutoriel/FAQ
                   </Dropdown.Item>
                   {user?.subscriptions?.length > 0 &&
                     user?.subscriptions?.[0]?.status !== "trial" && (
@@ -224,10 +247,6 @@ const AppNavbar = () => {
                         Documents
                       </Dropdown.Item>
                     )}
-                  <Dropdown.Item href="/profil">
-                    <i className="bi bi-person-circle me-2"></i>
-                    Profil
-                  </Dropdown.Item>
                   <Dropdown.Divider />
                   <Dropdown.Item onClick={handleLogout} className="text-danger">
                     <i className="bi bi-box-arrow-right me-2"></i>

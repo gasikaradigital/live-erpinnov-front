@@ -26,6 +26,7 @@ import AppNavbar from "./components/common/navbar/AppNavbar.jsx";
 import PaiementDocument from "./pages/Document/PaiementDocument.jsx";
 import InstanceErpinnov from "./components/common/InstanceErpinnov.jsx";
 import PayementCard from "./pages/Payement/PayementCard.jsx";
+import LandingFAQ from "./pages/Faq/LandingFAQ.jsx";
 
 function LandingPage() {
   return (
@@ -65,9 +66,7 @@ function App() {
                 path="/confirmer-mot-de-passe"
                 element={<ConfirmPassword />}
               />
-
               {/* <Route element={<ProtectedRoute />}> */}
-
               <Route path="/verifier-otp" element={<VerifyOtp />} />
               <Route path="/verifier-email" element={<VerifyEmail />} />
               <Route
@@ -88,7 +87,8 @@ function App() {
               <Route path="/document" element={<PaiementDocument />} />
               <Route path="/paiement-carte" element={<PayementCard />} />
               <Route path="/instance/nouvelle" element={<InstanceCreate />} />
-
+              <Route path="/instance/erpinnov" element={<InstanceErpinnov />} />
+              <Route path="/faq" element={<LandingFAQ />} />
               {/* </Route> */}
             </Routes>
           </AuthProvider>
