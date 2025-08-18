@@ -17,7 +17,7 @@ import { fetchPlan } from "../../api/planApi";
 const InstanceDoliSaas = () => {
   const { theme } = useTheme();
   const navigate = useNavigate();
-  const [selectedPlan, setSelectedPlan] = useState(1);
+  const [selectedPlan, setSelectedPlan] = useState(12);
 
   const bgColor = theme === "dark" ? "#1e1e2f" : "#ffffff";
   const textColor = theme === "dark" ? "#f8f9fa" : "#212529";
