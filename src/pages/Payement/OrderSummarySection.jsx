@@ -11,7 +11,7 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
         const initialize = async () => {
             try {
                 const res = await fetchPlan();
-                setPlans(res?.data?.plan || []);
+                setPlans(res);
             } catch {
                 console.warn("Plan vide");
                 setPlans([]);
@@ -32,6 +32,9 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
         getChoosePlan();
     }, []);
 
+    console.log({
+        "resultat": res,
+    })
     const planSelected = plans.find(p => p.id === planChoose.planId);
     
     const subPlanSelected = planSelected?.sub_plans?.find(p => p.id === planChoose.subPlanId);
