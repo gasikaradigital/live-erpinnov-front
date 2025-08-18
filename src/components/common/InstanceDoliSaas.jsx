@@ -25,7 +25,7 @@ const InstanceDoliSaas = () => {
   const grayBg = theme === "dark" ? "#2b2b3c" : "#f8f9fa";
   const [plans, setPlans] = useState([]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     const initialize = async () => {
       try {
         const res = await fetchPlan();
@@ -35,9 +35,11 @@ const InstanceDoliSaas = () => {
       }
     };
       initialize();
-  }, []);
+  }, []);*/
 
-  const handleStart = () => {
+  const handleStart = async () => {
+    const res = await fetchPlan();
+    setPlans(res?.data?.plan || []);
     const planSelected = plans.find(p => p.id === 5);
     const subPlanSelected = planSelected?.sub_plans?.find(p => p.id === selectedPlan);
     const prixBase = parseFloat(subPlanSelected?.price_monthly_formated || 0);
