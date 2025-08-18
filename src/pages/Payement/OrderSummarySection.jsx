@@ -23,7 +23,6 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
             if (data) {
                 const parsed = JSON.parse(data);
                 setPlanChoose(parsed);
-                console.log(parsed);
             } else {
                 console.warn("data vide");
             }
@@ -34,6 +33,7 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
 
     
     const planSelected = plans.find(p => p.id === planChoose.planId);
+    console.log(planSelected);
     const subPlanSelected = planSelected?.sub_plans?.find(p => p.id === planChoose.subPlanId);
     const prixBase = parseFloat(subPlanSelected?.price_monthly_formated || 0);
     const prixFinal = switchState ? prixBase * 1.10 : prixBase;
