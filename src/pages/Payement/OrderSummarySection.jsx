@@ -50,7 +50,7 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
 
     const prixLocal = subPlanSelected?.price_monthly_formated;
     console.log({
-        'prix': subPlanSelected
+        'prix': planSelected
     })
 
     return(
