@@ -16,7 +16,6 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
                 console.warn("Plan choisis vide");
             }
         };
-        initialize();
         getChoosePlan();
     }, []);
     console.log(planChoose);
