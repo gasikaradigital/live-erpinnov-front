@@ -5,25 +5,11 @@ import InstancesCard from "./InstancesCard";
 import InstanceDoliSaas from "./InstanceDoliSaas";
 import InstanceErpi from "./InstanceErpi";
 import PlanCard from "./PlanCard";
-import { fetchPlas } from "../../api/planApi";
 import { useTheme } from "../../contexts/ThemeContext";
 
 const DashboardContent = () => {
   const { theme } = useTheme();
-  const [plans, setPlans] = useState([]);
   const [activeTab, setActiveTab] = useState("dolisaas");
-
-  useEffect(() => {
-    const initialize = async () => {
-      try {
-        const res = await fetchPlas();
-        setPlans(res?.data || []);
-      } catch {
-        setPlans([]);
-      }
-    };
-    initialize();
-  }, []);
 
   const bgColor = theme === "dark" ? "#212529" : "#ffffff";
   const textColor = theme === "dark" ? "#f8f9fa" : "#212529";

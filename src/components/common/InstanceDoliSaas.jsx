@@ -30,7 +30,6 @@ const InstanceDoliSaas = () => {
       try {
         const res = await fetchPlan();
         setPlans(res?.data || []);
-        console.log('plan' . plans);
       } catch {
         setPlans([]);
       }
