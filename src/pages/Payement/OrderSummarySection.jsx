@@ -3,24 +3,13 @@ import { Form, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchState, methodSelected, backToDashboard}){
-    const [planChoose, setPlanChoose] = useState(null);
-
-    useEffect(() => {    
-        const getChoosePlan = () => {
-            const data = localStorage.getItem("planChoose");
-
-            if (data) {
-                const parsed = JSON.parse(data);
-                setPlanChoose(parsed);
-            } else {
-                console.warn("Plan choisis vide");
-            }
-        };
-        getChoosePlan();
-    }, []);
-    const prixBase = planChoose.prixBase;
+    const [planChoose, setPlanChoose] = useState(() => {
+        const data = localStorage.getItem("planChoose");
+        return data ? JSON.parse(data) : {prixBase: 0};
+    });
+    
     console.log(planChoose);
-
+    const prixBase = planChoose.prixBase ?? 0;
     const prixFinal = switchState ? prixBase * 1.10 : prixBase;
 
     // Fonction pour formater le prix avec séparateur d'espace (optionnel)
@@ -33,7 +22,7 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
     }).format(value).replace(/\s?MGA/, '').trim(); // Enlève "MGA" si besoin
     };
 
-    const prixFormate = formatPrice(prixFinal);
+    const prixFormate = prixBase ? formatPrice(prixFinal): null;
 
 
     return(
