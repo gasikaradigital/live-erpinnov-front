@@ -32,7 +32,6 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
         getChoosePlan();
     }, []);
 
-                console.log({'plan': plans})
     const planSelected = plans.find(p => p.id === planChoose.planId);
     
     const subPlanSelected = planSelected?.sub_plans?.find(p => p.id === planChoose.subPlanId);
