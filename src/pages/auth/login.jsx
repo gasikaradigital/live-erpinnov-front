@@ -49,7 +49,7 @@ const Login = () => {
       if (response.status === 200) {
         setStatus("Connexion réussie");
         setAuthenticated(true);
-        navigate("/dashboard");
+        navigate("/tableau-de-bord");
       } else {
         setError("Connexion échouée");
       }
