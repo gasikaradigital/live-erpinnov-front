@@ -46,8 +46,6 @@ const InstanceDoliSaas = () => {
     navigate("/paiement");
   };
 
-  const dolisaasPlan = plans.find(p => p.label === "Dolisaas");
-
   const pricingPlans = [
     {
       id: 12,
