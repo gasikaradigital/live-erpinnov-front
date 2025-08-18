@@ -24,8 +24,7 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
                 setPlanChoose(JSON.parse(data));
                 localStorage.removeItem("planChoose")
                 console.log({
-                    "planId": planChoose.planId,
-                    "subplanId": planChoose.subPlanId,
+                    "planSelected": planChoose
                 });
             } else {
             console.warn("data vide");
