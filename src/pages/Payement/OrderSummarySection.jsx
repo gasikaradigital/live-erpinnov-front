@@ -61,7 +61,7 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
                        <span className='fw-bold opacity-75'>Mensuel</span>
                     </div>
                     <div className='w-100 p-1 d-flex align-items-center justify-center flex-column'>
-                       { prixLocal ? (
+                       { prixFormate ? (
                             <span className='p-2 fs-2 fw-bold text-dark w-100 text-center price-order'>{prixFormate} <span>Ar/mois</span></span>
                        ) : (
                         <span className='p-2 fs-2 fw-bold text-dark w-100 text-center price-order'> Pas de prix <span>Ar/mois</span></span>
@@ -92,7 +92,7 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
                 }
                 <div className='d-flex align-items-center justify-between' style={{flexDirection: 'row'}}>
                     <label>Total à payer</label>
-                    { prixLocal ? (
+                    { prixFormate ? (
                         <span className='py-1 px-4 rounded text-light fw-bold' style={{backgroundColor: 'red', fontSize: '14px'}}>{prixFormate} Ar</span>
                     ) : (
                         <span className='py-1 px-4 rounded text-light fw-bold' style={{backgroundColor: 'red', fontSize: '14px'}}>Pas de prix</span>
