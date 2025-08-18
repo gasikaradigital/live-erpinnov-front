@@ -31,9 +31,9 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
         getChoosePlan();
     }, []);
 
-    
+    console.log(plans);
     const planSelected = plans.find(p => p.id === planChoose.planId);
-    console.log(planSelected);
+    
     const subPlanSelected = planSelected?.sub_plans?.find(p => p.id === planChoose.subPlanId);
     const prixBase = parseFloat(subPlanSelected?.price_monthly_formated || 0);
     const prixFinal = switchState ? prixBase * 1.10 : prixBase;
