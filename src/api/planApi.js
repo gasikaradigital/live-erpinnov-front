@@ -6,7 +6,7 @@ export const fetchPlan = async () => {
 
         console.log(res);
         if (res.status == 200) {
-            return res;
+            return res.data;
         } else {
 
             return null;
