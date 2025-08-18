@@ -18,9 +18,10 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
         };
         getChoosePlan();
     }, []);
+    const prixBase = planChoose.prixBase;
     console.log(planChoose);
 
-    //const prixFinal = switchState ? planChoose.prixBase * 1.10 : planChoose.prixBase;
+    const prixFinal = switchState ? prixBase * 1.10 : prixBase;
 
     // Fonction pour formater le prix avec séparateur d'espace (optionnel)
     const formatPrice = (value) => {
@@ -32,7 +33,7 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
     }).format(value).replace(/\s?MGA/, '').trim(); // Enlève "MGA" si besoin
     };
 
-    const prixFormate = formatPrice(25000);
+    const prixFormate = formatPrice(prixFinal);
 
 
     return(
