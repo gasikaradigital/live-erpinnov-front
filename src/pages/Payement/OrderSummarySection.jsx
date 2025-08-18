@@ -21,19 +21,18 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
             const data = localStorage.getItem("planChoose");
 
             if (data) {
-                setPlanChoose(JSON.parse(data));
-                localStorage.removeItem("planChoose")
-                console.log({
-                    "planSelected": planChoose
-                });
+                const parsed = JSON.parse(data);
+                setPlanChoose(parsed);
+                console.log(parsed);
             } else {
-            console.warn("data vide");
+                console.warn("data vide");
             }
         };
         initialize();
         getChoosePlan();
     }, []);
 
+    
     const planSelected = plans.find(p => p.id === planChoose.planId);
     const subPlanSelected = planSelected?.sub_plans?.find(p => p.id === planChoose.subPlanId);
     const prixBase = parseFloat(subPlanSelected?.price_monthly_formated || 0);
