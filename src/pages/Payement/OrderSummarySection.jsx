@@ -11,6 +11,7 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
     console.log(planChoose);
     const prixBase = planChoose.prixBase ?? 0;
     const prixFinal = switchState ? prixBase * 1.10 : prixBase;
+    const prixTotal = switchState ? prixFinal : prixBase * 12;
 
     // Fonction pour formater le prix avec séparateur d'espace (optionnel)
     const formatPrice = (value) => {
@@ -74,16 +75,16 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
                     <span className='py-1 px-4 rounded text-light fw-bold offer-name' style={{backgroundColor: '#fc8600', fontSize: '14px'}}>Solo-Basic</span>
                 </div>
                 {
-                    (methodSelected === "orange_money") &&
+                    (methodSelected === "orange_money") && prixFormate &&
                     <div className='d-flex align-items-center justify-between' style={{flexDirection: 'row'}}>
                         <label>Frais orange money</label>
-                        <span style={{fontSize: '14px'}}>0 Ar</span>
+                        <span style={{fontSize: '14px'}}>{prixFormate} Ar</span>
                     </div>
                 }
                 <div className='d-flex align-items-center justify-between' style={{flexDirection: 'row'}}>
                     <label>Total à payer</label>
-                    { prixFormate ? (
-                        <span className='py-1 px-4 rounded text-light fw-bold' style={{backgroundColor: 'red', fontSize: '14px'}}>{prixFormate} Ar</span>
+                    { prixTotal ? (
+                        <span className='py-1 px-4 rounded text-light fw-bold' style={{backgroundColor: 'red', fontSize: '14px'}}>{prixTotal} Ar</span>
                     ) : (
                         <span className='py-1 px-4 rounded text-light fw-bold' style={{backgroundColor: 'red', fontSize: '14px'}}>Pas de prix</span>
                     )}
