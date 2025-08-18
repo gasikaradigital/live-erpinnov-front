@@ -37,7 +37,7 @@ const InstanceDoliSaas = () => {
       planId: 5,
       subPlanId: selectedPlan,
       prixBase: prixBase,
-      source: "dolisaas",
+      source: "Dolisaas",
       nomSubPlan: subPlanSelected.label,
     }));
     navigate("/paiement");

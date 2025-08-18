@@ -11,7 +11,7 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
     const offre = planChoose.source;
     const nomSubPlan = planChoose.nomSubPlan;
     const prixBase = planChoose.prixBase ?? 0;
-    const prixFinal = switchState ? prixBase * 1.10 : prixBase;
+    const prixFinal = switchState ? Math.round(prixBase * 1.10) : prixBase;
     const prixTotal = switchState ? prixFinal : prixBase * 12;
 
     // Fonction pour formater le prix avec séparateur d'espace (optionnel)
