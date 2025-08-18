@@ -3,7 +3,7 @@ import { Form, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { fetchPlan } from '../../api/planApi';
 
-function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchState, methodSelected}){
+function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchState, methodSelected, backToDashboard}){
     const [planChoose, setPlanChoose] = useState(null);
     const [plans, setPlans] = useState([]);
 
