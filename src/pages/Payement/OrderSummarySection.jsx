@@ -8,7 +8,8 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
         return data ? JSON.parse(data) : {prixBase: 0};
     });
     
-    console.log(planChoose);
+    const offre = planChoose.source;
+    const nomSubPlan = planChoose.nomSubPlan;
     const prixBase = planChoose.prixBase ?? 0;
     const prixFinal = switchState ? prixBase * 1.10 : prixBase;
     const prixTotal = switchState ? prixFinal : prixBase * 12;
@@ -72,7 +73,13 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
             <div className='d-flex gap-2 w-100 py-2' style={{flexDirection: 'column'}}>
                 <div className='d-flex align-items-center justify-between' style={{flexDirection: 'row'}}>
                     <label>Offre</label>
-                    <span className='py-1 px-4 rounded text-light fw-bold offer-name' style={{backgroundColor: '#fc8600', fontSize: '14px'}}>Solo-Basic</span>
+                    { offre ? (
+                        <span className='py-1 px-4 rounded text-light fw-bold offer-name' style={{backgroundColor: '#fc8600', fontSize: '14px'}}>{offre} {nomSubPlan}</span>
+                        ) : (
+                        ""
+                        )
+                    }
+                    
                 </div>
                 {
                     (methodSelected === "orange_money") && prixFormate &&
