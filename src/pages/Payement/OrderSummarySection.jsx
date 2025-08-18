@@ -49,6 +49,10 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
     const prixFormate = formatPrice(prixFinal);
 
     const prixLocal = subPlanSelected?.price_monthly_formated;
+    console.log({
+        'prix': prixFormate,
+        'prix2': prixLocal,
+    })
 
     return(
         <>
