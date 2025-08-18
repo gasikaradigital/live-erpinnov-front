@@ -82,10 +82,10 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
                     
                 </div>
                 {
-                    (methodSelected === "orange_money") && prixFormate &&
+                    (methodSelected === "orange_money") && 
                     <div className='d-flex align-items-center justify-between' style={{flexDirection: 'row'}}>
                         <label>Frais orange money</label>
-                        <span style={{fontSize: '14px'}}>{prixFormate} Ar</span>
+                        <span style={{fontSize: '14px'}}>0 Ar</span>
                     </div>
                 }
                 <div className='d-flex align-items-center justify-between' style={{flexDirection: 'row'}}>
