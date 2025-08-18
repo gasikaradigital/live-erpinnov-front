@@ -10,6 +10,7 @@ import PaymentMethodSelector from './PaymentMethodSelector'
 import BillingInfosSection from './BillingInfosSection';
 import OrderSummarySection from './OrderSummarySection';
 import DetailsMethodForm from './DetailsMethodForm';
+import { useNavigate } from 'react-router-dom';
 
 
 function PayementCard(){
@@ -42,6 +43,7 @@ function PayementCard(){
     const [switchState, setSwitchState] = useState(true);
     const [showBillingForm, setShowBillingForm] = useState(true);
     const [date, setDate] = useState(null);
+    const navigate = useNavigate();
 
     // Réference du formulaire dans le fichier BillingInfosSection
     const billingFormRef = useRef();
@@ -71,6 +73,10 @@ function PayementCard(){
         }
     };
 
+
+    const backToDashboard = () => {
+        navigate("/tableau-de-bord");
+    }
 
     // Variable de contrôle responsive, catégorie : xl, lg, md, sm
     const padStyleXlLgMdSmExternal = 'p-xl-4 p-lg-4 p-md-3 p-sm-2';
@@ -130,6 +136,7 @@ function PayementCard(){
                                 switchState={switchState}
                                 setSwitchState={setSwitchState}
                                 methodSelected={selectedRadio}
+                                backToDashboard={backToDashboard}
                                 />
 
                                 {/* Fin de la section 3 */}
