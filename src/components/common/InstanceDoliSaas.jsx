@@ -42,6 +42,9 @@ const InstanceDoliSaas = () => {
     const subPlanSelected = planSelected?.sub_plans?.find(p => p.id === selectedPlan);
     const prixBase = parseFloat(subPlanSelected?.price_monthly_formated || 0);
 
+    console.log({
+      "plan": planSelected
+    });
     localStorage.setItem('planChoose', JSON.stringify({
       planId: 5,
       subPlanId: selectedPlan,
