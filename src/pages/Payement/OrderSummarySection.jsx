@@ -13,6 +13,7 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
                 const res = await fetchPlan();
                 setPlans(res?.data?.plan || []);
             } catch {
+                console.warn("Plan vide");
                 setPlans([]);
             }
         };
@@ -24,7 +25,7 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
                 const parsed = JSON.parse(data);
                 setPlanChoose(parsed);
             } else {
-                console.warn("data vide");
+                console.warn("Plan choisis vide");
             }
         };
         initialize();
