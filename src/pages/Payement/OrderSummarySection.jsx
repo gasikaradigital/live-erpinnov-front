@@ -12,6 +12,7 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
             try {
                 const res = await fetchPlan();
                 setPlans(res?.data?.plan || []);
+                console.log({'plan': plans})
             } catch {
                 console.warn("Plan vide");
                 setPlans([]);
