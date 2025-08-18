@@ -29,8 +29,8 @@ const InstanceDoliSaas = () => {
     const res = await fetchPlan();
     const newPlan = res?.plan || [];
     setPlans(newPlan);
-    const planSelected = newPlan.find(p => p.id === planId);
-    const subPlanSelected = planSelected?.sub_plans?.find(p => p.id === planSelected);
+    const planSelected = newPlan.find(p => p.id === 5);
+    const subPlanSelected = planSelected?.sub_plans?.find(p => p.id === selectedPlan);
     const prixBase = parseFloat(subPlanSelected?.price_monthly_formated || 0);
 
     console.log({
@@ -48,7 +48,7 @@ const InstanceDoliSaas = () => {
 
   const pricingPlans = [
     {
-      id: 1,
+      id: 12,
       name: "2 Go",
       monthlyPrice: "25 000 Ar",
       annualPrice: "300 000 Ar",
@@ -56,7 +56,7 @@ const InstanceDoliSaas = () => {
       badgeVariant: "info",
     },
     {
-      id: 2,
+      id: 13,
       name: "5 Go",
       monthlyPrice: "40 000 Ar",
       annualPrice: "480 000 Ar",
@@ -64,7 +64,7 @@ const InstanceDoliSaas = () => {
       badgeVariant: "primary",
     },
     {
-      id: 3,
+      id: 14,
       name: "10 Go",
       monthlyPrice: "80 000 Ar",
       annualPrice: "960 000 Ar",
