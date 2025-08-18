@@ -33,7 +33,7 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
     }, []);
 
     console.log({
-        "resultat": res,
+        "resultat": plans,
     })
     const planSelected = plans.find(p => p.id === planChoose.planId);
     
