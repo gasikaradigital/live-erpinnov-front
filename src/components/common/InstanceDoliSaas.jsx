@@ -38,9 +38,15 @@ const InstanceDoliSaas = () => {
   }, []);
 
   const handleStart = () => {
+    const planSelected = plans.find(p => p.id === 5);
+    const subPlanSelected = planSelected?.sub_plans?.find(p => p.id === selectedPlan);
+    const prixBase = parseFloat(subPlanSelected?.price_monthly_formated || 0);
+    const prixFinal = switchState ? prixBase * 1.10 : prixBase;
+
     localStorage.setItem('planChoose', JSON.stringify({
       planId: 5,
       subPlanId: selectedPlan,
+      prixFinal: prixFinal,
       source: "dolisaas"
     }));
     navigate("/paiement");

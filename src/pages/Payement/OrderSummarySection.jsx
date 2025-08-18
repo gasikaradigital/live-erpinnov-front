@@ -7,17 +7,7 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
     const [planChoose, setPlanChoose] = useState(null);
     const [plans, setPlans] = useState([]);
 
-    useEffect(() => {
-        const initialize = async () => {
-            try {
-                const res = await fetchPlan();
-                setPlans(res);
-            } catch {
-                console.warn("Plan vide");
-                setPlans([]);
-            }
-        };
-              
+    useEffect(() => {    
         const getChoosePlan = () => {
             const data = localStorage.getItem("planChoose");
 
@@ -32,15 +22,6 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
         getChoosePlan();
     }, []);
 
-    console.log({
-        "resultat": plans,
-    })
-    const planSelected = plans.find(p => p.id === planChoose.planId);
-    
-    const subPlanSelected = planSelected?.sub_plans?.find(p => p.id === planChoose.subPlanId);
-    const prixBase = parseFloat(subPlanSelected?.price_monthly_formated || 0);
-    const prixFinal = switchState ? prixBase * 1.10 : prixBase;
-
     // Fonction pour formater le prix avec séparateur d'espace (optionnel)
     const formatPrice = (value) => {
     return new Intl.NumberFormat('fr-FR', {
@@ -51,9 +32,7 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
     }).format(value).replace(/\s?MGA/, '').trim(); // Enlève "MGA" si besoin
     };
 
-    const prixFormate = formatPrice(prixFinal);
-
-    const prixLocal = subPlanSelected?.price_monthly_formated;
+    const prixFormate = formatPrice(planChoose.prixFinal);
 
 
     return(
