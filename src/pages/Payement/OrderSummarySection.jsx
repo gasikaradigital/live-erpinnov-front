@@ -22,7 +22,7 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
 
             if (data) {
                 setPlanChoose(JSON.parse(data));
-                console.log(planChoose);
+                localStorage.removeItem("planChoose")
             } else {
             console.warn("data vide");
             }
