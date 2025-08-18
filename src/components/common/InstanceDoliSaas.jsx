@@ -12,6 +12,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../contexts/ThemeContext";
 import dolibarrCover from "../../assets/dolibarr-pdf-bien-gerer-son-entreprisec2171d20240202113929-image_cover.jpg";
+import { fetchPlas } from "../../api/planApi";
 
 const InstanceDoliSaas = () => {
   const { theme } = useTheme();
@@ -22,6 +23,20 @@ const InstanceDoliSaas = () => {
   const textColor = theme === "dark" ? "#f8f9fa" : "#212529";
   const secondaryColor = theme === "dark" ? "#444" : "#ccc";
   const grayBg = theme === "dark" ? "#2b2b3c" : "#f8f9fa";
+  const [plans, setPlans] = useState([]);
+
+  useEffect(() => {
+    const initialize = async () => {
+      try {
+        const res = await fetchPlas();
+        setPlans(res?.data || []);
+        console.log(plans);
+      } catch {
+        setPlans([]);
+      }
+    };
+      initialize();
+  }, []);
 
   const handleStart = () => {
     localStorage.setItem('planChoose', JSON.stringify({
@@ -31,6 +46,8 @@ const InstanceDoliSaas = () => {
     }));
     navigate("/paiement");
   };
+
+
 
   const pricingPlans = [
     {
