@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { fetchPlan } from '../../api/planApi';
 
 function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchState, methodSelected, backToDashboard}){
     const [planChoose, setPlanChoose] = useState(null);
-    const [plans, setPlans] = useState([]);
 
     useEffect(() => {    
         const getChoosePlan = () => {
@@ -21,6 +19,7 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
         initialize();
         getChoosePlan();
     }, []);
+    console.log(planChoose);
 
     const prixFinal = switchState ? planChoose.prixBase * 1.10 : planChoose.prixBase;
 
