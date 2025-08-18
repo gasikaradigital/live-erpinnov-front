@@ -1,9 +1,55 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { fetchPlan } from '../../api/planApi';
 
 
 function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchState, methodSelected}){
+    const [planChoose, setPlanChoose] = useState(null);
+    const [plans, setPlans] = useState([]);
+
+    useEffect(() => {
+        const initialize = async () => {
+            try {
+                const res = await fetchPlan();
+                setPlans(res?.data?.plan || []);
+            } catch {
+                setPlans([]);
+            }
+        };
+              
+        const getChoosePlan = () => {
+            const data = localStorage.getItem("planChoose");
+
+            if (data) {
+                setPlanChoose(JSON.parse(data));
+                localStorage.removeItem("planChoose");
+            } else {
+            console.warn("data vide");
+            }
+        };
+        initialize();
+        getChoosePlan();
+    }, []);
+
+    const planSelected = plans.find(p => p.id === planChoose.planId);
+    const subPlanSelected = planSelected?.sub_plans?.find(p => p.id === planChoose.subPlanId);
+    const prixBase = parseFloat(subPlanSelected?.price_monthly_formated || 0);
+    const prixFinal = switchState ? prixBase * 1.10 : prixBase;
+
+    // Fonction pour formater le prix avec séparateur d'espace (optionnel)
+    const formatPrice = (value) => {
+    return new Intl.NumberFormat('fr-FR', {
+        style: 'currency',
+        currency: 'MGA',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+    }).format(value).replace(/\s?MGA/, '').trim(); // Enlève "MGA" si besoin
+    };
+
+    const prixFormate = formatPrice(prixFinal);
+
+    const prixLocal = subPlanSelected?.price_monthly_formated;
 
     return(
         <>
@@ -31,7 +77,12 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
                        <span className='fw-bold opacity-75'>Mensuel</span>
                     </div>
                     <div className='w-100 p-1 d-flex align-items-center justify-center flex-column'>
-                        <span className='p-2 fs-2 fw-bold text-dark w-100 text-center price-order'>167 755 <span>Ar/mois</span></span>
+                       { prixLocal ? (
+                            <span className='p-2 fs-2 fw-bold text-dark w-100 text-center price-order'>{prixFormate} <span>Ar/mois</span></span>
+                       ) : (
+                        <span className='p-2 fs-2 fw-bold text-dark w-100 text-center price-order'> Pas de prix <span>Ar/mois</span></span>
+                       )}
+                        
                         {
                             switchState &&
                             <span className='p-2 rounded small-font-size fw-bold text-danger w-100 text-center mt-1 fee-infos' style={{backgroundColor: 'rgba(255, 0, 0, 0.1'}}>
@@ -57,7 +108,12 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
                 }
                 <div className='d-flex align-items-center justify-between' style={{flexDirection: 'row'}}>
                     <label>Total à payer</label>
-                    <span className='py-1 px-4 rounded text-light fw-bold' style={{backgroundColor: 'red', fontSize: '14px'}}>167 755 Ar</span>
+                    { prixLocal ? (
+                        <span className='py-1 px-4 rounded text-light fw-bold' style={{backgroundColor: 'red', fontSize: '14px'}}>{prixFormate} Ar</span>
+                    ) : (
+                        <span className='py-1 px-4 rounded text-light fw-bold' style={{backgroundColor: 'red', fontSize: '14px'}}>Pas de prix</span>
+                    )}
+                    
                 </div>
             </div>
 

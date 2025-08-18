@@ -29,7 +29,7 @@ const InstanceDoliSaas = () => {
     const initialize = async () => {
       try {
         const res = await fetchPlan();
-        setPlans(res?.data || []);
+        setPlans(res?.data?.plan || []);
       } catch {
         setPlans([]);
       }
@@ -46,31 +46,31 @@ const InstanceDoliSaas = () => {
     navigate("/paiement");
   };
 
-
+  const dolisaasPlan = plans.find(p => p.label === "Dolisaas");
 
   const pricingPlans = [
     {
       id: 1,
       name: "2 Go",
       monthlyPrice: "25 000 Ar",
-      annualPrice: "270 000 Ar",
+      annualPrice: "300 000 Ar",
       description: "~5 €/mois par utilisateur",
       badgeVariant: "info",
     },
     {
       id: 2,
       name: "5 Go",
-      monthlyPrice: "35 000 Ar",
-      annualPrice: "378 000 Ar",
-      description: "~7 €/mois par utilisateur",
+      monthlyPrice: "40 000 Ar",
+      annualPrice: "480 000 Ar",
+      description: "~8 €/mois par utilisateur",
       badgeVariant: "primary",
     },
     {
       id: 3,
       name: "10 Go",
-      monthlyPrice: "45 000 Ar",
-      annualPrice: "486 000 Ar",
-      description: "~9 €/mois par utilisateur",
+      monthlyPrice: "80 000 Ar",
+      annualPrice: "960 000 Ar",
+      description: "~16 €/mois par utilisateur",
       badgeVariant: "warning",
     },
   ];
