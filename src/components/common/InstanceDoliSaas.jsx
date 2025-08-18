@@ -12,7 +12,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../contexts/ThemeContext";
 import dolibarrCover from "../../assets/dolibarr-pdf-bien-gerer-son-entreprisec2171d20240202113929-image_cover.jpg";
-import { fetchPlas } from "../../api/planApi";
+import { fetchPlan } from "../../api/planApi";
 
 const InstanceDoliSaas = () => {
   const { theme } = useTheme();
@@ -28,9 +28,9 @@ const InstanceDoliSaas = () => {
   useEffect(() => {
     const initialize = async () => {
       try {
-        const res = await fetchPlas();
+        const res = await fetchPlan();
         setPlans(res?.data || []);
-        console.log(plans);
+        console.log('plan' . plans);
       } catch {
         setPlans([]);
       }
