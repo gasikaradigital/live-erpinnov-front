@@ -44,6 +44,9 @@
     font-weight: normal; 
     cursor: pointer;
 }
+.btnBillingInfos {
+    border-color: transparent;
+}
 .btnBillingInfos:hover{
     border-color: transparent;
 }

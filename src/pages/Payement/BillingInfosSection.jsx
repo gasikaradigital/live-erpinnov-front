@@ -6,7 +6,7 @@ function BillingInfosSection({billingFormRef, showBillingForm, setShowBillingFor
     return(
         <div className='m-0 px-2 py-3 rounded w-100 mt-3 billing-infos-container'>
             <div className='d-flex flex-row align-items-center m-0'>
-                <button className='p-0 border-none w-auto div-transparent btnBillingInfos'
+                <button className='p-0 w-auto div-transparent btnBillingInfos'
                 onClick={() => setShowBillingForm(!showBillingForm)}>
                     {
                         showBillingForm ? <i className={`bi bi-chevron-down ${iClassColor}`}></i> : <i className={`bi bi-chevron-right ${iClassColor}`}></i> 

@@ -3,7 +3,7 @@ import { Form, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchState, methodSelected}){
+function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchState, methodSelected, backToDashboard}){
 
     return(
         <>
@@ -40,7 +40,7 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
                         }
                     </div>
                 </div>
-                <button className='bg-success text-light p-1 rounded mt-2 btn-change-offer'>Changer d'offre</button>
+                <button className='bg-success text-light p-1 rounded mt-2 btn-change-offer' onClick={backToDashboard}>Changer d'offre</button>
             </div>
 
             <div className='d-flex gap-2 w-100 py-2' style={{flexDirection: 'column'}}>
