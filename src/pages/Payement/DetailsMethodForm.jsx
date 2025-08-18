@@ -30,7 +30,7 @@ function DetailsMethodForm({selectedRadio, padStyleXlLgMdSmExternalInput,
                                 Payer
                             </Button>
                         </Form>
-                        <div>
+                        <div className='text-center'>
                             <p className='small mt-3'>
                                 En procédant au paiement, vous acceptez nos{' '}
                                 <a href="#" className="text-decoration-none">conditions générales</a> et notre{' '}
@@ -71,7 +71,7 @@ function DetailsMethodForm({selectedRadio, padStyleXlLgMdSmExternalInput,
                                 Enregistrer le paiement
                             </Button>
                         </Form>
-                        <div>
+                        <div className='text-center'>
                             <p className='small mt-3'>
                                 En procédant au paiement, vous acceptez nos{' '}
                                 <a href="#" className="text-decoration-none">conditions générales</a> et notre{' '}
@@ -120,7 +120,7 @@ function DetailsMethodForm({selectedRadio, padStyleXlLgMdSmExternalInput,
                                 Envoyer
                             </Button>
                         </Form>
-                        <div>
+                        <div className='text-center'>
                             <p className='small mt-3'>
                                 En procédant au paiement, vous acceptez nos{' '}
                                 <a href="#" className="text-decoration-none">conditions générales</a> et notre{' '}
