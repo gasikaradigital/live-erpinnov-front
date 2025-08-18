@@ -48,7 +48,7 @@ const InstanceDoliSaas = () => {
 
   const pricingPlans = [
     {
-      id: 12,
+      id: 1,
       name: "2 Go",
       monthlyPrice: "25 000 Ar",
       annualPrice: "300 000 Ar",
@@ -56,7 +56,7 @@ const InstanceDoliSaas = () => {
       badgeVariant: "info",
     },
     {
-      id: 13,
+      id: 2,
       name: "5 Go",
       monthlyPrice: "40 000 Ar",
       annualPrice: "480 000 Ar",
@@ -64,7 +64,7 @@ const InstanceDoliSaas = () => {
       badgeVariant: "primary",
     },
     {
-      id: 14,
+      id: 3,
       name: "10 Go",
       monthlyPrice: "80 000 Ar",
       annualPrice: "960 000 Ar",
