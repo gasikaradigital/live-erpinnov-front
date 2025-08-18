@@ -22,6 +22,8 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
         getChoosePlan();
     }, []);
 
+    const prixFinal = switchState ? planChoose.prixBase * 1.10 : planChoose.prixBase;
+
     // Fonction pour formater le prix avec séparateur d'espace (optionnel)
     const formatPrice = (value) => {
     return new Intl.NumberFormat('fr-FR', {
@@ -32,7 +34,7 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
     }).format(value).replace(/\s?MGA/, '').trim(); // Enlève "MGA" si besoin
     };
 
-    const prixFormate = formatPrice(planChoose.prixFinal);
+    const prixFormate = formatPrice(prixFinal);
 
 
     return(
