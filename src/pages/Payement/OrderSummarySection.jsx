@@ -23,6 +23,10 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
             if (data) {
                 setPlanChoose(JSON.parse(data));
                 localStorage.removeItem("planChoose")
+                console.log({
+                    "planId": planChoose.planId,
+                    "subplanId": planChoose.subPlanId,
+                });
             } else {
             console.warn("data vide");
             }
@@ -49,9 +53,7 @@ function OrderSummarySection({cardOrderSummaryBgColor, switchState, setSwitchSta
     const prixFormate = formatPrice(prixFinal);
 
     const prixLocal = subPlanSelected?.price_monthly_formated;
-    console.log({
-        'prix': planSelected
-    })
+
 
     return(
         <>
