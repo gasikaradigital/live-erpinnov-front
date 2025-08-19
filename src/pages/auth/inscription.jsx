@@ -10,8 +10,8 @@ const Inscription = () => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
-    const [showPwd, setShowPwd] = useState(false);
-  
+  const [showPwd, setShowPwd] = useState(false);
+
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -84,18 +84,54 @@ const Inscription = () => {
             height: "23%",
             marginTop: "70px",
             maxWidth: "500px",
-            maxHeight: "550px",
+            maxHeight: "650px", // Augmenté pour accommoder l'en-tête
             borderRadius: "12px",
             backgroundColor: darkMode ? "#2c3034" : "#fff",
           }}
         >
-          <h2
-            className={`text-center py-2 ${
-              darkMode ? "text-white" : "text-dark"
-            }`}
-          >
-            Créer un compte gratuit
-          </h2>
+          {/* En-tête avec logo et titre */}
+          <div className="text-center mb-3">
+            <div className="flex items-center justify-center mb-4 gap-2">
+              <img
+                src="/assets/img/front-pages/logo/logo.png"
+                alt="ERP INNOV"
+                className="h-12"
+              />
+              <h3
+                className="fw-bold mb-0"
+                style={{
+                  color: darkMode ? "#4a90e2" : "#4a90e2",
+                  fontSize: "28px",
+                  letterSpacing: "1px",
+                }}
+              >
+                ERP INNOV
+              </h3>
+            </div>
+
+            <h4 className={`mb-1 ${darkMode ? "text-white" : "text-dark"}`}>
+              creation compte gratuit par
+            </h4>
+            <h4
+              className="fw-bold mb-2"
+              style={{
+                color: darkMode ? "#ffffff" : "#2c3e50",
+                fontSize: "22px",
+              }}
+            >
+              15 jours d'essai gratuit
+            </h4>
+            <p
+              className="mb-1"
+              style={{
+                color: darkMode ? "#a0a6b0" : "#7f8c8d",
+                fontSize: "16px",
+              }}
+            >
+              Sans engagement, sans CB
+            </p>
+          </div>
+
           <form onSubmit={handleSubmit}>
             <div className="mb-3 position-relative">
               <label
@@ -109,8 +145,8 @@ const Inscription = () => {
                 type="email"
                 className={`form-control text-start ${
                   darkMode
-                    ? "bg-dark text-white border-secondary"
-                    : "bg-white text-dark"
+                    ? "bg-dark text-white border-secondary placeholder-white"
+                    : "bg-white text-dark placeholder-secondary"
                 }`}
                 placeholder="Adresse email"
                 value={email}
@@ -129,18 +165,19 @@ const Inscription = () => {
               </label>
               <div className="input-group">
                 <input
-                  type={showPassword ? "text" : "password"} // Utiliser showPassword ici
-                  className={`form-control ${
+                  type={showPassword ? "text" : "password"}
+                  className={`form-control text-start ${
                     darkMode
-                      ? "bg-dark text-white border-secondary"
-                      : "bg-white text-black"
-                  } text-start`}
+                      ? "bg-dark text-white border-secondary placeholder-white"
+                      : "bg-white text-dark placeholder-secondary"
+                  }`}
                   id="password"
                   placeholder="Mot de passe"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
+
                 <button
                   type="button"
                   className={`btn ${
@@ -148,45 +185,9 @@ const Inscription = () => {
                       ? "btn-outline-light border-secondary"
                       : "btn-outline-secondary"
                   }`}
-                  onClick={() => setShowPassword(!showPassword)} // Utiliser setShowPassword ici
+                  onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
-                </button>
-              </div>
-            </div>
-
-            <div className="mb-3 position-relative">
-              <label
-                className={`form-label text-start w-100 ${
-                  darkMode ? "text-white" : "text-dark"
-                }`}
-              >
-                Confirmer le mot de passe
-              </label>
-              <div className="input-group">
-                <input
-                  type={showConfirmPassword ? "text" : "password"} // Utiliser showConfirmPassword ici
-                  className={`form-control ${
-                    darkMode
-                      ? "bg-dark text-white border-secondary"
-                      : "bg-white text-black"
-                  } text-start`}
-                  id="confirmPassword"
-                  placeholder="Confirmer le mot de passe"
-                  value={confirmPassword} // Utiliser confirmPassword ici
-                  onChange={(e) => setConfirmPassword(e.target.value)} // Utiliser setConfirmPassword ici
-                  required
-                />
-                <button
-                  type="button"
-                  className={`btn ${
-                    darkMode
-                      ? "btn-outline-light border-secondary"
-                      : "btn-outline-secondary"
-                  }`}
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)} // Utiliser setShowConfirmPassword ici
-                >
-                  {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
                 </button>
               </div>
             </div>
@@ -205,7 +206,7 @@ const Inscription = () => {
                         ? "#6c757d"
                         : "#0d6efd"
                       : "transparent",
-                    borderColor: darkMode ? "#6c757d" : "#adb5bd",
+                    borderColor: darkMode ? "#6c757d" : "#000000ff",
                     transform: "scale(0.6)",
                   }}
                 />
