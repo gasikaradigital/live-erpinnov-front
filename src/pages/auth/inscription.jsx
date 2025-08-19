@@ -84,7 +84,7 @@ const Inscription = () => {
             height: "23%",
             marginTop: "70px",
             maxWidth: "500px",
-            maxHeight: "650px", // Augmenté pour accommoder l'en-tête
+            maxHeight: "600px", // Augmenté pour accommoder l'en-tête
             borderRadius: "12px",
             backgroundColor: darkMode ? "#2c3034" : "#fff",
           }}
@@ -100,12 +100,12 @@ const Inscription = () => {
               <h3
                 className="fw-bold mb-0"
                 style={{
-                  color: darkMode ? "#4a90e2" : "#4a90e2",
+                  color: darkMode ? "#ffffffff" : "#000000ff",
                   fontSize: "28px",
                   letterSpacing: "1px",
                 }}
               >
-                ERP INNOV
+                Erpinnov.com
               </h3>
             </div>
 

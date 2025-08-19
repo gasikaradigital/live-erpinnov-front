@@ -46,7 +46,13 @@ export default function NavigationBar({ isAuthenticated, user }) {
           )}
         </Button>
 
-        <Navbar.Toggle aria-controls="main-navbar-nav" />
+        <Navbar.Toggle aria-controls="main-navbar-nav">
+          {darkMode ? (
+            <i className="bi bi-list text-white"></i> // icône blanc
+          ) : (
+            <i className="bi bi-list text-dark"></i> // icône noir
+          )}
+        </Navbar.Toggle>
 
         <Navbar.Collapse id="main-navbar-nav">
           <Nav className="ms-auto d-flex align-items-center gap-3">

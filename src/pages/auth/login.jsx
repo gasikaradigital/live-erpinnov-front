@@ -69,60 +69,94 @@ const Login = () => {
 
       <div className="container d-flex justify-content-center align-items-center min-vh-100 px-3 py-4">
         <div
-          className={`card shadow p-3 p-md-4 login-form w-100 ${
-            darkMode ? "dark-card" : ""
-          }`}
+          className={`card shadow p-4 w-100 ${darkMode ? "dark-card" : ""}`}
           style={{
             maxWidth: "500px",
             backgroundColor: darkMode ? "#2c3034" : "#ffffff",
             border: darkMode ? "1px solid #495057" : "none",
-            color: darkMode ? "#f8f9fa" : "#212529",
+            borderRadius: "12px",
           }}
         >
-          <div className="text-center mb-4">
-            <img
-              src="/assets/img/front-pages/logo/logo.png"
-              alt="ERP INNOV"
-              style={{ height: "50px" }}
-              className="mb-2"
-            />
-            <h5 className="fw-bold mb-0">ERP INNOV</h5>
+          {/* En-tête */}
+          <div className="text-center mb-3">
+            <div className="flex items-center justify-center mb-4 gap-2">
+              <img
+                src="/assets/img/front-pages/logo/logo.png"
+                alt="ERP INNOV"
+                className="h-12"
+              />
+              <h3
+                className="fw-bold mb-0"
+                style={{
+                  color: darkMode ? "#ffffffff" : "#000000ff",
+                  fontSize: "28px",
+                  letterSpacing: "1px",
+                }}
+              >
+                Erpinnov.com
+              </h3>
+             
+            </div>
+
+            {/* <h4 className={`mb-1 ${darkMode ? "text-white" : "text-dark"}`}>
+              Content de vous revoir !
+            </h4>
+            <p
+              className="mb-1"
+              style={{
+                color: darkMode ? "#a0a6b0" : "#7f8c8d",
+                fontSize: "16px",
+              }}
+            >
+              Connectez-vous à votre espace
+            </p> */}
           </div>
 
+          {/* Formulaire */}
           <form onSubmit={handleSubmit}>
+            {/* Email */}
             <div className="mb-3">
-              <label htmlFor="email" className="form-label text-start w-100">
-                Email
+              <label
+                htmlFor="email"
+                className={`form-label text-start w-100 ${
+                  darkMode ? "text-white" : "text-dark"
+                }`}
+              >
+                Adresse email
               </label>
               <input
                 type="email"
-                className={`form-control ${
+                className={`form-control text-start ${
                   darkMode
-                    ? "bg-dark text-white border-secondary"
-                    : "bg-white text-dark"
-                } text-start`}
+                    ? "bg-dark text-white border-secondary placeholder-white"
+                    : "bg-white text-dark placeholder-secondary"
+                }`}
                 id="email"
-                placeholder="Entrer votre email"
+                placeholder="Adresse email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
 
+            {/* Mot de passe */}
             <div className="mb-3">
-              <div className="d-flex justify-content-between align-items-center w-100">
-                <label htmlFor="password" className="form-label mb-0">
-                  Mot de passe
-                </label>
-              </div>
+              <label
+                htmlFor="password"
+                className={`form-label text-start w-100 ${
+                  darkMode ? "text-white" : "text-dark"
+                }`}
+              >
+                Mot de passe
+              </label>
               <div className="input-group">
                 <input
                   type={showPwd ? "text" : "password"}
-                  className={`form-control ${
+                  className={`form-control text-start ${
                     darkMode
-                      ? "bg-dark text-white border-secondary"
-                      : "bg-white text-black"
-                  } text-start`}
+                      ? "bg-dark text-white border-secondary placeholder-white"
+                      : "bg-white text-dark placeholder-secondary"
+                  }`}
                   id="password"
                   placeholder="Mot de passe"
                   value={password}
@@ -138,15 +172,15 @@ const Login = () => {
                   }`}
                   onClick={() => setShowPwd(!showPwd)}
                 >
-                  <i
-                    className={`bi ${showPwd ? "bi-eye-slash" : "bi-eye"}`}
-                  ></i>
+                  <i className={`bi ${showPwd ? "bi-eye-slash" : "bi-eye"}`} />
                 </button>
               </div>
             </div>
 
-            <div className="d-flex flex-column flex-sm-row justify-content-between align-items-center mb-3">
-              <div className="form-check d-flex align-items-center mb-2 mb-sm-0">
+            {/* Options */}
+            <div className="mb-3">
+              {/* Checkbox alignée à gauche */}
+              <div className="form-check d-flex align-items-center mb-2">
                 <input
                   id="remember"
                   name="remember"
@@ -162,7 +196,7 @@ const Login = () => {
                 />
                 <label
                   className={`form-check-label ms-2 mb-0 ${
-                    darkMode ? "text-white-50" : "text-black"
+                    darkMode ? "text-white" : "text-dark"
                   }`}
                   htmlFor="remember"
                 >
@@ -170,16 +204,20 @@ const Login = () => {
                 </label>
               </div>
 
-              <Link
-                to="/forgot-password"
-                className={`small ${
-                  darkMode ? "text-info" : "text-primary"
-                } text-decoration-none`}
-              >
-                Mot de passe oublié ?
-              </Link>
+              {/* Lien centré en dessous */}
+              <div className="text-center">
+                <Link
+                  to="/forgot-password"
+                  className={`small ${
+                    darkMode ? "text-info" : "text-primary"
+                  } text-decoration-none`}
+                >
+                  Mot de passe oublié ?
+                </Link>
+              </div>
             </div>
 
+            {/* Messages */}
             {error && (
               <div
                 className={`alert ${
@@ -199,6 +237,7 @@ const Login = () => {
               </div>
             )}
 
+            {/* Bouton */}
             <div className="d-grid">
               <button
                 type="submit"
@@ -211,6 +250,7 @@ const Login = () => {
             </div>
           </form>
 
+          {/* Lien inscription */}
           <div
             className={`text-center mt-3 ${
               darkMode ? "text-light" : "text-dark"
