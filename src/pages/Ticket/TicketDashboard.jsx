@@ -12,12 +12,7 @@ import {
 } from "react-bootstrap";
 import { useTheme } from "../../contexts/ThemeContext";
 import AppNavbar from "../../components/common/navbar/AppNavbar";
-import {
-  HiTicket,
-  HiPlus,
-  HiOutlinePencil,
-  HiOutlineTrash,
-} from "react-icons/hi";
+import { HiTicket, HiPlus } from "react-icons/hi";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -25,46 +20,54 @@ const TicketDashboard = () => {
   const { theme } = useTheme();
   const darkMode = theme === "dark";
 
-  const today = new Date().toISOString().split("T")[0];
-  console.log(today);
+  const today = new Date().toISOString().slice(0, 16);
 
   const [tickets, setTickets] = useState([
     {
       id: 1,
+      reference: "EB54321",
+      createdAt: "2025-06-03T10:30",
+      contact: "Client B2B",
       sujet: "Demande de devis",
       categorie: "Commercial",
-      note: "Client B2B",
+      priorite: "Haute",
+      canal: "Email",
+      assigneA: "Jean Dupont",
+      derniereActivite: "2025-06-04T09:00",
       status: "finnish",
-      reference: "EB54321",
-      createdAt: "2025-06-03",
+      slaRestant: "0j 0h",
     },
     {
       id: 2,
+      reference: "EB12345",
+      createdAt: "2025-06-03T11:00",
+      contact: "Poste RH",
       sujet: "Recrutement",
       categorie: "Administratif",
-      note: "Poste RH",
+      priorite: "Moyenne",
+      canal: "Téléphone",
+      assigneA: "Sophie Martin",
+      derniereActivite: "2025-06-05T14:30",
       status: "in progress",
-      reference: "EB12345",
-      createdAt: "2025-06-03",
+      slaRestant: "1j 3h",
     },
   ]);
+
   const [showModal, setShowModal] = useState(false);
   const [editTicket, setEditTicket] = useState(null);
   const [formData, setFormData] = useState({
-    sujet: "",
-    categorie: "Commercial",
-    note: "",
-    status: "in progress",
     reference: "",
     createdAt: today,
+    contact: "",
+    sujet: "",
+    categorie: "Commercial",
+    priorite: "Moyenne",
+    canal: "Email",
+    assigneA: "",
+    derniereActivite: today,
+    status: "in progress",
+    slaRestant: "2j 0h",
   });
-
-  const commercialCount = tickets.filter(
-    (t) => t.categorie === "Commercial"
-  ).length;
-  const administratifCount = tickets.filter(
-    (t) => t.categorie === "Administratif"
-  ).length;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -82,19 +85,24 @@ const TicketDashboard = () => {
 
     setShowModal(false);
     setEditTicket(null);
-    setFormData({ sujet: "", categorie: "Commercial", note: "", status: "in progress", reference: "", createdAt: today});
+    setFormData({
+      reference: "",
+      createdAt: today,
+      contact: "",
+      sujet: "",
+      categorie: "Commercial",
+      priorite: "Moyenne",
+      canal: "Email",
+      assigneA: "",
+      derniereActivite: today,
+      status: "in progress",
+      slaRestant: "2j 0h",
+    });
   };
 
   const handleEdit = (ticket) => {
     setEditTicket(ticket);
-    setFormData({
-      sujet: ticket.sujet,
-      categorie: ticket.categorie,
-      note: ticket.note,
-      status: ticket.status,
-      reference: ticket.reference,
-      createdAt: ticket.createdAt,
-    });
+    setFormData({ ...ticket });
     setShowModal(true);
   };
 
@@ -139,66 +147,31 @@ const TicketDashboard = () => {
               style={{ color: badgeBlue }}
             >
               <HiTicket className="me-2" size={30} />
-              Tableau de bord
+              TICKET 
             </h2>
             <Button
               style={{ backgroundColor: badgeBlue, borderColor: badgeBlue }}
               onClick={() => {
                 setEditTicket(null);
-                setFormData({ sujet: "", categorie: "Commercial", note: "", status: "in progress", reference: "", createdAt: today});
+                setFormData({
+                  reference: "",
+                  createdAt: today,
+                  contact: "",
+                  sujet: "",
+                  categorie: "Commercial",
+                  priorite: "Moyenne",
+                  canal: "Email",
+                  assigneA: "",
+                  derniereActivite: today,
+                  status: "in progress",
+                  slaRestant: "2j 0h",
+                });
                 setShowModal(true);
               }}
             >
               <HiPlus className="me-1" /> Nouveau ticket
             </Button>
           </div>
-
-          {/* Statistiques */}
-          <Row className="g-4 mb-4 justify-content-center text-center">
-            <Col xs={12} md={6} lg={4}>
-              <Card
-                style={{
-                  backgroundColor: cardBg,
-                  color: textColor,
-                  width: "100%",
-                  height: "200px",
-                }}
-                className="shadow-sm"
-              >
-                <Card.Body className="d-flex flex-column justify-content-between">
-                  <div>
-                    <h6>Tickets commerciaux</h6>
-                    <h3>{commercialCount}</h3>
-                  </div>
-                  <Badge style={{ backgroundColor: badgeBlue, color: "#fff" }}>
-                    Commercial
-                  </Badge>
-                </Card.Body>
-              </Card>
-            </Col>
-
-            <Col xs={12} md={6} lg={4}>
-              <Card
-                style={{
-                  backgroundColor: cardBg,
-                  color: textColor,
-                  width: "100%",
-                  height: "200px",
-                }}
-                className="shadow-sm"
-              >
-                <Card.Body className="d-flex flex-column justify-content-between">
-                  <div>
-                    <h6>Tickets administratifs</h6>
-                    <h3>{administratifCount}</h3>
-                  </div>
-                  <Badge style={{ backgroundColor: badgeBlue, color: "#fff" }}>
-                    Administratif
-                  </Badge>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
 
           {/* Tableau des tickets */}
           <Card
@@ -221,30 +194,31 @@ const TicketDashboard = () => {
               >
                 <thead style={{ backgroundColor: badgeBlue, color: "#fff" }}>
                   <tr>
-                    <th>Réference</th>
-                    <th>Date</th>
+                    <th>Réf</th>
+                    <th>Date/heure</th>
+                    <th>Contact</th>
                     <th>Sujet</th>
                     <th>Catégorie</th>
-                    <th>Note</th>
-                    <th>Destination</th>
-                    <th>Satus</th>
+                    <th>Priorité</th>
+                    <th>Canal</th>
+                    <th>Assigné à</th>
+                    <th>Dernière activité</th>
+                    <th>Statut</th>
+                    <th>SLA restant</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {tickets.map((ticket, index) => (
+                  {tickets.map((ticket) => (
                     <tr key={ticket.id}>
                       <td>{ticket.reference}</td>
-                      <td className="text-start">
-                        {ticket.createdAt}
-                      </td>
+                      <td>{ticket.createdAt}</td>
+                      <td>{ticket.contact}</td>
                       <td>{ticket.sujet}</td>
                       <td>{ticket.categorie}</td>
-                      <td>{ticket.note}</td>
-                      <td>
-                        {ticket.categorie === "Administratif"
-                          ? "Vers Administratif"
-                          : "Vers Commercial"}
-                      </td>
+                      <td>{ticket.priorite}</td>
+                      <td>{ticket.canal}</td>
+                      <td>{ticket.assigneA}</td>
+                      <td>{ticket.derniereActivite}</td>
                       <td>
                         {ticket.status === "finnish" ? (
                           <Badge bg="success">terminé</Badge>
@@ -252,6 +226,7 @@ const TicketDashboard = () => {
                           <Badge bg="warning" text="dark">en cours</Badge>
                         )}
                       </td>
+                      <td>{ticket.slaRestant}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -275,14 +250,13 @@ const TicketDashboard = () => {
               <Row className="g-3">
                 <Col md={6}>
                   <Form.Group>
-                    <Form.Label>Date</Form.Label>
+                    <Form.Label>Date/heure</Form.Label>
                     <Form.Control
-                      type="date"
+                      type="datetime-local"
                       value={formData.createdAt}
                       onChange={(e) =>
                         setFormData({ ...formData, createdAt: e.target.value })
                       }
-                      style={{ textAlign: "left" }}
                       required
                     />
                   </Form.Group>
@@ -290,20 +264,30 @@ const TicketDashboard = () => {
 
                 <Col md={6}>
                   <Form.Group>
-                    <Form.Label>Réference</Form.Label>
+                    <Form.Label>Réf</Form.Label>
                     <Form.Control
                       type="text"
                       value={formData.reference}
                       onChange={(e) =>
                         setFormData({ ...formData, reference: e.target.value })
                       }
-                      style={{ textAlign: "left" }}
-                      placeholder="ex: EBxxxxx"
                       required
                     />
                   </Form.Group>
                 </Col>
-
+                <Col md={6}>
+                  <Form.Group>
+                    <Form.Label>Contact</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={formData.contact}
+                      onChange={(e) =>
+                        setFormData({ ...formData, contact: e.target.value })
+                      }
+                      required
+                    />
+                  </Form.Group>
+                </Col>
                 <Col md={6}>
                   <Form.Group>
                     <Form.Label>Sujet</Form.Label>
@@ -313,13 +297,10 @@ const TicketDashboard = () => {
                       onChange={(e) =>
                         setFormData({ ...formData, sujet: e.target.value })
                       }
-                      style={{ textAlign: "left" }}
-                      placeholder="ex: Devi..."
                       required
                     />
                   </Form.Group>
                 </Col>
-
                 <Col md={6}>
                   <Form.Group>
                     <Form.Label>Catégorie</Form.Label>
@@ -329,58 +310,105 @@ const TicketDashboard = () => {
                         setFormData({ ...formData, categorie: e.target.value })
                       }
                     >
-                      <option value="Commercial">Commercial</option>
-                      <option value="Administratif">Administratif</option>
+                      <option>Commercial</option>
+                      <option>Administratif</option>
+                      <option>Technique</option>
                     </Form.Select>
                   </Form.Group>
                 </Col>
-
-                <Col md={12}>
+                <Col md={6}>
                   <Form.Group>
-                    <Form.Label>Note</Form.Label>
-                    <Form.Control
-                      as="textarea"
-                      value={formData.note}
+                    <Form.Label>Priorité</Form.Label>
+                    <Form.Select
+                      value={formData.priorite}
                       onChange={(e) =>
-                        setFormData({ ...formData, note: e.target.value })
+                        setFormData({ ...formData, priorite: e.target.value })
                       }
-                      placeholder="Remarques, précisions..."
+                    >
+                      <option>Moyenne</option>
+                      <option>Haute</option>
+                      <option>Basse</option>
+                    </Form.Select>
+                  </Form.Group>
+                </Col>
+                <Col md={6}>
+                  <Form.Group>
+                    <Form.Label>Canal</Form.Label>
+                    <Form.Select
+                      value={formData.canal}
+                      onChange={(e) =>
+                        setFormData({ ...formData, canal: e.target.value })
+                      }
+                    >
+                      <option>Email</option>
+                      <option>Téléphone</option>
+                      <option>Chat</option>
+                    </Form.Select>
+                  </Form.Group>
+                </Col>
+                <Col md={6}>
+                  <Form.Group>
+                    <Form.Label>Assigné à</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={formData.assigneA}
+                      onChange={(e) =>
+                        setFormData({ ...formData, assigneA: e.target.value })
+                      }
                     />
                   </Form.Group>
                 </Col>
-
                 <Col md={6}>
                   <Form.Group>
-                    <Form.Label>Status</Form.Label>
+                    <Form.Label>Dernière activité</Form.Label>
+                    <Form.Control
+                      type="datetime-local"
+                      value={formData.derniereActivite}
+                      onChange={(e) =>
+                        setFormData({ ...formData, derniereActivite: e.target.value })
+                      }
+                    />
+                  </Form.Group>
+                </Col>
+                <Col md={6}>
+                  <Form.Group>
+                    <Form.Label>Statut</Form.Label>
                     <Form.Select
                       value={formData.status}
                       onChange={(e) =>
                         setFormData({ ...formData, status: e.target.value })
                       }
                     >
-                      <option value="finnish">Terminé</option>
                       <option value="in progress">en cours</option>
+                      <option value="finnish">terminé</option>
                     </Form.Select>
                   </Form.Group>
                 </Col>
-
-                <Col md={12}>
-                  <div className="d-flex justify-content-end gap-2 mt-3">
-                    <Button
-                      variant="outline-secondary"
-                      onClick={() => setShowModal(false)}
-                    >
-                      Annuler
-                    </Button>
-                    <Button
-                      type="submit"
-                      style={{ backgroundColor: badgeBlue, borderColor: badgeBlue }}
-                    >
-                      {editTicket ? "Mettre à jour" : "Ajouter"}
-                    </Button>
-                  </div>
+                <Col md={6}>
+                  <Form.Group>
+                    <Form.Label>SLA restant</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={formData.slaRestant}
+                      onChange={(e) =>
+                        setFormData({ ...formData, slaRestant: e.target.value })
+                      }
+                    />
+                  </Form.Group>
                 </Col>
               </Row>
+              <div className="d-flex justify-content-end mt-4">
+                <Button
+                  variant="secondary"
+                  className="me-2"
+                  onClick={() => setShowModal(false)}
+                >
+                  Annuler
+                </Button>
+                <Button type="submit" style={{ backgroundColor: badgeBlue, borderColor: badgeBlue }}>
+                  {editTicket ? "Modifier" : "Ajouter"}
+                </Button>
+              </div>
             </Form>
           </Modal.Body>
         </Modal>
