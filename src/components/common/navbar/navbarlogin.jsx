@@ -29,14 +29,15 @@ export default function NavigationBar({ isAuthenticated, user }) {
             style={{ height: "50px" }}
             className="mb-2"
           />
-          <span className="fw-semibold text-primary">ERP INNOV</span>
+          <span className="fw-semibold text-primary"> Erpinnov.com</span>
         </Navbar.Brand>
 
         {/* Bouton dark mode mobile seulement */}
         <Button
           variant={darkMode ? "light" : "outline-secondary"}
           onClick={toggleDarkMode}
-          className="rounded-circle p-2 d-lg-none me-2"
+          className="rounded-circle p-2 d-lg-none me-2 d-flex align-items-center justify-content-center"
+          style={{ width: "40px", height: "40px" }}
           title="Basculer en mode sombre"
         >
           {darkMode ? (
@@ -60,7 +61,8 @@ export default function NavigationBar({ isAuthenticated, user }) {
             <Button
               variant={darkMode ? "light" : "outline-secondary"}
               onClick={toggleDarkMode}
-              className="rounded-circle p-2 d-none d-lg-block"
+              className="rounded-circle p-2 d-none d-lg-flex align-items-center justify-content-center"
+              style={{ width: "40px", height: "40px" }}
               title="Basculer en mode sombre"
             >
               {darkMode ? (
