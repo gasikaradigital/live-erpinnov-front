@@ -3,6 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import NavigationBar from "../../components/common/navbar/navbarlogin";
 import { useDarkMode } from "../../contexts/DarkModeContext";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import dolibarrCover from "/src/assets/hero-dashboard-light.png";
+
+;
 import axios from "axios";
 
 const Inscription = () => {
@@ -94,7 +97,7 @@ const Inscription = () => {
               {/* Image du dashboard */}
               <div className="mb-4">
                 <img
-                  src="/src/assets/hero-dashboard-light.png"
+                  src={dolibarrCover}
                   alt="Dashboard ERP INNOV"
                   className="img-fluid rounded "
                   style={{
