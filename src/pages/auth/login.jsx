@@ -78,40 +78,49 @@ const Login = () => {
           }}
         >
           {/* En-tête */}
-          <div className="text-center mb-3">
-            <div className="flex items-center justify-center mb-4 gap-2">
-              <img
-                src="/assets/img/front-pages/logo/logo.png"
-                alt="ERP INNOV"
-                className="h-12"
-              />
-              <h3
-                className="fw-bold mb-0"
-                style={{
-                  color: darkMode ? "#ffffffff" : "#000000ff",
-                  fontSize: "28px",
-                  letterSpacing: "1px",
-                }}
-              >
-                Erpinnov.com
-              </h3>
-             
-            </div>
-
-            {/* <h4 className={`mb-1 ${darkMode ? "text-white" : "text-dark"}`}>
-              Content de vous revoir !
-            </h4>
-            <p
-              className="mb-1"
-              style={{
-                color: darkMode ? "#a0a6b0" : "#7f8c8d",
-                fontSize: "16px",
-              }}
-            >
-              Connectez-vous à votre espace
-            </p> */}
-          </div>
-
+             {/* En-tête avec logo et titre */}
+                  <div className="text-center mb-3">
+                    <div className="flex items-center justify-center mb-4 gap-2">
+                      <img
+                        src="/assets/img/front-pages/logo/logo.png"
+                        alt="ERP INNOV"
+                        className="h-12"
+                      />
+                      <h3
+                        className="fw-bold mb-0"
+                        style={{
+                          color: darkMode ? "#ffffffff" : "#000000ff",
+                          fontSize: "28px",
+                          letterSpacing: "1px",
+                        }}
+                      >
+                        <span
+                          style={{ color: "#007bff", fontWeight: "bold" }}
+                          className="innov-text"
+                        >
+                          <span className="erp-text desktop ms-2">
+                            <span
+                              style={{
+                                color: darkMode ? "#ffffff" : "black",
+                                opacity: darkMode ? 1 : 0.7,
+                              }}
+                            >
+                              Erp
+                            </span>
+                            innov
+                            <span
+                              style={{
+                                color: darkMode ? "#ffffff" : "black",
+                                fontSize: "18px",
+                              }}
+                            >
+                              .com
+                            </span>
+                          </span>
+                        </span>
+                      </h3>
+                    </div>
+                  </div>
           {/* Formulaire */}
           <form onSubmit={handleSubmit}>
             {/* Email */}

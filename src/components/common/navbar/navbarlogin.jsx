@@ -23,13 +23,48 @@ export default function NavigationBar({ isAuthenticated, user }) {
     >
       <Container>
         <Navbar.Brand href="/" className="d-flex align-items-center gap-2">
-          <img
-            src="/assets/img/front-pages/logo/logo.png"
-            alt="ERP INNOV"
-            style={{ height: "50px" }}
-            className="mb-2"
-          />
-          <span className="fw-semibold text-primary"> Erpinnov.com</span>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <img
+              src="/assets/img/front-pages/logo/logo.png"
+              alt="ERP INNOV"
+              style={{ height: "50px", marginRight: "10px" }}
+            />
+
+            <span
+              style={{ color: "#007bff", fontWeight: "bold" }}
+              className="innov-text"
+            >
+              <span
+                className="erp-text desktop ms-2"
+                style={{
+                  fontSize: "28px",
+                }}
+              >
+                <span
+                  style={{
+                    color: darkMode ? "#ffffff" : "black",
+                    opacity: darkMode ? 1 : 0.7,
+                  }}
+                >
+                  Erp
+                </span>
+                innov
+                <span
+                  style={{
+                    color: darkMode ? "#ffffff" : "black",
+                    fontSize: "18px",
+                  }}
+                >
+                  .com
+                </span>
+              </span>
+            </span>
+          </div>
         </Navbar.Brand>
 
         {/* Bouton dark mode mobile seulement */}

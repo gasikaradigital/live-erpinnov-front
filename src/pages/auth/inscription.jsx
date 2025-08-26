@@ -5,7 +5,6 @@ import { useDarkMode } from "../../contexts/DarkModeContext";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import dolibarrCover from "/src/assets/hero-dashboard-light.png";
 
-;
 import axios from "axios";
 
 const Inscription = () => {
@@ -157,7 +156,30 @@ const Inscription = () => {
                           letterSpacing: "1px",
                         }}
                       >
-                        Erpinnov.com
+                        <span
+                          style={{ color: "#007bff", fontWeight: "bold" }}
+                          className="innov-text"
+                        >
+                          <span className="erp-text desktop ms-2">
+                            <span
+                              style={{
+                                color: darkMode ? "#ffffff" : "black",
+                                opacity: darkMode ? 1 : 0.7,
+                              }}
+                            >
+                              Erp
+                            </span>
+                            innov
+                            <span
+                              style={{
+                                color: darkMode ? "#ffffff" : "black",
+                                fontSize: "18px",
+                              }}
+                            >
+                              .com
+                            </span>
+                          </span>
+                        </span>
                       </h3>
                     </div>
 
